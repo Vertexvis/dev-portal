@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer/viewer.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer/viewer.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer.js"
+    ></script>
+  </head>
+  <body>
+    <vertex-viewer
+      id="viewer"
+      class="viewer"
+      client-id="08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA"
+      style="width: auto; height: auto"
+    >
+    </vertex-viewer>
+
+    <script type="module">
+      document.addEventListener('DOMContentLoaded', () => {
+        main();
+      });
+
+      async function main() {
+        const viewer = document.querySelector('vertex-viewer');
+        await viewer.load(
+          `urn:vertexvis:stream-key:U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU`
+        );
+      }
+    </script>
+  </body>
+</html>

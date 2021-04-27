@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer/viewer.css"
+    />
+    <script
+      type="module"
+      src="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer/viewer.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer.js"
+    ></script>
+
+    <link rel="stylesheet" type="text/css" href="../viewer.css" />
+    <link rel="stylesheet" type="text/css" href="./overview.css" />
+    <script type="module" src="./overview.js"></script>
+  </head>
+
+  <body>
+    <button id="toggle">Toggle Item</button>
+    <vertex-viewer id="viewer" class="viewer">
+      <vertex-viewer-toolbar data-viewer="viewer"></vertex-viewer-toolbar>
+    </vertex-viewer>
+  </body>
+</html>

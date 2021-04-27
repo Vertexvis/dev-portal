@@ -1,0 +1,601 @@
+openapi: '3.0.2'
+tags:
+  - name: Vertex Platform API
+info:
+  title: Vertex Platform API
+  description: Vertex's Platform API specification
+  termsOfService: https://vertexvis.com/terms-of-use
+  version: beta
+  x-logo:
+    url: https://vertexvis.com/themes/custom/sparrow/img/vertex-logo.png
+    backgroundColor: '#ffffff'
+    altText: Vertex Software
+  contact:
+    name: Vertex Platform API Support
+    email: support@vertexvis.com
+servers:
+  - url: https://rest-api.prod.vertexvis.io/rest/api
+paths:
+  /filestore/file:
+    get:
+      description: Queries for a file in an organization's filestore.
+      operationId: queryFile
+      tags:
+        - filestore
+      security:
+        - OAuth2: [filestore.read, filestore.*]
+      parameters:
+        - $ref: '#/components/parameters/apiKey'
+        - name: external_id
+          in: query
+          description: Queries for a file that is assigned the specified customer supplied ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /filestore:
+    post:
+      tags:
+        - filestore
+      description: To upload a file to Vertex you will first make an HTTP POST call to /filestore with information about your file such as file name and your externalid which is a unique id that you use to identify this file and needs to be globally unique for your organization.  That call will result in an UploadView which contains information on where to HTTP PUT your actual file to begin the upload. You can safely ignore other fields that come back which are not documented here.
+      operationId: uploadFile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileStoreBody'
+        description: FileStoreBody
+        required: true
+      responses:
+        '200':
+          description: Use this UploadView response to make an HTTP PUT request to the uploadUrl, with "x-amz-tagging" header set to the value of the s3_tags field and the file as its body. Upload URL is a signed URL to the Amazon S3 service which Vertex leverages for it's upload process.  It is done via encrypted TLS connection and is only valid for one hour from the time it is generated.
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UploadView'
+  /scene_states:
+    get:
+      description: Queries for a scene state by a Vertex file ID or file revision ID.
+      operationId: querySceneState
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.read, scenestates.*]
+      parameters:
+        - name: fileId
+          in: query
+          description: A Vertex file ID
+          schema:
+            type: 'string'
+        - name: fileVersionId
+          in: query
+          description: A Vertex file version ID
+          schema:
+            type: 'string'
+        - $ref: '#/components/parameters/apiKey'
+      responses:
+        '200':
+          description: Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneState'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+  /scene_states/render:
+    post:
+      description: >
+        Returns an image rendered from the provided urn, camera, and set of bom operations.
+      operationId: renderSceneState
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.read, scenestates.*]
+      parameters:
+        - $ref: '#/components/parameters/apiKey'
+      requestBody:
+        description: The request body containing the data for updating a scene state.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RenderSceneStateRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /scene_states/{id}:
+    patch:
+      description: >
+        Updates a property of a scene state, such as the camera.
+      operationId: updateSceneState
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.write, scenestates.*]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A scene state ID.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/apiKey'
+      requestBody:
+        description: The request body containing the data for updating a scene state.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSceneStateRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneState'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+    delete:
+      description: Deletes a scene state.
+      operationId: deleteSceneState
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.write, scenestates.*]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A scene state ID.
+          schema:
+            type: 'string'
+        - $ref: '#/components/parameters/apiKey'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneState'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /scene_states/{id}/clone:
+    post:
+      description: >
+        Creates a clone of a scene state. Operations on a cloned scene state 
+        will not affect the original scene state.
+      operationId: cloneSceneState
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.write, scenestates.*]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A scene state ID.
+          schema:
+            type: 'string'
+        - $ref: '#/components/parameters/apiKey'
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneState'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+  /scene_states/{id}/bulk_bom_items:
+    post:
+      description: Performs an operation on the BOM items belonging to a scene state.
+      operationId: bulkOperation
+      tags:
+        - scenestates
+      security:
+        - OAuth2: [scenestates.write, scenestates.*]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: A scene state ID.
+          schema:
+            type: 'string'
+        - $ref: '#/components/parameters/apiKey'
+      requestBody:
+        description: The request body containing the operations to perform.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BomBulkOperationRequest'
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SceneState'
+        '404':
+          $ref: '#/components/responses/404NotFound'
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: 'https://rest-api.prod.vertexvis.io/rest/api/oauth2/token'
+          scopes:
+            filestore.read: Read access to an organizations filestore.
+            filestore.write: Write access to an organizations filestore.
+            filestore.*: Read/write access to an organizations filestore.
+            bom.read: Read access to a scene state's BOM tree.
+            bom.write: Write access to a scene state's BOM tree.
+            bom.*: Read/write access to a scene state's BOM tree.
+            scenestates.read: Read access to a scene state.
+            scenestates.write: Write access to a scene state.
+            scenestates.*: Read/write access to a scene state.
+  schemas:
+    Error:
+      type: object
+      description: An error representing a server-side error or bad client request.
+      properties:
+        timestamp:
+          description: An ISO8601 string for when the error occurred.
+          type: string
+        status:
+          description: The HTTP status code.
+          type: integer
+        error:
+          description: The title of the error.
+          type: string
+        message:
+          description: A message that describes the error.
+          type: string
+    BomOperation:
+      type: object
+      description: An object describing an operation on a scene state.
+      properties:
+        bomItemQuery:
+          $ref: '#/components/schemas/BomItemQuery'
+        bomOperations:
+          description: An array of operations to perform.
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/CloneSceneStateBomOperation'
+              - $ref: '#/components/schemas/HideBomItemOperation'
+              - $ref: '#/components/schemas/HighlightBomItemOperation'
+              - $ref: '#/components/schemas/ShowOnlyBomItemOperation'
+              - $ref: '#/components/schemas/ShowBomItemOperation'
+              - $ref: '#/components/schemas/ClearHighlightForAllBomItemOperation'
+    BomItemQuery:
+      type: object
+      description: An object that describes how to select an items when performing a query.
+      properties:
+        bomItemQueryType:
+          type: string
+          description: >
+            The type of query to perform. Must be one of the following:
+              * `NAME`: Selects an item by its name.
+              * `METADATA`: Selects an item by its metadata property. We use a 
+                [Lucene syntax](https://lucene.apache.org/core/2_9_4/queryparsersyntax.html) 
+                for matching metadata. See their documentation for writing Lucene queries.
+              * `PART_ID`: Selects an item by its Vertex part ID.
+              * `ALL_BY_NAME`: Selects all items matching the given name.
+              * `NONE`: Will match no items. Used by operations that operate on the whole
+                scene.
+              * `POSITION` Selects an item intersected by a raycast from a position specified in the request payload
+          enum: [NAME, METADATA, PART_ID, ALL_BY_NAME, POSITION, NONE]
+        value:
+          type: string
+          description: Needed for all types besides POSITION
+        hitRequestBody:
+          $ref: '#/components/schemas/HitsByPixel'
+          description: Payload required for the POSITION query type
+
+    FileStoreBody:
+      type: object
+      properties:
+        name:
+          type: string
+          format: string
+          maxLength: 255
+          description:
+            The name of the file being uploaded. If you are also specifying
+            fileid, then this will not change how the container item appears in
+            the application. However, each uploaded file version has a unique
+            name even if uploaded as a new version.
+        externalid:
+          type: string
+          format: string
+          description: Optional field for customer custom ids and can be used for uploading additional versions of a file.
+        shouldTranslate:
+          type: boolean
+          format: boolean
+          default: false
+          description: Should this file be translated or simply stored as an
+            attatchment.  For model uploads set this to true.
+        fileid:
+          type: string
+          format: uuid
+          description:
+            Optional. To upload a new version of an existing file, specify the
+            fileid to append a version to. externalid can also be used for this functionality.
+        userSpecifiedVersion:
+          type: string
+          format: string
+          description: Optional. The version is normally a simple automatically
+            incrementing integer, but if you would like to use a string version
+            or some other identifier you can do that with this field.
+    UploadView:
+      description: To upload a file to Vertex you will first make an HTTP POST call to /filestore with information about your file such as file name and your externalid which is a unique id that you use to identify this file and needs to be globally unique for your organization.  That call will result in an UploadView which contains information on where to HTTP PUT your actual file to begin the upload. You can safely ignore other fields that come back which are not documented here.
+      type: object
+      properties:
+        uploadUrl:
+          type: string
+          format: string
+          description: This is the url that you will perform an HTTP PUT request to with the "x-amz-tagging" header set to the value of the s3_tags field that is also returned in UploadView.
+        s3Tags:
+          type: string
+          description: This is the value that you will use as the value for the "x-amz-tagging" header when you perform an HTTP PUT request to the uploadUrl.
+    CloneSceneStateBomOperation:
+      type: object
+      description: >
+        Performs a clone operation of the current scene state.The cloned scene 
+        state ID will be included in the response of the request. If there are 
+        further operations, those operations will be performed on the cloned 
+        scene state.
+      properties:
+        type:
+          type: string
+          enum: [clone_scene_state]
+    HideBomItemOperation:
+      type: object
+      description: >
+        Hides the geometry for a BOM item that matches the BOM operation's query.
+      properties:
+        type:
+          type: string
+          enum: [hide]
+    HighlightBomItemOperation:
+      type: object
+      description: >
+        Colors the geometry for a BOM item that matches the BOM operation's query.
+      properties:
+        type:
+          type: string
+          enum: [highlight]
+        hexColorString:
+          type: string
+          description: A hex color string in the format of `FFFFFF`.
+    ShowOnlyBomItemOperation:
+      type: object
+      description: >
+        Hides all geometry except for the BOM item that matches the BOM operation's query.
+      properties:
+        type:
+          type: string
+          enum: [show_only]
+    ShowBomItemOperation:
+      type: object
+      description: >
+        Shows the geometry for the BOM item that matches the BOM operation's query.
+      properties:
+        type:
+          type: string
+          enum: [show]
+    ClearHighlightForAllBomItemOperation:
+      type: object
+      description: >
+        Clears any highlight colors that have been assigned to BOM item geometry.
+      properties:
+        type:
+          type: string
+          enum: [clear_highlight_all]
+    BomBulkOperationRequest:
+      type: object
+      description: A request body describing the operations to perform a scene state.
+      properties:
+        operations:
+          description: An array of operations to perform.
+          type: array
+          items:
+            $ref: '#/components/schemas/BomOperation'
+    UpdateSceneStateRequest:
+      type: object
+      description: A request body containing the data to update a scene state with.
+      properties:
+        camera:
+          $ref: '#/components/schemas/Camera'
+        combineOperations:
+          type: array
+          items: {}
+    RenderSceneStateRequest:
+      type: object
+      description: A request body containing the data to create, modify, and render a scene state.
+      properties:
+        id:
+          type: string
+          description: A URN representing the resource to create the initial scene state from.
+        camera:
+          allOf:
+            - $ref: '#/components/schemas/Camera'
+            - type: object
+              description: The camera to use when rendering the image.
+        dimensions:
+          allOf:
+            - $ref: '#/components/schemas/Dimension'
+            - type: object
+              description: The dimensions of the container this image will be placed in.
+        operations:
+          description: An array of operations to perform.
+          type: array
+          items:
+            $ref: '#/components/schemas/BomOperation'
+    File:
+      type: object
+      description: Represents a file uploaded to Vertex.
+      properties:
+        id:
+          description: A unique ID for this file.
+          type: string
+        name:
+          description: The name of the file.
+          type: string
+        versions:
+          description: The versions associated with this file.
+          type: array
+          items:
+            $ref: '#/components/schemas/FileVersion'
+    FileVersion:
+      type: object
+      description: Represents a version of a file.
+      properties:
+        id:
+          description: A unique ID for this file version.
+          type: string
+        version:
+          description: The numeric version of this file.
+          type: number
+        versionString:
+          description: The string version of this file.
+          type: string
+    Camera:
+      type: object
+      description: A camera describing the position within a scene.
+      properties:
+        position:
+          allOf:
+            - $ref: '#/components/schemas/Vector3'
+            - type: object
+              description: The position of the camera in the scene.
+        lookat:
+          allOf:
+            - $ref: '#/components/schemas/Vector3'
+            - type: object
+              description: The position of where the camera will point at.
+        upvector:
+          allOf:
+            - $ref: '#/components/schemas/Vector3'
+            - type: object
+              description: A normalized vector representing the up direction.
+    HitsByPixel:
+      type: object
+      description: An object for returning any items for that pixel
+      properties:
+        camera:
+          $ref: '#/components/schemas/Camera'
+        viewport:
+          $ref: '#/components/schemas/ViewPort'
+        position:
+          $ref: '#/components/schemas/Point'
+
+    ViewPort:
+      type: object
+      description: The viewport for a rendered image
+      properties:
+        height:
+          description: the height of the viewport
+          type: number
+        width:
+          description: the height of the viewport
+          type: number
+    Point:
+      type: object
+      description: A Point object
+      properties:
+        x:
+          description: A value on the X axis.
+          type: number
+          format: float
+        y:
+          description: A value on the Y axis.
+          type: number
+          format: float
+
+    Vector3:
+      type: object
+      description: A 3D coordinate.
+      properties:
+        x:
+          description: A value on the X axis.
+          type: number
+          format: float
+        y:
+          description: A value on the Y axis.
+          type: number
+          format: float
+        z:
+          description: A value on the Z axis.
+          type: number
+          format: float
+    SceneState:
+      type: object
+      description: Represents the container for a scene.
+      properties:
+        id:
+          description: The unique ID.
+          type: string
+
+    Dimension:
+      type: object
+      description: An object containing a width and height property.
+      properties:
+        width:
+          type: number
+          format: float
+        height:
+          type: number
+          format: float
+  parameters:
+    apiKey:
+      name: X-Api-Key
+      description: This key should be set to the value of your client_id
+      in: header
+      schema:
+        type: string
+  responses:
+    400BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    401Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    403Forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    404NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
