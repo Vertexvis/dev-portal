@@ -27,7 +27,7 @@ This command generates static content into the `build` directory and can be serv
 
 ### Production Deployment
 
-_NOTE:_ Production deployment will happen automatically upon any master merge. The instructions below can be used to do so manually.
+_NOTE:_ Production deployment will happen automatically upon any main merge. The instructions below can be used to do so manually.
 
 ```shell
 $ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy

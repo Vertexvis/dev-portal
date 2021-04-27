@@ -31,7 +31,7 @@ module.exports = {
       },
     ],
   ],
-  projectName: 'vertex-dev-portal',
+  projectName: 'dev-portal',
   themes: [],
   themeConfig: {
     algolia: {
@@ -179,7 +179,7 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/Vertexvis/vertex-dev-portal/tree/master',
+          editUrl: 'https://github.com/Vertexvis/dev-portal/tree/main',
           lastVersion: 'current',
           versions: {
             current: {
