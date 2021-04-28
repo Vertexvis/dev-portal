@@ -26,7 +26,7 @@ Support for new formats is added regularly.
 |       IFC        |                       .ifc                       |            2-4            |
 |       IGES       |                   .iges, .igs                    |         Up to 5.3         |
 |     Inventor     |                   .iam\*, .ipt                   |        Up to 2021         |
-|        JT        |                     .jt\*\*                      |         8.0-10.3          |
+|        JT        |                     .jt\*\*                      |         8.0-10.5          |
 | NX - Unigraphics |                       .prt                       |      11-12, and 1926      |
 |       OBJ        |                       .obj                       |            All            |
 |    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |         Up to 32          |
