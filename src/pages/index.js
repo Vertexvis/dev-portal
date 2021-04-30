@@ -101,8 +101,8 @@ const gettingStarted = [
     ),
     description: (
       <>
-        Deploy a full stack NextJS application using our template as a starting 
-        point. Add your own functionality to customize the application and take 
+        Deploy a full stack NextJS application using our template as a starting
+        point. Add your own functionality to customize the application and take
         full advantage of what Vertex has to offer.
       </>
     ),
@@ -373,9 +373,9 @@ const guideCards = [
         url: '/docs/guides/import-data',
       },
       {
-	    text: <>Build your first application</>,
-	    url: '/docs/guides/build-your-first-app',
-	  },
+        text: <>Build your first application</>,
+        url: '/docs/guides/build-your-first-app',
+      },
     ],
   },
   {
@@ -459,8 +459,8 @@ const sampleApps = [
     title: <>Business Intelligence Application</>,
     description: (
       <>
-        Connect external data sources to your 3D digital twin to accelerate 
-        quality, cost, and supply chain analyses and unlock your organization’s 
+        Connect external data sources to your 3D digital twin to accelerate
+        quality, cost, and supply chain analyses and unlock your organization’s
         business intelligence.
       </>
     ),
@@ -472,8 +472,8 @@ const sampleApps = [
     title: <>Time Series Application</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to 
-        improve decision-making and accelerate the adoption of IoT analytics in 
+        Visualize IoT time series data aligned to your 3D digital twin to
+        improve decision-making and accelerate the adoption of IoT analytics in
         your organization.
       </>
     ),
@@ -485,21 +485,25 @@ const sampleApps = [
 
 function SampleApp({ title, description, imageSrc, url, width }) {
   return (
-	
-    <div className={classnames('col', width, 'feature-card', styles.featureCard)}>
-      <div className={classnames('feature-card-content', styles.featureCardContent)}>
+    <div
+      className={classnames('col', width, 'feature-card', styles.featureCard)}
+    >
+      <div
+        className={classnames(
+          'feature-card-content',
+          styles.featureCardContent
+        )}
+      >
         <div className={classnames('header')}>
           <img src={imageSrc} alt="" />
         </div>
-         <div className={classnames('content')}>
-           <div className={classnames('category')}>
-             Featured Sample
-           </div>
-           <h2>{title}</h2>
-           <div className={classnames('intro')}>
-             <span>{description}</span>
-           </div>
-           <Link to={url} className={classnames('target')}></Link>
+        <div className={classnames('content')}>
+          <div className={classnames('category')}>Featured Sample</div>
+          <h2>{title}</h2>
+          <div className={classnames('intro')}>
+            <span>{description}</span>
+          </div>
+          <Link to={url} className={classnames('target')}></Link>
         </div>
       </div>
     </div>
@@ -633,36 +637,49 @@ function Home() {
           )}
         </div>
         {guideCards && guideCards.length && (
-        <div className={classnames(styles.guideCardSection)}>
-          <div className={classnames('container')}>
-            <div className={classnames('row')}>
-              <div className={classnames('col col--12')}>
-                <h2 className={classnames('secondary')}>Guides</h2>
+          <div className={classnames(styles.guideCardSection)}>
+            <div className={classnames('container')}>
+              <div className={classnames('row')}>
+                <div className={classnames('col col--12')}>
+                  <h2 className={classnames('secondary')}>Guides</h2>
+                </div>
+                {guideCards.map((props, idx) => (
+                  <GuideCard key={idx} {...props} />
+                ))}
               </div>
-              {guideCards.map((props, idx) => (
-                <GuideCard key={idx} {...props} />
-              ))}
             </div>
           </div>
-        </div>
         )}
         {sampleApps && sampleApps.length && (
-        <div className={classnames(styles.sampleAppsSection)}>
-          <div className={classnames('container')}>
-            <div className={classnames('row')}>
-              <div className={classnames('col', 'col--12',styles.sampleAppsSectionHeader)}>
-                <h2 className={classnames('secondary')}>Sample Applications</h2>
-                <p>We built the following sample applications to give you ideas about how you can use Vertex.</p>
+          <div className={classnames(styles.sampleAppsSection)}>
+            <div className={classnames('container')}>
+              <div className={classnames('row')}>
+                <div
+                  className={classnames(
+                    'col',
+                    'col--12',
+                    styles.sampleAppsSectionHeader
+                  )}
+                >
+                  <h2 className={classnames('secondary')}>
+                    Sample Applications
+                  </h2>
+                  <p>
+                    We built the following sample applications to give you ideas
+                    about how you can use Vertex.
+                  </p>
+                </div>
+                {sampleApps.map((props, idx) => (
+                  <SampleApp key={idx} {...props} />
+                ))}
+                <div className={classnames('col', 'col--12')}>
+                  <p>
+                    <Link to={'/samples'}>More Sample Applications</Link>
+                  </p>
+                </div>
               </div>
-              {sampleApps.map((props, idx) => (
-	            <SampleApp key={idx} {...props} /> 
-	          ))}
-	          <div className={classnames('col','col--12')}>
-	            <p><Link to={'/samples'}>More Sample Applications</Link></p>
-	          </div>
             </div>
           </div>
-        </div>
         )}
       </main>
       <div className={classnames('cta-block')}>

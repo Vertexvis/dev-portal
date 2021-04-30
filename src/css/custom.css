@@ -574,20 +574,20 @@ svg.angled {
   font-size: 1rem;
 }
 .tag-pill {
-	font-size:1rem;
-	padding:.25rem 1.125rem;
-	border-radius:5px;
-	background-color:#05abe2;
-	display:inline-block;
-	color:#FFF;
-	text-transform:uppercase;
-	font-weight:500;
-	letter-spacing:.39px;
+  font-size: 1rem;
+  padding: 0.25rem 1.125rem;
+  border-radius: 5px;
+  background-color: #05abe2;
+  display: inline-block;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.39px;
 }
 .disabled {
-	text-transform:uppercase;
-	color:#BDBDBD;
-	font-weight:400;
+  text-transform: uppercase;
+  color: #bdbdbd;
+  font-weight: 400;
 }
 .non-button-link {
   font-weight: 500;
@@ -892,54 +892,54 @@ svg.angled {
   margin-bottom: 2rem;
 }
 .feature-card {
-	margin-bottom:2rem;
+  margin-bottom: 2rem;
 }
 .feature-card .content {
-	color: #484848;
-	padding: 3rem;
+  color: #484848;
+  padding: 3rem;
 }
 .feature-card .feature-card-content {
-	position: relative;
-	border-radius: 2px;
-	border: .5px solid #cccccc;
-	box-shadow: 0 2px 3px rgb(0 0 0 / 20%);
-	text-align: left;
-	background-color: #FFF;
-	overflow: hidden;
-	height: 100%;
+  position: relative;
+  border-radius: 2px;
+  border: 0.5px solid #cccccc;
+  box-shadow: 0 2px 3px rgb(0 0 0 / 20%);
+  text-align: left;
+  background-color: #fff;
+  overflow: hidden;
+  height: 100%;
 }
 .feature-card-content .header img {
-	max-width: 100%;
-    height: auto;
-    vertical-align: text-bottom;
+  max-width: 100%;
+  height: auto;
+  vertical-align: text-bottom;
 }
 .feature-card-content .content .category {
-	font-weight: 500;
-	font-size: .9375rem;
-	text-transform: uppercase;
-	letter-spacing: .42px;
-	color: #05abe2;
-	margin-bottom: 1.5rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.42px;
+  color: #05abe2;
+  margin-bottom: 1.5rem;
 }
 .feature-card-content .content h2 {
-	font-size: 1.625rem;
-    line-height: 1.3;
-    font-weight: 400;
-    margin: 0 0 1rem;
+  font-size: 1.625rem;
+  line-height: 1.3;
+  font-weight: 400;
+  margin: 0 0 1rem;
 }
 .feature-card-content .content .intro {
-	display: block;
-	font-size: 1rem;
-	line-height: 1.75;
-	color: #444;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #444;
 }
 .feature-card .target {
-	position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 /* SwaggerUI Styles */
 .remove-all-styles * {
@@ -966,7 +966,7 @@ svg.angled {
     padding: 0.5rem 0.75rem;
   }
   .dropdown .navbar__link {
-	padding-right:1.375rem;  
+    padding-right: 1.375rem;
   }
 }
 @media (max-width: 1024px) {
@@ -1030,7 +1030,7 @@ svg.angled {
     font-size: 0.9rem;
   }
   .betaCalloutContent {
-    margin-top:2rem;
+    margin-top: 2rem;
   }
 }
 @media only screen and (max-width: 966px) {
@@ -1038,10 +1038,10 @@ svg.angled {
     margin-bottom: 0;
   }
 }
-@media (max-width:750px) {
-	.main-wrapper .DocSearch-Button-Placeholder {
-		display:block;
-	}
+@media (max-width: 750px) {
+  .main-wrapper .DocSearch-Button-Placeholder {
+    display: block;
+  }
 }
 @media only screen and (max-width: 500px) {
   .getting-started-sdks .sdk {
@@ -1050,7 +1050,7 @@ svg.angled {
     padding: 1rem 2rem !important;
   }
   .button--primary {
-	margin:1.5rem auto !important;  
+    margin: 1.5rem auto !important;
   }
 }
 /* Code block Line numbers */

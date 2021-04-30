@@ -86,8 +86,7 @@ module.exports = {
           position: 'right',
         },
         {
-          to:
-            'https://account.vertexvis.com/signin',
+          to: 'https://account.vertexvis.com/signin',
           label: 'Sign In',
           className: 'sign-in non-button-link',
           position: 'right',
@@ -116,9 +115,9 @@ module.exports = {
               to: 'docs/guides/render-your-first-scene',
             },
             {
-	          label: 'Samples',
-	          to: 'samples',
-	        },
+              label: 'Samples',
+              to: 'samples',
+            },
             {
               label: 'SDKs & Tools',
               to: 'docs/sdks-and-tools',
@@ -150,8 +149,7 @@ module.exports = {
             },
             {
               label: 'Pricing',
-              to:
-                'https://vertexvis.com/pricing/3d-platform',
+              to: 'https://vertexvis.com/pricing/3d-platform',
             },
           ],
         },
