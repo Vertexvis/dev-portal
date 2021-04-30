@@ -39,7 +39,7 @@ const gettingStarted = [
       },
     ],
     cta_links: false,
-    classes: 'col col--6 first',
+    classes: 'col col--4 first',
   },
   {
     title: <>Import data</>,
@@ -80,7 +80,40 @@ const gettingStarted = [
         url: '/docs/guides/import-metadata',
       },
     ],
-    classes: 'col col--6',
+    classes: 'col col--4',
+  },
+  {
+    title: <>Build your first application</>,
+    icon: (
+      <>
+        <svg
+          height="32"
+          viewBox="0 0 16 16"
+          width="32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m7 12a.5.5 0 0 0 1 0v-4.5h3l-3.5-5-3.5 5h3zm6.5-1a.5.5 0 0 0 -.5.5v2.33a.16.16 0 0 1 -.17.17h-10.66a.16.16 0 0 1 -.17-.17v-2.33a.5.5 0 0 0 -1 0v2.33a1.17 1.17 0 0 0 1.17 1.17h10.66a1.17 1.17 0 0 0 1.17-1.17v-2.33a.5.5 0 0 0 -.5-.5z"
+            fill="#00ade4"
+          />
+        </svg>
+      </>
+    ),
+    description: (
+      <>
+        Deploy a full stack NextJS application using our template as a starting 
+        point. Add your own functionality to customize the application and take 
+        full advantage of what Vertex has to offer.
+      </>
+    ),
+    callout: [
+      {
+        text: <>Build It</>,
+        url: '/docs/guides/render-your-first-scene/',
+      },
+    ],
+    cta_links: false,
+    classes: 'col col--4',
   },
 ];
 function GetStarted({ title, description, icon, callout, cta_links, classes }) {
@@ -396,8 +429,8 @@ const guideCards = [
 
 function GuideCard({ title, cta_links }) {
   return (
-    <div className={classnames('guide-card', 'col', styles.guideCard)}>
-      <div className={classnames(styles.cardContent)}>
+    <div className={classnames('col', styles.guideCard)}>
+      <div className={classnames(styles.guideCardContent)}>
         <h2>{title}</h2>
         <div className={classnames(styles.cardLinks)}>
           {cta_links.length &&
@@ -411,6 +444,58 @@ function GuideCard({ title, cta_links }) {
                 </Link>
               </p>
             ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const sampleApps = [
+  {
+    title: <>Business Intelligence Application</>,
+    description: (
+      <>
+        Connect external data sources to your 3D digital twin to accelerate 
+        quality, cost, and supply chain analyses and unlock your organization’s 
+        business intelligence.
+      </>
+    ),
+    imageSrc: 'https://placeimg.com/900/473/tech',
+    url: '#',
+    width: 'col--6',
+  },
+  {
+    title: <>Time Series Application</>,
+    description: (
+      <>
+        Visualize IoT time series data aligned to your 3D digital twin to 
+        improve decision-making and accelerate the adoption of IoT analytics in 
+        your organization.
+      </>
+    ),
+    imageSrc: 'https://placeimg.com/900/473/tech',
+    url: '#',
+    width: 'col--6',
+  },
+];
+
+function SampleApp({ title, description, imageSrc, url, width }) {
+  return (
+	
+    <div className={classnames('col', 'feature-card', styles.featureCard)}>
+      <div className={classnames('feature-card-content', styles.featureCardContent)}>
+        <div className={classnames('header')}>
+          <img src={imageSrc} alt="" />
+        </div>
+         <div className={classnames('content')}>
+           <div className={classnames('category')}>
+             Featured Sample
+           </div>
+           <h2>{title}</h2>
+           <div className={classnames('intro')}>
+             <span>{description}</span>
+           </div>
+           <Link to={url} className={classnames('target')}></Link>
         </div>
       </div>
     </div>
@@ -544,18 +629,36 @@ function Home() {
           )}
         </div>
         {guideCards && guideCards.length && (
-          <div className={classnames(styles.guideCardSection, styles.mainGray)}>
-            <div className={classnames('container')}>
-              <div className={classnames('row')}>
-                <div className={classnames('col col--12')}>
-                  <h2 className={classnames('secondary')}>Guides</h2>
-                </div>
-                {guideCards.map((props, idx) => (
-                  <GuideCard key={idx} {...props} />
-                ))}
+        <div className={classnames(styles.guideCardSection)}>
+          <div className={classnames('container')}>
+            <div className={classnames('row')}>
+              <div className={classnames('col col--12')}>
+                <h2 className={classnames('secondary')}>Guides</h2>
               </div>
+              {guideCards.map((props, idx) => (
+                <GuideCard key={idx} {...props} />
+              ))}
             </div>
           </div>
+        </div>
+        )}
+        {sampleApps && sampleApps.length && (
+        <div className={classnames(styles.sampleAppsSection)}>
+          <div className={classnames('container')}>
+            <div className={classnames('row')}>
+              <div className={classnames('col', 'col--12',styles.sampleAppsSectionHeader)}>
+                <h2 className={classnames('secondary')}>Sample Applications</h2>
+                <p>We built the following sample applications to give you ideas about how you can use Vertex.</p>
+              </div>
+              {sampleApps.map((props, idx) => (
+	            <SampleApp key={idx} {...props} /> 
+	          ))}
+	          <div className={classnames('col','col--12')}>
+	            <p><Link to={'#'}>More Sample Applications</Link></p>
+	          </div>
+            </div>
+          </div>
+        </div>
         )}
       </main>
       <div className={classnames('cta-block')}>

@@ -875,6 +875,56 @@ svg.angled {
 .gs-guide {
   margin-bottom: 2rem;
 }
+.feature-card {
+	margin-bottom:2rem;
+}
+.feature-card .content {
+	color: #484848;
+	padding: 3rem;
+}
+.feature-card .feature-card-content {
+	position: relative;
+	border-radius: 2px;
+	border: .5px solid #cccccc;
+	box-shadow: 0 2px 3px rgb(0 0 0 / 20%);
+	text-align: left;
+	background-color: #FFF;
+	overflow: hidden;
+	height: 100%;
+}
+.feature-card-content .header img {
+	max-width: 100%;
+    height: auto;
+    vertical-align: text-bottom;
+}
+.feature-card-content .content .category {
+	font-weight: 500;
+	font-size: .9375rem;
+	text-transform: uppercase;
+	letter-spacing: .42px;
+	color: #05abe2;
+	margin-bottom: 1.5rem;
+}
+.feature-card-content .content h2 {
+	font-size: 1.625rem;
+    line-height: 1.3;
+    font-weight: 400;
+    margin: 0 0 1rem;
+}
+.feature-card-content .content .intro {
+	display: block;
+	font-size: 1rem;
+	line-height: 1.75;
+	color: #444;
+}
+.feature-card .target {
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
 /* SwaggerUI Styles */
 .remove-all-styles * {
   all: revert;
