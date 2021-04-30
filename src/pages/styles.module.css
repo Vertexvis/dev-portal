@@ -107,8 +107,14 @@
   align-items: center;
   justify-content: center;
 }
-.betaCallout {
+.sectionPadding {
 	padding:3rem 0;
+}
+.textLeft {
+	text-align:left;
+}
+.textCenter {
+	text-align:center;
 }
 .betaCalloutHeading {
 	margin:1.5rem 0;
@@ -119,6 +125,10 @@
 	font-size:1rem;
 	line-height:1.75;
 	color:#444;
+}
+.normalParagraph {
+	font-size:1rem !important;
+	line-height:1.75;
 }
 .sdkLogosSection,
 .guideCardSection,
@@ -232,6 +242,14 @@
   z-index: 1;
   height: 100%;
 }
+.sceneStudioFeatureContent {
+	box-shadow:none;
+	transition:none;
+}
+.sceneStudioFeatureDescription {
+	font-size:1rem;
+	line-height:1.75;
+}
 .guideCardContent {
   padding: 1rem;
   position: relative;
@@ -258,6 +276,9 @@
 @media (hover: hover) {
   .cardContent:hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+  }
+  .sceneStudioFeatureContent:hover {
+	box-shadow:none;  
   }
 }
 .sdkLogos {

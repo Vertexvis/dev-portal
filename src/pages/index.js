@@ -109,7 +109,7 @@ const gettingStarted = [
     callout: [
       {
         text: <>Build It</>,
-        url: '/docs/guides/render-your-first-scene/',
+        url: '/docs/guides/build-your-first-app',
       },
     ],
     cta_links: false,
@@ -369,9 +369,13 @@ const guideCards = [
         url: '/docs/guides/render-your-first-scene',
       },
       {
-        text: <>Import data</>,
+        text: <>Import data with CLI</>,
         url: '/docs/guides/import-data',
       },
+      {
+	    text: <>Build your first application</>,
+	    url: '/docs/guides/build-your-first-app',
+	  },
     ],
   },
   {
@@ -386,7 +390,7 @@ const guideCards = [
         url: '/docs/guides/authentication',
       },
       {
-        text: <>Import data</>,
+        text: <>Import data (API)</>,
         url: '/docs/guides/import-data-with-api',
       },
     ],
@@ -396,7 +400,7 @@ const guideCards = [
     title: <>Reference</>,
     cta_links: [
       {
-        text: <>Install the SDK</>,
+        text: <>Install Web UI Components</>,
         url: '/docs/guides/install-sdk',
       },
       {
@@ -412,7 +416,7 @@ const guideCards = [
         url: '/docs/guides/platform-architecture',
       },
       {
-        text: <>Matrix transformation</>,
+        text: <>Matrix transformations</>,
         url: '/docs/guides/matrix-transformations',
       },
       {
@@ -461,7 +465,7 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: '#',
+    url: '/samples/business-intelligence',
     width: 'col--6',
   },
   {
@@ -474,7 +478,7 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: '#',
+    url: '/samples/time-series',
     width: 'col--6',
   },
 ];
@@ -482,7 +486,7 @@ const sampleApps = [
 function SampleApp({ title, description, imageSrc, url, width }) {
   return (
 	
-    <div className={classnames('col', 'feature-card', styles.featureCard)}>
+    <div className={classnames('col', width, 'feature-card', styles.featureCard)}>
       <div className={classnames('feature-card-content', styles.featureCardContent)}>
         <div className={classnames('header')}>
           <img src={imageSrc} alt="" />
@@ -654,7 +658,7 @@ function Home() {
 	            <SampleApp key={idx} {...props} /> 
 	          ))}
 	          <div className={classnames('col','col--12')}>
-	            <p><Link to={'#'}>More Sample Applications</Link></p>
+	            <p><Link to={'/samples'}>More Sample Applications</Link></p>
 	          </div>
             </div>
           </div>
