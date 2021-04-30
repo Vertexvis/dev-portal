@@ -38,7 +38,7 @@ const supportCards = [
     cta_links: [
       {
         text: <>Check it out</>,
-        url: '#',
+        url: 'https://github.com/Vertexvis/vertex-community/discussions',
       },
     ],
     classes: 'col col--4',
@@ -72,7 +72,7 @@ const supportCards = [
     cta_links: [
       {
         text: <>Contact us</>,
-        url: '#',
+        url: '/contact',
       },
     ],
     classes: 'col col--4',
@@ -103,7 +103,7 @@ const supportCards = [
     cta_links: [
       {
         text: <>COMING SOON</>,
-        url: '#',
+        url: '',
         disabled: true,
       },
     ],
@@ -337,7 +337,7 @@ function Support() {
             <div className={classnames('col col--3 button-column')}>
               <p>
                 <Link
-                  to={'https://aws.amazon.com/marketplace/pp/B08PP264Z1'}
+                  to={'https://github.com/Vertexvis/vertex-community/discussions'}
                   className={classnames(
                     'button button--secondary',
                     styles.callOutButton
