@@ -151,7 +151,7 @@ module.exports = {
             {
               label: 'Pricing',
               to:
-                'https://aws.amazon.com/marketplace/pp/B08PP264Z1?qid=1614615201574&sr',
+                'https://vertexvis.com/pricing/3d-platform',
             },
           ],
         },
