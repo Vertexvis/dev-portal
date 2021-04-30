@@ -144,7 +144,7 @@ function Samples() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={'/contact'}
+                  to={'/samples/contact'}
                 >
                   Contact a Expert
                 </Link> &nbsp; 

@@ -3,9 +3,9 @@ import classnames from 'classnames';
 import HubspotForm from 'react-hubspot-form';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import styles from './styles.module.css';
+import styles from '../styles.module.css';
 
-function ContactSpecialist() {
+function ContactExpert() {
   return (
     <Layout
       title={`Vertex Developer Portal`}
@@ -15,14 +15,7 @@ function ContactSpecialist() {
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Contact a Specialist</h1>
-              <p>
-                Please complete the form below or email our team at any time at{' '}
-                <Link to={'mailto:support@vertexvis.com'}>
-                  support@vertexvis.com
-                </Link>
-                .
-              </p>
+              <h1>Contact an Expert</h1>
             </div>
           </div>
         </div>
@@ -36,7 +29,7 @@ function ContactSpecialist() {
                   <div className={classnames('col col--7 contact-form')}>
                     <HubspotForm
                       portalId="8780919"
-                      formId="415c36a7-dbae-4dfb-bf40-9db22e7875f1"
+                      formId="710f874e-9d98-4d9d-9228-f5ef842716d3"
                       onSubmit={() => console.log('Submit!')}
                       onReady={() => console.log('Form ready!')}
                       loading={<div>Loading...</div>}
@@ -44,13 +37,8 @@ function ContactSpecialist() {
                   </div>
                   <div className={classnames('col col--5 contact-content')}>
                     <p>
-                      We’re committed to offering you help with your
-                      integrations and questions about the Vertex platform.
-                    </p>
-                    <p>
-                      Our Customer Support team is available Monday through
-                      Friday from 7 a.m. - 7 p.m. CST/CDT (excluding major U.S.
-                      holidays).
+                      One of our platform experts will be happy to answer your 
+                      questions and get you started with the Vertex Platform.
                     </p>
                   </div>
                 </div>
@@ -63,4 +51,4 @@ function ContactSpecialist() {
   );
 }
 
-export default ContactSpecialist;
+export default ContactExpert;
