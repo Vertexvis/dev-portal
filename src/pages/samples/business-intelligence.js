@@ -94,7 +94,7 @@ function BusinessInt() {
                 reflect the values found in the test data.
               </p>
               <div className={classnames(styles.textCenter)}>
-                <Link to={'#'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'#'} className={classnames('button button--primary button--outline')}>View on Github</Link>
+                <Link to={'#'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'https://github.com/Vertexvis/business-intelligence-demo'} className={classnames('button button--primary button--outline')}>View on Github</Link>
               </div>
             </div>
           </div>

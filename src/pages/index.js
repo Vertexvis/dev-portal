@@ -564,11 +564,11 @@ function Home() {
             </section>
           )}
         </div>
-        <div className={classnames(styles.awsCallout, 'aws-callout')}>
+        <div className={classnames(styles.logoCallout, 'logo-callout')}>
           <div className={classnames('container')}>
             <div className={classnames('row')}>
               <div className={classnames('col col--9')}>
-                <h2 className={classnames(styles.awsMark)}>
+                <h2 className={classnames(styles.logoMark, styles.awsMark)}>
                   Ready to add 3D experiences to your applications and
                   workflows? Subscribe to the Vertex 3D Visualization Platform
                   through the AWS Marketplace:{' '}

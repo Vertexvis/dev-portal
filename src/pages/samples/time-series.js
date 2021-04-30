@@ -93,7 +93,7 @@ function TimeSeries() {
                 of individual assets.
               </p>
               <div className={classnames(styles.textCenter)}>
-                <Link to={'#'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'#'} className={classnames('button button--primary button--outline')}>View on Github</Link>
+                <Link to={'https://time-series.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=4Hvcmm-waM5ygmEX8nep_uLgCXRz9V0yJ09G'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'https://github.com/Vertexvis/time-series-demo'} className={classnames('button button--primary button--outline')}>View on Github</Link>
               </div>
             </div>
           </div>

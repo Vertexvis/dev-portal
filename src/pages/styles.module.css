@@ -37,6 +37,9 @@
 }
 .sdks {
 }
+.supportCardsIntro {
+	margin-bottom:4rem;
+}
 .guides {
   margin-top: 2rem;
 }
@@ -55,32 +58,38 @@
   padding: 0;
   border-bottom: 1px solid transparent;
 }
-.awsCallout {
+.logoCallout {
   background-color: #f5f5f5;
   padding: 3rem 0;
   border-bottom: 1px solid transparent;
 }
-.awsButton {
+.callOutButton {
   background-color: #ff9900;
   border-color: #ff9900;
   text-transform: uppercase;
   color: #fff !important;
 }
-.awsMark {
-  padding-left: 169px;
-  background-image: url(/img/aws-mark.png);
+.logoMark {
   background-position: left center;
-  background-size: 129px 77px;
   background-repeat: no-repeat;
-  min-height: 77px;
   font-size: 1.25rem;
   margin: 0;
 }
-.awsMark a {
+.awsMark {
+  background-image: url(/img/aws-mark.png);
+  padding-left: 169px;
+  background-size: 129px 77px;
+  min-height: 77px;
+}
+.githubMark {
+  background-image: url(/img/github-mark.png);	
+  padding-left:105px;
+  background-size:65px 64px;
+  min-height: 64px;
+}
+.logoMark a {
   color: inherit;
   font-weight: 700;
-}
-.sdkMain {
 }
 .platformImage {
   margin-bottom: -20vw;
@@ -362,12 +371,20 @@
   }
 }
 @media only screen and (max-width: 996px) {
-  .awsMark {
-    padding-left: 0;
-    padding-top: 80px;
-    background-size: 68px;
+	
+  .logoMark {
+	padding-left:0;
     background-position: top 10px center;
     text-align: left;
+  }
+  .awsMark {
+    padding-top: 80px;
+    background-size: 68px;
+  }
+  .githubMark {
+	  padding-top:84px;
+	  background-size:70px;
+	  background-position:top center;
   }
   .useCaseContent {
     padding: var(--ifm-spacing-vertical) 2.75rem;

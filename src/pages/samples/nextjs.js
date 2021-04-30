@@ -97,7 +97,7 @@ function NextJS() {
                 Vertex.
               </p>
               <div className={classnames(styles.textCenter)}>
-                <Link to={'#'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'#'} className={classnames('button button--primary button--outline')}>View on Github</Link>
+                <Link to={'https://nextjs-starter.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU'} className={classnames('button button--primary')}>Launch App</Link> <Link to={'https://github.com/Vertexvis/vertex-nextjs-starter'} className={classnames('button button--primary button--outline')}>View on Github</Link>
               </div>
             </div>
           </div>

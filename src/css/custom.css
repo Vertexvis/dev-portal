@@ -584,6 +584,11 @@ svg.angled {
 	font-weight:500;
 	letter-spacing:.39px;
 }
+.disabled {
+	text-transform:uppercase;
+	color:#BDBDBD;
+	font-weight:400;
+}
 .non-button-link {
   font-weight: 500;
   font-size: 1rem;
@@ -822,11 +827,11 @@ svg.angled {
 .use-case-nav a.active {
   font-weight: var(--ifm-font-weight-bold);
 }
-.aws-callout .col {
+.logo-callout .col {
   display: flex;
   align-items: center;
 }
-.aws-callout .button-column p {
+.logo-callout .button-column p {
   margin-left: auto;
 }
 .sdk-card {
@@ -992,11 +997,11 @@ svg.angled {
   .footer__col {
     margin-bottom: var(--ifm-spacing-vertical);
   }
-  .aws-callout .col {
+  .logo-callout .col {
     text-align: center;
     display: block;
   }
-  .aws-callout .button-column {
+  .logo-callout .button-column {
     margin-top: 1rem;
   }
   .cta-block .content {
@@ -1032,6 +1037,11 @@ svg.angled {
   .platform-image {
     margin-bottom: 0;
   }
+}
+@media (max-width:750px) {
+	.main-wrapper .DocSearch-Button-Placeholder {
+		display:block;
+	}
 }
 @media only screen and (max-width: 500px) {
   .getting-started-sdks .sdk {
