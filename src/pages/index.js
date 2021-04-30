@@ -583,7 +583,7 @@ function Home() {
                     to={'https://aws.amazon.com/marketplace/pp/B08PP264Z1'}
                     className={classnames(
                       'button button--secondary',
-                      styles.awsButton
+                      styles.callOutButton
                     )}
                   >
                     Sign Up
