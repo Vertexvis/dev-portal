@@ -18,7 +18,7 @@
   background-color: #f5f5f5;
   color: #000;
 }
-.supportHero {
+.lightHero {
   background-color: #fff;
 }
 .LPhero h1 {
@@ -28,6 +28,12 @@
   font-size: 20px;
   line-height: 1.8;
   font-weight: 300;
+}
+.containerLarge {
+	margin:0 auto;
+	padding:0 var(--ifm-spacing-horizontal);
+	width:100%;
+	max-width: 1920px);
 }
 .sdks {
 }
@@ -100,6 +106,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.betaCallout {
+	padding:3rem 0;
+}
+.betaCalloutHeading {
+	margin:1.5rem 0;
+	font-size:1.625rem;
+	color:#212121;
+}
+.betaCalloutParagraph {
+	font-size:1rem;
+	line-height:1.75;
+	color:#444;
 }
 .sdkLogosSection,
 .guideCardSection,

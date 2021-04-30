@@ -59,6 +59,12 @@ module.exports = {
           position: 'right',
         },
         {
+          to: 'samples',
+          activeBasePath: 'samples',
+          label: 'Samples',
+          position: 'right',
+        },
+        {
           to: 'docs/sdks-and-tools',
           activeBasePath: 'docs/sdks-and-tools',
           label: 'SDKs & Tools',
@@ -78,16 +84,14 @@ module.exports = {
         {
           type: 'docsVersionDropdown',
           position: 'right',
-        } /*
-,
+        },
         {
           to:
-            'https://account.vertexvis.com/signin?redirectTo=https://console.vertexvis.com',
+            'https://account.vertexvis.com/signin',
           label: 'Sign In',
           className: 'sign-in non-button-link',
           position: 'right',
-        }
-*/,
+        },
         {
           to: 'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true',
           className: 'sign-up button button--primary',
@@ -111,6 +115,10 @@ module.exports = {
               label: 'Guides',
               to: 'docs/guides/render-your-first-scene',
             },
+            {
+	          label: 'Samples',
+	          to: 'samples',
+	        },
             {
               label: 'SDKs & Tools',
               to: 'docs/sdks-and-tools',

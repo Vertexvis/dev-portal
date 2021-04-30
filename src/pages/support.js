@@ -142,7 +142,7 @@ function Support() {
       title={`Vertex Developer Portal`}
       description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
     >
-      <header className={classnames(styles.LPhero, styles.supportHero)}>
+      <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
