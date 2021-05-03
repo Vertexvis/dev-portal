@@ -1,11 +1,13 @@
 import React from 'react';
 import classnames from 'classnames';
 import HubspotForm from 'react-hubspot-form';
+import VertexCustomJS from '../../components/VertexCustomJS';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from '../styles.module.css';
 
 function ContactExpert() {
+	
   return (
     <Layout
       title={`Vertex Developer Portal`}
@@ -30,8 +32,8 @@ function ContactExpert() {
                     <HubspotForm
                       portalId="8780919"
                       formId="710f874e-9d98-4d9d-9228-f5ef842716d3"
-                      onSubmit={() => console.log('Submit!')}
-                      onReady={() => console.log('Form ready!')}
+                      onSubmit={() => console.log('submit!') }
+                      onReady={() => window['js_selects']() }
                       loading={<div>Loading...</div>}
                     />
                   </div>
@@ -47,6 +49,7 @@ function ContactExpert() {
           </div>
         </div>
       </main>
+      <VertexCustomJS />
     </Layout>
   );
 }
