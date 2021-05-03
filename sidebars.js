@@ -69,7 +69,7 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'guides/matrix-transformations',
+          id: 'guides/transformation-matrices',
         },
         {
           type: 'link',

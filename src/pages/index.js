@@ -380,7 +380,7 @@ const guideCards = [
       },
       {
         text: <>Matrix transformation</>,
-        url: '/docs/guides/matrix-transformations',
+        url: '/docs/guides/transformation-matrices',
       },
       {
         text: <>UI Component examples</>,
