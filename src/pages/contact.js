@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import HubspotForm from 'react-hubspot-form';
+import VertexCustomJS from '../components/VertexCustomJS';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './styles.module.css';
@@ -8,14 +9,14 @@ import styles from './styles.module.css';
 function ContactSpecialist() {
   return (
     <Layout
-      title={`Vertex Developer Portal`}
+      title={`Contact an Expert | Vertex Developer Portal`}
       description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Contact a Specialist</h1>
+              <h1>Contact an Expert</h1>
               <p>
                 Please complete the form below or email our team at any time at{' '}
                 <Link to={'mailto:support@vertexvis.com'}>
@@ -36,11 +37,24 @@ function ContactSpecialist() {
                   <div className={classnames('col col--7 contact-form')}>
                     <HubspotForm
                       portalId="8780919"
-                      formId="415c36a7-dbae-4dfb-bf40-9db22e7875f1"
-                      onSubmit={() => console.log('Submit!')}
-                      onReady={() => console.log('Form ready!')}
+                      formId="710f874e-9d98-4d9d-9228-f5ef842716d3"
+                      onSubmit={() => console.log('submit!') }
+                      onReady={() => window['js_selects']() }
                       loading={<div>Loading...</div>}
                     />
+                    <div className={classnames(styles.contactLegal)}>
+                      <p>By submitting this form, you agree your contact 
+                      information may be used by us to communicate with you 
+                      about your registration, related products and services, 
+                      and offers from select partners. Refer to our 
+                      <Link 
+                        to={'https://vertexvis.com/privacy-policy'}
+                        >Privacy Policy</Link>{' '}and 
+                      <Link 
+                        to={'https://vertexvis.com/terms-of-use'}
+                        >Terms of Use</Link>{' '}for 
+                        additional information.</p>
+                    </div>
                   </div>
                   <div className={classnames('col col--5 contact-content')}>
                     <p>
@@ -59,6 +73,7 @@ function ContactSpecialist() {
           </div>
         </div>
       </main>
+      <VertexCustomJS />
     </Layout>
   );
 }

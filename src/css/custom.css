@@ -394,6 +394,9 @@ p {
   font-size: var(--ifm-p-font-size);
   line-height: var(--ifm-p-line-height);
 }
+.button {
+	text-transform:uppercase;
+}
 p.lead-in {
   font-size: var(--ifm-h3-font-size);
   font-weight: var(--ifm-font-weight-light);

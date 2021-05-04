@@ -8,6 +8,13 @@
 	background-color:#d8d8d8;
 	margin:2rem auto;
 }
+.contactLegal {
+	margin-top:2rem;
+}
+.contactLegal p {
+	font-size:.75rem;
+	color:#616161;
+}
 .heroBanner {
   padding: 6rem 0 11vw;
   text-align: center;
