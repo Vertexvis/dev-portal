@@ -290,7 +290,7 @@ const sdks = [
         ),
       },
     ],
-    url: 'https://github.com/Vertexvis/vertex-api-client-ts',
+    url: 'https://github.com/Vertexvis/vertex-api-client-node',
   },
   {
     title: <>Xamarin UI Components</>,

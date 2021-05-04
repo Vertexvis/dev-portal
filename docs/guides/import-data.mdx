@@ -31,7 +31,7 @@ Install the CLI with either [npm](https://www.npmjs.com/get-npm) or [Yarn](https
 <TabItem value="npm">
 
 ```shell
-npm install --global @vertexvis/vertex-cli
+npm install --global @vertexvis/cli
 ```
 
 </TabItem>
@@ -43,7 +43,7 @@ On Windows, you may need to add Yarn's `bin` directory to your `PATH` variable; 
 :::
 
 ```shell
-yarn global add @vertexvis/vertex-cli
+yarn global add @vertexvis/cli
 ```
 
 </TabItem>
@@ -85,7 +85,7 @@ Keep your client ID and secret handy; we'll use it in the following guide as wel
 Some customers use a different base API path than the default (https://platform.vertexvis.com). In this case, add the `--basePath` option to all commands, e.g., `vertex configure --basePath [YOUR_BASE_PATH]`.
 :::
 
-After you follow the prompts, the command creates `~/.config/@vertexvis/vertex-cli/config.json` on macOS/Linux and `%LOCALAPPDATA%\@vertexvis\vertex-cli\config.json` on Windows with your credentials. When you run additional commands, the CLI uses these to authenticate API calls.
+After you follow the prompts, the command creates `~/.config/@vertexvis/cli/config.json` on macOS/Linux and `%LOCALAPPDATA%\@vertexvis\cli\config.json` on Windows with your credentials. When you run additional commands, the CLI uses these to authenticate API calls.
 
 ## Importing data
 
