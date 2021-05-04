@@ -584,6 +584,9 @@ svg.angled {
   font-weight: 500;
   letter-spacing: 0.39px;
 }
+h1 .tag-pill {
+	vertical-align:top;
+}
 .disabled {
   text-transform: uppercase;
   color: #bdbdbd;

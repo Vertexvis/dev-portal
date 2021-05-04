@@ -73,7 +73,7 @@ function TimeSeries() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Vertex Developer Portal`}
+      title={`Time Series Application | Vertex Developer Portal`}
       description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
