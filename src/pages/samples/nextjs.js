@@ -87,11 +87,7 @@ function NextJS() {
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
               {/* Placeholder for demo */}
-              <div
-                Style={
-                  'padding-top:59%;background-color:#d8d8d8;margin:2rem auto;'
-                }
-              ></div>
+              <div className={classnames(styles.placeholder)}></div>
               {/* End Placeholder */}
             </div>
             <div
