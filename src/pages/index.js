@@ -456,7 +456,7 @@ function GuideCard({ title, cta_links }) {
 
 const sampleApps = [
   {
-    title: <>Business Intelligence Application</>,
+    title: <>3D Visual Analytics</>,
     description: (
       <>
         Connect external data sources to your 3D digital twin to accelerate
@@ -465,11 +465,11 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: '/samples/business-intelligence',
+    url: '/examples/3d-visual-analytics',
     width: 'col--6',
   },
   {
-    title: <>Time Series Application</>,
+    title: <>Digital Twin</>,
     description: (
       <>
         Visualize IoT time series data aligned to your 3D digital twin to
@@ -478,7 +478,7 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: '/samples/time-series',
+    url: '/examples/digital-twin',
     width: 'col--6',
   },
 ];

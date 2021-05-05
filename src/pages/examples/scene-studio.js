@@ -152,11 +152,11 @@ const sampleApps = [
         platform.
       </>
     ),
-    url: '/samples/nextjs',
+    url: '/examples/nextjs',
     width: 'col--4',
   },
   {
-    title: <>Business Intelligence Application</>,
+    title: <>3D Visual Analytics</>,
     description: (
       <>
         Connect external data sources to your 3D digital twin to accelerate
@@ -164,18 +164,19 @@ const sampleApps = [
         business intelligence.
       </>
     ),
-    url: '/samples/business-intelligence',
+    url: '/examples/3d-visual-analytics',
     width: 'col--4',
   },
   {
-    title: <>Scene Studio</>,
+    title: <>Digital Twin</>,
     description: (
       <>
-        Quickly author lightweight 3D content that can be integrated with your
-        Parts Catalog, Work Instructions, Training Materials, and more.
+        Visualize IoT time series data aligned to your 3D digital twin to 
+        improve decision-making and increase the effectiveness of IoT analytics 
+        in your organization.
       </>
     ),
-    url: '/samples/scene-studio',
+    url: '/examples/digital-twin',
     width: 'col--4',
   },
 ];
@@ -207,7 +208,8 @@ function SceneStudio() {
   return (
     <Layout
       title={`Scene Studio | Vertex Developer Portal`}
-      description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
+      description="Quickly author lightweight 3D content that can be integrated with your
+        Parts Catalog, Work Instructions, Training Materials, and more."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
@@ -281,9 +283,11 @@ function SceneStudio() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={'/samples/contact'}
+                  to={
+                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
+                  }
                 >
-                  Contact a Expert
+                  Sign Up Now
                 </Link>{' '}
                 &nbsp;
                 <Link
@@ -291,11 +295,9 @@ function SceneStudio() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={
-                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
-                  }
+                  to={'/examples/contact'}
                 >
-                  Sign Up Now
+                  Contact a Expert
                 </Link>
               </div>
             </div>

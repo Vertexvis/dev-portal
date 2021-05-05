@@ -8,20 +8,7 @@ import styles from '../styles.module.css';
 
 const sampleApps = [
   {
-    title: <>NextJS Starter Application</>,
-    description: (
-      <>
-        We created our full stack, deployable starter application using the
-        NextJS framework. Start with our template to quickly and easily build
-        your own prototype application that takes full advantage of the Vertex
-        platform.
-      </>
-    ),
-    url: '/samples/nextjs',
-    width: 'col--4',
-  },
-  {
-    title: <>Time Series Application</>,
+    title: <>Digital Twin</>,
     description: (
       <>
         Visualize IoT time series data aligned to your 3D digital twin to
@@ -29,7 +16,19 @@ const sampleApps = [
         your organization.
       </>
     ),
-    url: '/samples/time-series',
+    url: '/examples/digital-twin',
+    width: 'col--4',
+  },
+  {
+    title: <>3D Visual Analytics</>,
+    description: (
+      <>
+        Connect external data sources to your 3D digital twin to accelerate
+        quality, cost, and supply chain analyses and unlock your organization’s
+        business intelligence.
+      </>
+    ),
+    url: '/examples/3d-visual-analytics',
     width: 'col--4',
   },
   {
@@ -40,7 +39,7 @@ const sampleApps = [
         Parts Catalog, Work Instructions, Training Materials, and more.
       </>
     ),
-    url: '/samples/scene-studio',
+    url: '/examples/scene-studio',
     width: 'col--4',
   },
 ];
@@ -68,22 +67,25 @@ function SampleApp({ title, description, imageSrc, url, width }) {
   );
 }
 
-function BusinessInt() {
+function NextJS() {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Business Intelligence Application | Vertex Developer Portal`}
-      description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
+      title={`NextJS Starter Application | Vertex Developer Portal`}
+      description="We created our full stack, deployable starter application using the 
+        NextJS framework. Start with our template to quickly and easily build 
+        your own prototype application that takes full advantage of the Vertex 
+        platform."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Business Intelligence Application</h1>
+              <h1>NextJS Starter Application</h1>
               <p>
-                Connect external data sources to your 3D digital twin and unlock
-                your organization’s business intelligence.
+                We created a starter application template using the NextJS
+                framework.
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
@@ -103,17 +105,25 @@ function BusinessInt() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                To get started, load a Vertex sample scene and download the
-                corresponding CSV files of test data. Simply drag and drop the
-                CSV files onto the app, and watch as your view updates to
-                reflect the values found in the test data.
+                Our simple starter application has basic functionality for
+                viewing a scene, applying camera states and viewing a scene
+                item’s metadata. But the real benefit of this application is
+                that it was built following best practices for integrating the
+                Vertex platform. <Link to={'#'}>Follow our guide</Link>, and
+                once you have the foundation in place, you can add functionality
+                to create your own prototype application using Vertex.
               </p>
               <div className={classnames(styles.textCenter)}>
-                <Link to={'#'} className={classnames('button button--primary')}>
+                <Link
+                  to={
+                    'https://nextjs-starter.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU'
+                  }
+                  className={classnames('button button--primary')}
+                >
                   Launch App
                 </Link>{' '}
                 <Link
-                  to={'https://github.com/Vertexvis/business-intelligence-demo'}
+                  to={'https://github.com/Vertexvis/vertex-nextjs-starter'}
                   className={classnames(
                     'button button--primary button--outline'
                   )}
@@ -159,9 +169,11 @@ function BusinessInt() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={'/samples/contact'}
+                  to={
+                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
+                  }
                 >
-                  Contact a Expert
+                  Sign Up Now
                 </Link>{' '}
                 &nbsp;
                 <Link
@@ -169,11 +181,9 @@ function BusinessInt() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={
-                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
-                  }
+                  to={'/examples/contact'}
                 >
-                  Sign Up Now
+                  Contact a Expert
                 </Link>
               </div>
             </div>
@@ -184,4 +194,4 @@ function BusinessInt() {
   );
 }
 
-export default BusinessInt;
+export default NextJS;

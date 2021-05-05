@@ -59,9 +59,9 @@ module.exports = {
           position: 'right',
         },
         {
-          to: 'samples',
-          activeBasePath: 'samples',
-          label: 'Samples',
+          to: 'examples',
+          activeBasePath: 'examples',
+          label: 'Examples',
           position: 'right',
         },
         {
@@ -115,8 +115,8 @@ module.exports = {
               to: 'docs/guides/render-your-first-scene',
             },
             {
-              label: 'Samples',
-              to: 'samples',
+              label: 'Examples',
+              to: 'examples',
             },
             {
               label: 'SDKs & Tools',

@@ -18,12 +18,12 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: 'samples/nextjs',
+    url: '/examples/nextjs',
     cta: 'Check it out',
     width: 'col--4',
   },
   {
-    title: <>Time Series Application</>,
+    title: <>Digital Twin</>,
     description: (
       <>
         Visualize IoT time series data aligned to your 3D digital twin to 
@@ -32,12 +32,12 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: 'samples/time-series',
+    url: '/examples/digital-twin',
     cta: 'Check it out',
     width: 'col--4',
   },
   {
-    title: <>Business Intelligence Application</>,
+    title: <>3D Visual Analytics</>,
     description: (
       <>
         Securely connect external data sources to your 3D digital twin to 
@@ -46,7 +46,7 @@ const sampleApps = [
       </>
     ),
     imageSrc: 'https://placeimg.com/900/473/tech',
-    url: 'samples/business-intelligence',
+    url: '/examples/3d-visual-analytics',
     cta: 'Check it out',
     width: 'col--4',
   },
@@ -85,14 +85,14 @@ function Samples() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Sample Applications | Vertex Developer Portal`}
+      title={`Examples | Vertex Developer Portal`}
       description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Sample Applications</h1>
+              <h1>Examples</h1>
               <p>
                 With the Vertex platform, non-3D developers can easily 
                 integrate 3D CAD data into their application with just a few 
@@ -136,7 +136,7 @@ function Samples() {
                 </p>
                 <p>
                   <Link
-                    to={'samples/scene-studio'}
+                    to={'/examples/scene-studio'}
                     className={classnames('non-button-link')}
                   >
                     Learn more
@@ -175,7 +175,7 @@ function Samples() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={'/samples/contact'}
+                  to={'/examples/contact'}
                 >
                   Contact a Expert
                 </Link>
