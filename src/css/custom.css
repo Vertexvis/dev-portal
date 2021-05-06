@@ -965,7 +965,7 @@ select::-ms-expand {
 .feature-card .feature-card-content {
   position: relative;
   border-radius: 2px;
-  border: 0.5px solid #cccccc;
+  border: none;
   box-shadow: 0 2px 3px rgb(0 0 0 / 20%);
   text-align: left;
   background-color: #fff;

@@ -22,9 +22,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Connect external data sources to your 3D digital twin to accelerate
-        quality, cost, and supply chain analyses and unlock your organization’s
-        business intelligence.
+        Quickly connect external data sources to your 3D digital twin to 
+        accelerate quality, cost, and supply chain analyses and deliver 
+        powerful insights with ease. 
       </>
     ),
     url: '/examples/3d-visual-analytics',
@@ -84,14 +84,14 @@ function NextJS() {
                 Use our starter application template using the NextJS framework.
               </p>
             </div>
-            <div className={classnames('col', 'col--10', 'col--offset-1')}>
+            <div className={classnames('col', 'col--8', 'col--offset-2')}>
               <img src="/img/examples/starter-app@2x.png" alt="" />
             </div>
             <div
               className={classnames(
                 'col',
-                'col--10',
-                'col--offset-1',
+                'col--8',
+                'col--offset-2',
                 styles.textLeft
               )}
             >
@@ -101,7 +101,7 @@ function NextJS() {
               <p className={classnames(styles.normalParagraph)}>
                 View a scene, apply camera states, and see a scene item’s 
                 metadata. We built this application following best practices 
-                for integrating the Vertex platform. 
+                for integrating the Vertex platform.{' '}
                 <Link to={'/docs/guides/build-your-first-app'}>Follow our guide</Link> to build 
                 a foundation, then add functionality to create your own 
                 prototype application using Vertex. 
@@ -115,6 +115,7 @@ function NextJS() {
                 >
                   Launch App
                 </Link>{' '}
+                &nbsp;
                 <Link
                   to={'https://github.com/Vertexvis/vertex-nextjs-starter'}
                   className={classnames(
@@ -135,11 +136,15 @@ function NextJS() {
               className={classnames(styles.sectionPadding, styles.textCenter)}
             >
               <div className={classnames(styles.containerLarge)}>
-                <h2>Check out our other sample apps</h2>
+                <h2>Check out our other example apps</h2>
+                <div className={classnames('row')}>
+                  <div className={classnames('col col--10 col--offset-1')}>
                 <div className={classnames('row')}>
                   {sampleApps.map((props, idx) => (
                     <SampleApp key={idx} {...props} />
                   ))}
+                </div>
+                </div>
                 </div>
               </div>
             </div>

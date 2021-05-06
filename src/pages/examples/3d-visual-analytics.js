@@ -85,14 +85,14 @@ function BusinessInt() {
                 deliver powerful insights with ease. 
               </p>
             </div>
-            <div className={classnames('col', 'col--10', 'col--offset-1')}>
+            <div className={classnames('col', 'col--8', 'col--offset-2')}>
               <img src="/img/examples/visual-analytics@2x.png" alt="" />
             </div>
             <div
               className={classnames(
                 'col',
-                'col--10',
-                'col--offset-1',
+                'col--8',
+                'col--offset-2',
                 styles.textLeft
               )}
             >
@@ -109,6 +109,7 @@ function BusinessInt() {
                 <Link to={'https://visual-analytics.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=RA00uJtbA41VR9NmZvHnXSW4H8viv9AI5Vbx'} className={classnames('button button--primary')}>
                   Launch App
                 </Link>{' '}
+                &nbsp;
                 <Link
                   to={'https://github.com/Vertexvis/visual-analytics-demo'}
                   className={classnames(
@@ -139,11 +140,15 @@ function BusinessInt() {
               className={classnames(styles.sectionPadding, styles.textCenter)}
             >
               <div className={classnames(styles.containerLarge)}>
-                <h2>Check out our other sample apps</h2>
+                <h2>Check out our other example apps</h2>
+                <div className={classnames('row')}>
+                  <div className={classnames('col col--10 col--offset-1')}>
                 <div className={classnames('row')}>
                   {sampleApps.map((props, idx) => (
                     <SampleApp key={idx} {...props} />
                   ))}
+                </div>
+                </div>
                 </div>
               </div>
             </div>

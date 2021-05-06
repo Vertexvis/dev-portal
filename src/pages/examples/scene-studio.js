@@ -223,14 +223,14 @@ function SceneStudio() {
                 and more.
               </p>
             </div>
-            <div className={classnames('col', 'col--10', 'col--offset-1')}>
+            <div className={classnames('col', 'col--8', 'col--offset-2')}>
 			  <img src="/img/examples/scene-studio-fpo.png" alt="" />
             </div>
             <div
               className={classnames(
                 'col',
-                'col--10',
-                'col--offset-1',
+                'col--8',
+                'col--offset-2',
                 styles.textLeft
               )}
             >
@@ -245,18 +245,22 @@ function SceneStudio() {
           </div>
         </div>
       </header>
-      <main>
+     <main>
         <div className={classnames(styles.mainGray)}>
           {sampleApps && sampleApps.length && (
             <div
               className={classnames(styles.sectionPadding, styles.textCenter)}
             >
               <div className={classnames(styles.containerLarge)}>
-                <h2>Check out our other sample apps</h2>
+                <h2>Check out our other example apps</h2>
+                <div className={classnames('row')}>
+                  <div className={classnames('col col--10 col--offset-1')}>
                 <div className={classnames('row')}>
                   {sampleApps.map((props, idx) => (
                     <SampleApp key={idx} {...props} />
                   ))}
+                </div>
+                </div>
                 </div>
               </div>
             </div>

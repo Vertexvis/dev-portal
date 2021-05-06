@@ -85,14 +85,14 @@ function TimeSeries() {
                 Visualize IoT time series data aligned to your 3D digital twin.
               </p>
             </div>
-            <div className={classnames('col', 'col--10', 'col--offset-1')}>
+            <div className={classnames('col', 'col--8', 'col--offset-2')}>
               <img src="/img/examples/digital-twin@2x.png" alt="" />
             </div>
             <div
               className={classnames(
                 'col',
-                'col--10',
-                'col--offset-1',
+                'col--8',
+                'col--offset-2',
                 styles.textLeft
               )}
             >
@@ -114,6 +114,7 @@ function TimeSeries() {
                 >
                   Launch App
                 </Link>{' '}
+                &nbsp;
                 <Link
                   to={'https://github.com/Vertexvis/digital-twin-demo'}
                   className={classnames(
@@ -134,11 +135,15 @@ function TimeSeries() {
               className={classnames(styles.sectionPadding, styles.textCenter)}
             >
               <div className={classnames(styles.containerLarge)}>
-                <h2>Check out our other sample apps</h2>
+                <h2>Check out our other example apps</h2>
+                <div className={classnames('row')}>
+                  <div className={classnames('col col--10 col--offset-1')}>
                 <div className={classnames('row')}>
                   {sampleApps.map((props, idx) => (
                     <SampleApp key={idx} {...props} />
                   ))}
+                </div>
+                </div>
                 </div>
               </div>
             </div>
