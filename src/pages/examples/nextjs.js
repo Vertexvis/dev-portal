@@ -72,14 +72,14 @@ function NextJS() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`NextJS Starter Application | Vertex Developer Portal`}
+      title={`NextJS Starter | Vertex Developer Portal`}
       description="Quickly and easily build your own digital twin prototype application using the NextJS framework."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>NextJS Starter Application</h1>
+              <h1>NextJS Starter</h1>
               <p>
                 Use our starter application template using the NextJS framework.
               </p>

@@ -143,7 +143,7 @@ function SSFeature({ icon, title, description, width }) {
 
 const sampleApps = [
   {
-    title: <>NextJS Starter Application</>,
+    title: <>NextJS Starter</>,
     description: (
       <>
         We created our full stack, deployable starter application using the 
