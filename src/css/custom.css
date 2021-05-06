@@ -481,24 +481,25 @@ p.lead-in {
 }
 .navbar__item.sign-up {
   /* remove margin-left property when we add in the sign-in button */
-  margin-left: 1rem;
   order: 30;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  font-weight: 400;
   background-color: #00ade4;
-  height: 100%;
   display: flex;
   flex-flow: column;
   justify-content: center;
   text-transform: uppercase;
-  font-size: 0.875rem;
-  border-radius: none;
-  border-radius: 0;
   color: #fff;
+  margin:0 .5rem;
+  padding: .375rem 1rem;
+  border-radius: 4px;
+  font-size: .75rem;
+  letter-spacing: .6px;
+  font-weight: 500;
 }
-.navbar__item.sign-up:hover {
-  border-color: #00ade4;
+@media (hover:hover) {
+	.navbar__item.sign-up:hover {
+	  border-color: #616161;
+	  background-color:#616161;
+	}
 }
 .navbar__items {
   flex: 0 1 auto;
