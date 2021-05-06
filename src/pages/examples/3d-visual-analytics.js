@@ -118,6 +118,16 @@ function BusinessInt() {
                   View on Github
                 </Link>
               </div>
+               <h2 className={classnames(styles.betaCalloutHeading)}>
+                Instructions
+              </h2>
+              <p className={classnames(styles.normalParagraph)}>
+                Several data sets are available for you to try different 
+                analytics. The CSV files are available on Github or you can 
+                <Link 
+                  to={'https://business-intelligence.vertexvis.io/super-car-data.zip'}>
+                  easily download from here</Link>.
+              </p>
             </div>
           </div>
         </div>

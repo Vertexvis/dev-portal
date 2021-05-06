@@ -19,7 +19,7 @@ const sampleApps = [
     ),
     imageSrc: '/img/examples/starter-card-o.png',
     url: '/examples/nextjs',
-    cta: 'Learn more',
+    cta: 'Try it Out',
     width: 'col--4',
   },
   {
@@ -32,7 +32,7 @@ const sampleApps = [
     ),
     imageSrc: '/img/examples/digital-twin-card-o.png',
     url: '/examples/digital-twin',
-    cta: 'Learn more',
+    cta: 'Try it Out',
     width: 'col--4',
   },
   {
@@ -46,7 +46,7 @@ const sampleApps = [
     ),
     imageSrc: '/img/examples/visual analytics-card-o.png',
     url: '/examples/3d-visual-analytics',
-    cta: 'Learn more',
+    cta: 'Try it Out',
     width: 'col--4',
   },
 ];
