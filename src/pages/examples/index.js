@@ -12,14 +12,14 @@ const sampleApps = [
     description: (
       <>
         We created our full stack, deployable starter application using the 
-        NextJS framework. Start with our template to quickly and easily build 
-        your own prototype application that takes full advantage of the Vertex 
+        NextJS framework. Quickly and easily build your own prototype 
+        application that takes full advantage of the Vertex 
         platform.
       </>
     ),
-    imageSrc: 'https://placeimg.com/900/473/tech',
+    imageSrc: '/img/examples/starter-card-o.png',
     url: '/examples/nextjs',
-    cta: 'Check it out',
+    cta: 'Learn more',
     width: 'col--4',
   },
   {
@@ -27,27 +27,26 @@ const sampleApps = [
     description: (
       <>
         Visualize IoT time series data aligned to your 3D digital twin to 
-        improve decision-making and increase the effectiveness of IoT analytics 
-        in your organization.
+        improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
-    imageSrc: 'https://placeimg.com/900/473/tech',
+    imageSrc: '/img/examples/digital-twin-card-o.png',
     url: '/examples/digital-twin',
-    cta: 'Check it out',
+    cta: 'Learn more',
     width: 'col--4',
   },
   {
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Securely connect external data sources to your 3D digital twin to 
-        accelerate quality, cost, and supply chain analyses and unlock your 
-        organization’s business intelligence. 
+        Quickly connect external data sources to your 3D digital twin to 
+        accelerate quality, cost, and supply chain analyses and deliver powerful
+        insights with ease. 
       </>
     ),
-    imageSrc: 'https://placeimg.com/900/473/tech',
+    imageSrc: '/img/examples/visual analytics-card-o.png',
     url: '/examples/3d-visual-analytics',
-    cta: 'Check it out',
+    cta: 'Learn more',
     width: 'col--4',
   },
 ];
@@ -85,19 +84,19 @@ function Samples() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Examples | Vertex Developer Portal`}
-      description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
+      title={`Example Applications | Vertex Developer Portal`}
+      description="Example applications to help easily integrate 3D CAD data with data sources such as IoT, MES, data warehouses, and data lakes."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Examples</h1>
+              <h1>Example Applications</h1>
               <p>
                 With the Vertex platform, non-3D developers can easily 
                 integrate 3D CAD data into their application with just a few 
-                lines of code. Here are some sample applications to help you 
-                get an idea of what you can do with Vertex. 
+                lines of code. Get an idea of what you can do with these 
+                examples. 
               </p>
             </div>
           </div>
@@ -119,7 +118,7 @@ function Samples() {
           <div className={classnames('container')}>
             <div className={classnames('row')}>
               <div className={classnames('col', 'col--4')}>
-                <img src="https://placeimg.com/900/473/tech" alt="" />
+                <img src="/img/scene-studio/ss-preview.png" alt="" />
               </div>
               <div
                 className={classnames('col', 'col--8', 'betaCalloutContent')}
@@ -129,10 +128,10 @@ function Samples() {
                   Easily Author 3D Content with Scene Studio<sup>&trade;</sup>
                 </h2>
                 <p className={classnames(styles.betaCalloutParagraph)}>
-                  Scene Studio<sup>&trade;</sup> is an easy way to get 3D 
-                  applications into the hands of your colleagues and clients. 
-                  It replaces traditional product documentation that is 
-                  difficult to maintain and not easily accessible.
+                  Scene Studio<sup>&trade;</sup> gets 3D applications to 
+                  colleagues and clients. It replaces traditional product 
+                  documentation that is difficult to maintain and not easily 
+                  accessible.
                 </p>
                 <p>
                   <Link

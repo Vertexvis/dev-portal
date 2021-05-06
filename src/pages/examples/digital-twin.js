@@ -11,10 +11,9 @@ const sampleApps = [
     title: <>NextJS Starter Application</>,
     description: (
       <>
-        We created our full stack, deployable starter application using the
-        NextJS framework. Start with our template to quickly and easily build
-        your own prototype application that takes full advantage of the Vertex
-        platform.
+        We created our full stack, deployable starter application using the 
+        NextJS framework. Quickly and easily build your own prototype 
+        application that takes full advantage of the Vertex platform. 
       </>
     ),
     url: '/examples/nextjs',
@@ -24,9 +23,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Connect external data sources to your 3D digital twin to accelerate
-        quality, cost, and supply chain analyses and unlock your organization’s
-        business intelligence.
+        Quickly connect external data sources to your 3D digital twin to 
+        accelerate quality, cost, and supply chain analyses and deliver 
+        powerful insights with ease. 
       </>
     ),
     url: '/examples/3d-visual-analytics',
@@ -36,8 +35,9 @@ const sampleApps = [
     title: <>Scene Studio</>,
     description: (
       <>
-        Quickly author lightweight 3D content that can be integrated with your
-        Parts Catalog, Work Instructions, Training Materials, and more.
+        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and clients. It 
+        replaces traditional product documentation that is difficult to 
+        maintain and not easily accessible.
       </>
     ),
     url: '/examples/scene-studio',
@@ -73,24 +73,20 @@ function TimeSeries() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Digital Twin | Vertex Developer Portal`}
-      description="Visualize IoT time series data aligned to your 3D digital twin to 
-        improve decision-making and increase the effectiveness of IoT analytics 
-        in your organization."
+      title={`Digital Twin Application | Vertex Developer Portal`}
+      description="Example of how to visualize IoT time series data aligned to your 3D digital twin."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Digital Twin</h1>
+              <h1>Digital Twin Application</h1>
               <p>
                 Visualize IoT time series data aligned to your 3D digital twin.
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
-              {/* Placeholder for demo */}
-              <div className={classnames(styles.placeholder)}></div>
-              {/* End Placeholder */}
+              <img src="/img/examples/digital-twin.png" alt="" />
             </div>
             <div
               className={classnames(
@@ -104,22 +100,22 @@ function TimeSeries() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                Build a true digital twin by mapping sensor IoT data directly to
-                your 3D geometry. Set up conditional triggers to help users
-                better understand and explore issues, failures and performance
-                of individual assets.
+                Build a true digital twin by mapping sensor IoT data directly 
+                to your 3D geometry. Set up conditional triggers to help users 
+                better understand and explore issues, failures and performance 
+                of individual assets. 
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
                   to={
-                    'https://time-series.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=4Hvcmm-waM5ygmEX8nep_uLgCXRz9V0yJ09G'
+                    'https://digital-twin.vertexvis.io/'
                   }
                   className={classnames('button button--primary')}
                 >
                   Launch App
                 </Link>{' '}
                 <Link
-                  to={'https://github.com/Vertexvis/time-series-demo'}
+                  to={'https://github.com/Vertexvis/digital-twin-demo'}
                   className={classnames(
                     'button button--primary button--outline'
                   )}

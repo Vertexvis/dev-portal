@@ -11,9 +11,8 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to
-        improve decision-making and accelerate the adoption of IoT analytics in
-        your organization.
+        Visualize IoT time series data aligned to your 3D digital twin to 
+        improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
     url: '/examples/digital-twin',
@@ -35,8 +34,9 @@ const sampleApps = [
     title: <>Scene Studio</>,
     description: (
       <>
-        Quickly author lightweight 3D content that can be integrated with your
-        Parts Catalog, Work Instructions, Training Materials, and more.
+        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and clients. It 
+        replaces traditional product documentation that is difficult to 
+        maintain and not easily accessible.
       </>
     ),
     url: '/examples/scene-studio',
@@ -73,10 +73,7 @@ function NextJS() {
   return (
     <Layout
       title={`NextJS Starter Application | Vertex Developer Portal`}
-      description="We created our full stack, deployable starter application using the 
-        NextJS framework. Start with our template to quickly and easily build 
-        your own prototype application that takes full advantage of the Vertex 
-        platform."
+      description="Quickly and easily build your own digital twin prototype application using the NextJS framework."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
@@ -84,14 +81,11 @@ function NextJS() {
             <div className={classnames('col')}>
               <h1>NextJS Starter Application</h1>
               <p>
-                We created a starter application template using the NextJS
-                framework.
+                Use our starter application template using the NextJS framework.
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
-              {/* Placeholder for demo */}
-              <div className={classnames(styles.placeholder)}></div>
-              {/* End Placeholder */}
+              <img src="/img/examples/starter-app.png" alt="" />
             </div>
             <div
               className={classnames(
@@ -105,18 +99,17 @@ function NextJS() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                Our simple starter application has basic functionality for
-                viewing a scene, applying camera states and viewing a scene
-                item’s metadata. But the real benefit of this application is
-                that it was built following best practices for integrating the
-                Vertex platform. <Link to={'#'}>Follow our guide</Link>, and
-                once you have the foundation in place, you can add functionality
-                to create your own prototype application using Vertex.
+                View a scene, apply camera states, and see a scene item’s 
+                metadata. We built this application following best practices 
+                for integrating the Vertex platform. 
+                <Link to={'/docs/guides/build-your-first-app'}>Follow our guide</Link> to build 
+                a foundation, then add functionality to create your own 
+                prototype application using Vertex. 
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
                   to={
-                    'https://nextjs-starter.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU'
+                    'https://nextjs-starter.vertexvis.io'
                   }
                   className={classnames('button button--primary')}
                 >

@@ -86,17 +86,7 @@ const gettingStarted = [
     title: <>Build your first application</>,
     icon: (
       <>
-        <svg
-          height="32"
-          viewBox="0 0 16 16"
-          width="32"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="m7 12a.5.5 0 0 0 1 0v-4.5h3l-3.5-5-3.5 5h3zm6.5-1a.5.5 0 0 0 -.5.5v2.33a.16.16 0 0 1 -.17.17h-10.66a.16.16 0 0 1 -.17-.17v-2.33a.5.5 0 0 0 -1 0v2.33a1.17 1.17 0 0 0 1.17 1.17h10.66a1.17 1.17 0 0 0 1.17-1.17v-2.33a.5.5 0 0 0 -.5-.5z"
-            fill="#00ade4"
-          />
-        </svg>
+        <svg height="29" width="29" viewBox="0 0 25.38 25.38" xmlns="http://www.w3.org/2000/svg"><g fill="#00ade4" transform="translate(-1.81 -1.81)"><path d="m24.47 16.31h-5.47a2.72 2.72 0 0 0 -2.69 2.69v5.44a2.72 2.72 0 0 0 2.69 2.75h5.44a2.72 2.72 0 0 0 2.72-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z"/><path d="m10 16.31h-5.47a2.72 2.72 0 0 0 -2.72 2.69v5.44a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.72-2.72v-5.44a2.72 2.72 0 0 0 -2.72-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z"/><path d="m24.47 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.69h5.44a2.72 2.72 0 0 0 2.75-2.69v-5.47a2.72 2.72 0 0 0 -2.72-2.72zm.91 8.19a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.56h7.26z"/><path d="m10 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.69-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.72zm.88 8.19a.91.91 0 0 1 -.91.91h-5.44a.91.91 0 0 1 -.91-.91v-4.56h7.26z"/></g></svg>
       </>
     ),
     description: (
@@ -464,7 +454,7 @@ const sampleApps = [
         business intelligence.
       </>
     ),
-    imageSrc: 'https://placeimg.com/900/473/tech',
+    imageSrc: '/img/examples/visual analytics-card-o.png',
     url: '/examples/3d-visual-analytics',
     width: 'col--6',
   },
@@ -477,7 +467,7 @@ const sampleApps = [
         your organization.
       </>
     ),
-    imageSrc: 'https://placeimg.com/900/473/tech',
+    imageSrc: '/img/examples/digital-twin-card-o.png',
     url: '/examples/digital-twin',
     width: 'col--6',
   },
@@ -674,7 +664,7 @@ function Home() {
                 ))}
                 <div className={classnames('col', 'col--12')}>
                   <p>
-                    <Link to={'/samples'}>More Sample Applications</Link>
+                    <Link to={'/examples'}>More Example Applications</Link>
                   </p>
                 </div>
               </div>

@@ -28,8 +28,8 @@ const SSFeatures = [
     title: <>Build your scene</>,
     description: (
       <>
-        Quickly and easily add parts, assemblies and tools to your scene in an
-        intuitive UI.
+        Quickly and easily add parts, assemblies, and tools to your scene in 
+        an intuitive UI. 
       </>
     ),
     width: 'col--6',
@@ -55,8 +55,8 @@ const SSFeatures = [
     title: <>Transform parts</>,
     description: (
       <>
-        Select individual parts and perform transformations at the part level
-        without having to go back to your CAD program.
+        Select individual parts and transform at the part level without going 
+        back to your CAD program.
       </>
     ),
     width: 'col--6',
@@ -82,8 +82,8 @@ const SSFeatures = [
     title: <>View changes instantly</>,
     description: (
       <>
-        Make adjustments, transformations, or material overrides and preview
-        instantly, and only commit your changes when you have the perfect scene.
+        Make adjustments, transformations, or material overrides and preview 
+        instantly. Commit your changes when you have the perfect scene. 
       </>
     ),
     width: 'col--6',
@@ -109,8 +109,8 @@ const SSFeatures = [
     title: <>Seamless integration</>,
     description: (
       <>
-        Set up your scene so it’s always using the latest geometry for your 3D
-        data. No need to worry about your 3D data getting out of date.
+        Set up your scene so it’s always using the latest geometry for your 
+        3D data. 
       </>
     ),
     width: 'col--6',
@@ -146,10 +146,9 @@ const sampleApps = [
     title: <>NextJS Starter Application</>,
     description: (
       <>
-        We created our full stack, deployable starter application using the
-        NextJS framework. Start with our template to quickly and easily build
-        your own prototype application that takes full advantage of the Vertex
-        platform.
+        We created our full stack, deployable starter application using the 
+        NextJS framework. Quickly and easily build your own prototype 
+        application that takes full advantage of the Vertex platform. 
       </>
     ),
     url: '/examples/nextjs',
@@ -159,9 +158,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Connect external data sources to your 3D digital twin to accelerate
-        quality, cost, and supply chain analyses and unlock your organization’s
-        business intelligence.
+        Quickly connect external data sources to your 3D digital twin to 
+        accelerate quality, cost, and supply chain analyses and deliver 
+        powerful insights with ease. 
       </>
     ),
     url: '/examples/3d-visual-analytics',
@@ -172,8 +171,7 @@ const sampleApps = [
     description: (
       <>
         Visualize IoT time series data aligned to your 3D digital twin to 
-        improve decision-making and increase the effectiveness of IoT analytics 
-        in your organization.
+        improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
     url: '/examples/digital-twin',
@@ -207,7 +205,7 @@ function SceneStudio() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Scene Studio | Vertex Developer Portal`}
+      title={`Scene Studio Authoring Tool | Vertex Developer Portal`}
       description="Quickly author lightweight 3D content that can be integrated with your
         Parts Catalog, Work Instructions, Training Materials, and more."
     >
@@ -220,15 +218,13 @@ function SceneStudio() {
                 <span className={classnames('tag-pill')}>Beta</span>
               </h1>
               <p>
-                Quickly author lightweight 3D content that can be integrated
-                with your Parts Catalog, Work Instructions, Training Materials,
+                Quickly author lightweight 3D content that can be integrated 
+                with your Parts Catalog, Work Instructions, Training Materials, 
                 and more.
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
-              {/* Placeholder for demo */}
-              <div className={classnames(styles.placeholder)}></div>
-              {/* End Placeholder */}
+			  <img src="/img/examples/scene-studio-fpo.png" alt="" />
             </div>
             <div
               className={classnames(

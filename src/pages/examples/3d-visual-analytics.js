@@ -11,10 +11,9 @@ const sampleApps = [
     title: <>NextJS Starter Application</>,
     description: (
       <>
-        We created our full stack, deployable starter application using the
-        NextJS framework. Start with our template to quickly and easily build
-        your own prototype application that takes full advantage of the Vertex
-        platform.
+        We created our full stack, deployable starter application using the 
+        NextJS framework. Quickly and easily build your own prototype 
+        application that takes full advantage of the Vertex platform. 
       </>
     ),
     url: '/examples/nextjs',
@@ -24,9 +23,8 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to
-        improve decision-making and accelerate the adoption of IoT analytics in
-        your organization.
+        Visualize IoT time series data aligned to your 3D digital twin to 
+        improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
     url: '/examples/digital-twin',
@@ -36,8 +34,9 @@ const sampleApps = [
     title: <>Scene Studio</>,
     description: (
       <>
-        Quickly author lightweight 3D content that can be integrated with your
-        Parts Catalog, Work Instructions, Training Materials, and more.
+        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and clients. It 
+        replaces traditional product documentation that is difficult to 
+        maintain and not easily accessible.
       </>
     ),
     url: '/examples/scene-studio',
@@ -73,10 +72,8 @@ function BusinessInt() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Business Intelligence Application | Vertex Developer Portal`}
-      description="Securely connect external data sources to your 3D digital twin to 
-        accelerate quality, cost, and supply chain analyses and unlock your 
-        organization’s business intelligence."
+      title={`3D Visual Analytics Application | Vertex Developer Portal`}
+      description="Example showing how easy it is to connect external data sources to your 3D digital twin for visual analytics."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
@@ -84,14 +81,12 @@ function BusinessInt() {
             <div className={classnames('col')}>
               <h1>3D Visual Analytics</h1>
               <p>
-                Connect external data sources to your 3D digital twin and unlock
-                your organization’s business intelligence.
+                Connect external data sources to your 3D digital twin and 
+                deliver powerful insights with ease. 
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
-              {/* Placeholder for demo */}
-              <div className={classnames(styles.placeholder)}></div>
-              {/* End Placeholder */}
+              <img src="/img/examples/visual-analytics.png" alt="" />
             </div>
             <div
               className={classnames(
@@ -105,17 +100,17 @@ function BusinessInt() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                To get started, load a Vertex sample scene and download the
-                corresponding CSV files of test data. Simply drag and drop the
-                CSV files onto the app, and watch as your view updates to
-                reflect the values found in the test data.
+                Load a Vertex sample scene and download the corresponding CSV 
+                files of test data. Simply drag and drop the CSV files onto the 
+                app, and watch as your view updates to reflect the values 
+                found in the test data. 
               </p>
               <div className={classnames(styles.textCenter)}>
-                <Link to={'#'} className={classnames('button button--primary')}>
+                <Link to={'https://visual-analytics.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=RA00uJtbA41VR9NmZvHnXSW4H8viv9AI5Vbx'} className={classnames('button button--primary')}>
                   Launch App
                 </Link>{' '}
                 <Link
-                  to={'https://github.com/Vertexvis/business-intelligence-demo'}
+                  to={'https://github.com/Vertexvis/visual-analytics-demo'}
                   className={classnames(
                     'button button--primary button--outline'
                   )}
