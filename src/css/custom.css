@@ -629,7 +629,6 @@ h1 .tag-pill {
 .getting-started-sdks .sdk {
   width: 20%;
 }
-
 .main-wrapper .DocSearch.DocSearch-Button {
   margin: 1.5rem auto 0;
   display: inline-block;
@@ -780,7 +779,6 @@ h1 .tag-pill {
 .contact-form input[type='textbox'],
 .contact-form input[type='number'],
 .contact-form textarea {
-  
 	border:1px solid #D0D0D0;
 	background-color:#FFF;
 	border-radius:4px;
@@ -950,6 +948,9 @@ select::-ms-expand {
   background-color: var(--ifm-color-primary);
   color: #fff;
 }
+.gs-guide .button {
+	margin:1rem 0;
+}
 .gs-guide {
   margin-bottom: 2rem;
 }
@@ -960,6 +961,7 @@ select::-ms-expand {
   color: #484848;
   padding: 3rem;
 }
+
 .feature-card .feature-card-content {
   position: relative;
   border-radius: 2px;

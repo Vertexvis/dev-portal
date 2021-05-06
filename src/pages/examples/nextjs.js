@@ -85,7 +85,7 @@ function NextJS() {
               </p>
             </div>
             <div className={classnames('col', 'col--10', 'col--offset-1')}>
-              <img src="/img/examples/starter-app.png" alt="" />
+              <img src="/img/examples/starter-app@2x.png" alt="" />
             </div>
             <div
               className={classnames(
@@ -176,7 +176,7 @@ function NextJS() {
                   )}
                   to={'/examples/contact'}
                 >
-                  Contact a Expert
+                  Contact an Expert
                 </Link>
               </div>
             </div>

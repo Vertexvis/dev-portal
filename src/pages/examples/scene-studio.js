@@ -293,7 +293,7 @@ function SceneStudio() {
                   )}
                   to={'/examples/contact'}
                 >
-                  Contact a Expert
+                  Contact an Expert
                 </Link>
               </div>
             </div>

@@ -9,14 +9,14 @@ import styles from './styles.module.css';
 function ContactSpecialist() {
   return (
     <Layout
-      title={`Contact an Expert | Vertex Developer Portal`}
+      title={`Contact a Specialist | Vertex Developer Portal`}
       description="Vertex platform APIs and SDKs unlock 3D product data to fuel fast and easy collaboration. Collaborate on complex designs with anyone, anytime, and from any device."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
           <div className={classnames('row')}>
             <div className={classnames('col')}>
-              <h1>Contact an Expert</h1>
+              <h1>Contact a Specialist</h1>
               <p>
                 Please complete the form below or email our team at any time at{' '}
                 <Link to={'mailto:support@vertexvis.com'}>
@@ -46,10 +46,10 @@ function ContactSpecialist() {
                       <p>By submitting this form, you agree your contact 
                       information may be used by us to communicate with you 
                       about your registration, related products and services, 
-                      and offers from select partners. Refer to our 
+                      and offers from select partners. Refer to our{' '}
                       <Link 
                         to={'https://vertexvis.com/privacy-policy'}
-                        >Privacy Policy</Link>{' '}and 
+                        >Privacy Policy</Link>{' '}and{' '} 
                       <Link 
                         to={'https://vertexvis.com/terms-of-use'}
                         >Terms of Use</Link>{' '}for 

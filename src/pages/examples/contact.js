@@ -40,10 +40,10 @@ function ContactExpert() {
                       <p>By submitting this form, you agree your contact 
                       information may be used by us to communicate with you 
                       about your registration, related products and services, 
-                      and offers from select partners. Refer to our 
+                      and offers from select partners. Refer to our{' '} 
                       <Link 
                         to={'https://vertexvis.com/privacy-policy'}
-                        >Privacy Policy</Link>{' '}and 
+                        >Privacy Policy</Link>{' '}and{' '} 
                       <Link 
                         to={'https://vertexvis.com/terms-of-use'}
                         >Terms of Use</Link>{' '}for 
@@ -55,6 +55,12 @@ function ContactExpert() {
                       One of our platform experts will be happy to answer your 
                       questions and get you started with the Vertex Platform.
                     </p>
+                    <span>We are here to help you:</span>
+                    <ul>
+                      <li>Find the right solution</li>
+                      <li>Connect with helpful resources</li>
+                      <li>Deploy solutions with ease</li>
+                    </ul>
                   </div>
                 </div>
               </div>

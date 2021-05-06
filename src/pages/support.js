@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const supportCards = [
   {
-    title: <>Vertex community support</>,
+    title: <>Vertex Community support</>,
     icon: (
       <>
         <svg
@@ -38,7 +38,7 @@ const supportCards = [
     cta_links: [
       {
         text: <>Check it out</>,
-        url: 'https://github.com/Vertexvis/vertex-community/discussions',
+        url: 'https://github.com/Vertexvis/vertex-community/',
       },
     ],
     classes: 'col col--4',
@@ -220,7 +220,18 @@ const frequentlyAskedQuestions = [
     answer: (
       <>
         <p>
-          NEED
+          Follow this link to our list of <Link to={'/docs/beta/guides/importing-data/#supported-file-types'}>Supported File Types</Link>.
+        </p>
+      </>
+    ),
+  },
+  ,
+  {
+    question: <>Is there a sample file that can be used for testing?</>,
+    answer: (
+      <>
+        <p>
+          Yes, you can use our <Link to={'https://vertex-public-binaries.s3-us-west-2.amazonaws.com/vertex-valve.jt'}>vertex-valve.jt</Link> file that we mention in our <Link to={'https://developer.vertexvis.com/docs/guides/import-data'}>import data with CLI guide</Link>. Check back as we’ll be adding more sample models soon.
         </p>
       </>
     ),

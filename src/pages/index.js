@@ -383,6 +383,14 @@ const guideCards = [
         text: <>Import data (API)</>,
         url: '/docs/guides/import-data-with-api',
       },
+      {
+        text: <>Import metadata</>,
+        url: '/docs/guides/import-metadata',
+      },
+      {
+        text: <>Render static scenes</>,
+        url: '/docs/guides/render-static-scenes',
+      },
     ],
   },
 
@@ -406,7 +414,7 @@ const guideCards = [
         url: '/docs/guides/platform-architecture',
       },
       {
-        text: <>Matrix transformations</>,
+        text: <>Transformation matrices</>,
         url: '/docs/guides/matrix-transformations',
       },
       {
@@ -449,9 +457,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Connect external data sources to your 3D digital twin to accelerate
-        quality, cost, and supply chain analyses and unlock your organization’s
-        business intelligence.
+        Quickly connect external data sources to your 3D digital twin to 
+        accelerate quality, cost, and supply chain analyses and deliver 
+        powerful insights with ease. 
       </>
     ),
     imageSrc: '/img/examples/visual analytics-card-o.png',
@@ -462,9 +470,8 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to
-        improve decision-making and accelerate the adoption of IoT analytics in
-        your organization.
+        Visualize IoT time series data aligned to your 3D digital twin to 
+        improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
     imageSrc: '/img/examples/digital-twin-card-o.png',
@@ -488,7 +495,6 @@ function SampleApp({ title, description, imageSrc, url, width }) {
           <img src={imageSrc} alt="" />
         </div>
         <div className={classnames('content')}>
-          <div className={classnames('category')}>Featured Sample</div>
           <h2>{title}</h2>
           <div className={classnames('intro')}>
             <span>{description}</span>
@@ -580,7 +586,7 @@ function Home() {
                       styles.callOutButton
                     )}
                   >
-                    Sign Up
+                    Sign Up Now
                   </Link>
                 </p>
               </div>
@@ -641,7 +647,7 @@ function Home() {
           </div>
         )}
         {sampleApps && sampleApps.length && (
-          <div className={classnames(styles.sampleAppsSection)}>
+          <div className={classnames(styles.sampleAppsSection, styles.mainGray)}>
             <div className={classnames('container')}>
               <div className={classnames('row')}>
                 <div
@@ -652,10 +658,10 @@ function Home() {
                   )}
                 >
                   <h2 className={classnames('secondary')}>
-                    Sample Applications
+                    Examples
                   </h2>
                   <p>
-                    We built the following sample applications to give you ideas
+                    We built the following example applications to give you ideas
                     about how you can use Vertex.
                   </p>
                 </div>
@@ -664,7 +670,7 @@ function Home() {
                 ))}
                 <div className={classnames('col', 'col--12')}>
                   <p>
-                    <Link to={'/examples'}>More Example Applications</Link>
+                    <Link to={'/examples'} className={classnames('non-button-link')}>More Examples</Link>
                   </p>
                 </div>
               </div>

@@ -176,7 +176,7 @@
 }
 .gsGuideContent h2 {
   font-size: 1.625rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   font-weight: 400;
   text-align: left;
 }
@@ -257,10 +257,12 @@
   border-radius: 4px;
   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;
-  padding: 1rem;
+  padding: 1.5rem;
   position: relative;
   z-index: 1;
   height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
 }
 .sceneStudioFeatureContent {
 	box-shadow:none;
@@ -325,7 +327,15 @@
 }
 .sdkLinks,
 .cardLinks {
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top:1rem;
+}
+.cardLinksButton {
+	
+    min-height: 100px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 .callOutCardLink {
   text-align: center;
