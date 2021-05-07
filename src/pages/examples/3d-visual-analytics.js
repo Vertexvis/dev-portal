@@ -124,7 +124,7 @@ function BusinessInt() {
               </h2>
               <p className={classnames(styles.normalParagraph)}>
                 Several data sets are available for you to try different 
-                analytics. The CSV files are available on Github or you can 
+                analytics. The CSV files are available on Github or you can{' '}
                 <Link 
                   to={'https://visual-analytics.vertexvis.io/super-car-data.zip'}>
                   easily download from here</Link>.
