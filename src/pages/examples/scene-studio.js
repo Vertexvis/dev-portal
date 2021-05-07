@@ -223,7 +223,7 @@ function SceneStudio() {
               </p>
             </div>
             <div className={classnames('col', 'col--8', 'col--offset-2')}>
-			  <img src="/img/examples/scene-studio-fpo.png" alt="" />
+			  <img src="/img/scene-studio/scene-studio.png" alt="" />
             </div>
             <div
               className={classnames(
