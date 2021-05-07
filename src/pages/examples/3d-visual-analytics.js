@@ -126,7 +126,7 @@ function BusinessInt() {
                 Several data sets are available for you to try different 
                 analytics. The CSV files are available on Github or you can 
                 <Link 
-                  to={'https://business-intelligence.vertexvis.io/super-car-data.zip'}>
+                  to={'https://visual-analytics.vertexvis.io/super-car-data.zip'}>
                   easily download from here</Link>.
               </p>
             </div>
