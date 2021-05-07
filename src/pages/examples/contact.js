@@ -57,9 +57,9 @@ function ContactExpert() {
                     </p>
                     <span>We are here to help you:</span>
                     <ul>
-                      <li>Find the right solution</li>
+                      <li>Build insightful solutions</li>
                       <li>Connect with helpful resources</li>
-                      <li>Deploy solutions with ease</li>
+                      <li>Simplify how you work</li>
                     </ul>
                   </div>
                 </div>
