@@ -48,8 +48,8 @@ const reference = [
     url: 'docs/guides/supported-file-formats',
   },
   {
-    title: 'Matrix transformations',
-    url: 'docs/guides/matrix-transformations',
+    title: 'Transformation matrices',
+    url: 'docs/guides/transformation-matrices',
   },
   {
     title: 'UI Component examples',
