@@ -86,7 +86,7 @@ function BusinessInt() {
               </p>
             </div>
             <div className={classnames('col', 'col--8', 'col--offset-2')}>
-              <img src="/img/examples/visual-analytics@2x.png" alt="" />
+              <img src="/img/examples/visual-analytics.png" alt="" />
             </div>
             <div
               className={classnames(
