@@ -960,6 +960,9 @@ select::-ms-expand {
 .feature-card .content {
   color: #484848;
   padding: 3rem;
+  display:flex;
+  flex-flow:column nowrap;
+  flex-grow:1;
 }
 
 .feature-card .feature-card-content {
@@ -971,6 +974,9 @@ select::-ms-expand {
   background-color: #fff;
   overflow: hidden;
   height: 100%;
+  display:flex;
+  flex-flow:column nowrap;
+  height:100%;
 }
 .feature-card-content .header img {
   max-width: 100%;
@@ -996,6 +1002,12 @@ select::-ms-expand {
   font-size: 1rem;
   line-height: 1.75;
   color: #444;
+  flex-grow:1;
+  display:flex;
+  flex-flow:column nowrap;
+}
+.feature-card-content .content .intro .non-button-link {
+	margin-top:auto;
 }
 .feature-card .target {
   position: absolute;

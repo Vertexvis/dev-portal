@@ -17,7 +17,7 @@ const sampleApps = [
         platform.
       </>
     ),
-    imageSrc: '/img/examples/starter-card-o.png',
+    imageSrc: '/img/examples/starter-card.png',
     url: '/examples/nextjs',
     cta: 'Try it Out',
     width: 'col--4',
@@ -30,7 +30,7 @@ const sampleApps = [
         improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
-    imageSrc: '/img/examples/digital-twin-card-o.png',
+    imageSrc: '/img/examples/digital-twin-card.png',
     url: '/examples/digital-twin',
     cta: 'Try it Out',
     width: 'col--4',
@@ -44,7 +44,7 @@ const sampleApps = [
         insights with ease. 
       </>
     ),
-    imageSrc: '/img/examples/visual analytics-card-o.png',
+    imageSrc: '/img/examples/visual analytics-card.png',
     url: '/examples/3d-visual-analytics',
     cta: 'Try it Out',
     width: 'col--4',

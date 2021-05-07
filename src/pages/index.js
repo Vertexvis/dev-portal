@@ -462,7 +462,7 @@ const sampleApps = [
         powerful insights with ease. 
       </>
     ),
-    imageSrc: '/img/examples/visual analytics-card-o.png',
+    imageSrc: '/img/examples/visual analytics-card.png',
     url: '/examples/3d-visual-analytics',
     width: 'col--6',
   },
@@ -474,7 +474,7 @@ const sampleApps = [
         improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
-    imageSrc: '/img/examples/digital-twin-card-o.png',
+    imageSrc: '/img/examples/digital-twin-card.png',
     url: '/examples/digital-twin',
     width: 'col--6',
   },
