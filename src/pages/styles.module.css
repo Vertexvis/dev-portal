@@ -30,7 +30,7 @@
   color: #000;
 }
 .lightHero {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 .LPhero h1 {
   font-weight: 100;
