@@ -11,9 +11,9 @@ const sampleApps = [
     title: <>NextJS Starter</>,
     description: (
       <>
-        We created our full stack, deployable starter application using the 
-        NextJS framework. Quickly and easily build your own prototype 
-        application that takes full advantage of the Vertex platform. 
+        We created our full stack, deployable starter application using the
+        NextJS framework. Quickly and easily build your own prototype
+        application that takes full advantage of the Vertex platform.
       </>
     ),
     url: '/examples/nextjs',
@@ -23,9 +23,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Quickly connect external data sources to your 3D digital twin to 
-        accelerate quality, cost, and supply chain analyses and deliver 
-        powerful insights with ease. 
+        Quickly connect external data sources to your 3D digital twin to
+        accelerate quality, cost, and supply chain analyses and deliver powerful
+        insights with ease.
       </>
     ),
     url: '/examples/3d-visual-analytics',
@@ -35,9 +35,9 @@ const sampleApps = [
     title: <>Scene Studio</>,
     description: (
       <>
-        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and clients. It 
-        replaces traditional product documentation that is difficult to 
-        maintain and not easily accessible.
+        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and
+        clients. It replaces traditional product documentation that is difficult
+        to maintain and not easily accessible.
       </>
     ),
     url: '/examples/scene-studio',
@@ -100,16 +100,14 @@ function TimeSeries() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                Build a true digital twin by mapping sensor IoT data directly 
-                to your 3D geometry. Set up conditional triggers to help users 
-                better understand and explore issues, failures and performance 
-                of individual assets. 
+                Build a true digital twin by mapping sensor IoT data directly to
+                your 3D geometry. Set up conditional triggers to help users
+                better understand and explore issues, failures and performance
+                of individual assets.
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
-                  to={
-                    'https://digital-twin.vertexvis.io/'
-                  }
+                  to={'https://digital-twin.vertexvis.io/'}
                   className={classnames('button button--primary')}
                 >
                   Launch App
@@ -138,12 +136,12 @@ function TimeSeries() {
                 <h2>Check out our other example apps</h2>
                 <div className={classnames('row')}>
                   <div className={classnames('col col--10 col--offset-1')}>
-                <div className={classnames('row')}>
-                  {sampleApps.map((props, idx) => (
-                    <SampleApp key={idx} {...props} />
-                  ))}
-                </div>
-                </div>
+                    <div className={classnames('row')}>
+                      {sampleApps.map((props, idx) => (
+                        <SampleApp key={idx} {...props} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

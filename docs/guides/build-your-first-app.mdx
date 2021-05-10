@@ -71,6 +71,10 @@ const [credentials, setCredentials] = React.useState<StreamCredentials>({
   streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
 });
 
+const viewer = useViewer();
+const [dialogOpen, setDialogOpen] = React.useState(false);
+const [properties, setProperties] = React.useState<Properties>({});
+
 // On credentials changes, update URL and store in local storage.
 React.useEffect(() => {
   router.push(encodeCreds(credentials));
@@ -83,9 +87,6 @@ React.useEffect(() => {
   if (!dialogOpen && keys.o) setDialogOpen(true);
 }, [keys]);
 
-const viewer = useViewer();
-const [dialogOpen, setDialogOpen] = React.useState(false);
-const [properties, setProperties] = React.useState<Properties>({});
 const ready = credentials.clientId && credentials.streamKey && viewer.isReady;
 ```
 
@@ -96,7 +97,7 @@ Now, the fun stuff. We return a [`JSX`](https://reactjs.org/docs/jsx-in-depth.ht
 ```tsx
 return (
   <Layout
-    header={<OpenButton onClick={() => setDialogOpen(true)} />}
+    header={<OpenButton onOpenSceneClick={() => setDialogOpen(true)} />}
     main={
       ready && (
         <Viewer
@@ -115,6 +116,10 @@ return (
     {dialogOpen && (
       <OpenDialog
         credentials={credentials}
+        defaultCredentials={{
+          clientId: DefaultClientId,
+          streamKey: DefaultStreamKey,
+        }}
         onClose={() => setDialogOpen(false)}
         onConfirm={(cs) => {
           setCredentials(cs);

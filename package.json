@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "docusaurus build",
-    "clean": "rm -rf node_modules .docusaurus",
+    "clean": "rm -rf .docusaurus build node_modules",
     "deploy": "docusaurus deploy",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "eslint . --ext .js --config .eslintrc",
@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@algolia/client-search": "^4.9",
-    "@docusaurus/core": "^2.0.0-alpha.73",
-    "@docusaurus/plugin-client-redirects": "^2.0.0-alpha.73",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.73",
+    "@docusaurus/core": "^2.0.0-alpha.75",
+    "@docusaurus/plugin-client-redirects": "^2.0.0-alpha.75",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.75",
     "classnames": "^2.3",
     "docusaurus-gtm-plugin": "^0.0.2",
     "mermaid": "^8",
@@ -33,10 +33,10 @@
   "devDependencies": {
     "@types/react": "^17.0",
     "@vertexvis/eslint-config-vertexvis": "^0.6",
-    "eslint": "^7.25",
+    "eslint": "^7.26",
     "eslint-plugin-react": "^7.23",
     "husky": "^6.0",
-    "prettier": "^2.2",
+    "prettier": "^2.3",
     "raw-loader": "^4.0"
   },
   "workspaces": {

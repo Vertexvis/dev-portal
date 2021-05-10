@@ -11,7 +11,7 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to 
+        Visualize IoT time series data aligned to your 3D digital twin to
         improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
@@ -22,9 +22,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Quickly connect external data sources to your 3D digital twin to 
-        accelerate quality, cost, and supply chain analyses and deliver 
-        powerful insights with ease. 
+        Quickly connect external data sources to your 3D digital twin to
+        accelerate quality, cost, and supply chain analyses and deliver powerful
+        insights with ease.
       </>
     ),
     url: '/examples/3d-visual-analytics',
@@ -34,9 +34,9 @@ const sampleApps = [
     title: <>Scene Studio</>,
     description: (
       <>
-        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and clients. It 
-        replaces traditional product documentation that is difficult to 
-        maintain and not easily accessible.
+        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and
+        clients. It replaces traditional product documentation that is difficult
+        to maintain and not easily accessible.
       </>
     ),
     url: '/examples/scene-studio',
@@ -99,18 +99,18 @@ function NextJS() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                View a scene, apply camera states, and see a scene item’s 
-                metadata. We built this application following best practices 
-                for integrating the Vertex platform.{' '}
-                <Link to={'/docs/guides/build-your-first-app'}>Follow our guide</Link> to build 
-                a foundation, then add functionality to create your own 
-                prototype application using Vertex. 
+                View a scene, apply camera states, and see a scene item’s
+                metadata. We built this application following best practices for
+                integrating the Vertex platform.{' '}
+                <Link to={'/docs/guides/build-your-first-app'}>
+                  Follow our guide
+                </Link>{' '}
+                to build a foundation, then add functionality to create your own
+                prototype application using Vertex.
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
-                  to={
-                    'https://nextjs-starter.vertexvis.io'
-                  }
+                  to={'https://nextjs-starter.vertexvis.io'}
                   className={classnames('button button--primary')}
                 >
                   Launch App
@@ -139,12 +139,12 @@ function NextJS() {
                 <h2>Check out our other example apps</h2>
                 <div className={classnames('row')}>
                   <div className={classnames('col col--10 col--offset-1')}>
-                <div className={classnames('row')}>
-                  {sampleApps.map((props, idx) => (
-                    <SampleApp key={idx} {...props} />
-                  ))}
-                </div>
-                </div>
+                    <div className={classnames('row')}>
+                      {sampleApps.map((props, idx) => (
+                        <SampleApp key={idx} {...props} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

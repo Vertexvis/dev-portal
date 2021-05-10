@@ -86,7 +86,19 @@ const gettingStarted = [
     title: <>Build your first application</>,
     icon: (
       <>
-        <svg height="29" width="29" viewBox="0 0 25.38 25.38" xmlns="http://www.w3.org/2000/svg"><g fill="#00ade4" transform="translate(-1.81 -1.81)"><path d="m24.47 16.31h-5.47a2.72 2.72 0 0 0 -2.69 2.69v5.44a2.72 2.72 0 0 0 2.69 2.75h5.44a2.72 2.72 0 0 0 2.72-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z"/><path d="m10 16.31h-5.47a2.72 2.72 0 0 0 -2.72 2.69v5.44a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.72-2.72v-5.44a2.72 2.72 0 0 0 -2.72-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z"/><path d="m24.47 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.69h5.44a2.72 2.72 0 0 0 2.75-2.69v-5.47a2.72 2.72 0 0 0 -2.72-2.72zm.91 8.19a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.56h7.26z"/><path d="m10 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.69-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.72zm.88 8.19a.91.91 0 0 1 -.91.91h-5.44a.91.91 0 0 1 -.91-.91v-4.56h7.26z"/></g></svg>
+        <svg
+          height="29"
+          width="29"
+          viewBox="0 0 25.38 25.38"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g fill="#00ade4" transform="translate(-1.81 -1.81)">
+            <path d="m24.47 16.31h-5.47a2.72 2.72 0 0 0 -2.69 2.69v5.44a2.72 2.72 0 0 0 2.69 2.75h5.44a2.72 2.72 0 0 0 2.72-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z" />
+            <path d="m10 16.31h-5.47a2.72 2.72 0 0 0 -2.72 2.69v5.44a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.72-2.72v-5.44a2.72 2.72 0 0 0 -2.72-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z" />
+            <path d="m24.47 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.69h5.44a2.72 2.72 0 0 0 2.75-2.69v-5.47a2.72 2.72 0 0 0 -2.72-2.72zm.91 8.19a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.56h7.26z" />
+            <path d="m10 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.69-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.72zm.88 8.19a.91.91 0 0 1 -.91.91h-5.44a.91.91 0 0 1 -.91-.91v-4.56h7.26z" />
+          </g>
+        </svg>
       </>
     ),
     description: (
@@ -294,8 +306,7 @@ const sdks = [
         ),
       },
     ],
-    url:
-      'https://github.com/Vertexvis/vertex-web-sdk/tree/master/packages/viewer-react',
+    url: 'https://github.com/Vertexvis/vertex-web-sdk/tree/master/packages/viewer-react',
   },
   {
     title: <>Node API Client</>,
@@ -457,9 +468,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Quickly connect external data sources to your 3D digital twin to 
-        accelerate quality, cost, and supply chain analyses and deliver 
-        powerful insights with ease. 
+        Quickly connect external data sources to your 3D digital twin to
+        accelerate quality, cost, and supply chain analyses and deliver powerful
+        insights with ease.
       </>
     ),
     imageSrc: '/img/examples/visual analytics-card.png',
@@ -470,7 +481,7 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to 
+        Visualize IoT time series data aligned to your 3D digital twin to
         improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
@@ -647,7 +658,9 @@ function Home() {
           </div>
         )}
         {sampleApps && sampleApps.length && (
-          <div className={classnames(styles.sampleAppsSection, styles.mainGray)}>
+          <div
+            className={classnames(styles.sampleAppsSection, styles.mainGray)}
+          >
             <div className={classnames('container')}>
               <div className={classnames('row')}>
                 <div
@@ -657,12 +670,10 @@ function Home() {
                     styles.sampleAppsSectionHeader
                   )}
                 >
-                  <h2 className={classnames('secondary')}>
-                    Examples
-                  </h2>
+                  <h2 className={classnames('secondary')}>Examples</h2>
                   <p>
-                    We built the following example applications to give you ideas
-                    about how you can use Vertex.
+                    We built the following example applications to give you
+                    ideas about how you can use Vertex.
                   </p>
                 </div>
                 {sampleApps.map((props, idx) => (
@@ -670,7 +681,12 @@ function Home() {
                 ))}
                 <div className={classnames('col', 'col--12')}>
                   <p>
-                    <Link to={'/examples'} className={classnames('non-button-link')}>More Examples</Link>
+                    <Link
+                      to={'/examples'}
+                      className={classnames('non-button-link')}
+                    >
+                      More Examples
+                    </Link>
                   </p>
                 </div>
               </div>

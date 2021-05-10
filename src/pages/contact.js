@@ -38,22 +38,25 @@ function ContactSpecialist() {
                     <HubspotForm
                       portalId="8780919"
                       formId="415c36a7-dbae-4dfb-bf40-9db22e7875f1"
-                      onSubmit={() => console.log('submit!') }
-                      onReady={() => window['js_selects']() }
+                      onSubmit={() => console.log('submit!')}
+                      onReady={() => window['js_selects']()}
                       loading={<div>Loading...</div>}
                     />
                     <div className={classnames(styles.contactLegal)}>
-                      <p>By submitting this form, you agree your contact 
-                      information may be used by us to communicate with you 
-                      about your registration, related products and services, 
-                      and offers from select partners. Refer to our{' '}
-                      <Link 
-                        to={'https://vertexvis.com/privacy-policy'}
-                        >Privacy Policy</Link>{' '}and{' '} 
-                      <Link 
-                        to={'https://vertexvis.com/terms-of-use'}
-                        >Terms of Use</Link>{' '}for 
-                        additional information.</p>
+                      <p>
+                        By submitting this form, you agree your contact
+                        information may be used by us to communicate with you
+                        about your registration, related products and services,
+                        and offers from select partners. Refer to our{' '}
+                        <Link to={'https://vertexvis.com/privacy-policy'}>
+                          Privacy Policy
+                        </Link>{' '}
+                        and{' '}
+                        <Link to={'https://vertexvis.com/terms-of-use'}>
+                          Terms of Use
+                        </Link>{' '}
+                        for additional information.
+                      </p>
                     </div>
                   </div>
                   <div className={classnames('col col--5 contact-content')}>

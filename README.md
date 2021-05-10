@@ -14,8 +14,7 @@ $ yarn install
 $ yarn start
 ```
 
-These commands activate the appropriate version of `node.js`, install/update package dependencies, start a local development server,
-and open up a browser window pointing at the local dev server. Most changes are reflected live without having to restart the server.
+These commands activate the appropriate version of `node.js`, install/update package dependencies, start a local development server, and open up a browser window pointing at the local dev server. Most changes are reflected live without having to restart the server.
 
 ### Build
 

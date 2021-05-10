@@ -4,16 +4,16 @@
  * and scoped locally.
  */
 .placeholder {
-	padding-top:59%;
-	background-color:#d8d8d8;
-	margin:2rem auto;
+  padding-top: 59%;
+  background-color: #d8d8d8;
+  margin: 2rem auto;
 }
 .contactLegal {
-	margin-top:2rem;
+  margin-top: 2rem;
 }
 .contactLegal p {
-	font-size:.75rem;
-	color:#616161;
+  font-size: 0.75rem;
+  color: #616161;
 }
 .heroBanner {
   padding: 6rem 0 11vw;
@@ -41,15 +41,15 @@
   font-weight: 300;
 }
 .containerLarge {
-	margin:0 auto;
-	padding:0 var(--ifm-spacing-horizontal);
-	width:100%;
-	max-width: 1920px);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+  width: 100%;
+  max-width: 1920px;
 }
 .sdks {
 }
 .supportCardsIntro {
-	margin-bottom:4rem;
+  margin-bottom: 4rem;
 }
 .guides {
   margin-top: 2rem;
@@ -93,9 +93,9 @@
   min-height: 77px;
 }
 .githubMark {
-  background-image: url(/img/github-mark.png);	
-  padding-left:105px;
-  background-size:65px 64px;
+  background-image: url(/img/github-mark.png);
+  padding-left: 105px;
+  background-size: 65px 64px;
   min-height: 64px;
 }
 .logoMark a {
@@ -128,27 +128,27 @@
   justify-content: center;
 }
 .sectionPadding {
-	padding:3rem 0;
+  padding: 3rem 0;
 }
 .textLeft {
-	text-align:left;
+  text-align: left;
 }
 .textCenter {
-	text-align:center;
+  text-align: center;
 }
 .betaCalloutHeading {
-	margin:1.5rem 0;
-	font-size:1.625rem;
-	color:#212121;
+  margin: 1.5rem 0;
+  font-size: 1.625rem;
+  color: #212121;
 }
 .betaCalloutParagraph {
-	font-size:1rem;
-	line-height:1.75;
-	color:#444;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #444;
 }
 .normalParagraph {
-	font-size:1rem !important;
-	line-height:1.75;
+  font-size: 1rem !important;
+  line-height: 1.75;
 }
 .sdkLogosSection,
 .guideCardSection,
@@ -158,7 +158,7 @@
   text-align: center;
 }
 .sampleAppsSectionHeader {
-	margin-bottom:2.815rem;
+  margin-bottom: 2.815rem;
 }
 .gettingStartedSection {
   padding-bottom: 3rem;
@@ -261,16 +261,16 @@
   position: relative;
   z-index: 1;
   height: 100%;
-    display: flex;
-    flex-flow: column nowrap;
+  display: flex;
+  flex-flow: column nowrap;
 }
 .sceneStudioFeatureContent {
-	box-shadow:none;
-	transition:none;
+  box-shadow: none;
+  transition: none;
 }
 .sceneStudioFeatureDescription {
-	font-size:1rem;
-	line-height:1.75;
+  font-size: 1rem;
+  line-height: 1.75;
 }
 .guideCardContent {
   padding: 1rem;
@@ -300,7 +300,7 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
   }
   .sceneStudioFeatureContent:hover {
-	box-shadow:none;  
+    box-shadow: none;
   }
 }
 .sdkLogos {
@@ -328,14 +328,13 @@
 .sdkLinks,
 .cardLinks {
   margin-top: auto;
-  padding-top:1rem;
+  padding-top: 1rem;
 }
 .cardLinksButton {
-	
-    min-height: 100px;
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
+  min-height: 100px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 .callOutCardLink {
   text-align: center;
@@ -392,9 +391,8 @@
   }
 }
 @media only screen and (max-width: 996px) {
-	
   .logoMark {
-	padding-left:0;
+    padding-left: 0;
     background-position: top 10px center;
     text-align: left;
   }
@@ -403,9 +401,9 @@
     background-size: 68px;
   }
   .githubMark {
-	  padding-top:84px;
-	  background-size:70px;
-	  background-position:top center;
+    padding-top: 84px;
+    background-size: 70px;
+    background-position: top center;
   }
   .useCaseContent {
     padding: var(--ifm-spacing-vertical) 2.75rem;

@@ -220,7 +220,11 @@ const frequentlyAskedQuestions = [
     answer: (
       <>
         <p>
-          Follow this link to our list of <Link to={'/docs/beta/guides/importing-data/#supported-file-types'}>Supported File Types</Link>.
+          Follow this link to our list of{' '}
+          <Link to={'/docs/beta/guides/importing-data/#supported-file-types'}>
+            Supported File Types
+          </Link>
+          .
         </p>
       </>
     ),
@@ -231,7 +235,19 @@ const frequentlyAskedQuestions = [
     answer: (
       <>
         <p>
-          Yes, you can use our <Link to={'https://vertex-public-binaries.s3-us-west-2.amazonaws.com/vertex-valve.jt'}>vertex-valve.jt</Link> file that we mention in our <Link to={'https://developer.vertexvis.com/docs/guides/import-data'}>import data with CLI guide</Link>. Check back as we’ll be adding more sample models soon.
+          Yes, you can use our{' '}
+          <Link
+            to={
+              'https://vertex-public-binaries.s3-us-west-2.amazonaws.com/vertex-valve.jt'
+            }
+          >
+            vertex-valve.jt
+          </Link>{' '}
+          file that we mention in our{' '}
+          <Link to={'https://developer.vertexvis.com/docs/guides/import-data'}>
+            import data with CLI guide
+          </Link>
+          . Check back as we’ll be adding more sample models soon.
         </p>
       </>
     ),
@@ -241,7 +257,8 @@ const frequentlyAskedQuestions = [
     answer: (
       <>
         <p>
-          The best way to do this is to email <Link to={'mailto:support@vertexvis.com'}>support@vertexvis.com</Link>
+          The best way to do this is to email{' '}
+          <Link to={'mailto:support@vertexvis.com'}>support@vertexvis.com</Link>
         </p>
       </>
     ),
@@ -250,9 +267,7 @@ const frequentlyAskedQuestions = [
     question: <>What type of devices are supported?</>,
     answer: (
       <>
-        <p>
-          Vertex will work on any device using any of these browsers:
-        </p>
+        <p>Vertex will work on any device using any of these browsers:</p>
         <ul>
           <li>Google Chrome</li>
           <li>Microsoft Edge</li>
@@ -263,18 +278,17 @@ const frequentlyAskedQuestions = [
     ),
   },
   {
-    question: (
-      <>How do I know my data is safe?</>
-    ),
+    question: <>How do I know my data is safe?</>,
     answer: (
       <>
         <p>
-          Please refer to our <Link to={'https://vertexvis.com/security'}>security page</Link>. 
-          From here you will be able to download our security overview, request third-party audits and 
-          certifications, or watch a short video about our security model. If 
-          for some reason you would like more information please reach out 
-          through the chat on the security page and we will ensure your 
-          questions are answered. Your security is our top priority.
+          Please refer to our{' '}
+          <Link to={'https://vertexvis.com/security'}>security page</Link>. From
+          here you will be able to download our security overview, request
+          third-party audits and certifications, or watch a short video about
+          our security model. If for some reason you would like more information
+          please reach out through the chat on the security page and we will
+          ensure your questions are answered. Your security is our top priority.
         </p>
       </>
     ),
@@ -348,7 +362,9 @@ function Support() {
             <div className={classnames('col col--3 button-column')}>
               <p>
                 <Link
-                  to={'https://github.com/Vertexvis/vertex-community/discussions'}
+                  to={
+                    'https://github.com/Vertexvis/vertex-community/discussions'
+                  }
                   className={classnames(
                     'button button--secondary',
                     styles.callOutButton

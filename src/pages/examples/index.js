@@ -11,10 +11,9 @@ const sampleApps = [
     title: <>NextJS Starter</>,
     description: (
       <>
-        We created our full stack, deployable starter application using the 
-        NextJS framework. Quickly and easily build your own prototype 
-        application that takes full advantage of the Vertex 
-        platform.
+        We created our full stack, deployable starter application using the
+        NextJS framework. Quickly and easily build your own prototype
+        application that takes full advantage of the Vertex platform.
       </>
     ),
     imageSrc: '/img/examples/starter-card.png',
@@ -26,7 +25,7 @@ const sampleApps = [
     title: <>Digital Twin</>,
     description: (
       <>
-        Visualize IoT time series data aligned to your 3D digital twin to 
+        Visualize IoT time series data aligned to your 3D digital twin to
         improve decision-making and increase the effectiveness of IoT analytics.
       </>
     ),
@@ -39,9 +38,9 @@ const sampleApps = [
     title: <>3D Visual Analytics</>,
     description: (
       <>
-        Quickly connect external data sources to your 3D digital twin to 
+        Quickly connect external data sources to your 3D digital twin to
         accelerate quality, cost, and supply chain analyses and deliver powerful
-        insights with ease. 
+        insights with ease.
       </>
     ),
     imageSrc: '/img/examples/visual analytics-card.png',
@@ -93,10 +92,9 @@ function Samples() {
             <div className={classnames('col')}>
               <h1>Example Applications</h1>
               <p>
-                With the Vertex platform, non-3D developers can easily 
-                integrate 3D CAD data into their application with just a few 
-                lines of code. Get an idea of what you can do with these 
-                examples. 
+                With the Vertex platform, non-3D developers can easily integrate
+                3D CAD data into their application with just a few lines of
+                code. Get an idea of what you can do with these examples.
               </p>
             </div>
           </div>
@@ -128,9 +126,9 @@ function Samples() {
                   Easily Author 3D Content with Scene Studio<sup>&trade;</sup>
                 </h2>
                 <p className={classnames(styles.betaCalloutParagraph)}>
-                  Scene Studio<sup>&trade;</sup> gets 3D applications to 
-                  colleagues and clients. It replaces traditional product 
-                  documentation that is difficult to maintain and not easily 
+                  Scene Studio<sup>&trade;</sup> gets 3D applications to
+                  colleagues and clients. It replaces traditional product
+                  documentation that is difficult to maintain and not easily
                   accessible.
                 </p>
                 <p>
@@ -153,8 +151,8 @@ function Samples() {
               <div className={classnames('col col--12')}>
                 <h2>Ready to get started?</h2>
                 <p>
-                  Get in touch with a platform expert or subscribe for free to 
-                  the Vertex 3D Visualization Platform through the AWS 
+                  Get in touch with a platform expert or subscribe for free to
+                  the Vertex 3D Visualization Platform through the AWS
                   Marketplace.
                 </p>
                 <Link
