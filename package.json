@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "start": "docusaurus start",
     "version-docs": "docusaurus docs:version",
-    "swizzle": "docusaurus swizzle"
+    "swizzle": "docusaurus swizzle",
+    "serve": "docusaurus serve"
   },
   "dependencies": {
     "@algolia/client-search": "^4.9",
