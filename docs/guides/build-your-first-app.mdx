@@ -61,45 +61,45 @@ Now, in your application, click **Open Scene**, enter your client ID and stream 
 Start by opening [`src/pages/index.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/pages/index.tsx). We'll walk through the `Home` function in pieces.
 
 ```tsx
-// Prefer credentials in URL to enable easy scene sharing.
-// If they don't exist, check local storage. If empty, use defaults.
 const router = useRouter();
-const { clientId: queryId, streamKey: queryKey } = router.query;
-const stored = getStoredCreds();
-const [credentials, setCredentials] = React.useState<StreamCredentials>({
-  clientId: queryId?.toString() || stored.clientId || DefaultClientId,
-  streamKey: queryKey?.toString() || stored.streamKey || DefaultStreamKey,
-});
-
 const viewer = useViewer();
+const [credentials, setCredentials] =
+  React.useState<StreamCredentials | undefined>();
 const [dialogOpen, setDialogOpen] = React.useState(false);
 const [properties, setProperties] = React.useState<Properties>({});
 
-// On credentials changes, update URL and store in local storage.
+// Prefer credentials in URL to enable easy scene sharing. If empty, use defaults.
 React.useEffect(() => {
-  router.push(encodeCreds(credentials));
-  setStoredCreds(credentials);
+  if (!router.isReady) return;
+
+  setCredentials({
+    clientId: head(router.query.clientId) || DefaultCredentials.clientId,
+    streamKey: head(router.query.streamKey) || DefaultCredentials.streamKey,
+  });
+}, [router.isReady]);
+
+// On credentials changes, update URL.
+React.useEffect(() => {
+  if (credentials) router.push(encodeCreds(credentials));
 }, [credentials]);
 
 // Open dialog if 'o' key pressed
 const keys = useKeyListener();
 React.useEffect(() => {
   if (!dialogOpen && keys.o) setDialogOpen(true);
-}, [keys]);
-
-const ready = credentials.clientId && credentials.streamKey && viewer.isReady;
+}, [dialogOpen, keys]);
 ```
 
-At the top, we configure variables we'll need later. We also use [React effect hooks](https://reactjs.org/docs/hooks-effect.html) to update the URL and local storage on credential changes and listen for 'o' key presses to open the **Open Scene** dialog.
+At the top, we configure variables we'll need later. We also use [React effect hooks](https://reactjs.org/docs/hooks-effect.html) to update the URL on credential changes and listen for 'o' key presses to open the **Open Scene** dialog.
 
 Now, the fun stuff. We return a [`JSX`](https://reactjs.org/docs/jsx-in-depth.html) element representing your application.
 
 ```tsx
-return (
+return router.isReady && credentials ? (
   <Layout
-    header={<OpenButton onOpenSceneClick={() => setDialogOpen(true)} />}
+    header={<Header onOpenSceneClick={() => setDialogOpen(true)} />}
     main={
-      ready && (
+      viewer.isReady && (
         <Viewer
           configEnv={Env}
           credentials={credentials}
@@ -111,15 +111,11 @@ return (
         />
       )
     }
-    rightDrawer={<RightDrawer properties={properties} />}
+    rightDrawer={<RightDrawer files={files} properties={properties} />}
   >
     {dialogOpen && (
       <OpenDialog
         credentials={credentials}
-        defaultCredentials={{
-          clientId: DefaultClientId,
-          streamKey: DefaultStreamKey,
-        }}
         onClose={() => setDialogOpen(false)}
         onConfirm={(cs) => {
           setCredentials(cs);
@@ -129,39 +125,41 @@ return (
       />
     )}
   </Layout>
+) : (
+  <></>
 );
 ```
 
 Let's break this down to see exactly what's happening:
 
-- We return the application's components wrapped in a `Layout`.
-- The header includes the **Open Scene** button.
+- Once the NextJS router is ready and credentials are set, we return the application's components wrapped in a `Layout`. Until then, we return an empty [React fragment](https://reactjs.org/docs/fragments.html).
+- The header includes the **Open Scene** button. With the `onOpenSceneClick` callback, we set the `dialogOpen` state.
 - Next is the main application content:
-  - If `ready`, we display the `Viewer` component.
-  - With the `onSelect` callback, we set the properties state. Then, call a utility function similar to the [Render your first scene](./render-your-first-scene.mdx) guide's function to perform item selection.
-- The right drawer receives the metadata properties for display.
+  - When the `viewer` is ready, we display the `Viewer` component.
+  - With the `onSelect` callback, we set the properties state. Then, call a utility function similar to the [Render your first scene](./render-your-first-scene.mdx) guide's function to perform scene item selection.
+- The right drawer receives files, which we'll discuss more later, and metadata properties for display.
 - Finally, the **Open Scene** dialog. It's shown if the `dialogOpen` React state is `true`. We pass two callbacks:
   - `onClose` closes the dialog.
-  - `onConfirm` updates the credentials, then closes the dialog.
+  - `onConfirm` sets the credentials state, then closes the dialog.
 
 ## Calling the Vertex API
 
-Browse to [http://localhost:3000/api/files](http://localhost:3000/api/files). You should get a `401: Unauthorized` error. The application doesn't know your Vertex client ID and secret, so it cannot make API calls on your behalf. Let's fix that.
+Open the **Recent Files** accordion in the right drawer. You should see "No data". Similarly, browse to [http://localhost:3000/api/files](http://localhost:3000/api/files) and you should see a `401: Unauthorized` error. The application doesn't know your Vertex client ID and secret, so it cannot make API calls on your behalf. Let's fix that.
 
-In your terminal, type `Ctrl+C` to stop the development server. NextJS has [built-in support for environment variables](https://nextjs.org/docs/basic-features/environment-variables), and the Vertex NextJS Starter comes with a `.env.local.template` file you can rename to make it easier for you to set them.
+In your terminal, type `Ctrl+C` to stop the development server. NextJS has [built-in support for environment variables](https://nextjs.org/docs/basic-features/environment-variables), and the Vertex NextJS Starter comes with a `.env.local.template` file you can rename. This makes it easier for you to set them.
 
 ```shell
 mv .env.local.template .env.local
 ```
 
-Open `.env.local` and set the `VERTEX_CLIENT_ID` and `VERTEX_CLIENT_SECRET` to your Vertex client ID and secret. You can leave `NEXT_PUBLIC_VERTEX_ENV` blank. Since the environment variables don't start with `NEXT_PUBLIC_`, they are only exposed server-side, keeping your client secret safe.
+Open `.env.local` and set the `VERTEX_CLIENT_ID` and `VERTEX_CLIENT_SECRET` to your Vertex client ID and secret. You can leave `NEXT_PUBLIC_VERTEX_ENV` blank to use the default. Since the environment variables don't start with `NEXT_PUBLIC_`, they are only exposed server-side, keeping your client secret safe.
 
 :::note
 
 <ProtectSecretNote />
 :::
 
-Now, start the development server again and browse to [http://localhost:3000/api/files](http://localhost:3000/api/files). You should see a list of files you've uploaded!
+Now, start the development server again with `yarn dev` and browse to [http://localhost:3000/api/files](http://localhost:3000/api/files). You should see a list of files you've uploaded! You'll see a simplified list in the **Recent Files** accordion.
 
 How does this work? Go ahead and open [`src/pages/api/files.ts`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/pages/api/files.ts).
 
@@ -174,7 +172,7 @@ export default async function getFiles(
 }
 ```
 
-We're using NextJS [API Routes](https://nextjs.org/docs/api-routes/introduction) and the `makeCall` helper function. Open [`src/lib/vertex-api.ts`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/lib/vertex-api.ts) to see what that does.
+This is the function getting called when you browse to [http://localhost:3000/api/files](http://localhost:3000/api/files). We're using NextJS [API Routes](https://nextjs.org/docs/api-routes/introduction) and the `makeCall` helper function. Open [`src/lib/vertex-api.ts`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/lib/vertex-api.ts) to see what that does.
 
 ```ts
 export async function makeCall<T>(
@@ -185,14 +183,11 @@ export async function makeCall<T>(
     const c = await getClient();
     res.status(200).json((await apiCall(c)).data);
   } catch (error) {
-    const failure = error.vertexError?.res;
-    if (!failure) {
-      const errors = new Set<ApiError>();
-      errors.add({ status: '500', title: 'Unknown error from Vertex API.' });
-      failure.errors = errors;
-    }
-
-    res.status(parseInt(head(failure.errors)?.status ?? 500, 10)).json(failure);
+    res.status(500).json(
+      error.vertexError?.res ?? {
+        errors: [{ status: '500', title: 'Unknown error from Vertex API.' }],
+      }
+    );
   }
 }
 
@@ -212,6 +207,24 @@ async function getClient(): Promise<VertexClient> {
 ```
 
 `makeCall` calls `getClient`, which creates a Vertex API Client if it doesn't already exist using the environment variables we provided. It then uses the client to call the Vertex API and handles possible errors.
+
+Open [`src/pages/index.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/pages/index.tsx) once more. At the bottom, we're using [NextJS's `getServerSideProps`](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) function for server-side rendering.
+
+```ts
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const noFiles = { props: { files: [] } };
+  const host = context.req.headers.host;
+  if (!host) return noFiles;
+
+  const baseUrl = `http${host.startsWith('localhost') ? '' : 's'}://${host}`;
+  const res = await (await fetch(`${baseUrl}/api/files`)).json();
+  return res == null || res.errors
+    ? noFiles
+    : { props: { files: toFileData(res) } };
+};
+```
+
+Since `fetch` requires absolute URLs, we get the `host` from the request and construct a `baseUrl` with either `http://` or `https://` depending on if we're running locally or not. Then, we make a request to our `/files` API. We map the response with `toFileData` and the NextJS passes the result as [React props](https://reactjs.org/docs/components-and-props.html) into our `Home` component. As we saw above, we pass the `files` prop to the right drawer for display.
 
 ## Deploying your application
 
