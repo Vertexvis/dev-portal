@@ -53,7 +53,7 @@ const reference = [
   },
   {
     title: 'UI Component examples',
-    url: 'https://github.com/Vertexvis/web-sdk-examples',
+    url: 'https://github.com/Vertexvis/vertex-web-sdk/tree/master/examples',
   },
   {
     title: 'Glossary',

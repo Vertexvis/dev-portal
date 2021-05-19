@@ -107,9 +107,7 @@ function BusinessInt() {
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
-                  to={
-                    'https://visual-analytics.vertexvis.io/?clientId=08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA&streamKey=RA00uJtbA41VR9NmZvHnXSW4H8viv9AI5Vbx'
-                  }
+                  to={'https://visual-analytics.vertexvis.io/'}
                   className={classnames('button button--primary')}
                 >
                   Launch App

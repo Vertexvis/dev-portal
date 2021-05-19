@@ -12,7 +12,7 @@ Vertex's UI Components and APIs.
 To view a model imported into Vertex, you must first create a scene to load into the viewer. Scenes can either be created through the UI Components or through our RESTful API.
 
 You can find the example JS code for this guide in our [Web UI Component
-Examples](https://github.com/Vertexvis/web-sdk-examples/tree/master/examples/loading-models) repo.
+Examples](https://github.com/Vertexvis/vertex-web-sdk/tree/master/examples/loading-models) repo.
 
 ## Referencing a model
 

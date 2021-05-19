@@ -74,7 +74,7 @@ module.exports = {
         {
           type: 'link',
           label: 'UI Component examples',
-          href: 'https://github.com/Vertexvis/web-sdk-examples',
+          href: 'https://github.com/Vertexvis/vertex-web-sdk/tree/master/examples',
         },
         {
           type: 'doc',

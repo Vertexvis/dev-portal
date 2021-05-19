@@ -99,4 +99,4 @@ Here's a simple example of loading a model:
 After you've loaded a model into the basic viewer, you can begin to explore the additional capabilities of the
 viewer components combined with the Vertex platform APIs.
 
-Check out [UI Component Examples](https://github.com/Vertexvis/web-sdk-examples) on GitHub for more complex examples.
+Check out [UI Component Examples](https://github.com/Vertexvis/vertex-web-sdk/tree/master/examples) on GitHub for more complex examples.
