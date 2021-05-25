@@ -13,7 +13,7 @@ export function SignUpNote() {
           .
         </li>
         <li>
-          You created an application in the{' '}
+          You created credentials in the{' '}
           <a href="https://console.vertexvis.com/applications">
             Vertex Console
           </a>{' '}

@@ -97,7 +97,7 @@ const supportCards = [
       </>
     ),
     description: (
-      <>We’d love to learn more about your experience using our platform!</>
+      <>We'd love to learn more about your experience using our platform!</>
     ),
     callout: false,
     cta_links: [
@@ -176,7 +176,7 @@ function SupportCard({
 
 const frequentlyAskedQuestions = [
   {
-    question: <>What can I do with Vertex’s platform?</>,
+    question: <>What can I do with Vertex's platform?</>,
     answer: (
       <>
         <p>
@@ -190,14 +190,14 @@ const frequentlyAskedQuestions = [
     ),
   },
   {
-    question: <>How do I get started using Vertex’s platform?</>,
+    question: <>How do I get started using Vertex's platform?</>,
     answer: (
       <>
         <p>
           You can render your first scene without even signing up for an
           account. Simply check out{' '}
           <Link to={'/docs/guides/render-your-first-scene'}>our guide</Link> and
-          use the sample scene we’ve provided to get started.
+          use the sample scene we've provided to get started.
         </p>
         <p>
           When you are ready to try the platform out with some of your own 3D
@@ -221,7 +221,7 @@ const frequentlyAskedQuestions = [
       <>
         <p>
           Follow this link to our list of{' '}
-          <Link to={'/docs/beta/guides/importing-data/#supported-file-types'}>
+          <Link to={'/docs/guides/supported-file-formats'}>
             Supported File Types
           </Link>
           .
@@ -235,19 +235,9 @@ const frequentlyAskedQuestions = [
     answer: (
       <>
         <p>
-          Yes, you can use our{' '}
-          <Link
-            to={
-              'https://vertex-public-binaries.s3-us-west-2.amazonaws.com/vertex-valve.jt'
-            }
-          >
-            vertex-valve.jt
-          </Link>{' '}
-          file that we mention in our{' '}
-          <Link to={'https://developer.vertexvis.com/docs/guides/import-data'}>
-            import data with CLI guide
-          </Link>
-          . Check back as we’ll be adding more sample models soon.
+          Yes, see our{' '}
+          <Link to={'/docs/guides/model-database'}>3D model database</Link>.
+          Check back as we'll be adding more sample models soon.
         </p>
       </>
     ),
@@ -311,7 +301,7 @@ function Support() {
             >
               <h1>Vertex Platform Support</h1>
               <p>
-                We’re committed to offering you help with your integrations and
+                We're committed to offering you help with your integrations and
                 questions about the Vertex platform.
               </p>
               <SearchButton />

@@ -15,11 +15,11 @@ import TabItem from '@theme/TabItem';
 <SignUpNote />
 :::
 
-Gain secure access to the Vertex APIs by exchanging OAuth 2.0 application credentials for an access token.
+Gain secure access to the Vertex APIs by exchanging OAuth 2.0 credentials for an access token.
 
 The flow is as follows:
 
-- Your application makes a secure HTTP call, providing its application credentials. You receive an access token in response.
+- Your application makes a secure HTTP call, providing its credentials. You receive an access token in response.
 - When making subsequent Vertex API calls, your application includes the access token.
 
 <Mermaid
@@ -30,7 +30,7 @@ The flow is as follows:
   participant V as Vertex API clients
   participant API as Vertex API
     CF->>+C: Authenticate
-    C->>+API: Request token with application credentials
+    C->>+API: Request token with credentials
     API-->>-C: Token response
     C-->>-CF: Token
     CF->>+V: API client call with token
@@ -42,7 +42,7 @@ The flow is as follows:
 
 ## Creating access tokens
 
-To create an access token, `POST` to the [createToken](https://docs.vertexvis.com/#f8c5dc19-0f68-442e-8d28-aa03be2c48fb) API with your application credentials. The token API uses HTTP basic access authentication. The request contains the `Authorization: Basic [YOUR_CREDENTIALS]` header, where `YOUR_CREDENTIALS` is the Base64 encoding of your Vertex client ID and secret joined by a colon. The following command performs this encoding and creates an access token.
+To create an access token, `POST` to the [createToken](https://docs.vertexvis.com/#f8c5dc19-0f68-442e-8d28-aa03be2c48fb) API with your credentials. The token API uses HTTP basic access authentication. The request contains the `Authorization: Basic [YOUR_CREDENTIALS]` header, where `YOUR_CREDENTIALS` is the Base64 encoding of your Vertex client ID and secret joined by a colon. The following command performs this encoding and creates an access token.
 
 :::note
 

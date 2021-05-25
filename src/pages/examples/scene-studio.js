@@ -109,7 +109,7 @@ const SSFeatures = [
     title: <>Seamless integration</>,
     description: (
       <>
-        Set up your scene so it’s always using the latest geometry for your 3D
+        Set up your scene so it's always using the latest geometry for your 3D
         data.
       </>
     ),

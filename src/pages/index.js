@@ -26,9 +26,9 @@ const gettingStarted = [
     ),
     description: (
       <>
-        Visualize 3D in under 10 minutes. We’ve provided a sample model that’s
-        already in the cloud, so you can try out Vertex. Once you’re rendering,
-        you’re ready to integrate Vertex into your applications. It’s that
+        Visualize 3D in under 10 minutes. We've provided a sample model that's
+        already in the cloud, so you can try out Vertex. Once you're rendering,
+        you're ready to integrate Vertex into your applications. It's that
         simple.
       </>
     ),
@@ -423,6 +423,10 @@ const guideCards = [
       {
         text: <>Platform architecture</>,
         url: '/docs/guides/platform-architecture',
+      },
+      {
+        text: <>3D model database</>,
+        url: '/docs/guides/model-database',
       },
       {
         text: <>Transformation matrices</>,

@@ -61,7 +61,7 @@ function ContactSpecialist() {
                   </div>
                   <div className={classnames('col col--5 contact-content')}>
                     <p>
-                      We’re committed to offering you help with your
+                      We're committed to offering you help with your
                       integrations and questions about the Vertex platform.
                     </p>
                     <p>

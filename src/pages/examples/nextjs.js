@@ -99,7 +99,7 @@ function NextJS() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                View a scene, apply camera states, and see a scene item’s
+                View a scene, apply camera states, and see a scene item's
                 metadata. We built this application following best practices for
                 integrating the Vertex platform.{' '}
                 <Link to={'/docs/guides/build-your-first-app'}>

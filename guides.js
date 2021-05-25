@@ -48,6 +48,14 @@ const reference = [
     url: 'docs/guides/supported-file-formats',
   },
   {
+    title: 'Platform architecture',
+    url: '/docs/guides/platform-architecture',
+  },
+  {
+    title: '3D model database',
+    url: '/docs/guides/model-database',
+  },
+  {
     title: 'Transformation matrices',
     url: 'docs/guides/transformation-matrices',
   },

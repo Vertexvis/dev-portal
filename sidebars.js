@@ -69,6 +69,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'guides/model-database',
+        },
+        {
+          type: 'doc',
           id: 'guides/transformation-matrices',
         },
         {
