@@ -32,6 +32,10 @@ const apiAdvancedSteps = [
     title: 'Render static scenes',
     url: 'docs/guides/render-static-scenes',
   },
+  {
+    title: 'Webhook Events',
+    url: 'docs/guides/webhook-events',
+  },
 ];
 
 const reference = [

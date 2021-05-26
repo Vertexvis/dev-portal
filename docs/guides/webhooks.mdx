@@ -1,0 +1,174 @@
+---
+id: webhook-events
+title: Webhook Events
+description: Receive Vertex platform event notifications with webhooks to automatically trigger actions in your application.
+---
+
+import { Mermaid } from '@site/src/components/Mermaid';
+import { ProtectSecretNote } from '@site/src/components/ProtectSecretNote';
+import { SignUpNote } from '@site/src/components/SignUpNote';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Vertex uses webhooks to notify your application of activity occurring in your account. Rather than your application calling our API, webhooks allow Vertex to call your API or server. For instance, webhook events indicate when asynchronous operations like creating parts and scene items complete. Upon receiving these events from Vertex, your application can react.
+
+The specific actions your webhook endpoint takes differ based on the event. Some examples include:
+
+- Starting scene creation once all parts in the scene are translated
+- Updating database values when a scene is updated
+- Sending an event to your front-end when a scene is ready to view
+
+Not all applications require webhooks. Many events in Vertex have synchronous results. For example, a successful request to create a scene immediately returns. These requests don't require webhooks.
+
+To receive webhook events, do the following:
+
+- Create a webhook endpoint on your server.
+- Create a webhook subscription providing your server's URL.
+- Verify the events using the webhook signature.
+
+<Mermaid
+  chart={`
+  sequenceDiagram
+  participant C as Client App
+  participant API as Vertex API
+      Note over C,API: Create webhook subscription
+      C->>+API: Create webhook subscription
+      API-->>-C: Subscription secret
+      Note over C,API: Receive webhook events
+      API->>+C: scene.updated, etc.
+      C-->>-API: 200 OK
+      C->>+C: Verify event with secret, take action
+`}
+/>
+
+## Creating a webhook endpoint
+
+Creating a webhook endpoint on your server is as simple as adding a new route with the desired URL. For each event, Vertex `POST`s to your endpoint with the JSON event body.
+
+:::note
+For security purposes, Vertex requires HTTPS URLs for webhook subscriptions.
+:::
+
+Your webhook endpoint must confirm successful receipt with a 2xx status code. All timeouts or response codes >=3xx indicate failure to Vertex and [we will retry](#retry-schedule). Vertex stops retrying after the 8th attempt. After multiple days without receiving any 2xx status codes from your endpoint, Vertex pauses your subscription.
+
+Your endpoint must return a 2xx status code quickly, even as your sever receives many events in parallel. Therefore, Vertex recommends immediately queuing events using something like SQS or RabbitMQ, returning a 200, and then processing the event asynchronously.
+
+Event processing should be idempotent as endpoints may occasionally receive the same event more than once. Vertex also does not guarantee event order. Your endpoint should not expect delivery in a specific order.
+
+## Creating a webhook subscription
+
+To receive webhooks, you first create a webhook subscription. `POST` to the [createWebhookSubscription](https://docs.vertexvis.com/#27c642fc-6abd-4fea-851b-7f7b5cc476cb) API. [See the table below](#topics) for available topics. It's best practice to receive only the topics required by your application. Listening for extra events puts strain on your server and is not recommended.
+
+<Tabs
+  defaultValue="req"
+  values={[
+    { label: 'Request', value: 'req', },
+    { label: 'Response', value: 'res', },
+  ]
+}>
+<TabItem value="req">
+
+```shell
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/webhook-subscriptions" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+  "data": {
+    "attributes": {
+      // highlight-start
+      "topics": ["scene.updated"],
+      "url": "https://example.com"
+      // highlight-end
+    },
+    "type": "webhook-subscription"
+  }
+}'
+```
+
+</TabItem>
+<TabItem value="res">
+
+```json
+{
+  "data": {
+    "type": "webhook-subscription",
+    "id": "[YOUR_WEBHOOK_SUBSCRIPTION_ID]",
+    "attributes": {
+      "url": "https://example.com/",
+      // highlight-next-line
+      "secret": "[YOUR_WEBHOOK_SECRET]",
+      "topics": ["scene.updated"],
+      "status": "active",
+      "created": "2021-01-01T12:00:00.000Z"
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+Vertex generates a unique secret for each subscription. Keep it secure. We'll use it in the following section.
+
+## Verifying events using webhook signatures
+
+Vertex signs webhook events it sends to your endpoints and includes a signature in each event's `x-vertex-signature` header allowing you to verify that Vertex sent the events.
+
+Vertex generates signatures using a hash-based message authentication code (HMAC) with SHA-256. To verify it in your webhook endpoint, compute an HMAC with the SHA256 hash function. Use the secret as the key and the HTTP request's body as the message. The following is an example using Node.js.
+
+```js
+import { createHmac } from 'crypto';
+
+export function handler(evt) {
+  const signature = evt.headers['x-vertex-signature'];
+  if (!signature) {
+    return response(400, 'No signature.');
+  }
+
+  if (!isSignatureValid(evt.body, signature)) {
+    return response(400, 'Invalid signature.');
+  }
+
+  try {
+    const body = JSON.parse(evt.body);
+    console.log(
+      `Received ${evt.headers['x-vertex-topic']}: ${JSON.stringify(body)}`
+    );
+
+    // TODO: Take action on the webhook event.
+
+    return response(200, 'OK');
+  } catch (e) {
+    return response(400, 'Invalid body.');
+  }
+}
+
+export function isSignatureValid(body, signature) {
+  return (
+    signature ===
+    createHmac('sha256', process.env.WEBHOOK_SECRET).update(body).digest('hex')
+  );
+}
+```
+
+## Topics
+
+| Name                           | Description                                                                                                                               |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `queued-scene-item.completed`  | Queued scene item completed. Occurs after asynchronous `POST /scenes/:id/scene-items` completes.                                          |
+| `queued-translation.completed` | Queued translation completed. Occurs after asynchronous `POST /parts` or `POST /geometry-sets` completes.                                 |
+| `scene.updated`                | Scene updated. Occurs upon `PATCH /scenes/:id` and after asynchronous scene `commit` of a scene completes and `state` updates to `ready`. |
+
+## Retry schedule
+
+| Retry number | Interval relative to last retry | Time relative to original attempt |
+| ------------ | ------------------------------- | --------------------------------- |
+| 1            | 5 mins                          | 5 mins                            |
+| 2            | 10 mins                         | 15 mins                           |
+| 3            | 45 mins                         | 1 hr                              |
+| 4            | 2 hrs                           | 3 hrs                             |
+| 5            | 3 hrs                           | 6 hrs                             |
+| 6            | 6 hrs                           | 12 hrs                            |
+| 7            | 12 hrs                          | 24 hrs                            |
+| 8            | 24 hrs                          | 48 hrs                            |

@@ -44,6 +44,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/render-static-scenes',
         },
+        {
+          type: 'doc',
+          id: 'guides/webhook-events',
+        },
       ],
     },
     {
