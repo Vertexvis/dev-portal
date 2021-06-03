@@ -57,7 +57,15 @@ Event processing should be idempotent as endpoints may occasionally receive the 
 
 ## Creating a webhook subscription
 
-To receive webhooks, you first create a webhook subscription. `POST` to the [createWebhookSubscription](https://docs.vertexvis.com/#27c642fc-6abd-4fea-851b-7f7b5cc476cb) API. [See the table below](#topics) for available topics. It's best practice to receive only the topics required by your application. Listening for extra events puts strain on your server and is not recommended.
+To receive webhooks, you first create a webhook subscription.
+
+With the CLI, run the following command.
+
+```shell
+vertex webhook-subscriptions:create --url https://example.com --topics scene.update
+```
+
+With the API, `POST` to the [createWebhookSubscription](https://docs.vertexvis.com/#27c642fc-6abd-4fea-851b-7f7b5cc476cb) API. [See the table below](#topics) for available topics. It's best practice to receive only the topics required by your application. Listening for extra events puts strain on your server and is not recommended.
 
 <Tabs
   defaultValue="req"
@@ -113,7 +121,7 @@ Vertex generates a unique secret for each subscription. Keep it secure. We'll us
 
 ## Verifying events using webhook signatures
 
-Vertex signs webhook events it sends to your endpoints and includes a signature in each event's `x-vertex-signature` header allowing you to verify that Vertex sent the events.
+Vertex signs webhook events it sends to your endpoints and includes a signature in each event's `x-vertex-signature` header allowing you to verify that Vertex sent the events. You should verify the event prior to decoding the body.
 
 Vertex generates signatures using a hash-based message authentication code (HMAC) with SHA-256. To verify it in your webhook endpoint, compute an HMAC with the SHA256 hash function. Use the secret as the key and the HTTP request's body as the message. The following is an example using Node.js.
 
@@ -151,6 +159,43 @@ export function isSignatureValid(body, signature) {
   );
 }
 ```
+
+Once verified, the following is an example of the webhook event body.
+
+```json
+{
+  "data": {
+    "attributes": {
+      "created": "2021-01-01T12:00:00.000Z",
+      "topic": "scene.updated"
+    },
+    "id": "[WEBHOOK_EVENT_ID]",
+    "relationships": {
+      "owner": {
+        "data": {
+          "id": "[ACCOUNT_ID]",
+          "type": "account"
+        },
+        "links": {
+          "related": "accounts/[ACCOUNT_ID]"
+        }
+      },
+      "resource": {
+        "data": {
+          "id": "[SCENE_ID]",
+          "type": "scene"
+        },
+        "links": {
+          "related": "scenes/[SCENE_ID]"
+        }
+      }
+    },
+    "type": "webhook-event"
+  }
+}
+```
+
+There isn't much information in the event for security purposes. To retrieve additional information on the resource, make a `GET` call to the Vertex API using the `resource.links.related` URL.
 
 ## Topics
 
