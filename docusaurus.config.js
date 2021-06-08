@@ -45,6 +45,7 @@ module.exports = {
       additionalLanguages: ['csharp', 'yaml', 'powershell'],
       theme: require('prism-react-renderer/themes/dracula'),
     },
+    image: 'img/examples/visual-analytics.png',
     navbar: {
       title: '',
       logo: {
