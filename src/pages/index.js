@@ -402,6 +402,10 @@ const guideCards = [
         text: <>Render static scenes</>,
         url: '/docs/guides/render-static-scenes',
       },
+      {
+        text: <>Webhook events</>,
+        url: '/docs/guides/webhook-events',
+      },
     ],
   },
 
