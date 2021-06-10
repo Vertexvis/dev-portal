@@ -241,6 +241,21 @@ function SceneStudio() {
                 </div>
               )}
             </div>
+            <div className={classnames('col', 'col--8', 'col--offset-2')}>
+              <Link
+                to={'https://scene-studio.vertexvis.io'}
+                className={classnames('button button--primary')}
+              >
+                Launch App
+              </Link>{' '}
+              &nbsp;
+              <Link
+                to={'https://github.com/Vertexvis/scene-studio-demo'}
+                className={classnames('button button--primary button--outline')}
+              >
+                View on Github
+              </Link>
+            </div>
           </div>
         </div>
       </header>

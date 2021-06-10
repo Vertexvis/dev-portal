@@ -136,7 +136,7 @@ function Samples() {
                     to={'/examples/scene-studio'}
                     className={classnames('non-button-link')}
                   >
-                    Learn more
+                    Try it Out
                   </Link>
                 </p>
               </div>
