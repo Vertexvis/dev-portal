@@ -2,8 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from '../styles.module.css';
 
 const sampleApps = [
@@ -79,8 +77,6 @@ function SampleApp({ title, description, imageSrc, url, cta, width }) {
 }
 
 function Samples() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Example Applications | Vertex Developer Portal`}

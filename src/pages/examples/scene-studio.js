@@ -2,7 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from '../styles.module.css';
 
 const SSFeatures = [
@@ -178,7 +177,7 @@ const sampleApps = [
   },
 ];
 
-function SampleApp({ title, description, imageSrc, url, width }) {
+function SampleApp({ title, description, url }) {
   return (
     <div className={classnames('col', 'feature-card', styles.featureCard)}>
       <div
@@ -200,8 +199,6 @@ function SampleApp({ title, description, imageSrc, url, width }) {
 }
 
 function SceneStudio() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Scene Studio Authoring Tool | Vertex Developer Portal`}

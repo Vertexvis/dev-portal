@@ -2,8 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from '../styles.module.css';
 
 const sampleApps = [
@@ -44,7 +42,7 @@ const sampleApps = [
   },
 ];
 
-function SampleApp({ title, description, imageSrc, url, width }) {
+function SampleApp({ title, description, url, width }) {
   return (
     <div
       className={classnames('col', width, 'feature-card', styles.featureCard)}
@@ -68,8 +66,6 @@ function SampleApp({ title, description, imageSrc, url, width }) {
 }
 
 function NextJS() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`NextJS Starter | Vertex Developer Portal`}
