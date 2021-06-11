@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from '../styles.module.css';
 
 const SSFeatures = [
@@ -218,7 +217,7 @@ function SceneStudio() {
               </h1>
               <p>
                 Quickly author lightweight 3D content that can be integrated
-                with your Parts Catalog, Work Instructions, Training Materials,
+                with your parts catalog, work instructions, training materials,
                 and more.
               </p>
             </div>
