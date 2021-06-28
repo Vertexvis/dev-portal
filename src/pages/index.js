@@ -241,6 +241,37 @@ const sdks = [
     url: 'https://github.com/Vertexvis/vertex-cli',
   },
   {
+    title: <>Node API Client</>,
+    logos: [
+      {
+        source: (
+          <>
+            <svg viewBox="0 0 95 95" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="m47.6 82.55a5.67 5.67 0 0 1 -2.71-.71l-8.56-5.08c-1.29-.71-.64-1-.26-1.1a15.76 15.76 0 0 0 3.87-1.74.58.58 0 0 1 .64.07l6.57 3.92a.81.81 0 0 0 .77 0l25.69-14.91a.74.74 0 0 0 .39-.71v-29.65a.72.72 0 0 0 -.39-.7l-25.69-14.82a.81.81 0 0 0 -.77 0l-25.7 14.82a.8.8 0 0 0 -.38.7v29.69a.82.82 0 0 0 .38.71l7 4.06c3.8 1.93 6.18-.33 6.18-2.58v-29.3a.79.79 0 0 1 .78-.77h3.28a.78.78 0 0 1 .77.77v29.3c0 5.09-2.76 8-7.59 8-1.49 0-2.64 0-5.93-1.61l-6.74-3.81a5.44 5.44 0 0 1 -2.71-4.71v-29.68a5.42 5.42 0 0 1 2.71-4.71l25.69-14.87a5.76 5.76 0 0 1 5.41 0l25.7 14.87a5.43 5.43 0 0 1 2.7 4.7v29.69a5.45 5.45 0 0 1 -2.7 4.71l-25.7 14.9a6.49 6.49 0 0 1 -2.7.58zm7.92-20.41c-11.27 0-13.59-5.15-13.59-9.53a.78.78 0 0 1 .77-.78h3.35a.66.66 0 0 1 .71.65c.52 3.41 2 5.09 8.82 5.09 5.41 0 7.73-1.23 7.73-4.13 0-1.67-.64-2.89-9.08-3.73-7-.71-11.4-2.26-11.4-7.86 0-5.21 4.38-8.31 11.72-8.31 8.25 0 12.3 2.84 12.82 9a1.11 1.11 0 0 1 -.19.58.81.81 0 0 1 -.52.26h-3.35a.77.77 0 0 1 -.71-.58c-.77-3.54-2.77-4.7-8.05-4.7-5.92 0-6.63 2.06-6.63 3.6 0 1.87.84 2.45 8.82 3.48s11.66 2.51 11.66 8-4.7 8.89-12.88 8.89z"
+                fill="#539e43"
+              />
+            </svg>
+          </>
+        ),
+      },
+    ],
+    url: 'https://github.com/Vertexvis/vertex-api-client-node',
+  },
+  {
+    title: <>Java API Client</>,
+    logos: [
+      {
+        source: (
+          <>
+            <svg enable-background="new 0 0 71 95" viewBox="0 0 71 95" xmlns="http://www.w3.org/2000/svg"><path d="m20.3 72.3s-3.6 2.1 2.6 2.8c7.5.9 11.4.7 19.7-.8 0 0 2.2 1.4 5.2 2.6-18.6 7.9-42.1-.5-27.5-4.6m-2.3-10.4s-4.1 3 2.1 3.7c8 .8 14.4.9 25.4-1.2 0 0 1.5 1.5 3.9 2.4-22.4 6.5-47.5.4-31.4-4.9" fill="#5382a1"/><path d="m37.2 44.3c4.6 5.3-1.2 10-1.2 10s11.6-6 6.3-13.5c-5-7-8.8-10.5 11.9-22.5 0-.1-32.6 8.1-17 26" fill="#e76f00"/><path d="m61.8 80s2.7 2.2-3 3.9c-10.7 3.3-44.7 4.2-54.1.1-3.4-1.5 3-3.5 5-4 2.1-.5 3.3-.4 3.3-.4-3.8-2.5-24.4 5.4-10.5 7.6 37.9 6.2 69.1-2.8 59.3-7.2m-39.8-28.9s-17.3 4.1-6.1 5.6c4.7.6 14.1.5 22.8-.2 7.1-.6 14.3-1.9 14.3-1.9s-2.5 1.1-4.3 2.3c-17.5 4.6-51.4 2.5-41.7-2.3 8.3-3.9 15-3.5 15-3.5m31 17.3c17.8-9.3 9.6-18.2 3.8-17-1.4.3-2 .5-2 .5s.5-.8 1.5-1.2c11.4-4 20.1 11.8-3.7 18.1 0 .1.3-.1.4-.4" fill="#5382a1"/><path d="m42.3-1.2s9.9 9.9-9.4 25.1c-15.4 12.2-3.5 19.1 0 27.1-9-8.1-15.6-15.3-11.2-21.9 6.5-9.8 24.5-14.6 20.6-30.3" fill="#e76f00"/><path d="m23.8 93.5c17.1 1.1 43.4-.6 44-8.7 0 0-1.2 3.1-14.1 5.5-14.7 2.8-32.7 2.5-43.4.7 0 0 2.2 1.8 13.5 2.5" fill="#5382a1"/></svg>
+          </>
+        ),
+      },
+    ],
+    url: 'https://github.com/Vertexvis/vertex-api-client-java',
+  },
+  {
     title: <>Web UI Components</>,
     logos: [
       {
@@ -307,42 +338,6 @@ const sdks = [
       },
     ],
     url: 'https://github.com/Vertexvis/vertex-web-sdk/tree/master/packages/viewer-react',
-  },
-  {
-    title: <>Node API Client</>,
-    logos: [
-      {
-        source: (
-          <>
-            <svg viewBox="0 0 95 95" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="m47.6 82.55a5.67 5.67 0 0 1 -2.71-.71l-8.56-5.08c-1.29-.71-.64-1-.26-1.1a15.76 15.76 0 0 0 3.87-1.74.58.58 0 0 1 .64.07l6.57 3.92a.81.81 0 0 0 .77 0l25.69-14.91a.74.74 0 0 0 .39-.71v-29.65a.72.72 0 0 0 -.39-.7l-25.69-14.82a.81.81 0 0 0 -.77 0l-25.7 14.82a.8.8 0 0 0 -.38.7v29.69a.82.82 0 0 0 .38.71l7 4.06c3.8 1.93 6.18-.33 6.18-2.58v-29.3a.79.79 0 0 1 .78-.77h3.28a.78.78 0 0 1 .77.77v29.3c0 5.09-2.76 8-7.59 8-1.49 0-2.64 0-5.93-1.61l-6.74-3.81a5.44 5.44 0 0 1 -2.71-4.71v-29.68a5.42 5.42 0 0 1 2.71-4.71l25.69-14.87a5.76 5.76 0 0 1 5.41 0l25.7 14.87a5.43 5.43 0 0 1 2.7 4.7v29.69a5.45 5.45 0 0 1 -2.7 4.71l-25.7 14.9a6.49 6.49 0 0 1 -2.7.58zm7.92-20.41c-11.27 0-13.59-5.15-13.59-9.53a.78.78 0 0 1 .77-.78h3.35a.66.66 0 0 1 .71.65c.52 3.41 2 5.09 8.82 5.09 5.41 0 7.73-1.23 7.73-4.13 0-1.67-.64-2.89-9.08-3.73-7-.71-11.4-2.26-11.4-7.86 0-5.21 4.38-8.31 11.72-8.31 8.25 0 12.3 2.84 12.82 9a1.11 1.11 0 0 1 -.19.58.81.81 0 0 1 -.52.26h-3.35a.77.77 0 0 1 -.71-.58c-.77-3.54-2.77-4.7-8.05-4.7-5.92 0-6.63 2.06-6.63 3.6 0 1.87.84 2.45 8.82 3.48s11.66 2.51 11.66 8-4.7 8.89-12.88 8.89z"
-                fill="#539e43"
-              />
-            </svg>
-          </>
-        ),
-      },
-    ],
-    url: 'https://github.com/Vertexvis/vertex-api-client-node',
-  },
-  {
-    title: <>Xamarin UI Components</>,
-    logos: [
-      {
-        source: (
-          <>
-            <svg viewBox="0 0 95 95" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="m32.15 15.21a5.77 5.77 0 0 0 -4.87 2.79l-15.35 26.69a5.81 5.81 0 0 0 0 5.63l15.35 26.68a5.78 5.78 0 0 0 4.87 2.82h30.7a5.78 5.78 0 0 0 4.87-2.82l15.35-26.68a5.81 5.81 0 0 0 0-5.63l-15.35-26.69a5.75 5.75 0 0 0 -4.87-2.81zm.28 15.6h5.42a.71.71 0 0 1 .58.34l9 16a.62.62 0 0 1 .09.26.79.79 0 0 1 .08-.26l9-16a.69.69 0 0 1 .6-.34h5.29a.72.72 0 0 1 .6 1l-8.82 15.69 8.73 15.67a.73.73 0 0 1 -.6 1h-5.25a.7.7 0 0 1 -.6-.37l-9-16a.79.79 0 0 1 -.08-.26.62.62 0 0 1 -.09.26l-9 16a.7.7 0 0 1 -.58.37h-5.24a.72.72 0 0 1 -.6-1l8.76-15.67-8.72-15.68a.72.72 0 0 1 .47-1z"
-                fill="#3498db"
-              />
-            </svg>
-          </>
-        ),
-      },
-    ],
-    url: 'https://github.com/Vertexvis/xamarin-viewer',
   },
 ];
 function SDK({ title, logos, url }) {
@@ -473,16 +468,16 @@ function GuideCard({ title, cta_links }) {
 
 const sampleApps = [
   {
-    title: <>3D Visual Analytics</>,
+    title: <>3D Work Instructions</>,
     description: (
       <>
-        Quickly connect external data sources to your 3D digital twin to
-        accelerate quality, cost, and supply chain analyses and deliver powerful
-        insights with ease.
+        Optimize complex process workflows by connecting interactive visual 
+        data to work instructions. Real-time 3D clarifies processes to improve 
+        efficiency and quality.
       </>
     ),
-    imageSrc: '/img/examples/visual analytics-card.png',
-    url: '/examples/3d-visual-analytics',
+    imageSrc: '/img/examples/work-instructions-card.png',
+    url: '/examples/work-instructions',
     width: 'col--6',
   },
   {
@@ -715,20 +710,15 @@ function Home() {
                 </p>
                 <Link
                   className={classnames(
-                    'button button--primary',
+                    'button button--primary button--multiline',
                     styles.getStarted
                   )}
                   to={
                     'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
                   }
                 >
-                  Sign Up Now
+                  <span>Sign Up Now On</span> AWS Marketplace
                 </Link>
-                <img
-                  src="/img/Powered-By_logo-horiz_RGB_WHT Copy.png"
-                  alt="Powered by AWS"
-                  className={classnames('logo-aws')}
-                />
               </div>
             </div>
           </div>
