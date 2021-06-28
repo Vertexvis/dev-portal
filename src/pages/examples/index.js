@@ -6,18 +6,18 @@ import styles from '../styles.module.css';
 
 const sampleApps = [
   {
-    title: <>NextJS Starter</>,
-    description: (
-      <>
-        We created our full stack, deployable starter application using the
-        NextJS framework. Quickly and easily build your own prototype
-        application that takes full advantage of the Vertex platform.
-      </>
+	title: <>3D Work Instructions</>,
+	description: (
+	  <>
+	    Optimize complex process workflows by connecting interactive visual 
+	    data to work instructions. Real-time 3D clarifies processes to improve 
+	    efficiency and quality.
+	  </>	
     ),
-    imageSrc: '/img/examples/starter-card.png',
-    url: '/examples/nextjs',
+    imageSrc: '/img/examples/work-instructions-card.png',
+    url: '/examples/work-instructions',
     cta: 'Try it Out',
-    width: 'col--4',
+	width: 'col--6'
   },
   {
     title: <>Digital Twin</>,
@@ -30,7 +30,7 @@ const sampleApps = [
     imageSrc: '/img/examples/digital-twin-card.png',
     url: '/examples/digital-twin',
     cta: 'Try it Out',
-    width: 'col--4',
+    width: 'col--6',
   },
   {
     title: <>3D Visual Analytics</>,
@@ -44,7 +44,21 @@ const sampleApps = [
     imageSrc: '/img/examples/visual analytics-card.png',
     url: '/examples/3d-visual-analytics',
     cta: 'Try it Out',
-    width: 'col--4',
+    width: 'col--6',
+  },
+  {
+    title: <>NextJS Starter</>,
+    description: (
+      <>
+        We created our full stack, deployable starter application using the
+        NextJS framework. Quickly and easily build your own prototype
+        application that takes full advantage of the Vertex platform.
+      </>
+    ),
+    imageSrc: '/img/examples/starter-card.png',
+    url: '/examples/nextjs',
+    cta: 'Try it Out',
+    width: 'col--6',
   },
 ];
 
@@ -88,8 +102,8 @@ function Samples() {
             <div className={classnames('col')}>
               <h1>Example Applications</h1>
               <p>
-                With the Vertex platform, non-3D developers can easily integrate
-                3D CAD data into their application with just a few lines of
+                With the Vertex platform, non-3D developers can easily integrate 
+                3D CAD data into their application with just a few lines of 
                 code. Get an idea of what you can do with these examples.
               </p>
             </div>
@@ -101,9 +115,13 @@ function Samples() {
           <div className={classnames(styles.sampleAppsSection)}>
             <div className={classnames(styles.containerLarge)}>
               <div className={classnames('row')}>
+                <div className={classnames("col col--8 col--offset-2")}>
+                  <div className={classnames('row')}>
                 {sampleApps.map((props, idx) => (
                   <SampleApp key={idx} {...props} />
                 ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -111,22 +129,22 @@ function Samples() {
         <div className={classnames(styles.sectionPadding, styles.mainGray)}>
           <div className={classnames('container')}>
             <div className={classnames('row')}>
-              <div className={classnames('col', 'col--4')}>
+              <div className={classnames('col', 'col--5')}>
                 <img src="/img/scene-studio/ss-preview.png" alt="" />
               </div>
               <div
-                className={classnames('col', 'col--8', 'betaCalloutContent')}
+                className={classnames('col', 'col--7', 'betaCalloutContent')}
               >
                 <span className={classnames('tag-pill')}>Beta</span>
                 <h2 className={classnames(styles.betaCalloutHeading)}>
-                  Easily Author 3D Content with Scene Studio<sup>&trade;</sup>
+                  Easily Author 3D Content with Scene Studio&trade;
                 </h2>
                 <p className={classnames(styles.betaCalloutParagraph)}>
-                  Scene Studio<sup>&trade;</sup> gets 3D applications to
-                  colleagues and clients. It replaces traditional product
-                  documentation that is difficult to maintain and not easily
+                  Deliver 3D applications to colleagues and clients. Scene 
+                  Studio&trade; uses 3D visuals to replace traditional product 
+                  documentation that's difficult to maintain and not easily 
                   accessible.
-                </p>
+               </p>
                 <p>
                   <Link
                     to={'/examples/scene-studio'}
