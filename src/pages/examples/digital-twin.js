@@ -78,7 +78,10 @@ function TimeSeries() {
             <div className={classnames('col')}>
               <h1>Digital Twin Application</h1>
               <p>
-                Visualize IoT time series data aligned to your 3D digital twin.
+                Build a digital twin by mapping sensor IoT data directly to your 
+                3D geometry. Set up conditional triggers to help users better 
+                understand and explore issues, failures, and performance of 
+                individual assets.
               </p>
             </div>
             <div className={classnames('col', 'col--8', 'col--offset-2')}>
