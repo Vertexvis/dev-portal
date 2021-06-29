@@ -77,7 +77,7 @@ function WorkInstructions() {
             <div className={classnames('col')}>
               <h1>3D Work Instructions</h1>
               <p>
-                Bring clarity to your processes by connecting 3D digital twins 
+                Bring clarity to your processes by connecting 3D digital twins
                 to your work instructions.
               </p>
             </div>
@@ -96,17 +96,17 @@ function WorkInstructions() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                Visualize your data in context by building a fully interactive 
-                3D digital twin for your work instructions. Create a sequence of 
-                steps that includes dynamic 3D snapshots of the required parts 
-                along with written instructions. Choose if you want to ghost 
-                model geometry that's not part of the active step or hide it 
-                completely. You can also connect your issue-tracking tool to 
+                Visualize your data in context by building a fully interactive
+                3D digital twin for your work instructions. Create a sequence of
+                steps that includes dynamic 3D snapshots of the required parts
+                along with written instructions. Choose if you want to ghost
+                model geometry that's not part of the active step or hide it
+                completely. You can also connect your issue-tracking tool to
                 report issues and enter feature requests.
               </p>
               <div className={classnames(styles.textCenter)}>
                 <Link
-                  to={'https://work-instructions-demo.vercel.app/'}
+                  to={'https://work-instructions.vertexvis.io/'}
                   className={classnames('button button--primary')}
                 >
                   Launch App

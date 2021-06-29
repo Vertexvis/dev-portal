@@ -78,9 +78,9 @@ function TimeSeries() {
             <div className={classnames('col')}>
               <h1>Digital Twin Application</h1>
               <p>
-                Build a digital twin by mapping sensor IoT data directly to your 
-                3D geometry. Set up conditional triggers to help users better 
-                understand and explore issues, failures, and performance of 
+                Build a digital twin by mapping sensor IoT data directly to your
+                3D geometry. Set up conditional triggers to help users better
+                understand and explore issues, failures, and performance of
                 individual assets.
               </p>
             </div>

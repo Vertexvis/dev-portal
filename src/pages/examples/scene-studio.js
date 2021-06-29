@@ -29,18 +29,18 @@ const sampleApps = [
     width: 'col--4',
   },
   {
-	title: <>3D Work Instructions</>,
-	description: (
-	  <>
-	    Optimize complex process workflows by connecting interactive visual 
-	    data to work instructions. Real-time 3D clarifies processes to improve 
-	    efficiency and quality.
-	  </>	
+    title: <>3D Work Instructions</>,
+    description: (
+      <>
+        Optimize complex process workflows by connecting interactive visual data
+        to work instructions. Real-time 3D clarifies processes to improve
+        efficiency and quality.
+      </>
     ),
     imageSrc: '/img/examples/work-instructions-card.png',
     url: '/examples/work-instructions',
     cta: 'Try it Out',
-	width: 'col--6'
+    width: 'col--6',
   },
 ];
 
@@ -100,10 +100,10 @@ function SceneStudio() {
                 What you can do with this application
               </h2>
               <p className={classnames(styles.normalParagraph)}>
-                View a scene and transform parts along the X, Y, and Z axes. 
-                You can also display part properties and change part visibility 
-                using the BOM. Scene Studio makes it easy to visualize your data 
-                in context so teammates can be more efficient, collaborative, 
+                View a scene and transform parts along the X, Y, and Z axes. You
+                can also display part properties and change part visibility
+                using the BOM. Scene Studio makes it easy to visualize your data
+                in context so teammates can be more efficient, collaborative,
                 and innovative.
               </p>
               <div className={classnames(styles.textCenter)}>

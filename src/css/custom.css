@@ -398,10 +398,10 @@ p {
   text-transform: uppercase;
 }
 .button.button--multiline span {
-	font-size: .6875rem;
-	letter-spacing: .88px;
-	line-height: 2;
-	display: block;
+  font-size: 0.6875rem;
+  letter-spacing: 0.88px;
+  line-height: 2;
+  display: block;
 }
 p.lead-in {
   font-size: var(--ifm-h3-font-size);
