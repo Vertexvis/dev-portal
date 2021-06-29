@@ -69,7 +69,7 @@ function SceneStudio() {
   return (
     <Layout
       title={`Scene Studio Authoring Tool | Vertex Developer Portal`}
-      description="Author lightweight 3D content for quick integration with a parts catalog, work instructions, training materials and other critical workflows."
+      description="Example of how to quickly integrate 3D content with your parts catalog, training materials, and more."
     >
       <header className={classnames(styles.LPhero, styles.lightHero)}>
         <div className={classnames('container')}>
