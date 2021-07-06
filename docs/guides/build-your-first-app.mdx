@@ -77,13 +77,11 @@ React.useEffect(() => {
     clientId: head(router.query.clientId) || DefaultCredentials.clientId,
     streamKey: head(router.query.streamKey) || DefaultCredentials.streamKey,
   });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [router.isReady]);
 
 // On credentials changes, update URL.
 React.useEffect(() => {
   if (credentials) router.push(encodeCreds(credentials));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [credentials]);
 
 // Open dialog if 'o' key pressed
