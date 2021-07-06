@@ -58,7 +58,7 @@ Now, in your application, click **Open Scene**, enter your client ID and stream 
 
 ## Understanding the code
 
-Start by opening [`src/pages/index.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/pages/index.tsx). We'll walk through the `Home` function in pieces.
+Start by opening [`src/components/Home.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/components/Home.tsx). We'll walk through the `Home` function in pieces.
 
 ```tsx
 const router = useRouter();
@@ -67,7 +67,7 @@ const [credentials, setCredentials] = React.useState<
   StreamCredentials | undefined
 >();
 const [dialogOpen, setDialogOpen] = React.useState(false);
-const [properties, setProperties] = React.useState<Properties>({});
+const [metadata, setMetadata] = React.useState<Metadata | undefined>();
 
 // Prefer credentials in URL to enable easy scene sharing. If empty, use defaults.
 React.useEffect(() => {
@@ -77,18 +77,17 @@ React.useEffect(() => {
     clientId: head(router.query.clientId) || DefaultCredentials.clientId,
     streamKey: head(router.query.streamKey) || DefaultCredentials.streamKey,
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [router.isReady]);
 
 // On credentials changes, update URL.
 React.useEffect(() => {
   if (credentials) router.push(encodeCreds(credentials));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [credentials]);
 
 // Open dialog if 'o' key pressed
-const keys = useKeyListener();
-React.useEffect(() => {
-  if (!dialogOpen && keys.o) setDialogOpen(true);
-}, [dialogOpen, keys]);
+useHotkeys("o", () => setDialogOpen(true), { keyup: true });
 ```
 
 At the top, we configure variables we'll need later. We also use [React effect hooks](https://reactjs.org/docs/hooks-effect.html) to update the URL on credential changes and listen for 'o' key presses to open the **Open Scene** dialog.
@@ -102,23 +101,24 @@ return router.isReady && credentials ? (
     main={
       viewer.isReady && (
         <Viewer
-          configEnv={Env}
+          configEnv={vertexEnv}
           credentials={credentials}
-          onSelect={async (hit) => {
-            setProperties(toProperties({ hit }));
+          onSelect={async (hit?: vertexvis.protobuf.stream.IHit) => {
+            setMetadata(toMetadata({ hit }));
             await selectByHit({ hit, viewer: viewer.ref.current });
           }}
           viewer={viewer.ref}
         />
       )
     }
-    rightDrawer={<RightDrawer files={files} properties={properties} />}
+    rightDrawer={<RightDrawer files={files} metadata={metadata} />}
+    rightDrawerOpen
   >
     {dialogOpen && (
       <OpenDialog
         credentials={credentials}
         onClose={() => setDialogOpen(false)}
-        onConfirm={(cs) => {
+        onConfirm={(cs: StreamCredentials) => {
           setCredentials(cs);
           setDialogOpen(false);
         }}
@@ -137,7 +137,7 @@ Let's break this down to see exactly what's happening:
 - The header includes the **Open Scene** button. With the `onOpenSceneClick` callback, we set the `dialogOpen` state.
 - Next is the main application content:
   - When the `viewer` is ready, we display the `Viewer` component.
-  - With the `onSelect` callback, we set the properties state. Then, call a utility function similar to the [Render your first scene](./render-your-first-scene.mdx) guide's function to perform scene item selection.
+  - With the `onSelect` callback, we set the metadata properties state. Then, call a utility function similar to the [Render your first scene](./render-your-first-scene.mdx) guide's function to perform scene item selection.
 - The right drawer receives files, which we'll discuss more later, and metadata properties for display.
 - Finally, the **Open Scene** dialog. It's shown if the `dialogOpen` React state is `true`. We pass two callbacks:
   - `onClose` closes the dialog.
@@ -169,24 +169,34 @@ export default async function getFiles(
   req: NextApiRequest,
   res: NextApiResponse<FileList | Failure>
 ): Promise<void> {
-  return makeCall(res, (client) => client.files.getFiles({ pageSize: 5 }));
+  return makeCallAndReturn(res, (client) => client.files.getFiles({ pageSize: 5 }));
 }
 ```
 
 This is the function getting called when you browse to [http://localhost:3000/api/files](http://localhost:3000/api/files). We're using NextJS [API Routes](https://nextjs.org/docs/api-routes/introduction) and the `makeCall` helper function. Open [`src/lib/vertex-api.ts`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/lib/vertex-api.ts) to see what that does.
 
 ```ts
-export async function makeCall<T>(
+export async function makeCallAndReturn<T>(
   res: NextApiResponse<T | Failure>,
   apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
 ): Promise<void> {
+  const result = await makeCall(apiCall);
+  return isFailure(result)
+    ? res.status(500).json(result)
+    : res.status(200).json(result);
+}
+
+export async function makeCall<T>(
+  apiCall: (client: VertexClient) => Promise<AxiosResponse<T>>
+): Promise<T | Failure> {
   try {
     const c = await getClient();
-    res.status(200).json((await apiCall(c)).data);
+    return (await apiCall(c)).data;
   } catch (error) {
-    res.status(500).json(
+    console.error("Error calling Vertex API", error.data);
+    return (
       error.vertexError?.res ?? {
-        errors: [{ status: '500', title: 'Unknown error from Vertex API.' }],
+        errors: [{ status: "500", title: "Unknown error from Vertex API." }],
       }
     );
   }
@@ -198,8 +208,8 @@ async function getClient(): Promise<VertexClient> {
 
   Client = await VertexClient.build({
     client: {
-      id: process.env.VERTEX_CLIENT_ID ?? '',
-      secret: process.env.VERTEX_CLIENT_SECRET ?? '',
+      id: process.env.VERTEX_CLIENT_ID ?? "",
+      secret: process.env.VERTEX_CLIENT_SECRET ?? "",
     },
   });
 
@@ -212,17 +222,19 @@ async function getClient(): Promise<VertexClient> {
 Open [`src/pages/index.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/blob/main/src/pages/index.tsx) once more. At the bottom, we're using [NextJS's `getServerSideProps`](https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering) function for server-side rendering.
 
 ```ts
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const noFiles = { props: { files: [] } };
+export async function getServerSideProps(
+  context: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<Props>> {
+  const empty = { props: { files: [], vertexEnv: Config.vertexEnv } };
   const host = context.req.headers.host;
-  if (!host) return noFiles;
+  if (!host) return empty;
 
-  const baseUrl = `http${host.startsWith('localhost') ? '' : 's'}://${host}`;
+  const baseUrl = `http${host.startsWith("localhost") ? "" : "s"}://${host}`;
   const res = await (await fetch(`${baseUrl}/api/files`)).json();
   return res == null || res.errors
-    ? noFiles
-    : { props: { files: toFileData(res) } };
-};
+    ? empty
+    : { props: { ...empty.props, files: toFileData(res) } };
+}
 ```
 
 Since `fetch` requires absolute URLs, we get the `host` from the request and construct a `baseUrl` with either `http://` or `https://` depending on if we're running locally or not. Then, we make a request to our `/files` API. We map the response with `toFileData` and the NextJS passes the result as [React props](https://reactjs.org/docs/components-and-props.html) into our `Home` component. As we saw above, we pass the `files` prop to the right drawer for display.
