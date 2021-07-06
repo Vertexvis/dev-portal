@@ -87,7 +87,7 @@ React.useEffect(() => {
 }, [credentials]);
 
 // Open dialog if 'o' key pressed
-useHotkeys("o", () => setDialogOpen(true), { keyup: true });
+useHotkeys('o', () => setDialogOpen(true), { keyup: true });
 ```
 
 At the top, we configure variables we'll need later. We also use [React effect hooks](https://reactjs.org/docs/hooks-effect.html) to update the URL on credential changes and listen for 'o' key presses to open the **Open Scene** dialog.
@@ -169,7 +169,9 @@ export default async function getFiles(
   req: NextApiRequest,
   res: NextApiResponse<FileList | Failure>
 ): Promise<void> {
-  return makeCallAndReturn(res, (client) => client.files.getFiles({ pageSize: 5 }));
+  return makeCallAndReturn(res, (client) =>
+    client.files.getFiles({ pageSize: 5 })
+  );
 }
 ```
 
@@ -193,10 +195,10 @@ export async function makeCall<T>(
     const c = await getClient();
     return (await apiCall(c)).data;
   } catch (error) {
-    console.error("Error calling Vertex API", error.data);
+    console.error('Error calling Vertex API', error.data);
     return (
       error.vertexError?.res ?? {
-        errors: [{ status: "500", title: "Unknown error from Vertex API." }],
+        errors: [{ status: '500', title: 'Unknown error from Vertex API.' }],
       }
     );
   }
@@ -208,8 +210,8 @@ async function getClient(): Promise<VertexClient> {
 
   Client = await VertexClient.build({
     client: {
-      id: process.env.VERTEX_CLIENT_ID ?? "",
-      secret: process.env.VERTEX_CLIENT_SECRET ?? "",
+      id: process.env.VERTEX_CLIENT_ID ?? '',
+      secret: process.env.VERTEX_CLIENT_SECRET ?? '',
     },
   });
 
@@ -229,7 +231,7 @@ export async function getServerSideProps(
   const host = context.req.headers.host;
   if (!host) return empty;
 
-  const baseUrl = `http${host.startsWith("localhost") ? "" : "s"}://${host}`;
+  const baseUrl = `http${host.startsWith('localhost') ? '' : 's'}://${host}`;
   const res = await (await fetch(`${baseUrl}/api/files`)).json();
   return res == null || res.errors
     ? empty
