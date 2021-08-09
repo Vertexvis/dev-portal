@@ -25,7 +25,7 @@ Support for new formats is added regularly.
 |    Creo/Pro-E    |         .asm\*, .prt, .neu Pro/Engineer          |     19.0 to Creo 8.0      |
 |       IFC        |                       .ifc                       |            2-4            |
 |       IGES       |                   .iges, .igs                    |         Up to 5.3         |
-|     Inventor     |                   .iam\*, .ipt                   |        Up to 2021         |
+|     Inventor     |                   .iam\*, .ipt                   |        Up to 2022         |
 |        JT        |                     .jt\*\*                      |         8.0-10.5          |
 | NX - Unigraphics |                       .prt                       |   11-12, and 1847-1980    |
 |       OBJ        |                       .obj                       |            All            |

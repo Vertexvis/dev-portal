@@ -11,15 +11,15 @@ import {
 } from '@site/src/components/CodeExamples';
 import * as exampleResultHtml from '../../static/examples/first-scene/index.html';
 
-The Vertex Web UI Components include a collection of standards-based [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) allowing you to view, interact with, and modify 3D data. These components look and act like regular HTML elements, allowing you to embed our viewer into simple JavaScript applications or more complex applications using React, Vue, or Angular.
+The Vertex Web UI Components include a collection of standards-based [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) that let you view, interact with, and modify 3D data. These components look and act like regular HTML elements, allowing you to embed our viewer into simple JavaScript applications or more complex applications using React, Vue, or Angular.
 
 All the heavy lifting of rendering takes place server-side within Vertex's platform, enabling you to build performant applications across all types of devices using even complex models.
 
 The following is a brief introduction to render your first scene in Vertex. The working example complete with an interactive demo is available at the [bottom of the page](#wrapping-up) if you get stuck and need help.
 
-## Before we start
+## Before you start
 
-Save the following HTML to a file on your computer and open it in your browser.
+Save the following HTML to a file on your computer and open it in your browser. The page is currently blank.
 
 ```html
 <!DOCTYPE html>
@@ -66,9 +66,9 @@ Save the following HTML to a file on your computer and open it in your browser.
 </html>
 ```
 
-## Rendering the scene
+## Render the scene
 
-To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. We'll explain these in more detail later. But for now, let's use our test key, `U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU`. Copy the following into the empty `<script>` tag.
+To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `U9cSWVb7fvS9k-NQcT28uZG6wtm6xmiG0ctU`. Copy the following into the empty `<script>` tag.
 
 ```js
 import { defineCustomElements } from 'https://unpkg.com/@vertexvis/viewer@0.9.x/dist/esm/loader.js';
@@ -86,17 +86,18 @@ async function main() {
 main();
 ```
 
-Let's take a moment to explain what's going on here. The first line imports the loader that fetches web components used on our page. The loader only loads required components, minimizing the startup time of your application.
+Here's what this code does:
 
-The second line imports a utility that we'll use later. One thing to note is that we're using the ES6 import syntax to load these files. Our components are packaged and distributed using the modern ECMAScript module standard, making it easy to load them in a browser.
+- The first line imports the loader that fetches web components used on our page. The loader only loads the required components, minimizing the startup time of your application.
+- The second line imports a utility that you'll use later. One thing to note is that we're using the ES6 import syntax to load these files. Our components are packaged and distributed using the modern ECMAScript module standard, making it easy to load them in a browser.
+- Inside the `main` function, `defineCustomElements` searches for components and registers them with the browser. Once they're registered, you can interact with the viewer. 
+The next lines query for the viewer in the DOM and load the scene via the stream key. This starts a new streaming session with its own scene view. Scene views isolate scene modifications such as camera and scene item updates. This allows users to view and modify a scene without their changes impacting others viewing the same scene
 
-Inside our `main` function, we call `defineCustomElements` to search for components and register them with the browser. Once they're registered, we can begin to interact with the viewer. The next lines query for the viewer in the DOM and load our scene via the stream key. This starts a new streaming session with its own scene view. Scene views isolate scene modifications such as camera and scene item updates. This allows users to view and modify a scene without their changes impacting others viewing the same scene.
+You should now see the model rendering in your browser. You've rendered your first scene.
 
-At this point, you should see the model rendering in your browser. You've rendered your first scene.
+## Interact with the scene
 
-## Interacting with the scene
-
-Now that we're able to render a scene. Let's add a simple interaction to select items based on clicking or tapping on them. Update the `main` function with the following JavaScript.
+Now that you're able to render a scene, add a simple interaction to select items based on clicking or tapping on them. Update the `main` function with the following JavaScript.
 
 ```js
 async function main() {
@@ -117,9 +118,10 @@ async function main() {
 }
 ```
 
-The first thing we need to do is figure out which item to select. We do this by registering for `tap` events from the viewer. The event listener will receive an event that contains the 2D position of where the user clicked or tapped the viewer.
+Here's what this code does:
 
-Inside the listener, we retrieve an instance of the scene and a raycaster. You'll use the `Scene` object to perform operations on items and the camera. The `Raycaster` is used to perform hit tests on items in the scene. Calling `raycaster.hitItems` with the 2D coordinates of the event returns a list of items that intersect those coordinates. You might notice we're using `async/await` here. Since these operations happen asynchronously, we need to wait for those tasks to complete before continuing.
+- Registering for `tap` events in the viewer figures out which item to select. When a user clicks or taps in the viewer, the event listener receives an event that contains the 2D position of the click location.
+- Inside the event listener, an instance of the scene and a raycaster is retrieved. The `scene` object performs operations on items and the camera. The `raycaster` performs hit tests on items in the scene. Calling `raycaster.hitItems` with the 2D coordinates of the event returns a list of items that intersect those coordinates. Notice you're using `async/await` here. Since these operations happen asynchronously, you need to wait for those tasks to complete before continuing.
 
 Try clicking on an item in the viewer. Look in your browser's developer console. You should see logs printing an array of hit results when tapping on an item and an empty array when tapping in white space.
 
@@ -128,7 +130,7 @@ hit results [Hit]
 hit results []
 ```
 
-Now that we are receiving hit results, we can use them to perform actions on the scene. Replace your `main` function with the following JavaScript.
+Now that you're receiving hit results, you can use them to perform actions on the scene. Replace your `main` function with the following JavaScript.
 
 ```js
 async function main() {
@@ -162,11 +164,12 @@ async function main() {
 }
 ```
 
-Here, we're using an API from the Viewer component to modify the scene's items. Scenes contain a tree of items, and each item has a position, visibility, selection, material, and reference geometry. Vertex can render huge scenes, so it's prohibitive to send all scene items over the network. The client may also run into memory constraints, especially on lower-end devices. Instead, we provide a query API to pick the items to update and which operations to perform on them. Then, send this operation to the server to execute on the scene.
+Here's what this code does:
 
-Let's analyze what queries we're using in this interaction. When we get a hit result back, we create a compound query that will deselect all items in the scene and select an item matching an ID from our hit result. Calling `execute` sends the operation to the server, updates the scene, and renders a new image.
+- An API from the Viewer component modifies the scene's items. Scenes contain a tree of items, and each item has a position, visibility, selection, material, and reference geometry. Vertex can render huge scenes, so it's prohibitive to send all scene items over the network. The client may also run into memory constraints, especially on lower-end devices. Instead, we provide a query API to pick the items to update and which operations to perform on them, and then send this operation to the server to execute on the scene.
+- For the queries in this interaction: when you get a hit result back, you create a compound query that deselects all items in the scene and selects an item matching an ID from your hit result. Calling `execute` sends the operation to the server, updates the scene, and renders a new image.
 
-With this interaction written, try selecting items. Tapping in white space should deselect all items.
+With this interaction written, try selecting items in the viewer. Tapping an item should apply the selection color. Tapping in white space should deselect all items.
 
 ## Wrapping up
 
