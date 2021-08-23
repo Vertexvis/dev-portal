@@ -178,7 +178,6 @@ module.exports = {
       ],
       copyright: `© Copyright ${new Date().getFullYear()} Vertex Software, Inc.`,
     },
-    sidebarCollapsible: false,
   },
   presets: [
     [
@@ -195,6 +194,7 @@ module.exports = {
             },
           },
         },
+        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
