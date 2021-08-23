@@ -176,7 +176,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `© Copyright ${new Date().getFullYear()} Vertex Software LLC.`,
+      copyright: `© Copyright ${new Date().getFullYear()} Vertex Software, Inc.`,
     },
     sidebarCollapsible: false,
   },

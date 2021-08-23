@@ -90,8 +90,8 @@ Here's what this code does:
 
 - The first line imports the loader that fetches web components used on our page. The loader only loads the required components, minimizing the startup time of your application.
 - The second line imports a utility that you'll use later. One thing to note is that we're using the ES6 import syntax to load these files. Our components are packaged and distributed using the modern ECMAScript module standard, making it easy to load them in a browser.
-- Inside the `main` function, `defineCustomElements` searches for components and registers them with the browser. Once they're registered, you can interact with the viewer. 
-The next lines query for the viewer in the DOM and load the scene via the stream key. This starts a new streaming session with its own scene view. Scene views isolate scene modifications such as camera and scene item updates. This allows users to view and modify a scene without their changes impacting others viewing the same scene
+- Inside the `main` function, `defineCustomElements` searches for components and registers them with the browser. Once they're registered, you can interact with the viewer.
+  The next lines query for the viewer in the DOM and load the scene via the stream key. This starts a new streaming session with its own scene view. Scene views isolate scene modifications such as camera and scene item updates. This allows users to view and modify a scene without their changes impacting others viewing the same scene
 
 You should now see the model rendering in your browser. You've rendered your first scene.
 

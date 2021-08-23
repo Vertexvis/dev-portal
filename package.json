@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@algolia/client-search": "^4.10",
-    "@docusaurus/core": "^2.0.0-beta.3",
-    "@docusaurus/plugin-client-redirects": "^2.0.0-beta.3",
-    "@docusaurus/preset-classic": "^2.0.0-beta.3",
+    "@docusaurus/core": "^2.0.0-beta.4",
+    "@docusaurus/plugin-client-redirects": "^2.0.0-beta.4",
+    "@docusaurus/preset-classic": "^2.0.0-beta.4",
     "classnames": "^2.3",
     "docusaurus-gtm-plugin": "^0.0.2",
     "mermaid": "^8",
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@types/react": "^17.0",
     "@vertexvis/eslint-config-vertexvis": "^0.6",
-    "eslint": "^7.30",
+    "eslint": "^7.32",
     "eslint-plugin-react": "^7.24",
     "husky": "^7.0",
     "prettier": "^2.3",
