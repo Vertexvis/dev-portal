@@ -10,16 +10,16 @@ import { SignUpNote } from '@site/src/components/SignUpNote';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Now that you've [rendered your first scene](./render-your-first-scene.mdx), let's use your own 3D data to make things more interesting. We'll use the Vertex command-line interface (CLI). The CLI makes Vertex API calls on your behalf, simplifying typical operations into single commands.
+Now that you've [rendered your first scene](./render-your-first-scene.mdx), try importing your own 3D data using the Vertex command-line interface (CLI). The CLI makes Vertex API calls on your behalf, simplifying typical operations into single commands.
 
 :::note
 
 <SignUpNote />
 :::
 
-## Installing
+## Install the CLI
 
-Install the CLI with either [npm](https://www.npmjs.com/get-npm) or [Yarn](https://classic.yarnpkg.com/en/docs/install/).
+1. Install the CLI with either [npm](https://www.npmjs.com/get-npm) or [Yarn](https://classic.yarnpkg.com/en/docs/install/). If you need help, here's a [third-party video](https://www.youtube.com/watch?v=NzXeLbOP_-0) for setting up Node.js and npm.
 
 <Tabs
   defaultValue="npm"
@@ -49,7 +49,7 @@ yarn global add @vertexvis/cli
 </TabItem>
 </Tabs>
 
-Verify it's working by accessing help.
+2. Verify it's working by accessing help.
 
 ```shell
 # Help for the CLI as a whole
@@ -65,20 +65,20 @@ vertex scenes --help
 vertex scenes:get --help
 ```
 
-## Authenticating
+## CLI authentication
 
-The CLI authenticates Vertex API calls on your behalf. To do this, it requires your Vertex client ID and secret.
+1. Have your Vertex client ID and secret ready so that the CLI can authenticate Vertex API calls on your behalf.
 
 :::note
 
 <ProtectSecretNote />
 :::
 
+2. Run `vertex configure` and follow the prompts.
+
 ```shell
 vertex configure
 ```
-
-Keep your client ID and secret handy; we'll use it in the following guide as well.
 
 :::note
 
@@ -87,17 +87,19 @@ Some customers use a different base API path than the default (https://platform.
 
 After you follow the prompts, the command creates `~/.config/@vertexvis/cli/config.json` on macOS/Linux and `%LOCALAPPDATA%\@vertexvis\cli\config.json` on Windows with your credentials. When you run additional commands, the CLI uses these to authenticate API calls.
 
-## Importing data
+Keep your client ID and secret handy; you'll use it in the following guide as well.
 
-To import 3D data in one of [Vertex's supported formats](./supported-file-formats.mdx), create a JSON file containing a list of scene items. Multiple CLI commands use this JSON file to build requests for the API.
+## Import data
+
+1. To import 3D data in one of [Vertex's supported formats](./supported-file-formats.mdx), create a JSON file containing a list of scene items. Multiple CLI commands use this JSON file to build requests for the API.
 
 :::note
+
+If you don't have 3D data handy, download a prepared model from our [3D database](./model-database.mdx) to follow along.
 
 <ImportAssemblyNote />
 
 :::
-
-If you do not have 3D data handy, download a model from our [3D database](./model-database.mdx) to follow along.
 
 Below is a simple example of a JSON file with the required parameters specified. For a complete list and explanation of each parameter, see the [type definition](https://github.com/Vertexvis/vertex-cli/blob/master/src/create-items/index.d.ts).
 
@@ -114,27 +116,28 @@ Below is a simple example of a JSON file with the required parameters specified.
 ]
 ```
 
-Next, run `create-parts` with the path to this JSON file as an argument. `create-parts` uploads the 3D data, translates it into 3D geometry, and creates parts in Vertex's Parts Library. The what? Vertex's Parts Library is a repository of your team's or organization's parts, each with references to geometry and optional metadata. As we'll see later in this guide, you can use combinations of these parts to build scenes.
+2. Next, run `create-parts` with the path to this JSON file as an argument. `create-parts` uploads the 3D data, translates it into 3D geometry, and creates parts in Vertex's Parts Library. Vertex's Parts Library is a repository of your team's or organization's parts, each with references to geometry and optional metadata. As we'll see later in this guide, you can use combinations of these parts to build scenes.
 
 ```shell
 vertex create-parts [YOUR_PATH_TO_JSON_FILE]
 ```
 
-## Rendering scenes
+## Render scenes
 
-With the parts now in Vertex's Parts Library, run `create-scene` to create a scene and add the root part as a scene item to that scene.
+1. With the parts now in Vertex's Parts Library, run `create-scene` to create a scene and add the root part as a scene item to that scene. This command prints the created scene ID.
 
 ```shell
 vertex create-scene --name [YOUR_SCENE_NAME] [YOUR_PATH_TO_JSON_FILE]
-```
+``` 
 
-This command prints the created scene ID. Use this ID in the `scenes:render` command to render your scene. The `--viewer` flag creates an HTML file using Vertex's Viewer component similar to the one we wrote in the [Render your first scene](./render-your-first-scene.mdx) guide. It then opens this file in your browser so you can interact with it.
+2. To render the scene, run the `scenes:render` command and include the  `--viewer` flag along with the scene ID from the previous step. 
+The `--viewer` flag creates an HTML file using Vertex's Viewer component similar to the one you wrote in the [Render your first scene](./render-your-first-scene.mdx) guide. It then opens this file in your browser so you can interact with it.
 
 ```shell
 vertex scenes:render --viewer [YOUR_SCENE_ID]
 ```
 
-Keep your scene ID handy; we'll use it in the following guide as well.
+Keep your scene ID handy; you'll use it in the following guide as well.
 
 ## Wrapping up
 
@@ -143,4 +146,4 @@ Congratulations! You've imported your own 3D data into Vertex and interacted wit
 - Vertex's command-line interface (CLI) makes Vertex API calls on your behalf, simplifying typical operations into single commands.
 - Vertex's Parts Library is a repository of your team's or organization's parts. You can build scenes using any combination of these parts.
 
-We explained a few in this guide, but for a complete list of CLI commands and their options, check out the [`vertex-cli` README](https://github.com/Vertexvis/vertex-cli).
+We explained a few commands in this guide, but for a complete list of CLI commands and their options, check out the [`vertex-cli` README](https://github.com/Vertexvis/vertex-cli).
