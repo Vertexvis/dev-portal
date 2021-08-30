@@ -50,7 +50,7 @@ module.exports = {
       title: '',
       logo: {
         alt: 'Vertex Developers Logo',
-        src: 'img/vertex-devportal-rev.svg',
+        src: 'img/vertex-dev.svg',
       },
       items: [
         {

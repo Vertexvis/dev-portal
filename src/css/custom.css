@@ -444,12 +444,10 @@ p.lead-in {
   padding: 0 0.5rem;
 }
 .navbar .navbar__brand img {
-  width: 207px;
   max-width: none;
 }
 .navbar .navbar__brand {
   overflow-x: hidden;
-  max-width: 148px;
 }
 .navbar__item.sign-in {
   order: 20;
