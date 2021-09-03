@@ -23,6 +23,7 @@ Support for new formats is added regularly.
 |      3DXML       |                      .3DXML                      |            All            |
 |      CATIA       | .CATProduct\*, .CATPart, .model, .CATShape, .cgr |            4-6            |
 |    Creo/Pro-E    |         .asm\*, .prt, .neu Pro/Engineer          |     19.0 to Creo 8.0      |
+|    Creo View     |                    .pvz, .ol                     | Creo View Express 4-7 and Creo View ECAD 6.1.0.0 |
 |       IFC        |                       .ifc                       |            2-4            |
 |       IGES       |                   .iges, .igs                    |         Up to 5.3         |
 |     Inventor     |                   .iam\*, .ipt                   |        Up to 2022         |
