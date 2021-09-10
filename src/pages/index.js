@@ -603,35 +603,42 @@ function Home() {
             </section>
           )}
         </div>
-        <div className={classnames(styles.logoCallout, 'logo-callout')}>
-          <div className={classnames('container')}>
-            <div className={classnames('row')}>
-              <div className={classnames('col col--9')}>
-                <h2 className={classnames(styles.logoMark, styles.awsMark)}>
-                  Ready to add 3D experiences to your applications and
-                  workflows? Subscribe to the Vertex 3D Visualization Platform
-                  through the AWS Marketplace:{' '}
-                  <Link to={'https://aws.amazon.com/marketplace/pp/B08PP264Z1'}>
-                    free for the first 100 rendering sessions!
-                  </Link>
-                </h2>
-              </div>
-              <div className={classnames('col col--3 button-column')}>
-                <p>
-                  <Link
-                    to={'https://aws.amazon.com/marketplace/pp/B08PP264Z1'}
-                    className={classnames(
-                      'button button--secondary',
-                      styles.callOutButton
-                    )}
-                  >
-                    Sign Up Now
-                  </Link>
-                </p>
+        {sampleApps && sampleApps.length && (
+          <div
+            className={classnames(styles.sampleAppsSection, styles.mainGray)}
+          >
+            <div className={classnames('container')}>
+              <div className={classnames('row')}>
+                <div
+                  className={classnames(
+                    'col',
+                    'col--12',
+                    styles.sampleAppsSectionHeader
+                  )}
+                >
+                  <h2 className={classnames('secondary')}>Examples</h2>
+                  <p>
+                    We built the following example applications to give you
+                    ideas about how you can use Vertex.
+                  </p>
+                </div>
+                {sampleApps.map((props, idx) => (
+                  <SampleApp key={idx} {...props} />
+                ))}
+                <div className={classnames('col', 'col--12')}>
+                  <p>
+                    <Link
+                      to={'/examples'}
+                      className={classnames('non-button-link')}
+                    >
+                      More Examples
+                    </Link>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
         <div className={classnames(styles.sdkLogosSection)}>
           {sdks && sdks.length && (
             <section className={classnames('getting-started-sdks')}>
@@ -685,42 +692,6 @@ function Home() {
             </div>
           </div>
         )}
-        {sampleApps && sampleApps.length && (
-          <div
-            className={classnames(styles.sampleAppsSection, styles.mainGray)}
-          >
-            <div className={classnames('container')}>
-              <div className={classnames('row')}>
-                <div
-                  className={classnames(
-                    'col',
-                    'col--12',
-                    styles.sampleAppsSectionHeader
-                  )}
-                >
-                  <h2 className={classnames('secondary')}>Examples</h2>
-                  <p>
-                    We built the following example applications to give you
-                    ideas about how you can use Vertex.
-                  </p>
-                </div>
-                {sampleApps.map((props, idx) => (
-                  <SampleApp key={idx} {...props} />
-                ))}
-                <div className={classnames('col', 'col--12')}>
-                  <p>
-                    <Link
-                      to={'/examples'}
-                      className={classnames('non-button-link')}
-                    >
-                      More Examples
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </main>
       <div className={classnames('cta-block')}>
         <div className={classnames('content')}>
@@ -729,20 +700,18 @@ function Home() {
               <div className={classnames('col col--12')}>
                 <h2>Build Powerful Apps&nbsp;Fast</h2>
                 <p>
-                  Ready to add 3D experiences to your applications and
-                  workflows? Subscribe for <strong>free</strong> to the Vertex
-                  3D Visualization Platform through the AWS Marketplace.
+                  Ready to add connected 3D experiences to your applications and workflows? Sign up to the Vertex 3D Visualization Platform: <strong>free for the first 100 rendering sessions!</strong>
                 </p>
                 <Link
                   className={classnames(
-                    'button button--primary button--multiline',
+                    'button button--primary',
                     styles.getStarted
                   )}
                   to={
-                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
+                    'https://account.vertexvis.com/signup'
                   }
                 >
-                  <span>Sign Up Now On</span> AWS Marketplace
+                  Sign Up Now
                 </Link>
               </div>
             </div>

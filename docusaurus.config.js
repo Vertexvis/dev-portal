@@ -93,7 +93,7 @@ module.exports = {
           position: 'right',
         },
         {
-          to: 'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true',
+          to: 'https://account.vertexvis.com/signup',
           className: 'sign-up button button--primary',
           label: 'Sign Up',
           position: 'right',
