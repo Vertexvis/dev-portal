@@ -30,7 +30,7 @@ Save the following HTML to a file on your computer and open it in your browser. 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer/viewer.css"
+      href="https://unpkg.com/@vertexvis/viewer@0.10.x/dist/viewer/viewer.css"
     />
     <style>
       html,
@@ -46,11 +46,11 @@ Save the following HTML to a file on your computer and open it in your browser. 
   <body>
     <script
       type="module"
-      src="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer/viewer.esm.js"
+      src="https://unpkg.com/@vertexvis/viewer@0.10.x/dist/viewer/viewer.esm.js"
     ></script>
     <script
       nomodule
-      src="https://unpkg.com/@vertexvis/viewer@0.9.x/dist/viewer.js"
+      src="https://unpkg.com/@vertexvis/viewer@0.10.x/dist/viewer.js"
     ></script>
 
     <vertex-viewer
@@ -71,8 +71,8 @@ Save the following HTML to a file on your computer and open it in your browser. 
 To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`. Copy the following into the empty `<script>` tag.
 
 ```js
-import { defineCustomElements } from 'https://unpkg.com/@vertexvis/viewer@0.9.x/dist/esm/loader.js';
-import { ColorMaterial } from 'https://unpkg.com/@vertexvis/viewer@0.9.x/dist/esm/index.js';
+import { defineCustomElements } from 'https://unpkg.com/@vertexvis/viewer@0.10.x/dist/esm/loader.js';
+import { ColorMaterial } from 'https://unpkg.com/@vertexvis/viewer@0.10.x/dist/esm/index.js';
 
 async function main() {
   await defineCustomElements(window);
@@ -140,6 +140,7 @@ async function main() {
   await viewer.load(
     `urn:vertexvis:stream-key:Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`
   );
+  let selectedItemId;
 
   viewer.addEventListener('tap', async (event) => {
     const scene = await viewer.scene();
@@ -149,16 +150,24 @@ async function main() {
     const [hit] = result.hits;
 
     if (hit != null) {
+      const itemId = hit.itemId?.hex;
       await scene
         .items((op) => [
-          op.where((q) => q.all()).deselect(),
+          ...(selectedItemId
+            ? [op.where((q) => q.withItemId(selectedItemId)).deselect()]
+            : []),
           op
-            .where((q) => q.withItemId(hit.itemId.hex))
+            .where((q) => q.withItemId(itemId))
             .select(ColorMaterial.create(255, 255, 0)),
         ])
         .execute();
-    } else {
-      await scene.items((op) => op.where((q) => q.all()).deselect()).execute();
+      selectedItemId = itemId;
+    } else if (selectedItemId) {
+      await scene
+        .items((op) => [
+          op.where((q) => q.withItemId(selectedItemId)).deselect(),
+        ])
+        .execute();
     }
   });
 }
@@ -167,7 +176,7 @@ async function main() {
 Here's what this code does:
 
 - An API from the Viewer component modifies the scene's items. Scenes contain a tree of items, and each item has a position, visibility, selection, material, and reference geometry. Vertex can render huge scenes, so it's prohibitive to send all scene items over the network. The client may also run into memory constraints, especially on lower-end devices. Instead, we provide a query API to pick the items to update and which operations to perform on them, and then send this operation to the server to execute on the scene.
-- For the queries in this interaction: when you get a hit result back, you create a compound query that deselects all items in the scene and selects an item matching an ID from your hit result. Calling `execute` sends the operation to the server, updates the scene, and renders a new image.
+- For the queries in this interaction: when you get a hit result back, you create a compound query that deselects any previously selected item in the scene and selects an item matching an ID from your hit result. Calling `execute` sends the operation to the server, updates the scene, and renders a new image.
 
 With this interaction written, try selecting items in the viewer. Tapping an item should apply the selection color. Tapping in white space should deselect all items.
 

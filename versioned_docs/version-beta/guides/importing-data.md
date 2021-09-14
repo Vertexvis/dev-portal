@@ -18,24 +18,24 @@ Vertex currently supports the following file formats.
 If you need support for another type, just let us know.
 Support for new formats is added regularly.
 
-|    File type     |                  File extension                  |         Versions          |
-| :--------------: | :----------------------------------------------: | :-----------------------: |
-|      3DXML       |                      .3DXML                      |            All            |
-|      CATIA       | .CATProduct\*, .CATPart, .model, .CATShape, .cgr |            4-6            |
-|    Creo/Pro-E    |         .asm\*, .prt, .neu Pro/Engineer          |     19.0 to Creo 8.0      |
+|    File type     |                  File extension                  |                     Versions                     |
+| :--------------: | :----------------------------------------------: | :----------------------------------------------: |
+|      3DXML       |                      .3DXML                      |                       All                        |
+|      CATIA       | .CATProduct\*, .CATPart, .model, .CATShape, .cgr |                       4-6                        |
+|    Creo/Pro-E    |         .asm\*, .prt, .neu Pro/Engineer          |                 19.0 to Creo 8.0                 |
 |    Creo View     |                    .pvz, .ol                     | Creo View Express 4-7 and Creo View ECAD 6.1.0.0 |
-|       IFC        |                       .ifc                       |            2-4            |
-|       IGES       |                   .iges, .igs                    |         Up to 5.3         |
-|     Inventor     |                   .iam\*, .ipt                   |        Up to 2022         |
-|        JT        |                     .jt\*\*                      |         8.0-10.5          |
-| NX - Unigraphics |                       .prt                       |   11-12, and 1847-1980    |
-|       OBJ        |                       .obj                       |            All            |
-|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |        Up to 33.1         |
-|      Revit       |                       .rvt                       |         2015-2021         |
-|    Solid Edge    |                   .asm\*, .par                   | 19-20, ST1-ST10, and 2021 |
-|    SolidWorks    |                .sldasm\*, .sldprt                |          97-2021          |
-|       STEP       |                   .step, .stp                    |    AP203, AP214, AP242    |
-|       STL        |                       .stl                       |            N/A            |
+|       IFC        |                       .ifc                       |                       2-4                        |
+|       IGES       |                   .iges, .igs                    |                    Up to 5.3                     |
+|     Inventor     |                   .iam\*, .ipt                   |                    Up to 2022                    |
+|        JT        |                     .jt\*\*                      |                     8.0-10.5                     |
+| NX - Unigraphics |                       .prt                       |               11-12, and 1847-1980               |
+|       OBJ        |                       .obj                       |                       All                        |
+|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 33.1                    |
+|      Revit       |                       .rvt                       |                    2015-2021                     |
+|    Solid Edge    |                   .asm\*, .par                   |            19-20, ST1-ST10, and 2021             |
+|    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2021                      |
+|       STEP       |                   .step, .stp                    |               AP203, AP214, AP242                |
+|       STL        |                       .stl                       |                       N/A                        |
 
 \* If you want to import an entire assembly as a single file, you need to take an additional step to [prepare it for Vertex](https://help.vertexvis.com/hc/en-us/articles/360014163734). This is so Vertex can properly import all of the data that's included in an assembly file.
 

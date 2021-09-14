@@ -700,16 +700,16 @@ function Home() {
               <div className={classnames('col col--12')}>
                 <h2>Build Powerful Apps&nbsp;Fast</h2>
                 <p>
-                  Ready to add connected 3D experiences to your applications and workflows? Sign up to the Vertex 3D Visualization Platform: <strong>free for the first 100 rendering sessions!</strong>
+                  Ready to add connected 3D experiences to your applications and
+                  workflows? Sign up to the Vertex 3D Visualization Platform:{' '}
+                  <strong>free for the first 100 rendering sessions!</strong>
                 </p>
                 <Link
                   className={classnames(
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={
-                    'https://account.vertexvis.com/signup'
-                  }
+                  to={'https://account.vertexvis.com/signup'}
                 >
                   Sign Up Now
                 </Link>

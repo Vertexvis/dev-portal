@@ -99,24 +99,28 @@ return router.isReady && credentials ? (
     main={
       viewer.isReady && (
         <Viewer
-          configEnv={vertexEnv}
+          config={JSON.stringify({ network })}
           credentials={credentials}
-          onSelect={async (hit?: vertexvis.protobuf.stream.IHit) => {
+          onSelect={async (hit) => {
+            await selectByHit({
+              deselectItemId: metadata?.itemId,
+              hit,
+              viewer: viewer.ref.current,
+            });
             setMetadata(toMetadata({ hit }));
-            await selectByHit({ hit, viewer: viewer.ref.current });
           }}
           viewer={viewer.ref}
         />
       )
     }
-    rightDrawer={<RightDrawer files={files} metadata={metadata} />}
-    rightDrawerOpen
+    rightDrawer={<RightDrawer files={files} metadata={metadata} open />}
+    rightDrawerWidth={RightDrawerWidth}
   >
     {dialogOpen && (
       <OpenDialog
         credentials={credentials}
         onClose={() => setDialogOpen(false)}
-        onConfirm={(cs: StreamCredentials) => {
+        onConfirm={(cs) => {
           setCredentials(cs);
           setDialogOpen(false);
         }}
@@ -193,10 +197,13 @@ export async function makeCall<T>(
     const c = await getClient();
     return (await apiCall(c)).data;
   } catch (error) {
-    console.error('Error calling Vertex API', error.data);
+    const ve = error as VertexError;
+    console.error('Error calling Vertex API', ve);
     return (
-      error.vertexError?.res ?? {
-        errors: [{ status: '500', title: 'Unknown error from Vertex API.' }],
+      ve.vertexError?.res ?? {
+        errors: new Set([
+          { status: '500', title: 'Unknown error from Vertex API.' },
+        ]),
       }
     );
   }
@@ -207,6 +214,7 @@ async function getClient(): Promise<VertexClient> {
   if (Client != null) return Client;
 
   Client = await VertexClient.build({
+    basePath: Config.network.apiHost.toString(),
     client: {
       id: process.env.VERTEX_CLIENT_ID ?? '',
       secret: process.env.VERTEX_CLIENT_SECRET ?? '',
@@ -225,7 +233,7 @@ Open [`src/pages/index.tsx`](https://github.com/Vertexvis/vertex-nextjs-starter/
 export async function getServerSideProps(
   context: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<Props>> {
-  const empty = { props: { files: [], vertexEnv: Config.vertexEnv } };
+  const empty = { props: { files: [], config: Config } };
   const host = context.req.headers.host;
   if (!host) return empty;
 
