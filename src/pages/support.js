@@ -205,7 +205,7 @@ const frequentlyAskedQuestions = [
           <Link to={'https://account.vertexvis.com/signup'}>
             create a free developer account
           </Link>
-          . Your first 100 rendering sessions are free.{' '}
+          . Your first 100 rendering sessions are free.
         </p>
       </>
     ),
