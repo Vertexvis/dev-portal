@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from '@docusaurus/Link';
 
 export function SignUpNote() {
   return (
@@ -7,16 +8,16 @@ export function SignUpNote() {
       <ul>
         <li>
           You{' '}
-          <a href="https://account.vertexvis.com/signup">
+          <Link href="https://account.vertexvis.com/signup">
             created a free developer account
-          </a>
+          </Link>
           .
         </li>
         <li>
           You created credentials in the{' '}
-          <a href="https://console.vertexvis.com/applications">
+          <Link href="https://console.vertexvis.com/applications">
             Vertex Console
-          </a>{' '}
+          </Link>{' '}
           and have your Vertex client ID and secret.
         </li>
       </ul>
