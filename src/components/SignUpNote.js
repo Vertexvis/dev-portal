@@ -6,9 +6,9 @@ export function SignUpNote() {
       The following instructions assume:
       <ul>
         <li>
-          You created a free developer account by{' '}
-          <a href="https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true">
-            visiting our listing on the AWS Marketplace
+          You{' '}
+          <a href="https://account.vertexvis.com/signup">
+            created a free developer account
           </a>
           .
         </li>

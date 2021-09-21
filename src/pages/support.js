@@ -202,15 +202,10 @@ const frequentlyAskedQuestions = [
         <p>
           When you are ready to try the platform out with some of your own 3D
           data, simply{' '}
-          <Link
-            to={
-              'https://aws.amazon.com/marketplace/pp/B08PP264Z1?qid=1614803817665&sr'
-            }
-          >
-            subscribe to the Vertex 3D Visualization Platform
-          </Link>{' '}
-          through the AWS Marketplace. Your first 100 rendering sessions are
-          free.{' '}
+          <Link to={'https://account.vertexvis.com/signup'}>
+            create a free developer account
+          </Link>
+          . Your first 100 rendering sessions are free.{' '}
         </p>
       </>
     ),

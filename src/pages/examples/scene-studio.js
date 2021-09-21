@@ -165,9 +165,7 @@ function SceneStudio() {
                     'button button--primary',
                     styles.getStarted
                   )}
-                  to={
-                    'https://aws.amazon.com/marketplace/pp/B08PP264Z1?stl=true'
-                  }
+                  to={'https://account.vertexvis.com/signup'}
                 >
                   Sign Up Now
                 </Link>{' '}
