@@ -702,7 +702,7 @@ function Home() {
                 <p>
                   Ready to add connected 3D experiences to your applications and
                   workflows? Sign up to the Vertex 3D Visualization Platform:{' '}
-                  <strong>free for the first 100 rendering sessions!</strong>
+                  <strong>free for the first 100 rendering sessions.</strong>
                 </p>
                 <Link
                   className={classnames(

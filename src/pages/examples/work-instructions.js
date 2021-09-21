@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from '../styles.module.css';
+import { ExamplesCta } from '../../components/ExamplesCta';
 
 const sampleApps = [
   {
@@ -151,33 +152,7 @@ function WorkInstructions() {
         <div className={classnames('content')}>
           <div className={classnames('container')}>
             <div className={classnames('row')}>
-              <div className={classnames('col col--12')}>
-                <h2>Ready to get started?</h2>
-                <p>
-                  Get in touch with one of our platform experts or subscribe for
-                  free to the Vertex 3D Visualization Platform through the AWS
-                  Marketplace.
-                </p>
-                <Link
-                  className={classnames(
-                    'button button--primary',
-                    styles.getStarted
-                  )}
-                  to={'https://account.vertexvis.com/signup'}
-                >
-                  Sign Up Now
-                </Link>{' '}
-                &nbsp;
-                <Link
-                  className={classnames(
-                    'button button--primary',
-                    styles.getStarted
-                  )}
-                  to={'/examples/contact'}
-                >
-                  Contact an Expert
-                </Link>
-              </div>
+              <ExamplesCta />
             </div>
           </div>
         </div>

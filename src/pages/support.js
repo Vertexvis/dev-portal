@@ -5,7 +5,6 @@ import SearchButton from '../theme/SearchBar';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
 
 const supportCards = [
@@ -110,6 +109,7 @@ const supportCards = [
     classes: 'col col--4',
   },
 ];
+
 function SupportCard({
   title,
   description,
@@ -281,8 +281,6 @@ const frequentlyAskedQuestions = [
 ];
 
 function Support() {
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Support | Vertex Developer Portal`}
