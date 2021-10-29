@@ -15,7 +15,7 @@ export function SignUpNote() {
         </li>
         <li>
           You created credentials in the{' '}
-          <Link href="https://console.vertexvis.com/applications">
+          <Link href="https://console.vertexvis.com/getting-started">
             Vertex Console
           </Link>{' '}
           and have your Vertex client ID and secret.
