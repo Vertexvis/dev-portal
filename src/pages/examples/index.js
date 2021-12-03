@@ -127,37 +127,6 @@ function Samples() {
             </div>
           </div>
         )}
-        <div className={classnames(styles.sectionPadding, styles.mainGray)}>
-          <div className={classnames('container')}>
-            <div className={classnames('row')}>
-              <div className={classnames('col', 'col--5')}>
-                <img src="/img/scene-studio/ss-preview.png" alt="" />
-              </div>
-              <div
-                className={classnames('col', 'col--7', 'betaCalloutContent')}
-              >
-                <span className={classnames('tag-pill')}>Beta</span>
-                <h2 className={classnames(styles.betaCalloutHeading)}>
-                  Easily Author 3D Content with Scene Studio&trade;
-                </h2>
-                <p className={classnames(styles.betaCalloutParagraph)}>
-                  Deliver 3D applications to colleagues and clients. Scene
-                  Studio&trade; uses 3D visuals to replace traditional product
-                  documentation that's difficult to maintain and not easily
-                  accessible.
-                </p>
-                <p>
-                  <Link
-                    to={'/examples/scene-studio'}
-                    className={classnames('non-button-link')}
-                  >
-                    Try it Out
-                  </Link>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
       </main>
       <div className={classnames('cta-block')}>
         <div className={classnames('content')}>

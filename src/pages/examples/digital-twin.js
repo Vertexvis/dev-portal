@@ -31,15 +31,15 @@ const sampleApps = [
     width: 'col--4',
   },
   {
-    title: <>Scene Studio</>,
+    title: <>3D Work Instructions</>,
     description: (
       <>
-        Scene Studio<sup>&trade;</sup> gets 3D applications to colleagues and
-        clients. It replaces traditional product documentation that is difficult
-        to maintain and not easily accessible.
+        Optimize complex process workflows by connecting interactive visual data
+        to work instructions. Real-time 3D clarifies processes to improve
+        efficiency and quality.
       </>
     ),
-    url: '/examples/scene-studio',
+    url: '/examples/work-instructions',
     width: 'col--4',
   },
 ];

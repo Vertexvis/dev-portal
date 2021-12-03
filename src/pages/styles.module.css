@@ -264,14 +264,6 @@
   display: flex;
   flex-flow: column nowrap;
 }
-.sceneStudioFeatureContent {
-  box-shadow: none;
-  transition: none;
-}
-.sceneStudioFeatureDescription {
-  font-size: 1rem;
-  line-height: 1.75;
-}
 .guideCardContent {
   padding: 1rem;
   position: relative;
@@ -298,9 +290,6 @@
 @media (hover: hover) {
   .cardContent:hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
-  }
-  .sceneStudioFeatureContent:hover {
-    box-shadow: none;
   }
 }
 .sdkLogos {
