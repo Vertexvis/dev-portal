@@ -1,5 +1,6 @@
-import React from 'react';
 import classnames from 'classnames';
+import React from 'react';
+
 import styles from './styles.module.css';
 
 class VertexAccordion extends React.Component {

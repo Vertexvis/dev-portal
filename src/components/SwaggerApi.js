@@ -1,8 +1,10 @@
-import React from 'react';
-import Layout from '@theme/Layout';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import SwaggerUI from './SwaggerUI';
 import 'swagger-ui-react/swagger-ui.css';
+
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import React from 'react';
+
+import SwaggerUI from './SwaggerUI';
 
 export default function Api({ version, url }) {
   const context = useDocusaurusContext();

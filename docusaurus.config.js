@@ -35,7 +35,8 @@ module.exports = {
   themes: [],
   themeConfig: {
     algolia: {
-      apiKey: '91f9078180760ed3f03125341bf3e686',
+      appId: 'F6A45IVQLY',
+      apiKey: 'd82e0f5853b36e7095e470c130146f24',
       indexName: 'vertexvis_developer',
     },
     colorMode: {
@@ -194,7 +195,6 @@ module.exports = {
             },
           },
         },
-        sidebarCollapsible: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },

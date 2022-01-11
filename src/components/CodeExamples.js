@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import BrowserWindow from '@site/src/components/BrowserWindow';
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import dracula from 'prism-react-renderer/themes/dracula';
+import React, { useEffect, useRef } from 'react';
 
 const LANGUAGE_TO_LABEL = {
   html: 'HTML',

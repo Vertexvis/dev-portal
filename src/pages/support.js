@@ -1,10 +1,11 @@
-import React from 'react';
-import classnames from 'classnames';
-import Accordion from '../components/VertexAccordion';
-import SearchButton from '../theme/SearchBar';
-import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import classnames from 'classnames';
+import React from 'react';
+
+import Accordion from '../components/VertexAccordion';
+import SearchButton from '../theme/SearchBar';
 import styles from './styles.module.css';
 
 const supportCards = [

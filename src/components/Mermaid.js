@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import mermaid from 'mermaid';
+import React, { useEffect } from 'react';
 
 const fontFamily = `Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
 

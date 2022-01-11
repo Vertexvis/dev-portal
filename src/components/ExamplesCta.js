@@ -1,6 +1,7 @@
-import classnames from 'classnames';
 import Link from '@docusaurus/Link';
+import classnames from 'classnames';
 import React from 'react';
+
 import styles from '../pages/styles.module.css';
 
 export function ExamplesCta() {

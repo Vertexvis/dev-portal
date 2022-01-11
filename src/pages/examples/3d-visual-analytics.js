@@ -1,9 +1,10 @@
-import React from 'react';
-import classnames from 'classnames';
-import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import styles from '../styles.module.css';
+import Layout from '@theme/Layout';
+import classnames from 'classnames';
+import React from 'react';
+
 import { ExamplesCta } from '../../components/ExamplesCta';
+import styles from '../styles.module.css';
 
 const sampleApps = [
   {
