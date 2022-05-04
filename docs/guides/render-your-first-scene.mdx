@@ -68,7 +68,7 @@ Save the following HTML to a file on your computer and open it in your browser. 
 
 ## Render the scene
 
-To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`. Copy the following into the empty `<script>` tag.
+To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `vpe5dKpDffDT8bLzhbP0S7Da2nN9-w-xgq6X`. Copy the following into the empty `<script>` tag.
 
 ```js
 import { defineCustomElements } from 'https://unpkg.com/@vertexvis/viewer@0.11.x/dist/esm/loader.js';
@@ -79,7 +79,7 @@ async function main() {
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertexvis:stream-key:Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`
+    `urn:vertexvis:stream-key:vpe5dKpDffDT8bLzhbP0S7Da2nN9-w-xgq6X`
   );
 }
 
@@ -105,7 +105,7 @@ async function main() {
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertexvis:stream-key:Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`
+    `urn:vertexvis:stream-key:vpe5dKpDffDT8bLzhbP0S7Da2nN9-w-xgq6X`
   );
 
   viewer.addEventListener('tap', async (event) => {
@@ -138,7 +138,7 @@ async function main() {
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertexvis:stream-key:Eh96kzXEppNfcxj5gbbqdJ9oUdQPB7hXzHrU`
+    `urn:vertexvis:stream-key:vpe5dKpDffDT8bLzhbP0S7Da2nN9-w-xgq6X`
   );
   let selectedItemId;
 
