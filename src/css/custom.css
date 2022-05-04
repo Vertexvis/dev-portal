@@ -442,6 +442,7 @@ p.lead-in {
 .navbar__logo {
   height: 26px;
   padding: 0 0.5rem;
+  overflow: hidden;
 }
 .navbar .navbar__brand img {
   max-width: none;
