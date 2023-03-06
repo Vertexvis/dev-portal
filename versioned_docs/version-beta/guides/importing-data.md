@@ -28,12 +28,12 @@ Support for new formats is added regularly.
 |       IGES       |                   .iges, .igs                    |                    Up to 5.3                     |
 |     Inventor     |                   .iam\*, .ipt                   |                    Up to 2023                    |
 |        JT        |                     .jt\*\*                      |                     8.0-10.6                     |
-| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2206               |
+| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2212               |
 |       OBJ        |                       .obj                       |                       All                        |
-|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 34.1                    |
+|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 35.0                    |
 |      Revit       |                       .rvt                       |                    2015-2023                     |
-|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2022          |
-|    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2022                      |
+|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2023          |
+|    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2023                      |
 |       STEP       |                   .step, .stp                    |               AP203, AP214, AP242                |
 |       STL        |                       .stl                       |                       N/A                        |
 
