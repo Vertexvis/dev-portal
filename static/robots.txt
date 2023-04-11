@@ -1,2 +1,4 @@
+User-agent: Algolia Crawler
+Disallow:
 User-agent: *
 Disallow: /
