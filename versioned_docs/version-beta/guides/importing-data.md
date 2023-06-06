@@ -26,7 +26,7 @@ Support for new formats is added regularly.
 |    Creo View     |                    .pvz, .ol                     | Creo View Express 4-7 and Creo View ECAD 6.1.0.0 |
 |       IFC        |                       .ifc                       |                       2-4                        |
 |       IGES       |                   .iges, .igs                    |                    Up to 5.3                     |
-|     Inventor     |                   .iam\*, .ipt                   |                    Up to 2023                    |
+|     Inventor     |                   .iam\*, .ipt                   |                    Up to 2024                    |
 |        JT        |                     .jt\*\*                      |                     8.0-10.6                     |
 | NX - Unigraphics |                       .prt                       |               11-12, and 1847-2212               |
 |       OBJ        |                       .obj                       |                       All                        |
