@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Getting Started with Vertex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/viewer/viewer.css" />
+  <style>
+    html,
+    body,
+    .viewer {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/viewer/viewer.esm.js"></script>
+  <script nomodule src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/viewer.js"></script>
+
+  <vertex-viewer class="viewer" client-id="08F675C4AACE8C0214362DB5EFD4FACAFA556D463ECA00877CB225157EF58BFA">
+    <vertex-viewer-toolbar placement="top-right">
+      <vertex-viewer-view-cube></vertex-viewer-view-cube>
+    </vertex-viewer-toolbar>
+
+    <vertex-viewer-toolbar placement="bottom-left">
+      <input id="opacity-input" type="range" value="0.2" min="0.1" max="1" step="0.1" />
+    </vertex-viewer-toolbar>
+  </vertex-viewer>
+
+  <script type="module">
+    import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/esm/loader.js';
+    import { ColorMaterial } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/esm/index.js';
+
+    async function main() {
+      await defineCustomElements(window);
+
+      const viewer = document.querySelector('vertex-viewer');
+      const input = document.querySelector('#opacity-input');
+      await viewer.load(
+        `urn:vertex:stream-key:hfmI8VBsIiMmO7THqdZdWO5Fhjqp_VDaee9e`
+      );
+
+      viewer.addEventListener('tap', async (event) => {
+        const scene = await viewer.scene();
+        const raycaster = scene.raycaster();
+
+        const result = await raycaster.hitItems(event.detail.position);
+        const [hit] = result.hits;
+
+        if (hit != null) {
+          const itemId = hit.itemId?.hex;
+          await scene
+            .items((op) => [
+              op
+                .where((q) => q.withItemId(itemId))
+                .setPhantom(true),
+            ])
+            .execute();
+          selectedItemId = itemId;
+        } else {
+          await scene
+            .items((op) => [
+              op.where((q) => q.all()).clearPhantom(),
+            ])
+            .execute();
+        }
+      });
+
+      input.addEventListener('change', (event) => {
+        viewer.phantom = { opacity: event.target.value };
+      });
+    }
+
+    main();
+  </script>
+</body>
+
+</html>

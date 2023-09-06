@@ -10,10 +10,10 @@ import {
   Viewer,
 } from '@site/src/components/CodeExamples';
 import { ExampleAppNote } from '@site/src/components/ExampleAppNote';
-import * as exampleResultHtml from '../../static/examples/first-scene/index.html';
+import * as changeMaterialHtml from '../../static/examples/change-material/index.html';
+import * as changePhantomHtml from '../../static/examples/change-phantom/index.html';
 
-Now that you have [rendered your first scene](./render-your-first-scene.mdx), [imported your data](./import-data.mdx), and [built your first application](./build-your-first-app.mdx). We briefly explored the ability to perform actions against a scene's
-items to modify their visual appearance when rendering the first scene, next let's explore additional ways you can modify the items in your scene.
+Now that you have [rendered your first scene](./render-your-first-scene.mdx), [imported your data](./import-data.mdx), and [built your first application](./build-your-first-app.mdx), let's  explore additional ways you can modify the items in your scene.
 
 :::note
 
@@ -23,8 +23,8 @@ items to modify their visual appearance when rendering the first scene, next let
 
 ## Performing a scene operation
 
-Once a view of a scene has been established established, we can perform scene operations to alter the visual representation of items in the scene. This allows for dynamic updates to the visual representation of a scene based on
-a user's interaction with the 3D. These alterations to the view are temporary, and are not persisted to the base scene. They can however be persisted through our scene view states, which we will cover in a later guide.
+Once a view of a scene has been established, we can perform scene operations to alter the visual representation of items in the scene. This allows for dynamic updates to the items in a scene based on
+a user's interaction with the 3D. These alterations to the view are temporary by default, and are not persisted to the base scene. We'll cover how to persist the alterations to the view in a later guide.
 
 The Vertex Viewer UI component provides a set of APIs that your application can leverage to describe operations to perform in response to various events, and the component will automatically handle the generation of a new image
 to reflect the result of the operations.
@@ -527,3 +527,27 @@ async function performOperation() {
   ]);
 }
 ```
+
+## Examples
+
+#### **Changing an item's material**
+
+The following example shows how to change an item's material based on `tap` events. Clicking on an item will change its color to match the input
+in the bottom right, and clicking in white space will clear all overrides.
+
+<CodeExamples>
+  <Example lang="html" code={changeMaterialHtml} />
+  <Viewer src="/examples/change-material/index.html" />
+</CodeExamples>
+
+#### **Changing an item's phantom state**
+
+The following example shows how to change an item's phantom state based on `tap` events. Clicking an item will mark it as phantom, and clicking in
+white space will remove the phantom state for all items.
+
+The slider in the bottom right can be used to adjust the opacity that the phantom items are displayed with.
+
+<CodeExamples>
+  <Example lang="html" code={changePhantomHtml} />
+  <Viewer src="/examples/change-phantom/index.html" />
+</CodeExamples>
