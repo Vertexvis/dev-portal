@@ -2,6 +2,8 @@
 id: customize-your-scene
 title: Customize your scene
 description: Use the Vertex platform's Viewer component to alter the view of your scene.
+toc_min_heading_level: 2
+toc_max_heading_level: 4
 ---
 
 import {
@@ -73,9 +75,15 @@ image reflecting the requested updates.
 
 The `op.where` method supports a number of queries to specify what items within a scene that you want to operate on:
 
-#### `all()`
+#### `all`
 
+- Parameters:
+  - None
 - Specifies that the operation should be performed on all items in the scene.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -87,10 +95,19 @@ async function performOperation() {
 }
 ```
 
-#### **`not()`**
 
+</details>
+
+#### `not`
+
+- Parameters:
+  - None
 - Specifies that the operation should be performed on all items that do not match any following queries. For example, a `q.not().withSelected()` will perform
   an operation on all items in the scene that are not selected.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -102,9 +119,17 @@ async function performOperation() {
 }
 ```
 
-#### `withItemId(id: string)`
 
+</details>
+
+#### `withItemId`
+- Parameters:
+  - `id: string` - the ID of the item to operate on
 - Specifies that the operation should be performed on any item matching the provided ID.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -118,9 +143,18 @@ async function performOperation() {
 }
 ```
 
-#### `withSuppliedId(id: string)`
 
+</details>
+
+#### `withSuppliedId`
+
+- Parameters:
+  - `suppliedId: string` - the supplied ID of the item to operate on
 - Specifies that the operation should be performed on any item matching the provided custom supplied ID.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -134,9 +168,18 @@ async function performOperation() {
 }
 ```
 
-#### `withItemIds(ids: string[])`
 
+</details>
+
+#### `withItemIds`
+
+- Parameters:
+  - `ids: string[]` - a set of item IDs for the items to operate on
 - Specifies that the operation should be performed on any item matching any one of the provided IDs.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -150,9 +193,18 @@ async function performOperation() {
 }
 ```
 
-#### `withSuppliedIds(ids: string[])`
 
+</details>
+
+#### `withSuppliedIds`
+
+- Parameters:
+  - `suppliedIds: string[]` - a set of supplied item IDs for the items to operate on
 - Specifies that the operation should be performed on any item matching any one of the provided custom supplied IDs.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -169,9 +221,18 @@ async function performOperation() {
 }
 ```
 
-#### `withSelected()`
 
+</details>
+
+#### `withSelected`
+
+- Parameters:
+  - None
 - Specifies that the operation should be performed on any item that has been selected.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -183,10 +244,21 @@ async function performOperation() {
 }
 ```
 
-#### `withMetadata(filter: string, keys: string[], exactMatch: boolean)`
 
+</details>
+
+#### `withMetadata`
+
+- Parameters:
+  - `filter: string` - the value to match against for the provided `keys`
+  - `keys: string[]` - the keys to include when matching
+  - `exactMatch: boolean` - whether the metadata value should exactly match the `filter`
 - Specifies that the operation should be performed on any item that has a metadata value matching the `filter` provided for any of the `keys` specified.
   Can optionally be set to perform an `exactMatch`, which will require that the `filter` matches the value exactly.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -205,27 +277,47 @@ async function performOperation() {
 }
 ```
 
-#### `withPoint(point: Point.Point)`
 
+</details>
+
+#### `withPoint`
+
+- Parameters:
+  - `point: Point.Point` - the point on the image where an item to be operated on is located
 - Specifies that the operation should be performed on any item present at the provided `point` in the image. This query operates on the item found at that
   `point` similar to using `withItemId` in combination with `raycaster.hitItems`, which can be useful if the additional metadata from the `raycaster.hitItems`
   method is not needed to eliminate a network request.
 
+<details className="code">
+<summary>Example</summary>
+
+
 ```js
+import { Point } from '@vertexvis/geometry';
+
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Select the item present at the [100, 100] coordinate of the image
   await scene.items((op) => [
-    op.where((q) => q.withPoint({ x: 100, y: 100 })).select(),
+    op.where((q) => q.withPoint(Point.create(100, 100))).select(),
   ]);
 }
 ```
 
-#### `withSceneTreeRange(range: SceneTreeRange)`
 
+</details>
+
+#### `withSceneTreeRange`
+
+- Parameters:
+  - `range: SceneTreeRange` - the range within the tree to perform the operation on
 - Specifies that the operation should be performed on a range within the `<vertex-scene-tree>` component.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -246,12 +338,24 @@ async function performOperation() {
 }
 ```
 
-#### `withVolumeIntersection(rectangle: Rectangle.Rectangle, exclusive?: boolean)`
 
+</details>
+
+#### `withVolumeIntersection`
+
+- Parameters:
+  - `rectangle: Rectangle.Rectangle` - the 2D bounds within the image
+  - `exclusive?: boolean` - whether this is exclusive (only items fully contained) or inclusive (items fully contained + intersecting)
 - Specifies that the operation should be performed on items within the specified `rectangle` boundary within the Viewer. The `exclusive` flag here determines
   whether items that intersect with the `rectangle`, but are not contained should be included in the result.
 
+<details className="code">
+<summary>Example</summary>
+
+
 ```js
+import { Rectangle } from '@vertexvis/geometry';
+
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
@@ -262,12 +366,7 @@ async function performOperation() {
     op
       .where((q) =>
         q.withVolumeIntersection(
-          {
-            x: 100,
-            y: 100,
-            width: 100,
-            height: 100,
-          },
+          Rectangle.create(100, 100, 100, 100),
           true
         )
       )
@@ -280,12 +379,7 @@ async function performOperation() {
     op
       .where((q) =>
         q.withVolumeIntersection(
-          {
-            x: 100,
-            y: 100,
-            width: 100,
-            height: 100,
-          },
+          Rectangle.create(100, 100, 100, 100),
           false
         )
       )
@@ -294,13 +388,22 @@ async function performOperation() {
 }
 ```
 
+
+</details>
+
 ## Available operations
 
 The `scene.items` method supports a number of operations to specify how the items should be altered:
 
-#### `show()`
+#### `show`
 
+- Parameters:
+  - None
 - Specifies that the items matching the query should be shown.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -314,9 +417,18 @@ async function performOperation() {
 }
 ```
 
-#### `hide()`
 
+</details>
+
+#### `hide`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should be hidden.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -330,9 +442,18 @@ async function performOperation() {
 }
 ```
 
-#### `select()`
 
+</details>
+
+#### `select`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should be selected.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -346,9 +467,18 @@ async function performOperation() {
 }
 ```
 
-#### `deselect()`
 
+</details>
+
+#### `deselect`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should be deselected.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -362,9 +492,18 @@ async function performOperation() {
 }
 ```
 
-#### `materialOverride(material: ColorMaterial | string)`
 
+</details>
+
+#### `materialOverride`
+
+- Parameters:
+  - `material: ColorMaterial | string` - a `ColorMaterial` or `string` representing the material color
 - Specifies that the items matching the query should have their default material overridden to match the specified material.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 import { ColorMaterial } from '@vertexvis/viewer';
@@ -389,9 +528,18 @@ async function performOperation() {
 }
 ```
 
-#### `clearMaterialOverrides()`
 
+</details>
+
+#### `clearMaterialOverrides`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should have any overridden material removed.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 import { ColorMaterial } from '@vertexvis/viewer';
@@ -407,9 +555,18 @@ async function performOperation() {
 }
 ```
 
-#### `transform(matrix: Matrix4x4)`
 
+</details>
+
+#### `transform`
+
+- Parameters:
+  - `matrix: Matrix4x4` - the transformation matrix to use
 - Specifies that the items matching the query should have their transformation matrix overridden to match the specified transformation matrix.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 import { Matrix4, Vector3 } from '@vertexvis/geometry';
@@ -428,10 +585,19 @@ async function performOperation() {
 }
 ```
 
-#### `clearTransforms(cascade?: boolean)`
 
+</details>
+
+#### `clearTransforms`
+
+- Parameters:
+  - `cascade?: boolean` - whether this operation should cascade to child items
 - Specifies that the items matching the query should have their overridden transformation matrix removed. The `cascade` flag determines whether
   children of the items matching the query should also have their overridden transformation matrix removed, and defaults to `true`.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -452,10 +618,19 @@ async function performOperation() {
 }
 ```
 
-#### `setPhantom(phantomState?: boolean)`
 
+</details>
+
+#### `setPhantom`
+
+- Parameters:
+  - `phantomState?: boolean` - the phantom state to apply to the items
 - Specifies that the items matching the query should have their phantom state overridden to match the specified `phantomState` flag. If the
   `phantomState` flag is not provided, it will default to `true`.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -474,9 +649,18 @@ async function performOperation() {
 }
 ```
 
-#### `clearPhantom()`
 
+</details>
+
+#### `clearPhantom`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should have their overridden phantom state removed.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -490,10 +674,19 @@ async function performOperation() {
 }
 ```
 
-#### `setEndItem(endItemState?: boolean)`
 
+</details>
+
+#### `setEndItem`
+
+- Parameters:
+  - `endItemState?: boolean` - the end item state to apply to the items
 - Specifies that the items matching the query should have their end item state overridden to match the specified `endItemState` flag. If the
   `endItemState` flag is not provided, it will default to `true`.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -512,9 +705,18 @@ async function performOperation() {
 }
 ```
 
-#### `clearEndItem()`
 
+</details>
+
+#### `clearEndItem`
+
+- Parameters:
+  - None
 - Specifies that the items matching the query should have their overridden end item state removed.
+
+<details className="code">
+<summary>Example</summary>
+
 
 ```js
 async function performOperation() {
@@ -528,12 +730,15 @@ async function performOperation() {
 }
 ```
 
+
+</details>
+
 ## Examples
 
 #### **Changing an item's material**
 
 The following example shows how to change an item's material based on `tap` events. Clicking on an item will change its color to match the input
-in the bottom right, and clicking in white space will clear all overrides.
+in the bottom left, and clicking in white space will clear all overrides.
 
 <CodeExamples>
   <Example lang="html" code={changeMaterialHtml} />
@@ -545,7 +750,7 @@ in the bottom right, and clicking in white space will clear all overrides.
 The following example shows how to change an item's phantom state based on `tap` events. Clicking an item will mark it as phantom, and clicking in
 white space will remove the phantom state for all items.
 
-The slider in the bottom right can be used to adjust the opacity that the phantom items are displayed with.
+The slider in the bottom left can be used to adjust the opacity that the phantom items are displayed with.
 
 <CodeExamples>
   <Example lang="html" code={changePhantomHtml} />

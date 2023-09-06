@@ -393,6 +393,9 @@ p {
   font-size: var(--ifm-p-font-size);
   line-height: var(--ifm-p-line-height);
 }
+details.code {
+  padding: 1rem;
+}
 .button {
   text-transform: uppercase;
 }
