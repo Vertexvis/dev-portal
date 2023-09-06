@@ -9,6 +9,11 @@ const gettingStarted = [
     title: 'Import data',
     url: 'docs/guides/import-data',
   },
+  {
+    id: 'customize-your-scene',
+    title: 'Customize your scene',
+    url: 'docs/guides/customize-your-scene',
+  },
 ];
 
 const apiAdvancedSteps = [

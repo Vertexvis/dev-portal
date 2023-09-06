@@ -388,7 +388,6 @@ h4 {
   font-size: var(--ifm-h4-font-size);
   line-height: var(--ifm-h4-line-height);
   margin-bottom: 0;
-  text-transform: uppercase;
 }
 p {
   font-size: var(--ifm-p-font-size);
