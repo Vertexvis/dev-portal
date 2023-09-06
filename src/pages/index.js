@@ -118,42 +118,6 @@ const gettingStarted = [
     cta_links: false,
     classes: 'col col--4',
   },
-  // {
-  //   title: <>Customize your application</>,
-  //   icon: (
-  //     <>
-  //       <svg
-  //         height="29"
-  //         width="29"
-  //         viewBox="0 0 25.38 25.38"
-  //         xmlns="http://www.w3.org/2000/svg"
-  //       >
-  //         <g fill="#00ade4" transform="translate(-1.81 -1.81)">
-  //           <path d="m24.47 16.31h-5.47a2.72 2.72 0 0 0 -2.69 2.69v5.44a2.72 2.72 0 0 0 2.69 2.75h5.44a2.72 2.72 0 0 0 2.72-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z" />
-  //           <path d="m10 16.31h-5.47a2.72 2.72 0 0 0 -2.72 2.69v5.44a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.72-2.72v-5.44a2.72 2.72 0 0 0 -2.72-2.69zm.91 8.16a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.53h7.26z" />
-  //           <path d="m24.47 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.69h5.44a2.72 2.72 0 0 0 2.75-2.69v-5.47a2.72 2.72 0 0 0 -2.72-2.72zm.91 8.19a.91.91 0 0 1 -.91.91h-5.47a.91.91 0 0 1 -.91-.91v-4.56h7.26z" />
-  //           <path d="m10 1.81h-5.47a2.72 2.72 0 0 0 -2.72 2.72v5.47a2.72 2.72 0 0 0 2.72 2.72h5.47a2.72 2.72 0 0 0 2.69-2.72v-5.47a2.72 2.72 0 0 0 -2.69-2.72zm.88 8.19a.91.91 0 0 1 -.91.91h-5.44a.91.91 0 0 1 -.91-.91v-4.56h7.26z" />
-  //         </g>
-  //       </svg>
-  //     </>
-  //   ),
-  //   description: (
-  //     <>
-  //       Customize your application by leveraging our flexible API Dynamically
-  //       update your 3D visuals to fit your application's needs using a flexible
-  //       API designed to perform both small and large updates easily and
-  //       concisely.
-  //     </>
-  //   ),
-  //   callout: [
-  //     {
-  //       text: <>Customize It</>,
-  //       url: '/docs/guides/alter-your-scene',
-  //     },
-  //   ],
-  //   cta_links: false,
-  //   classes: 'col col--4',
-  // },
 ];
 function GetStarted({ title, description, icon, callout, cta_links, classes }) {
   return (
