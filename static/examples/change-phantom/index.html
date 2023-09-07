@@ -34,7 +34,6 @@
 
   <script type="module">
     import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/esm/loader.js';
-    import { ColorMaterial } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.19.x/dist/esm/index.js';
 
     async function main() {
       await defineCustomElements(window);
@@ -61,7 +60,6 @@
                 .setPhantom(true),
             ])
             .execute();
-          selectedItemId = itemId;
         } else {
           await scene
             .items((op) => [

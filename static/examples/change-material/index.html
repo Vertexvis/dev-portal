@@ -58,10 +58,9 @@
             .items((op) => [
               op
                 .where((q) => q.withItemId(itemId))
-                .materialOverride(input.value),
+                .materialOverride(ColorMaterial.fromHex(input.value)),
             ])
             .execute();
-          selectedItemId = itemId;
         } else {
           await scene
             .items((op) => [
