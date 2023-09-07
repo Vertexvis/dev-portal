@@ -91,7 +91,7 @@ async function performOperation() {
   const scene = await viewer.scene();
 
   // Deselect all items in the scene
-  await scene.items((op) => [op.where((q) => q.all()).deselect()]);
+  await scene.items((op) => [op.where((q) => q.all()).deselect()]).execute();
 }
 ```
 
@@ -115,7 +115,7 @@ async function performOperation() {
   const scene = await viewer.scene();
 
   // Hide all items that are not selected
-  await scene.items((op) => [op.where((q) => q.not().withSelected()).hide()]);
+  await scene.items((op) => [op.where((q) => q.not().withSelected()).hide()]).execute();
 }
 ```
 
@@ -139,7 +139,7 @@ async function performOperation() {
   // Hide the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -164,7 +164,7 @@ async function performOperation() {
   // Hide the item with the `item-supplied-id` supplied ID
   await scene.items((op) => [
     op.where((q) => q.withSuppliedId('item-supplied-id')).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -189,7 +189,7 @@ async function performOperation() {
   // Hide the item with the `item-uuid-1` ID and the `item-uuid-2` ID
   await scene.items((op) => [
     op.where((q) => q.withItemIds(['item-uuid-1', 'item-uuid-2'])).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -217,7 +217,7 @@ async function performOperation() {
     op
       .where((q) => q.withItemIds(['item-supplied-id-1', 'item-supplied-id-2']))
       .hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -240,7 +240,7 @@ async function performOperation() {
   const scene = await viewer.scene();
 
   // Hide all items that are selected
-  await scene.items((op) => [op.where((q) => q.withSelected()).hide()]);
+  await scene.items((op) => [op.where((q) => q.withSelected()).hide()]).execute();
 }
 ```
 
@@ -268,12 +268,12 @@ async function performOperation() {
   // Hide all items where the `PART_NAME_KEY` includes a value of `PartName`
   await scene.items((op) => [
     op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'])).hide(),
-  ]);
+  ]).execute();
 
   // Hide all items where the `PART_NAME_KEY` has exactly a value of `PartName`
   await scene.items((op) => [
     op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'], true)).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -302,7 +302,7 @@ async function performOperation() {
   // Select the item present at the [100, 100] coordinate of the image
   await scene.items((op) => [
     op.where((q) => q.withPoint(Point.create(100, 100))).select(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -334,7 +334,7 @@ async function performOperation() {
         })
       )
       .hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -379,7 +379,7 @@ async function performOperation() {
         )
       )
       .hide(),
-  ]);
+  ]).execute();
 
   // Select all items within the specified `region` of the image
   // including any elements that intersect with the region
@@ -392,7 +392,7 @@ async function performOperation() {
         )
       )
       .hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -421,7 +421,7 @@ async function performOperation() {
   // Show the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).show(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -446,7 +446,7 @@ async function performOperation() {
   // Hide the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -471,7 +471,7 @@ async function performOperation() {
   // Select the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).select(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -496,7 +496,7 @@ async function performOperation() {
   // Deselect the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -526,13 +526,13 @@ async function performOperation() {
     op
       .where((q) => q.withItemId('item-uuid'))
       .materialOverride(ColorMaterial.create(255, 0, 0, 0.5)),
-  ]);
+  ]).execute();
 
   // Override the material for the item with the `item-uuid` ID to
   // be red with an opacity of 1.
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).materialOverride('#ff0000'),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -559,7 +559,7 @@ async function performOperation() {
   // Clear the overridden material on the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).clearMaterialOverrides(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -589,7 +589,7 @@ async function performOperation() {
     op
       .where((q) => q.withItemId('item-uuid'))
       .transform(Matrix4.makeTranslation(Vector3.create(100, 0, 0))),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -616,13 +616,13 @@ async function performOperation() {
   // and do not cascade to preserve transformations on children
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).clearTransforms(false),
-  ]);
+  ]).execute();
 
   // Clear the overridden the transformation matrix for the item with the `item-uuid` ID
   // and cascade to clear overridden transformations on children
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).clearTransforms(true),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -648,12 +648,12 @@ async function performOperation() {
   // Mark the item with the `item-uuid` ID as phantom
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).setPhantom(true),
-  ]);
+  ]).execute();
 
   // Unmark the item with the `item-uuid` ID as phantom
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).setPhantom(false),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -678,7 +678,7 @@ async function performOperation() {
   // Clear the overridden phantom state of the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).clearPhantom(),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -706,12 +706,12 @@ async function performOperation() {
   // Mark the item with the `item-uuid` ID as an end item
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).setEndItem(true),
-  ]);
+  ]).execute();
 
   // Unmark the item with the `item-uuid` ID as an end item
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).setEndItem(false),
-  ]);
+  ]).execute();
 }
 ```
 
@@ -736,7 +736,7 @@ async function performOperation() {
   // Clear the overridden end item state of the item with the `item-uuid` ID
   await scene.items((op) => [
     op.where((q) => q.withItemId('item-uuid')).clearEndItem(),
-  ]);
+  ]).execute();
 }
 ```
 
