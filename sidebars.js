@@ -17,6 +17,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/build-your-first-app',
         },
+        {
+          type: 'doc',
+          id: 'guides/customize-your-scene',
+        },
       ],
     },
     {

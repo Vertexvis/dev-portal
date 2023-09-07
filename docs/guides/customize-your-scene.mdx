@@ -1,0 +1,768 @@
+---
+id: customize-your-scene
+title: Customize your scene
+description: Use the Vertex platform's Viewer component to alter the view of your scene.
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
+import {
+  CodeExamples,
+  Example,
+  Viewer,
+} from '@site/src/components/CodeExamples';
+import { ExampleAppNote } from '@site/src/components/ExampleAppNote';
+import * as changeMaterialHtml from '../../static/examples/change-material/index.html';
+import * as changePhantomHtml from '../../static/examples/change-phantom/index.html';
+
+Now that you have [rendered your first scene](./render-your-first-scene.mdx), [imported your data](./import-data.mdx), and [built your first application](./build-your-first-app.mdx), let's  explore additional ways you can modify the items in your scene.
+
+:::note
+
+<ExampleAppNote />
+
+:::
+
+## Performing a scene operation
+
+Once a view of a scene has been established, we can perform scene operations to alter the visual representation of items in the scene. This allows for dynamic updates to the items in a scene based on
+a user's interaction with the 3D. These alterations to the view are temporary by default, and are not persisted to the base scene. We'll cover how to persist the alterations to the view in a later guide.
+
+The Vertex Viewer UI component provides a set of APIs that your application can leverage to describe operations to perform in response to various events, and the component will automatically handle the generation of a new image
+to reflect the result of the operations.
+
+When you [rendered your first scene](./render-your-first-scene.mdx), we explored the ability to perform scene operations through adding click-based selection. Let's take a closer look at the operations performed in that example:
+
+```js
+if (hit != null) {
+  const itemId = hit.itemId?.hex;
+  await scene
+    .items((op) => [
+      ...(selectedItemId
+        ? [op.where((q) => q.withItemId(selectedItemId)).deselect()]
+        : []),
+      op.where((q) => q.withItemId(itemId)).select(),
+    ])
+    .execute();
+  selectedItemId = itemId;
+}
+```
+
+Here's what this code does:
+
+- If we have a hit result from an earlier `raycaster.hitItems` request, we initiate an operation on the items within the scene using the `scene.items` method.
+  This method expects a function that takes an operation builder as a parameter, and returns a set of operations to perform. In this scenario, we select the item
+  matching the `itemId` of our hit result, while deselecting the previously selected item (if there is one).
+
+Breaking it down further, we can inspect an individual operation being performed:
+
+```js
+op.where((q) => q.withItemId(itemId)).select(),
+```
+
+Here's what this code does:
+
+- We leverage the `where` method provided on the operation builder that was passed to our function, which similarly expects a function, this time taking a query
+  builder as a parameter. This query builder provides us with a method of describing what we want to change. In this case, we use a simple query, specifying
+  the exact ID of an item to select.
+- After specifying what we want to change, we specify how we want to change it. In this case, we use the `select` operation to indicate
+  that we want this item to be marked as selected.
+
+Once we have specified the operation we want to perform, we can call `execute`, which will tell the Viewer component to execute the operation and return a new
+image reflecting the requested updates.
+
+## Available queries
+
+The `op.where` method supports a number of queries to specify what items within a scene that you want to operate on:
+
+#### `all`
+
+- Parameters:
+  - None
+- Specifies that the operation should be performed on all items in the scene.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Deselect all items in the scene
+  await scene.items((op) => [op.where((q) => q.all()).deselect()]).execute();
+}
+```
+
+
+</details>
+
+#### `not`
+
+- Parameters:
+  - None
+- Specifies that the operation should be performed on all items that do not match any following queries. For example, a `q.not().withSelected()` will perform
+  an operation on all items in the scene that are not selected.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide all items that are not selected
+  await scene.items((op) => [op.where((q) => q.not().withSelected()).hide()]).execute();
+}
+```
+
+
+</details>
+
+#### `withItemId`
+- Parameters:
+  - `id: string` - the ID of the item to operate on
+- Specifies that the operation should be performed on any item matching the provided ID.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withSuppliedId`
+
+- Parameters:
+  - `suppliedId: string` - the supplied ID of the item to operate on
+- Specifies that the operation should be performed on any item matching the provided custom supplied ID.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide the item with the `item-supplied-id` supplied ID
+  await scene.items((op) => [
+    op.where((q) => q.withSuppliedId('item-supplied-id')).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withItemIds`
+
+- Parameters:
+  - `ids: string[]` - a set of item IDs for the items to operate on
+- Specifies that the operation should be performed on any item matching any one of the provided IDs.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide the item with the `item-uuid-1` ID and the `item-uuid-2` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemIds(['item-uuid-1', 'item-uuid-2'])).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withSuppliedIds`
+
+- Parameters:
+  - `suppliedIds: string[]` - a set of supplied item IDs for the items to operate on
+- Specifies that the operation should be performed on any item matching any one of the provided custom supplied IDs.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide the item with the `item-supplied-id-1` supplied ID
+  // and the `item-supplied-id-2` supplied ID
+  await scene.items((op) => [
+    op
+      .where((q) => q.withItemIds(['item-supplied-id-1', 'item-supplied-id-2']))
+      .hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withSelected`
+
+- Parameters:
+  - None
+- Specifies that the operation should be performed on any item that has been selected.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide all items that are selected
+  await scene.items((op) => [op.where((q) => q.withSelected()).hide()]).execute();
+}
+```
+
+
+</details>
+
+#### `withMetadata`
+
+- Parameters:
+  - `filter: string` - the value to match against for the provided `keys`
+  - `keys: string[]` - the keys to include when matching
+  - `exactMatch: boolean` - whether the metadata value should exactly match the `filter`
+- Specifies that the operation should be performed on any item that has a metadata value matching the `filter` provided for any of the `keys` specified.
+  Can optionally be set to perform an `exactMatch`, which will require that the `filter` matches the value exactly.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide all items where the `PART_NAME_KEY` includes a value of `PartName`
+  await scene.items((op) => [
+    op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'])).hide(),
+  ]).execute();
+
+  // Hide all items where the `PART_NAME_KEY` has exactly a value of `PartName`
+  await scene.items((op) => [
+    op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'], true)).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withPoint`
+
+- Parameters:
+  - `point: Point.Point` - the point on the image where an item to be operated on is located
+- Specifies that the operation should be performed on any item present at the provided `point` in the image. This query operates on the item found at that
+  `point` similar to using `withItemId` in combination with `raycaster.hitItems`, which can be useful if the additional metadata from the `raycaster.hitItems`
+  method is not needed to eliminate a network request.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+import { Point } from '@vertexvis/geometry';
+
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Select the item present at the [100, 100] coordinate of the image
+  await scene.items((op) => [
+    op.where((q) => q.withPoint(Point.create(100, 100))).select(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withSceneTreeRange`
+
+- Parameters:
+  - `range: SceneTreeRange` - the range within the tree to perform the operation on
+- Specifies that the operation should be performed on a range within the `<vertex-scene-tree>` component.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide all items from the 2nd row to the 5th row of the scene-tree
+  await scene.items((op) => [
+    op
+      .where((q) =>
+        q.withSceneTreeRange({
+          start: 2,
+          end: 5,
+        })
+      )
+      .hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `withVolumeIntersection`
+
+- Parameters:
+  - `rectangle: Rectangle.Rectangle` - the 2D bounds within the image
+  - `exclusive?: boolean` - whether this is exclusive (only items fully contained) or inclusive (items fully contained + intersecting)
+- Specifies that the operation should be performed on items within the specified `rectangle` boundary within the Viewer. The `exclusive` flag here determines
+  whether items that intersect with the `rectangle`, but are not contained should be included in the result.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+import { Rectangle } from '@vertexvis/geometry';
+
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  const viewerBounds = viewer.getBoundingClientRect();
+  const x = viewerBounds.x + 100;
+  const y = viewerBounds.y + 100;
+
+  // Create a 100x100 region at a point offset 100 pixels from the
+  // top and left of the `<vertex-viewer>` element.
+  const region = Rectangle.create(x, y, 100, 100);
+
+  // Select all items within the specified `region` of the image
+  // excluding any elements that are not fully contained by the region
+  await scene.items((op) => [
+    op
+      .where((q) =>
+        q.withVolumeIntersection(
+          region,
+          true
+        )
+      )
+      .hide(),
+  ]).execute();
+
+  // Select all items within the specified `region` of the image
+  // including any elements that intersect with the region
+  await scene.items((op) => [
+    op
+      .where((q) =>
+        q.withVolumeIntersection(
+          region,
+          false
+        )
+      )
+      .hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+## Available operations
+
+The `scene.items` method supports a number of operations to specify how the items should be altered:
+
+#### `show`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should be shown.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Show the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).show(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `hide`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should be hidden.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Hide the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `select`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should be selected.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Select the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).select(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `deselect`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should be deselected.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Deselect the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).hide(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `materialOverride`
+
+- Parameters:
+  - `material: ColorMaterial | string` - a `ColorMaterial` or `string` representing the material color
+- Specifies that the items matching the query should have their default material overridden to match the specified material.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+import { ColorMaterial } from '@vertexvis/viewer';
+
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Override the material for the item with the `item-uuid` ID to
+  // be red with an opacity of 0.5.
+  await scene.items((op) => [
+    op
+      .where((q) => q.withItemId('item-uuid'))
+      .materialOverride(ColorMaterial.create(255, 0, 0, 0.5)),
+  ]).execute();
+
+  // Override the material for the item with the `item-uuid` ID to
+  // be red with an opacity of 1.
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).materialOverride('#ff0000'),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `clearMaterialOverrides`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should have any overridden material removed.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+import { ColorMaterial } from '@vertexvis/viewer';
+
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Clear the overridden material on the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).clearMaterialOverrides(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `transform`
+
+- Parameters:
+  - `matrix: Matrix4x4` - the transformation matrix to use
+- Specifies that the items matching the query should have their transformation matrix overridden to match the specified transformation matrix.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+import { Matrix4, Vector3 } from '@vertexvis/geometry';
+
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Override the transformation matrix for the item with the `item-uuid` ID to
+  // move the element along the x-axis
+  await scene.items((op) => [
+    op
+      .where((q) => q.withItemId('item-uuid'))
+      .transform(Matrix4.makeTranslation(Vector3.create(100, 0, 0))),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `clearTransforms`
+
+- Parameters:
+  - `cascade?: boolean` - whether this operation should cascade to child items
+- Specifies that the items matching the query should have their overridden transformation matrix removed. The `cascade` flag determines whether
+  children of the items matching the query should also have their overridden transformation matrix removed, and defaults to `true`.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Clear the overridden the transformation matrix for the item with the `item-uuid` ID
+  // and do not cascade to preserve transformations on children
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).clearTransforms(false),
+  ]).execute();
+
+  // Clear the overridden the transformation matrix for the item with the `item-uuid` ID
+  // and cascade to clear overridden transformations on children
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).clearTransforms(true),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `setPhantom`
+
+- Parameters:
+  - `phantomState?: boolean` - the phantom state to apply to the items
+- Specifies that the items matching the query should have their phantom state overridden to match the specified `phantomState` flag. If the
+  `phantomState` flag is not provided, it will default to `true`.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Mark the item with the `item-uuid` ID as phantom
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).setPhantom(true),
+  ]).execute();
+
+  // Unmark the item with the `item-uuid` ID as phantom
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).setPhantom(false),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `clearPhantom`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should have their overridden phantom state removed.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Clear the overridden phantom state of the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).clearPhantom(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `setEndItem`
+
+- Parameters:
+  - `endItemState?: boolean` - the end item state to apply to the items
+- Specifies that the items matching the query should have their end item state overridden to match the specified `endItemState` flag. If the
+  `endItemState` flag is not provided, it will default to `true`.
+  - **Note:** end item states do not propagate to children similar to other states. I.e. calling `setEndItem(false)` on an item will cause it
+    to be unmarked as an end item, but any children where `setEndItem(true)` was called previously will remain as end items.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Mark the item with the `item-uuid` ID as an end item
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).setEndItem(true),
+  ]).execute();
+
+  // Unmark the item with the `item-uuid` ID as an end item
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).setEndItem(false),
+  ]).execute();
+}
+```
+
+
+</details>
+
+#### `clearEndItem`
+
+- Parameters:
+  - None
+- Specifies that the items matching the query should have their overridden end item state removed.
+
+<details className="code">
+<summary>Example</summary>
+
+
+```js
+async function performOperation() {
+  const viewer = document.querySelector('vertex-viewer');
+  const scene = await viewer.scene();
+
+  // Clear the overridden end item state of the item with the `item-uuid` ID
+  await scene.items((op) => [
+    op.where((q) => q.withItemId('item-uuid')).clearEndItem(),
+  ]).execute();
+}
+```
+
+
+</details>
+
+## Examples
+
+#### **Changing an item's material**
+
+The following example shows how to change an item's material based on `tap` events. Clicking on an item will change its color to match the input
+in the bottom left, and clicking in white space will clear all overrides.
+
+<CodeExamples>
+  <Example lang="html" code={changeMaterialHtml} />
+  <Viewer src="/examples/change-material/index.html" />
+</CodeExamples>
+
+#### **Changing an item's phantom state**
+
+The following example shows how to change an item's phantom state based on `tap` events. Clicking an item will mark it as phantom, and clicking in
+white space will remove the phantom state for all items.
+
+The slider in the bottom left can be used to adjust the opacity that the phantom items are displayed with.
+
+<CodeExamples>
+  <Example lang="html" code={changePhantomHtml} />
+  <Viewer src="/examples/change-phantom/index.html" />
+</CodeExamples>

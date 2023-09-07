@@ -398,6 +398,10 @@ const guideCards = [
         text: <>Build your first application</>,
         url: '/docs/guides/build-your-first-app',
       },
+      {
+        text: <>Customize your scene</>,
+        url: '/docs/guides/customize-your-scene',
+      },
     ],
   },
   {
