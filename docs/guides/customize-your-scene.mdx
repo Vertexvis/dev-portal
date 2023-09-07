@@ -360,26 +360,34 @@ async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
-  // Select all items within the specified 100x100 region of the image
+  const viewerBounds = viewer.getBoundingClientRect();
+  const x = viewerBounds.x + 100;
+  const y = viewerBounds.y + 100;
+
+  // Create a 100x100 region at a point offset 100 pixels from the
+  // top and left of the `<vertex-viewer>` element.
+  const region = Rectangle.create(x, y, 100, 100);
+
+  // Select all items within the specified `region` of the image
   // excluding any elements that are not fully contained by the region
   await scene.items((op) => [
     op
       .where((q) =>
         q.withVolumeIntersection(
-          Rectangle.create(100, 100, 100, 100),
+          region,
           true
         )
       )
       .hide(),
   ]);
 
-  // Select all items within the specified 100x100 region of the image
+  // Select all items within the specified `region` of the image
   // including any elements that intersect with the region
   await scene.items((op) => [
     op
       .where((q) =>
         q.withVolumeIntersection(
-          Rectangle.create(100, 100, 100, 100),
+          region,
           false
         )
       )
@@ -683,6 +691,8 @@ async function performOperation() {
   - `endItemState?: boolean` - the end item state to apply to the items
 - Specifies that the items matching the query should have their end item state overridden to match the specified `endItemState` flag. If the
   `endItemState` flag is not provided, it will default to `true`.
+  - **Note:** end item states do not propagate to children similar to other states. I.e. calling `setEndItem(false)` on an item will cause it
+    to be unmarked as an end item, but any children where `setEndItem(true)` was called previously will remain as end items.
 
 <details className="code">
 <summary>Example</summary>
