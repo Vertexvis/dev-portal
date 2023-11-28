@@ -167,7 +167,10 @@ Once verified, the following is an example of the webhook event body.
   "data": {
     "attributes": {
       "created": "2021-01-01T12:00:00.000Z",
-      "topic": "scene.updated"
+      "topic": "scene.updated",
+      "metadata": {
+        "key": "value"
+      }
     },
     "id": "[WEBHOOK_EVENT_ID]",
     "relationships": {
@@ -199,11 +202,13 @@ There isn't much information in the event for security purposes. To retrieve add
 
 ## Topics
 
-| Name                           | Description                                                                                                                               |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `queued-scene-item.completed`  | Queued scene item completed. Occurs after asynchronous `POST /scenes/:id/scene-items` completes.                                          |
-| `queued-translation.completed` | Queued translation completed. Occurs after asynchronous `POST /parts` or `POST /geometry-sets` completes.                                 |
-| `scene.updated`                | Scene updated. Occurs upon `PATCH /scenes/:id` and after asynchronous scene `commit` of a scene completes and `state` updates to `ready`. |
+| Name                           | Description                                                                                                                                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `queued-scene-item.completed`  | Queued scene item completed. Occurs after asynchronous `POST /scenes/:id/scene-items` completes.                                                                                                                    |
+| `queued-translation.completed` | Queued translation completed. Occurs after asynchronous `POST /parts` or `POST /geometry-sets` completes.                                                                                                           |
+| `scene.created`                | Scene created. Occurs upon `POST /scenes`. Includes any `metadata` on the created Scene as part of the `attributes`.                                                                                                |
+| `scene.deleted`                | Scene deleted. Occurs upon `DELETE /scenes/:id`.                                                                                                                                                                    |
+| `scene.updated`                | Scene updated. Occurs upon `PATCH /scenes/:id` and after asynchronous scene `commit` of a scene completes and `state` updates to `ready`. Includes any `metadata` on the updated Scene as part of the `attributes`. |
 
 ## Retry schedule
 
