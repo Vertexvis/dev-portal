@@ -27,12 +27,12 @@ Support for new formats is added regularly.
 |       IFC        |                       .ifc                       |                       2-4                        |
 |       IGES       |                   .iges, .igs                    |                    Up to 5.3                     |
 |     Inventor     |                   .iam\*, .ipt                   |                    Up to 2024                    |
-|        JT        |                     .jt\*\*                      |                     8.0-10.6                     |
-| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2212               |
+|        JT        |                     .jt\*\*                      |                     8.0-10.9                     |
+| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2306               |
 |       OBJ        |                       .obj                       |                       All                        |
-|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 35.1                    |
-|      Revit       |                       .rvt                       |                    2015-2023                     |
-|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2023          |
+|    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 36.0                    |
+|      Revit       |                       .rvt                       |                    2015-2024                     |
+|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2024          |
 |    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2023                      |
 |       STEP       |                   .step, .stp                    |               AP203, AP214, AP242                |
 |       STL        |                       .stl                       |                       N/A                        |
