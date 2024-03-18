@@ -2,6 +2,7 @@
 id: webhook-events
 title: Webhook Events
 description: Receive Vertex platform event notifications with webhooks to automatically trigger actions in your application.
+toc_max_heading_level: 4
 ---
 
 import { Mermaid } from '@site/src/components/Mermaid';
@@ -168,9 +169,7 @@ Once verified, the following is an example of the webhook event body.
     "attributes": {
       "created": "2021-01-01T12:00:00.000Z",
       "topic": "scene.updated",
-      "metadata": {
-        "key": "value"
-      }
+      "changed": ["property1", "property2"]
     },
     "id": "[WEBHOOK_EVENT_ID]",
     "relationships": {
@@ -194,21 +193,98 @@ Once verified, the following is an example of the webhook event body.
       }
     },
     "type": "webhook-event"
-  }
+  },
+  "included": [
+    {
+      "id": "[SCENE_ID]",
+      "type": "scene",
+      "attributes": {
+        "metadata": {
+          "key": "value"
+        }
+      },
+      "links": {
+        "self": { 
+          "href": "scenes/[SCENE_ID]"
+        },
+      }
+    }
+  ],
 }
 ```
 
-There isn't much information in the event for security purposes. To retrieve additional information on the resource, make a `GET` call to the Vertex API using the URL provided in the `data.resource.links.related` field.
+The information in the event is kept to a minimum for security purposes. To retrieve additional information on the resource,
+make a `GET` call to the Vertex API using the URL provided in the `data.resource.links.related` field. 
+
+In the case of CRUD events,
+more information about the resource attributes or associated resources will be present in the `included` resource array. For Update
+events specifically, the `data.attributes.changed` field will contain a list of properties on the resource that have changed.
 
 ## Topics
 
-| Name                           | Description                                                                                                                                                                                                         |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `queued-scene-item.completed`  | Queued scene item completed. Occurs after asynchronous `POST /scenes/:id/scene-items` completes.                                                                                                                    |
-| `queued-translation.completed` | Queued translation completed. Occurs after asynchronous `POST /parts` or `POST /geometry-sets` completes.                                                                                                           |
-| `scene.created`                | Scene created. Occurs upon `POST /scenes`. Includes any `metadata` on the created Scene as part of the `attributes`.                                                                                                |
-| `scene.deleted`                | Scene deleted. Occurs upon `DELETE /scenes/:id`.                                                                                                                                                                    |
-| `scene.updated`                | Scene updated. Occurs upon `PATCH /scenes/:id` and after asynchronous scene `commit` of a scene completes and `state` updates to `ready`. Includes any `metadata` on the updated Scene as part of the `attributes`. |
+#### `queued-scene-item.completed`
+
+Occurs when a queued Scene Item has completed after using the asynchronous `POST /scenes/:id/scene-items` endpoint.
+
+<br/>
+
+#### `queued-translation.completed`
+
+Occurs when a Translation has completed after using the asynchronous `POST /parts` or `POST /geometry-sets` endpoints.
+
+<br/>
+
+#### `scene.created`
+
+Occurs when a Scene is created using the `POST /scenes` endpoint.
+
+<br/>
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Scene.
+    - This resource will include the `metadata` on the created Scene.
+
+<br/>
+
+#### `scene.deleted`
+
+Occurs when a Scene is deleted using the `DELETE /scenes/:id` endpoint.
+
+<br/>
+
+#### `scene.updated`
+
+Occurs when a Scene is updated using the `PATCH /scenes/:id` and after an asynchronous Scene `commit` completes and the `state` has been updated to `ready`.
+
+- `data.attributes.changed` for this event can contain the following properties:
+  - `scene.name` if the Scene's name was changed.
+  - `scene.state` if the Scene's state (`draft`, `commit`, `recovering`, or `ready`) was changed.
+  - `scene.suppliedId` if the Scene's suppliedId was changed.
+  - `scene.camera` if the Scene's camera was changed.
+  - `scene.treeEnabled` if the Scene's tree availablility was changed.
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Scene.
+    - This resource will include the `metadata` on the updated Scene.
+
+<br/>
+
+#### `part-revision.updated`
+
+Occurs when a Part Revision is updated using the `PATCH /part-revisions/:id` endpoint.
+
+
+- `data.attributes.changed` for this event can contain the following properties:
+  - `revision.defaultRenditionId` if the Part Revision's default Part Rendition was changed.
+  - `revision.metadata` if the Part Revision's metadata was changed.
+
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Part Revision.
+    - This resource will include the `created` timestamp, `suppliedId`, `partName`, and `name` for this Part Revision.
+  - `geometrySet` will be included if the Part Revision references a Geometry Set.
+  - `part` will be included if the Part Revision references a Part.
+  - `defaultPartRendition` will be included if the Part Revision has a default Part Rendition.
 
 ## Retry schedule
 
