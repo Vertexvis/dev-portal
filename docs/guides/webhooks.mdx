@@ -216,9 +216,9 @@ Once verified, the following is an example of the webhook event body.
 The information in the event is kept to a minimum for security purposes. To retrieve additional information on the resource,
 make a `GET` call to the Vertex API using the URL provided in the `data.resource.links.related` field. 
 
-In the case of CRUD events,
-more information about the resource attributes or associated resources will be present in the `included` resource array. For Update
-events specifically, the `data.attributes.changed` field will contain a list of properties on the resource that have changed.
+In the case of CRUD events, more information about the resource attributes or associated resources will be present in the
+`included` resource array. For Update events specifically, the `data.attributes.changed` field will contain a list of
+properties on the resource that have changed.
 
 ## Topics
 
