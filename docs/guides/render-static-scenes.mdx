@@ -97,17 +97,6 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-:::tip
-Scenes that are created or updated with the metadata key/value pair `"CONNECT_WORKSPACE_URN": "{YOUR_URN}"` will be added to the corresponding Connect workspace. This information can be added to the attributes section of your requests:
-```
-    "attributes": {
-      "metadata": {
-        "CONNECT_WORKSPACE_URN": "{YOUR_URN}"
-      }
-    }
-```
-:::
-
 Now that the scene resource exists, `POST` to the [createSceneItem](https://docs.vertexvis.com/#d597f539-3785-4c83-a645-fdf3a9a90521) API. This API is asynchronous, returning the status of a queued scene item. See the [Transformation matrices](./transformation-matrices.mdx) reference for an explanation of the `transform` property.
 
 <Tabs
