@@ -254,3 +254,15 @@ curl --location --request GET \
 
 </TabItem>
 </Tabs>
+
+:::tip
+Data contained in scenes that are created or updated with the metadata key/value pair `"CONNECT_WORKSPACE_URN": "{YOUR_URN}"` will be added to the corresponding Connect workspace. This information can be added to the attributes section of your requests to create or update a scene:
+```
+    "attributes": {
+      "metadata": {
+        "CONNECT_WORKSPACE_URN": "{YOUR_URN}"
+      }
+    }
+```
+To learn more about scenes in Vertex, see [Render static scenes](https://developer.vertexvis.com/docs/guides/render-static-scenes).
+:::
