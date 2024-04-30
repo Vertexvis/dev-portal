@@ -42,11 +42,11 @@ function ContactExpert() {
                         information may be used by us to communicate with you
                         about your registration, related products and services,
                         and offers from select partners. Refer to our{' '}
-                        <Link to={'https://vertexvis.com/privacy-policy'}>
+                        <Link to={'https://vertex3d.com/privacy-policy'}>
                           Privacy Policy
                         </Link>{' '}
                         and{' '}
-                        <Link to={'https://vertexvis.com/terms-of-use'}>
+                        <Link to={'https://vertex3d.com/terms-of-use'}>
                           Terms of Use
                         </Link>{' '}
                         for additional information.

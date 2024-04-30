@@ -106,7 +106,7 @@ module.exports = {
       logo: {
         alt: 'Vertex',
         src: 'img/vertex-logo-rev.svg',
-        href: 'https://vertexvis.com/',
+        href: 'https://vertex3d.com/',
       },
       links: [
         {
@@ -139,20 +139,16 @@ module.exports = {
           items: [
             {
               label: 'Vertex 3D Platform',
-              to: 'https://vertexvis.com/products/vertex-digital-twin-platform',
+              to: 'https://vertex3d.com/products/vertex-3d-platform',
             },
             {
               label: 'Request a Demo',
-              to: 'https://vertexvis.com/demo',
+              to: 'https://vertex3d.com/demo',
             },
             {
               label: 'Webinars & Events',
-              to: 'https://vertexvis.com/resources/webinars-events',
-            },
-            {
-              label: 'Pricing',
-              to: 'https://vertexvis.com/pricing/3d-platform',
-            },
+              to: 'https://vertex3d.com/resources/webinars-events',
+            }
           ],
         },
         {
@@ -160,19 +156,19 @@ module.exports = {
           items: [
             {
               label: 'About',
-              href: 'https://vertexvis.com/company/about-us',
+              href: 'https://vertex3d.com/company/about-us',
             },
             {
               label: 'Contact Sales',
-              href: 'https://vertexvis.com/company/contact-us',
+              href: 'https://vertex3d.com/company/contact-us',
             },
             {
               label: 'Blog',
-              href: 'https://vertexvis.com/resources/blog',
+              href: 'https://vertex3d.com/resources/blog',
             },
             {
               label: 'Careers',
-              href: 'https://vertexvis.com/company/careers',
+              href: 'https://vertex3d.com/company/careers',
             },
           ],
         },

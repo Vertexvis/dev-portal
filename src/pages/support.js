@@ -244,7 +244,7 @@ const frequentlyAskedQuestions = [
       <>
         <p>
           The best way to do this is to email{' '}
-          <Link to={'mailto:support@vertexvis.com'}>support@vertexvis.com</Link>
+          <Link to={'mailto:support@vertex3d.com'}>support@vertex3d.com</Link>
         </p>
       </>
     ),
@@ -269,7 +269,7 @@ const frequentlyAskedQuestions = [
       <>
         <p>
           Please refer to our{' '}
-          <Link to={'https://vertexvis.com/security'}>security page</Link>. From
+          <Link to={'https://vertex3d.com/security'}>security page</Link>. From
           here you will be able to download our security overview, request
           third-party audits and certifications, or watch a short video about
           our security model. If for some reason you would like more information
