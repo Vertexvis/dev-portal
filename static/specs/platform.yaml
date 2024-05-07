@@ -4,7 +4,7 @@ tags:
 info:
   title: Vertex Platform API
   description: Vertex's Platform API specification
-  termsOfService: https://vertexvis.com/terms-of-use
+  termsOfService: https://vertex3d.com/terms-of-use
   version: beta
   x-logo:
     url: https://vertexvis.com/themes/custom/sparrow/img/vertex-logo.png
@@ -12,7 +12,7 @@ info:
     altText: Vertex Software
   contact:
     name: Vertex Platform API Support
-    email: support@vertexvis.com
+    email: support@vertex3d.com
 servers:
   - url: https://rest-api.prod.vertexvis.io/rest/api
 paths:
