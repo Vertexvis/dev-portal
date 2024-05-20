@@ -4,7 +4,7 @@ module.exports = {
   title: '3D Visualization Engine',
   tagline:
     "Easily integrate 3D product data into your business applications using Vertex's distributed cloud rendering system.",
-  url: 'https://developer.vertexvis.com',
+  url: 'https://developer.vertex3d.com',
   baseUrl: '/',
   favicon: 'img/favicon-512x512.png',
   organizationName: 'Vertexvis',
@@ -73,7 +73,7 @@ module.exports = {
           position: 'right',
         },
         {
-          href: 'https://docs.vertexvis.com/',
+          href: 'https://docs.vertex3d.com/',
           label: 'API Reference',
           position: 'right',
         },
@@ -126,7 +126,7 @@ module.exports = {
             },
             {
               label: 'API Reference',
-              to: 'https://docs.vertexvis.com/',
+              to: 'https://docs.vertex3d.com/',
             },
             {
               label: 'Support',

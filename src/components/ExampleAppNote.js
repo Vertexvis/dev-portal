@@ -15,7 +15,7 @@ export function ExampleAppNote() {
         </li>
         <li>
           You are familiar with the raycaster tool and hit results for{' '}
-          <Link href="https://developer.vertexvis.com/docs/guides/render-your-first-scene#interact-with-the-scene">
+          <Link href="https://developer.vertex3d.com/docs/guides/render-your-first-scene#interact-with-the-scene">
             interacting with the scene
           </Link>
           .
