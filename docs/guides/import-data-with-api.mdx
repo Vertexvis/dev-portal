@@ -38,7 +38,7 @@ To import your 3D data into the Parts Library, do the following:
 
 ## Uploading files
 
-See our [supported file formats](./supported-file-formats.mdx). If you do not have 3D data handy, download a model from our [3D database](./model-database.mdx) to follow along. To create files in one of these formats, `POST` to the [createFile](https://docs.vertex3d.com/#a8f05429-036c-45b8-89ef-6bd3aa14a7fe) API.
+See our [supported file formats](./supported-file-formats.mdx). If you do not have 3D data handy, download a model from our [3D database](./model-database.mdx) to follow along. To create files in one of these formats, `POST` to the [createFile](https://docs.vertexvis.com/#a8f05429-036c-45b8-89ef-6bd3aa14a7fe) API.
 
 :::note
 
@@ -92,7 +92,7 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-Now that the file resource exists, `POST` to the [uploadFile](https://docs.vertex3d.com/#0b0a01c2-831d-4b01-87ea-765d4f2e6c1a) API.
+Now that the file resource exists, `POST` to the [uploadFile](https://docs.vertexvis.com/#0b0a01c2-831d-4b01-87ea-765d4f2e6c1a) API.
 
 <Tabs
   defaultValue="req"
@@ -122,7 +122,7 @@ curl --location --request POST \
 
 ## Creating parts
 
-To make querying for parts easier, Vertex supports supplied IDs. You supply these IDs, likely using existing part and revision IDs from your PLM system. To initiate translations, `POST` to the [createPart](https://docs.vertex3d.com/#05c13b3e-b407-4b19-b110-e6bdc016a714) API. This API is asynchronous, returning the status of a queued translation.
+To make querying for parts easier, Vertex supports supplied IDs. You supply these IDs, likely using existing part and revision IDs from your PLM system. To initiate translations, `POST` to the [createPart](https://docs.vertexvis.com/#05c13b3e-b407-4b19-b110-e6bdc016a714) API. This API is asynchronous, returning the status of a queued translation.
 
 <Tabs
   defaultValue="req"
@@ -179,14 +179,14 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-To check the status of queued translations, `GET` the [getQueuedTranslation](https://docs.vertex3d.com/#9d4734b1-3300-46bb-bb87-85d23b5e52a3) API. The response returns one of the following:
+To check the status of queued translations, `GET` the [getQueuedTranslation](https://docs.vertexvis.com/#9d4734b1-3300-46bb-bb87-85d23b5e52a3) API. The response returns one of the following:
 
 - The status if `running`.
 - An `error` (similar to the response above).
 - Upon completion, redirects to the created part.
 
 :::note
-The `PART_ID` returned is for the root assembly or part. If your file contains a hierarchy, query for other parts using the [getParts](https://docs.vertex3d.com/#25778d06-038f-410f-bb67-503c932a59a8) API.
+The `PART_ID` returned is for the root assembly or part. If your file contains a hierarchy, query for other parts using the [getParts](https://docs.vertexvis.com/#25778d06-038f-410f-bb67-503c932a59a8) API.
 :::
 
 <Tabs
@@ -264,5 +264,5 @@ Data contained in scenes that are created or updated with the metadata key/value
       }
     }
 ```
-To learn more about scenes in Vertex, see [Render static scenes](https://developer.vertex3d.com/docs/guides/render-static-scenes).
+To learn more about scenes in Vertex, see [Render static scenes](https://developer.vertexvis.com/docs/guides/render-static-scenes).
 :::

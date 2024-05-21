@@ -32,7 +32,7 @@ While [creating parts](./import-data.mdx#creating-parts), set the `indexMetadata
 
 ## Adding to existing part revisions
 
-To add metadata to existing part revisions, `PATCH` the [updatePartRevision](https://docs.vertex3d.com/#4dc8ffa1-c138-476f-ba9b-d3f1ca382223) API.
+To add metadata to existing part revisions, `PATCH` the [updatePartRevision](https://docs.vertexvis.com/#4dc8ffa1-c138-476f-ba9b-d3f1ca382223) API.
 
 <Tabs
   defaultValue="req"
@@ -139,7 +139,7 @@ java.time.Instant.now().toString();
 
 ## Getting metadata
 
-To get metadata for a part revisions, `GET` the [getPartRevision](https://docs.vertex3d.com/#3260f3e6-8264-4c44-b41d-595a4c37f14a) API. By default, the response does not include metadata. You must explicitly request it using the `fields[part-revision]=metadata` query parameter.
+To get metadata for a part revisions, `GET` the [getPartRevision](https://docs.vertexvis.com/#3260f3e6-8264-4c44-b41d-595a4c37f14a) API. By default, the response does not include metadata. You must explicitly request it using the `fields[part-revision]=metadata` query parameter.
 
 :::note
 

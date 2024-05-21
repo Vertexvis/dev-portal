@@ -48,7 +48,7 @@ To create and view scenes, do the following:
 
 ## Creating scenes and scene items
 
-To create scenes, `POST` to the [createScene](https://docs.vertex3d.com/#fe3357f4-c86d-49d2-832a-e76f1f386cc3) API.
+To create scenes, `POST` to the [createScene](https://docs.vertexvis.com/#fe3357f4-c86d-49d2-832a-e76f1f386cc3) API.
 
 <Tabs
   defaultValue="req"
@@ -97,7 +97,7 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-Now that the scene resource exists, `POST` to the [createSceneItem](https://docs.vertex3d.com/#d597f539-3785-4c83-a645-fdf3a9a90521) API. This API is asynchronous, returning the status of a queued scene item. See the [Transformation matrices](./transformation-matrices.mdx) reference for an explanation of the `transform` property.
+Now that the scene resource exists, `POST` to the [createSceneItem](https://docs.vertexvis.com/#d597f539-3785-4c83-a645-fdf3a9a90521) API. This API is asynchronous, returning the status of a queued scene item. See the [Transformation matrices](./transformation-matrices.mdx) reference for an explanation of the `transform` property.
 
 <Tabs
   defaultValue="req"
@@ -160,7 +160,7 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-To check the status of queued scene items, `GET` the [getQueuedSceneItem](https://docs.vertex3d.com/#f11ab42d-fda6-432c-b219-f7f59299c2eb) API. The response returns one of the following:
+To check the status of queued scene items, `GET` the [getQueuedSceneItem](https://docs.vertexvis.com/#f11ab42d-fda6-432c-b219-f7f59299c2eb) API. The response returns one of the following:
 
 - The status if `running`.
 - An `error` (similar to the response above).
@@ -217,7 +217,7 @@ curl --location --request GET \
 </TabItem>
 </Tabs>
 
-Now that the scene contains scene items, commit it with a `PATCH` to the [updateScene](https://docs.vertex3d.com/#5fa99d4f-85d6-451d-abda-e0459830daf4) API.
+Now that the scene contains scene items, commit it with a `PATCH` to the [updateScene](https://docs.vertexvis.com/#5fa99d4f-85d6-451d-abda-e0459830daf4) API.
 
 <Tabs
   defaultValue="req"
@@ -274,12 +274,12 @@ curl --location --request PATCH \
 View scenes either by getting a scene image from the API or using the Viewer component.
 
 :::note
-If you do not see any items in your scene, make sure the scene is in the `commit` state. If it is, try updating the camera with the [updateScene](https://docs.vertex3d.com/#5fa99d4f-85d6-451d-abda-e0459830daf4) API.
+If you do not see any items in your scene, make sure the scene is in the `commit` state. If it is, try updating the camera with the [updateScene](https://docs.vertexvis.com/#5fa99d4f-85d6-451d-abda-e0459830daf4) API.
 :::
 
 ### In the API
 
-To get a scene image, `GET` the [renderScene](https://docs.vertex3d.com/#defdc52f-a574-4f65-92f9-d59bba85ca1a) API.
+To get a scene image, `GET` the [renderScene](https://docs.vertexvis.com/#defdc52f-a574-4f65-92f9-d59bba85ca1a) API.
 
 <Tabs
   defaultValue="req"

@@ -42,7 +42,7 @@ The flow is as follows:
 
 ## Creating access tokens
 
-To create an access token, `POST` to the [createToken](https://docs.vertex3d.com/#f8c5dc19-0f68-442e-8d28-aa03be2c48fb) API with your credentials. The token API uses HTTP basic access authentication. The request contains the `Authorization: Basic [YOUR_CREDENTIALS]` header, where `YOUR_CREDENTIALS` is the Base64 encoding of your Vertex client ID and secret joined by a colon. The following command performs this encoding and creates an access token.
+To create an access token, `POST` to the [createToken](https://docs.vertexvis.com/#f8c5dc19-0f68-442e-8d28-aa03be2c48fb) API with your credentials. The token API uses HTTP basic access authentication. The request contains the `Authorization: Basic [YOUR_CREDENTIALS]` header, where `YOUR_CREDENTIALS` is the Base64 encoding of your Vertex client ID and secret joined by a colon. The following command performs this encoding and creates an access token.
 
 :::note
 
@@ -97,7 +97,7 @@ curl --location --request GET \
 
 ## Viewer component
 
-The Viewer component authenticates using stream keys. These keys grant access to specific scenes, so you'll need one first. If you don't have one, create one by following the [Import data](./import-data.mdx) and [Render static scenes](./render-static-scenes.mdx) guides. Then, to create a stream key, `POST` to the [createSceneStreamKey](https://docs.vertex3d.com/#dd9c119e-5808-4bc5-8aeb-afc1ca34362d) API.
+The Viewer component authenticates using stream keys. These keys grant access to specific scenes, so you'll need one first. If you don't have one, create one by following the [Import data](./import-data.mdx) and [Render static scenes](./render-static-scenes.mdx) guides. Then, to create a stream key, `POST` to the [createSceneStreamKey](https://docs.vertexvis.com/#dd9c119e-5808-4bc5-8aeb-afc1ca34362d) API.
 
 <Tabs
   defaultValue="req"

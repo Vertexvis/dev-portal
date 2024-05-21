@@ -124,7 +124,7 @@ export function Viewer({ src }) {
   });
 
   return (
-    <BrowserWindow url="developer.vertex3d.com">
+    <BrowserWindow url="developer.vertexvis.com">
       <iframe
         ref={ref}
         width="100%"
