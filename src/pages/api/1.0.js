@@ -15,7 +15,7 @@ const Api = ({ version }) => {
       <div style={{ marginTop: `5rem`, textAlign: 'center' }}>
         <p>
           Our 1.0 API Reference has{' '}
-          <a href="https://docs.vertexvis.com/">moved here</a>.
+          <a href="https://docs.vertex3d.com/">moved here</a>.
         </p>
       </div>
     </Layout>
