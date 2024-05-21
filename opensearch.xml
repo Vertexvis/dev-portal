@@ -4,8 +4,8 @@
   <ShortName>3D Visualization Engine</ShortName>
   <Description>Search 3D Visualization Engine</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/x-icon">https://developer.vertexvis.com/img/favicon-512x512.png</Image>
-  <Url type="text/html" method="get" template="https://developer.vertexvis.com/search?q={searchTerms}"/>
-  <Url type="application/opensearchdescription+xml" rel="self" template="https://developer.vertexvis.com/opensearch.xml" />
-  <moz:SearchForm>https://developer.vertexvis.com/</moz:SearchForm>
+  <Image width="16" height="16" type="image/x-icon">https://developer.vertex3d.com/img/favicon-512x512.png</Image>
+  <Url type="text/html" method="get" template="https://developer.vertex3d.com/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://developer.vertex3d.com/opensearch.xml" />
+  <moz:SearchForm>https://developer.vertex3d.com/</moz:SearchForm>
 </OpenSearchDescription>
