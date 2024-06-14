@@ -37,6 +37,6 @@ Support for new formats is added regularly.
 |       STEP       |                   .step, .stp                    |               AP203, AP214, AP242                |
 |       STL        |                       .stl                       |                       N/A                        |
 
-\* If you want to import an entire assembly as a single file, you need to take an additional step to [prepare it for Vertex](https://help.vertexvis.com/hc/en-us/articles/360014163734). This is so Vertex can properly import all of the data that's included in an assembly file.
+\* If you want to import an entire assembly as a single file, you need to take an additional step to [prepare it for Vertex](https://help.vertex3d.com/hc/en-us/articles/360014163734). This is so Vertex can properly import all of the data that's included in an assembly file.
 
-\*\* If your JT or NX file is a shattered JT or an NX assembly, and you want to import the entire assembly as a single file, [prepare it for Vertex](https://help.vertexvis.com/hc/en-us/articles/360014163734). If it's a monolithic JT assembly, do not prep it: you can import it now.
+\*\* If your JT or NX file is a shattered JT or an NX assembly, and you want to import the entire assembly as a single file, [prepare it for Vertex](https://help.vertex3d.com/hc/en-us/articles/360014163734). If it's a monolithic JT assembly, do not prep it: you can import it now.
