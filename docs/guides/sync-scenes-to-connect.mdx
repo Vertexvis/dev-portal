@@ -1,6 +1,6 @@
 ---
 id: sync-scenes-to-connect
-title: Sync scenes to Connect
+title: Synchronizing with Connect
 description: Synchronize your Vertex Platform Scenes with Vertex Connect.
 toc_min_heading_level: 2
 toc_max_heading_level: 4
@@ -17,8 +17,8 @@ import * as changePhantomHtml from '../../static/examples/change-phantom/index.h
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Once your data has been [imported](./import-data.mdx), we can leverage the metadata properties of [scenes](./render-static-scenes.mdx) to synchronize data
-to the Vertex Connect application.
+Once your data has been [imported](./import-data-with-api.mdx), we can leverage the metadata properties of [scenes](./render-static-scenes.mdx) to synchronize data
+with Vertex Connect.
 
 :::note
 
@@ -28,7 +28,7 @@ to the Vertex Connect application.
 
 ## Configuring a scene to be synchronized
 
-The Vertex Connect application leverages [webhook events](./webhooks.mdx) to detect when scenes have been created or updated within the same account.
+The Connect application leverages [webhook events](./webhooks.mdx) to detect when scenes have been created or updated within the same account.
 By adding a set of metadata properties to these scenes, they can be automatically synchronized to a workspace and optionally a folder.
 
 ### CONNECT_WORKSPACE_URN

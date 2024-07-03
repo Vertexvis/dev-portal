@@ -122,6 +122,7 @@ curl --location --request POST \
 
 ## Creating parts
 
+
 To make querying for parts easier, Vertex supports supplied IDs. You supply these IDs, likely using existing part and revision IDs from your PLM system. To initiate translations, `POST` to the [createPart](https://docs.vertex3d.com/#05c13b3e-b407-4b19-b110-e6bdc016a714) API. This API is asynchronous, returning the status of a queued translation.
 
 <Tabs
@@ -264,5 +265,6 @@ Data contained in scenes that are created or updated with the metadata key/value
       }
     }
 ```
-To learn more about scenes in Vertex, see [Render static scenes](https://developer.vertex3d.com/docs/guides/render-static-scenes).
+To learn more about scenes in Vertex, see [Render static scenes](https://developer.vertex3d.com/docs/guides/render-static-scenes), and to learn
+more about these metadata properties for synchronizing data to Connect, see [Synchronizing with Connect](./sync-scenes-to-connect.mdx).
 :::
