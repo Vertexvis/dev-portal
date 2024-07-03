@@ -1,0 +1,113 @@
+---
+id: sync-scenes-to-connect
+title: Sync scenes to Connect
+description: Synchronize your Vertex Platform Scenes with Vertex Connect.
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
+import {
+  CodeExamples,
+  Example,
+  Viewer,
+} from '@site/src/components/CodeExamples';
+import { ConnectSyncNote } from '@site/src/components/ConnectSyncNote';
+import * as changeMaterialHtml from '../../static/examples/change-material/index.html';
+import * as changePhantomHtml from '../../static/examples/change-phantom/index.html';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Once your data has been [imported](./import-data.mdx), we can leverage the metadata properties of [scenes](./render-static-scenes.mdx) to synchronize data
+to the Vertex Connect application.
+
+:::note
+
+<ConnectSyncNote />
+
+:::
+
+## Configuring a scene to be synchronized
+
+The Vertex Connect application leverages [webhook events](./webhooks.mdx) to detect when scenes have been created or updated within the same account.
+By adding a set of metadata properties to these scenes, they can be automatically synchronized to a workspace and optionally a folder.
+
+### CONNECT_WORKSPACE_URN
+
+The `CONNECT_WORKSPACE_URN` metadata property represents the URN of the workspace and folder that the scene should be
+synchronized to. This can be found under the `Settings` dialog within the workspace.
+
+![Workspace URN](/img/connect/workspace-settings-urn.png 'Workspace URN')
+
+### PLM_PART_ID
+
+The `PLM_PART_ID` metadata property optionally provides a way to indicate whether synchronized scenes represent a revision of a
+part or assembly. If scenes are created or updated with a `PLM_PART_ID` that is identical to another scene's `PLM_PART_ID` in the same workspace,
+that scene will be synchronized as a revision of the existing scene rather than a separate item.
+
+:::caution
+
+If you plan to use the `PLM_PART_ID` field for revisioning, make sure that the initial scene is created or updated with the `PLM_PART_ID`
+before or with the same request that sets the `CONNECT_WORKSPACE_URN`.
+
+:::
+
+## Setting the scene metadata
+
+After you have found the `CONNECT_WORKSPACE_URN` associated with the workspace where you want your scene to appear, and optionally determined
+a `PLM_PART_ID` to use for creating revisions of the scene, these metadata properties can then be added as part of either the creation of a
+scene or as an update to an existing scene. Below are examples of both requests.
+
+<Tabs
+  defaultValue="post"
+  values={[
+    { label: 'Create', value: 'post', },
+    { label: 'Update', value: 'patch', },
+  ]
+}>
+<TabItem value="post">
+
+```shell
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/scenes" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+  "data": {
+    "attributes": {
+      "metadata": {
+        // highlight-next-line
+        "CONNECT_WORKSPACE_URN": "urn:vertex:workspace:[YOUR_WORKSPACE_URN]",
+        // highlight-next-line
+        "PLM_PART_ID": "[YOUR_PLM_PART_ID]"
+      }
+    },
+    "type": "scene"
+  }
+}'
+```
+
+</TabItem>
+<TabItem value="patch">
+
+```shell
+curl --location --request PATCH \
+  --url "https://platform.vertexvis.com/scenes/[YOUR_SCENE_ID]" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+  "data": {
+    "attributes": {
+      "metadata": {
+        // highlight-next-line
+        "CONNECT_WORKSPACE_URN": "urn:vertex:workspace:[YOUR_WORKSPACE_URN]",
+        // highlight-next-line
+        "PLM_PART_ID": "[YOUR_PLM_PART_ID]"
+      }
+    },
+    "type": "scene"
+  }
+}'
+```
+
+</TabItem>
+</Tabs>

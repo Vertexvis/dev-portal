@@ -41,6 +41,10 @@ const apiAdvancedSteps = [
     title: 'Webhook Events',
     url: 'docs/guides/webhook-events',
   },
+  {
+    title: 'Synchronize Data',
+    url: 'docs/guides/sync-scenes-to-connect',
+  },
 ];
 
 const reference = [
