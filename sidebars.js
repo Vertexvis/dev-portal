@@ -52,6 +52,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/webhook-events',
         },
+        {
+          type: 'doc',
+          id: 'guides/sync-scenes-to-connect',
+        },
       ],
     },
     {
