@@ -20,15 +20,15 @@ The easiest way to pull the viewer component into your project is to include the
   <head>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer/viewer.css"
+      href="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.x/dist/viewer/viewer.css"
     />
     <script
       type="module"
-      src="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer/viewer.esm.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.x/dist/viewer/viewer.esm.js"
     ></script>
     <script
       nomodule
-      src="https://unpkg.com/@vertexvis/viewer@0.3.x/dist/viewer.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.x/dist/viewer.js"
     ></script>
   </head>
 </html>
@@ -51,15 +51,15 @@ Here's a simple example of loading a model:
   <head>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/@vertexvis/viewer@0.3.2-5/dist/viewer/viewer.css"
+      href="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.2-5/dist/viewer/viewer.css"
     />
     <script
       type="module"
-      src="https://unpkg.com/@vertexvis/viewer@0.3.2-5/dist/viewer/viewer.esm.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.2-5/dist/viewer/viewer.esm.js"
     ></script>
     <script
       nomodule
-      src="https://unpkg.com/@vertexvis/viewer@0.3.2-5/dist/viewer.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.3.2-5/dist/viewer.js"
     ></script>
 
     <script>
