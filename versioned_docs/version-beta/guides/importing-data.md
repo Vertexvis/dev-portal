@@ -28,7 +28,7 @@ Support for new formats is added regularly.
 |       IGES       |                   .iges, .igs                    |                    Up to 5.3                     |
 |     Inventor     |                   .iam\*, .ipt                   |                    Up to 2025                    |
 |        JT        |                     .jt\*\*                      |                     8.0-10.9                     |
-| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2312               |
+| NX - Unigraphics |                       .prt                       |               11-12, and 1847-2406               |
 |       OBJ        |                       .obj                       |                       All                        |
 |    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 36.1                    |
 |      Revit       |                       .rvt                       |                    2015-2024                     |
