@@ -32,8 +32,8 @@ Support for new formats is added regularly.
 |       OBJ        |                       .obj                       |                       All                        |
 |    Parasolid     |            .x_b, .x_t, .xmt, .xmt_txt            |                    Up to 37.0                    |
 |      Revit       |                       .rvt                       |                    2015-2025                     |
-|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2024          |
-|    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2024                      |
+|    Solid Edge    |                   .asm\*, .par                   |          19-20, ST1-ST10, and 2021-2025          |
+|    SolidWorks    |                .sldasm\*, .sldprt                |                     97-2025                      |
 |       STEP       |                   .step, .stp                    |               AP203, AP214, AP242                |
 |       STL        |                       .stl                       |                       N/A                        |
 
