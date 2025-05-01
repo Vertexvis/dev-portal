@@ -204,17 +204,17 @@ Once verified, the following is an example of the webhook event body.
         }
       },
       "links": {
-        "self": { 
+        "self": {
           "href": "scenes/[SCENE_ID]"
-        },
+        }
       }
     }
-  ],
+  ]
 }
 ```
 
 The information in the event is kept to a minimum for security purposes. To retrieve additional information on the resource,
-make a `GET` call to the Vertex API using the URL provided in the `data.resource.links.related` field. 
+make a `GET` call to the Vertex API using the URL provided in the `data.resource.links.related` field.
 
 In the case of CRUD events, more information about the resource attributes or associated resources will be present in the
 `included` resource array. For Update events specifically, the `data.attributes.changed` field will contain a list of
@@ -226,37 +226,38 @@ properties on the resource that have changed.
 
 Occurs when a queued Scene Item has completed after using the asynchronous `POST /scenes/:id/scene-items` endpoint.
 
-<br/>
+<br />
 
 #### `queued-translation.completed`
 
 Occurs when a Translation has completed after using the asynchronous `POST /parts` or `POST /geometry-sets` endpoints.
 
-<br/>
+<br />
 
 #### `scene.created`
 
 Occurs when a Scene is created using the `POST /scenes` endpoint.
 
-<br/>
+<br />
 
 - `included` for this event can contain the following resources:
   - `self` will always be included and references the Scene.
     - This resource will include the `metadata` on the created Scene.
 
-<br/>
+<br />
 
 #### `scene.deleted`
 
 Occurs when a Scene is deleted using the `DELETE /scenes/:id` endpoint.
 
-<br/>
+<br />
 
 #### `scene.updated`
 
 Occurs when a Scene is updated using the `PATCH /scenes/:id` and after an asynchronous Scene `commit` completes and the `state` has been updated to `ready`.
 
 - `data.attributes.changed` for this event can contain the following properties:
+
   - `scene.name` if the Scene's name was changed.
   - `scene.state` if the Scene's state (`draft`, `commit`, `recovering`, or `ready`) was changed.
   - `scene.suppliedId` if the Scene's suppliedId was changed.
@@ -267,17 +268,16 @@ Occurs when a Scene is updated using the `PATCH /scenes/:id` and after an asynch
   - `self` will always be included and references the Scene.
     - This resource will include the `metadata` on the updated Scene.
 
-<br/>
+<br />
 
 #### `part-revision.updated`
 
 Occurs when a Part Revision is updated using the `PATCH /part-revisions/:id` endpoint.
 
-
 - `data.attributes.changed` for this event can contain the following properties:
+
   - `revision.defaultRenditionId` if the Part Revision's default Part Rendition was changed.
   - `revision.metadata` if the Part Revision's metadata was changed.
-
 
 - `included` for this event can contain the following resources:
   - `self` will always be included and references the Part Revision.

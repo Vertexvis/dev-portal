@@ -30,7 +30,7 @@ Save the following HTML to a file on your computer and open it in your browser. 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.22.x/dist/viewer/viewer.css"
+      href="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.23.x/dist/viewer/viewer.css"
     />
     <style>
       html,
@@ -46,11 +46,11 @@ Save the following HTML to a file on your computer and open it in your browser. 
   <body>
     <script
       type="module"
-      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.22.x/dist/viewer/viewer.esm.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.23.x/dist/viewer/viewer.esm.js"
     ></script>
     <script
       nomodule
-      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.22.x/dist/viewer.js"
+      src="https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.23.x/dist/viewer.js"
     ></script>
 
     <vertex-viewer
@@ -68,18 +68,18 @@ Save the following HTML to a file on your computer and open it in your browser. 
 
 ## Render the scene
 
-To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `AH7v0jg5aN5_thkhU-XTzB_29aqW89EjyOH8`. Copy the following into the empty `<script>` tag.
+To render a scene, you'll need a stream key. Stream keys grant the Viewer component access to a specific scene. This is explained in more detail later, but for now, use our test key, `W8Nk7_Ch8u8AS4_rstyew2H6GIlvBnhf6dOc`. Copy the following into the empty `<script>` tag.
 
 ```js
-import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.22.x/dist/esm/loader.js';
-import { ColorMaterial } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.22.x/dist/esm/index.js';
+import { defineCustomElements } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.23.x/dist/esm/loader.js';
+import { ColorMaterial } from 'https://cdn.jsdelivr.net/npm/@vertexvis/viewer@0.23.x/dist/esm/index.js';
 
 async function main() {
   await defineCustomElements(window);
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertex:stream-key:AH7v0jg5aN5_thkhU-XTzB_29aqW89EjyOH8`
+    `urn:vertex:stream-key:W8Nk7_Ch8u8AS4_rstyew2H6GIlvBnhf6dOc`
   );
 }
 
@@ -105,7 +105,7 @@ async function main() {
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertex:stream-key:AH7v0jg5aN5_thkhU-XTzB_29aqW89EjyOH8`
+    `urn:vertex:stream-key:W8Nk7_Ch8u8AS4_rstyew2H6GIlvBnhf6dOc`
   );
 
   viewer.addEventListener('tap', async (event) => {
@@ -138,7 +138,7 @@ async function main() {
 
   const viewer = document.querySelector('vertex-viewer');
   await viewer.load(
-    `urn:vertex:stream-key:AH7v0jg5aN5_thkhU-XTzB_29aqW89EjyOH8`
+    `urn:vertex:stream-key:W8Nk7_Ch8u8AS4_rstyew2H6GIlvBnhf6dOc`
   );
   let selectedItemId;
 
