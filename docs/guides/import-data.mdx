@@ -30,63 +30,62 @@ Now that you've [rendered your first scene](./render-your-first-scene.mdx), try 
   }>
   <TabItem value="npm">
 
-```shell
-npm install --global @vertexvis/cli
-```
+  ```shell
+  npm install --global @vertexvis/cli
+  ```
 
   </TabItem>
   <TabItem value="yarn">
 
-:::note
+  :::note
 
-On Windows, you may need to add Yarn's `bin` directory to your `PATH` variable; [more details here](https://stackoverflow.com/a/60436135).
-:::
+  On Windows, you may need to add Yarn's `bin` directory to your `PATH` variable; [more details here](https://stackoverflow.com/a/60436135).
+  :::
 
-```shell
-yarn global add @vertexvis/cli
-```
+  ```shell
+  yarn global add @vertexvis/cli
+  ```
 
   </TabItem>
   </Tabs>
 
 2. Verify it's working by accessing help.
 
-```shell
-# Help for the CLI as a whole
-vertex --help
+  ```shell
+  # Help for the CLI as a whole
+  vertex --help
 
-# Help for an individual command
-vertex configure --help
+  # Help for an individual command
+  vertex configure --help
 
-# Help for a topic
-vertex scenes --help
+  # Help for a topic
+  vertex scenes --help
 
-# Help for a command within a topic
-vertex scenes:get --help
-```
+  # Help for a command within a topic
+  vertex scenes:get --help
+  ```
 
 ## CLI authentication
 
 1. Have your Vertex client ID and secret ready so that the CLI can authenticate Vertex API calls on your behalf.
 
-:::note
+  :::note
 
-{' '}
-<ProtectSecretNote />
-:::
+  <ProtectSecretNote />
+  :::
 
 2. Run `vertex configure` and follow the prompts.
 
-```shell
-vertex configure
-```
+  ```shell
+  vertex configure
+  ```
 
-:::note
+  :::note
 
-Some customers use a different base API path than the default (https://platform.vertexvis.com). In this case, add the `--basePath` option to all commands, e.g., `vertex configure --basePath [YOUR_BASE_PATH]`.
-:::
+  Some customers use a different base API path than the default (https://platform.vertexvis.com). In this case, add the `--basePath` option to all commands, e.g., `vertex configure --basePath [YOUR_BASE_PATH]`.
+  :::
 
-After you follow the prompts, the command creates `~/.config/@vertexvis/cli/config.json` on macOS/Linux and `%LOCALAPPDATA%\@vertexvis\cli\config.json` on Windows with your credentials. When you run additional commands, the CLI uses these to authenticate API calls.
+  After you follow the prompts, the command creates `~/.config/@vertexvis/cli/config.json` on macOS/Linux and `%LOCALAPPDATA%\@vertexvis\cli\config.json` on Windows with your credentials. When you run additional commands, the CLI uses these to authenticate API calls.
 
 Keep your client ID and secret handy; you'll use it in the following guide as well.
 
@@ -94,50 +93,49 @@ Keep your client ID and secret handy; you'll use it in the following guide as we
 
 1. To import 3D data in one of [Vertex's supported formats](./supported-file-formats.mdx), create a JSON file containing a list of scene items. Multiple CLI commands use this JSON file to build requests for the API.
 
-:::note
+  :::note
 
-If you don't have 3D data handy, download a prepared model from our [3D database](./model-database.mdx) to follow along.
+  If you don't have 3D data handy, download a prepared model from our [3D database](./model-database.mdx) to follow along.
 
-{' '}
-<ImportAssemblyNote />
+  <ImportAssemblyNote />
 
-:::
+  :::
 
-Below is a simple example of a JSON file with the required parameters specified. For a complete list and explanation of each parameter, see the [type definition](https://github.com/Vertexvis/vertex-cli/blob/master/src/create-items/index.d.ts).
+  Below is a simple example of a JSON file with the required parameters specified. For a complete list and explanation of each parameter, see the [type definition](https://github.com/Vertexvis/vertex-cli/blob/master/src/create-items/index.d.ts).
 
-```json title="vertex-valve.json"
-[
-  {
-    "indexMetadata": true,
-    "source": {
-      "fileName": "[YOUR_PATH_TO_3D_DATA_FILE_INCLUDING_FILE_EXTENSION]",
-      "suppliedPartId": "vertex-valve",
-      "suppliedRevisionId": "1"
+  ```json title="vertex-valve.json"
+  [
+    {
+      "indexMetadata": true,
+      "source": {
+        "fileName": "[YOUR_PATH_TO_3D_DATA_FILE_INCLUDING_FILE_EXTENSION]",
+        "suppliedPartId": "vertex-valve",
+        "suppliedRevisionId": "1"
+      }
     }
-  }
-]
-```
+  ]
+  ```
 
 2. Next, run `create-parts` with the path to this JSON file as an argument. `create-parts` uploads the 3D data, translates it into 3D geometry, and creates parts in Vertex's Parts Library. Vertex's Parts Library is a repository of your team's or organization's parts, each with references to geometry and optional metadata. As we'll see later in this guide, you can use combinations of these parts to build scenes.
 
-```shell
-vertex create-parts [YOUR_PATH_TO_JSON_FILE]
-```
+  ```shell
+  vertex create-parts [YOUR_PATH_TO_JSON_FILE]
+  ```
 
 ## Render scenes
 
 1. With the parts now in Vertex's Parts Library, run `create-scene` to create a scene and add the root part as a scene item to that scene. This command prints the created scene ID.
 
-```shell
-vertex create-scene --name [YOUR_SCENE_NAME] [YOUR_PATH_TO_JSON_FILE]
-```
+  ```shell
+  vertex create-scene --name [YOUR_SCENE_NAME] [YOUR_PATH_TO_JSON_FILE]
+  ```
 
-2. To render the scene, run the `scenes:render` command and include the `--viewer` flag along with the scene ID from the previous step.
-   The `--viewer` flag creates an HTML file using Vertex's Viewer component similar to the one you wrote in the [Render your first scene](./render-your-first-scene.mdx) guide. It then opens this file in your browser so you can interact with it.
+2. To render the scene, run the `scenes:render` command and include the  `--viewer` flag along with the scene ID from the previous step.
+The `--viewer` flag creates an HTML file using Vertex's Viewer component similar to the one you wrote in the [Render your first scene](./render-your-first-scene.mdx) guide. It then opens this file in your browser so you can interact with it.
 
-```shell
-vertex scenes:render --viewer [YOUR_SCENE_ID]
-```
+  ```shell
+  vertex scenes:render --viewer [YOUR_SCENE_ID]
+  ```
 
 Keep your scene ID handy; you'll use it in the following guide as well.
 
