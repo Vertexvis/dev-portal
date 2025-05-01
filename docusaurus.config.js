@@ -148,7 +148,7 @@ module.exports = {
             {
               label: 'Webinars & Events',
               to: 'https://vertex3d.com/resources/webinars-events',
-            }
+            },
           ],
         },
         {

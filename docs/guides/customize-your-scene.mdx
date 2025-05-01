@@ -15,7 +15,7 @@ import { ExampleAppNote } from '@site/src/components/ExampleAppNote';
 import * as changeMaterialHtml from '../../static/examples/change-material/index.html';
 import * as changePhantomHtml from '../../static/examples/change-phantom/index.html';
 
-Now that you have [rendered your first scene](./render-your-first-scene.mdx), [imported your data](./import-data.mdx), and [built your first application](./build-your-first-app.mdx), let's  explore additional ways you can modify the items in your scene.
+Now that you have [rendered your first scene](./render-your-first-scene.mdx), [imported your data](./import-data.mdx), and [built your first application](./build-your-first-app.mdx), let's explore additional ways you can modify the items in your scene.
 
 :::note
 
@@ -84,7 +84,6 @@ The `op.where` method supports a number of queries to specify what items within 
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
@@ -94,7 +93,6 @@ async function performOperation() {
   await scene.items((op) => [op.where((q) => q.all()).deselect()]).execute();
 }
 ```
-
 
 </details>
 
@@ -108,21 +106,22 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide all items that are not selected
-  await scene.items((op) => [op.where((q) => q.not().withSelected()).hide()]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.not().withSelected()).hide()])
+    .execute();
 }
 ```
-
 
 </details>
 
 #### `withItemId`
+
 - Parameters:
   - `id: string` - the ID of the item to operate on
 - Specifies that the operation should be performed on any item matching the provided ID.
@@ -130,19 +129,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).hide()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -155,19 +152,19 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide the item with the `item-supplied-id` supplied ID
-  await scene.items((op) => [
-    op.where((q) => q.withSuppliedId('item-supplied-id')).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withSuppliedId('item-supplied-id')).hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -180,19 +177,19 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide the item with the `item-uuid-1` ID and the `item-uuid-2` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemIds(['item-uuid-1', 'item-uuid-2'])).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemIds(['item-uuid-1', 'item-uuid-2'])).hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -205,7 +202,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
@@ -213,14 +209,17 @@ async function performOperation() {
 
   // Hide the item with the `item-supplied-id-1` supplied ID
   // and the `item-supplied-id-2` supplied ID
-  await scene.items((op) => [
-    op
-      .where((q) => q.withItemIds(['item-supplied-id-1', 'item-supplied-id-2']))
-      .hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op
+        .where((q) =>
+          q.withItemIds(['item-supplied-id-1', 'item-supplied-id-2'])
+        )
+        .hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -233,17 +232,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide all items that are selected
-  await scene.items((op) => [op.where((q) => q.withSelected()).hide()]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withSelected()).hide()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -259,24 +258,28 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide all items where the `PART_NAME_KEY` includes a value of `PartName`
-  await scene.items((op) => [
-    op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'])).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'])).hide(),
+    ])
+    .execute();
 
   // Hide all items where the `PART_NAME_KEY` has exactly a value of `PartName`
-  await scene.items((op) => [
-    op.where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'], true)).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op
+        .where((q) => q.withMetadata('PartName', ['PART_NAME_KEY'], true))
+        .hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -291,7 +294,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 import { Point } from '@vertexvis/geometry';
 
@@ -300,12 +302,13 @@ async function performOperation() {
   const scene = await viewer.scene();
 
   // Select the item present at the [100, 100] coordinate of the image
-  await scene.items((op) => [
-    op.where((q) => q.withPoint(Point.create(100, 100))).select(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withPoint(Point.create(100, 100))).select(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -318,26 +321,26 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide all items from the 2nd row to the 5th row of the scene-tree
-  await scene.items((op) => [
-    op
-      .where((q) =>
-        q.withSceneTreeRange({
-          start: 2,
-          end: 5,
-        })
-      )
-      .hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op
+        .where((q) =>
+          q.withSceneTreeRange({
+            start: 2,
+            end: 5,
+          })
+        )
+        .hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -351,7 +354,6 @@ async function performOperation() {
 
 <details className="code">
 <summary>Example</summary>
-
 
 ```js
 import { Rectangle } from '@vertexvis/geometry';
@@ -370,32 +372,21 @@ async function performOperation() {
 
   // Select all items within the specified `region` of the image
   // excluding any elements that are not fully contained by the region
-  await scene.items((op) => [
-    op
-      .where((q) =>
-        q.withVolumeIntersection(
-          region,
-          true
-        )
-      )
-      .hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withVolumeIntersection(region, true)).hide(),
+    ])
+    .execute();
 
   // Select all items within the specified `region` of the image
   // including any elements that intersect with the region
-  await scene.items((op) => [
-    op
-      .where((q) =>
-        q.withVolumeIntersection(
-          region,
-          false
-        )
-      )
-      .hide(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withVolumeIntersection(region, false)).hide(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -412,19 +403,17 @@ The `scene.items` method supports a number of operations to specify how the item
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Show the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).show(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).show()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -437,19 +426,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Hide the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).hide()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -462,19 +449,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Select the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).select(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).select()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -487,19 +472,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Deselect the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).hide(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).hide()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -512,7 +495,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 import { ColorMaterial } from '@vertexvis/viewer';
 
@@ -522,20 +504,23 @@ async function performOperation() {
 
   // Override the material for the item with the `item-uuid` ID to
   // be red with an opacity of 0.5.
-  await scene.items((op) => [
-    op
-      .where((q) => q.withItemId('item-uuid'))
-      .materialOverride(ColorMaterial.create(255, 0, 0, 0.5)),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op
+        .where((q) => q.withItemId('item-uuid'))
+        .materialOverride(ColorMaterial.create(255, 0, 0, 0.5)),
+    ])
+    .execute();
 
   // Override the material for the item with the `item-uuid` ID to
   // be red with an opacity of 1.
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).materialOverride('#ff0000'),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).materialOverride('#ff0000'),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -548,7 +533,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 import { ColorMaterial } from '@vertexvis/viewer';
 
@@ -557,12 +541,13 @@ async function performOperation() {
   const scene = await viewer.scene();
 
   // Clear the overridden material on the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).clearMaterialOverrides(),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).clearMaterialOverrides(),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -575,7 +560,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 import { Matrix4, Vector3 } from '@vertexvis/geometry';
 
@@ -585,14 +569,15 @@ async function performOperation() {
 
   // Override the transformation matrix for the item with the `item-uuid` ID to
   // move the element along the x-axis
-  await scene.items((op) => [
-    op
-      .where((q) => q.withItemId('item-uuid'))
-      .transform(Matrix4.makeTranslation(Vector3.create(100, 0, 0))),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op
+        .where((q) => q.withItemId('item-uuid'))
+        .transform(Matrix4.makeTranslation(Vector3.create(100, 0, 0))),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -606,7 +591,6 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
@@ -614,18 +598,21 @@ async function performOperation() {
 
   // Clear the overridden the transformation matrix for the item with the `item-uuid` ID
   // and do not cascade to preserve transformations on children
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).clearTransforms(false),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).clearTransforms(false),
+    ])
+    .execute();
 
   // Clear the overridden the transformation matrix for the item with the `item-uuid` ID
   // and cascade to clear overridden transformations on children
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).clearTransforms(true),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).clearTransforms(true),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -639,24 +626,26 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Mark the item with the `item-uuid` ID as phantom
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).setPhantom(true),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).setPhantom(true),
+    ])
+    .execute();
 
   // Unmark the item with the `item-uuid` ID as phantom
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).setPhantom(false),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).setPhantom(false),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -669,19 +658,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Clear the overridden phantom state of the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).clearPhantom(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).clearPhantom()])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -697,24 +684,26 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Mark the item with the `item-uuid` ID as an end item
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).setEndItem(true),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).setEndItem(true),
+    ])
+    .execute();
 
   // Unmark the item with the `item-uuid` ID as an end item
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).setEndItem(false),
-  ]).execute();
+  await scene
+    .items((op) => [
+      op.where((q) => q.withItemId('item-uuid')).setEndItem(false),
+    ])
+    .execute();
 }
 ```
-
 
 </details>
 
@@ -727,19 +716,17 @@ async function performOperation() {
 <details className="code">
 <summary>Example</summary>
 
-
 ```js
 async function performOperation() {
   const viewer = document.querySelector('vertex-viewer');
   const scene = await viewer.scene();
 
   // Clear the overridden end item state of the item with the `item-uuid` ID
-  await scene.items((op) => [
-    op.where((q) => q.withItemId('item-uuid')).clearEndItem(),
-  ]).execute();
+  await scene
+    .items((op) => [op.where((q) => q.withItemId('item-uuid')).clearEndItem()])
+    .execute();
 }
 ```
-
 
 </details>
 
