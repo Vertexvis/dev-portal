@@ -222,6 +222,13 @@ properties on the resource that have changed.
 
 ## Topics
 
+#### `file-job.completed`
+
+Occurs when a file job has completed after using the asynchronous `POST /file-jobs` endpoint. 
+
+- `included.attributes` fro this event contains the following properties: 
+  - `status` will be 2 if the job completeed and 3 if the job failed. 
+ 
 #### `queued-scene-item.completed`
 
 Occurs when a queued Scene Item has completed after using the asynchronous `POST /scenes/:id/scene-items` endpoint.
