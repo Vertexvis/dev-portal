@@ -56,6 +56,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/sync-scenes-to-connect',
         },
+        {
+          type: 'doc',
+          id: 'guides/shared-parts-library',
+        },
       ],
     },
     {
