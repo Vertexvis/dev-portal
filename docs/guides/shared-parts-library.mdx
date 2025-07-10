@@ -1,0 +1,64 @@
+---
+id: shared-parts-library
+title: Shared parts library
+description: Use the Vertex platform's shared parts library concept to create reusable parts libraries.
+---
+
+## Motivation
+To facilitate organization and access control of parts shared across an enterprise, the Vertex API provides the
+concept of shared parts libraries. The granularity of control is at the level of Vertex platform accounts.
+A parts library (as created and accessible through `/parts` and related API endpoints) from one account can be shared
+with another with read-only access, allowing users in the granted account to make scenes with shared parts, separating
+management of the shared library from its usage.
+
+## Description
+### Grants
+*Grants* are made from a grantor account to a grantee account. Creating a grant requires credentials for the grantor
+and a UUID identifier for the grantee. There are two domains of grants, `parts` and `property-sets`.
+
+### Scope of parts domain
+Once a `parts` domain grant is made, users of the grantee account will be able to make scene items using parts from the
+grantor account (without credentials for the grantor account), but will not be able to add, remove, or otherwise
+modify the parts in the grantor's library. Regardless of the source of the parts, the created scene items will still
+be owned by the account from which the creation calls were made.
+
+### Scope of property-sets domain
+Once a `property-sets` domain grant is made, users of the grantee account will be able to see metadata properties for the
+parts from the grantor account (without credentials for the grantor account), but will
+not be able to add, remove, or otherwise modify the metadata properties in the grantor's library.
+
+A `property-sets` domain grant is typically only useful along with a `parts` domain grant between the same accounts.
+
+### Scenes vs. parts
+Once shared parts and metadata properties are incorporated into a scene through `/scene-items` and related API
+endpoints, they will be visible to users of the grantee account. When grants are revoked, these scene items will still
+be visible in these scenes. Grants only control the scene creation, and all further viewing or manipulation of the scene
+is governed by the account in which the scenes and scene items are created.
+
+## Usage
+### Account IDs
+Accounts are identified by UUIDs assigned when they are created. The admin dashboard can be used to find these
+UUIDs if they were not recorded when the accounts were created.
+
+### Making and revoking grants
+Grants are made with the `POST /permission-grants` call.
+
+Grants are revoked with the `DELETE /permission-grants/:id` call.
+
+### Getting and listing current grants
+Grants are listed with the `GET /permission-grants` call. Individual grants can be retrieved by ID with
+`GET /permission-grants/:id`
+
+### Listing available parts
+Once a `parts` domain grant is made, the `GET /parts` call will default to listing all parts available to the
+calling account. The parts returned from this include an `owner` property in the `relationships` property, so that the
+owning account can be distinguished. The `GET /parts` call can be filtered by a specific owner by including an `ownerId`
+filter.
+
+### Creating scene items with granted parts
+Once the grant is made, creating a scene item with a granted part is identical regardless of which library the part
+comes from.
+
+### Metadata
+Metadata from the parts library will only be included on scene items if the `property-sets` domain grant is made along
+with the `parts` domain grant.
