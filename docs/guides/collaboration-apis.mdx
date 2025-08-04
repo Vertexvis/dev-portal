@@ -1,0 +1,86 @@
+---
+id: collaboration-apis
+title: Collaboration APIs
+description: Use Vertex Platform's collaboration APIs to communicate with team members.
+---
+
+This guide explains the core concepts and API usage for enabling collaboration
+within your application using the Vertex Collaboration APIs. These APIs allow
+your users to participate in structured discussions through contexts, threads,
+and replies.
+
+:::note
+This guide assumes that you have already configured authentication for
+your deployment. Some APIs require a user access token obtained via [token
+exchange](../guides/authentication.md).
+:::
+
+## Core Concepts
+
+### Collaboration Context
+
+A **Collaboration Context** is a container for discussions related to a specific
+resource — such as a 3D model, a project, or a design session. Each context
+defines who can participate via one or more associated **User Groups**.
+
+### Thread
+
+A **Thread** represents a focused discussion within a collaboration context.
+Each thread has two important properties that help categorize and manage
+discussions:
+
+- **Type:** A thread can be either an `issue` or a `comment`. An `issue` thread
+  is typically used to flag problems, bugs, or actionable items that may require
+  resolution. A `comment` thread is intended for general discussion, feedback,
+  or non-blocking remarks.
+
+- **Status:** Threads have a status that indicates their current state. An
+  `open` thread signifies an active discussion or unresolved issue, while a
+  `resolved` thread indicates that the topic has been addressed or closed.
+
+### Reply
+
+A **Reply** is an individual message within a thread. Users can reply to threads
+to continue discussions, provide updates, or give feedback.
+
+## Access Control
+
+- Only users in the user groups associated with a context can interact with its
+  threads and replies.
+- Threads and replies **require a user access token** obtained through an
+  RFC8693-compliant [token exchange process](../guides/authentication.md).
+- Collaboration contexts are managed using **application-level access tokens**.
+
+## API Usage
+
+### Collaboration Contexts
+
+| Operation                          | Endpoint                                        | Auth      |
+| ---------------------------------- | ----------------------------------------------- | --------- |
+| Create a context                   | `POST /collaboration-contexts`                  | App token |
+| Associate user groups to a context | `POST /collaboration-contexts/{id}/user-groups` | App token |
+| List all contexts                  | `GET /collaboration-contexts`                   | App token |
+| Get a context by ID                | `GET /collaboration-contexts/{id}`              | App token |
+
+### Threads
+
+| Operation               | Endpoint                                           | Auth       |
+| ----------------------- | -------------------------------------------------- | ---------- |
+| Create a thread         | `POST /threads`                                    | User token |
+| List threads by context | `GET /threads?filter[collaborationContextId]={id}` | User token |
+| Get thread by ID        | `GET /threads/{id}`                                | User token |
+
+### Replies
+
+| Operation              | Endpoint                             | Auth       |
+| ---------------------- | ------------------------------------ | ---------- |
+| Post a reply           | `POST /replies`                      | User token |
+| List replies in thread | `GET /replies?filter[threadId]={id}` | User token |
+| Get reply by ID        | `GET /replies/{id}`                  | User token |
+
+## Authentication Summary
+
+- Use an application token to manage collaboration contexts.
+- Use a user token (via token exchange) to post or read threads and replies.
+- For more details, including how to set up identity provider integration and
+  perform a token exchange, see the Authentication Guide.

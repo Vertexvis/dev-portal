@@ -60,6 +60,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/shared-parts-library',
         },
+        {
+          type: 'doc',
+          id: 'guides/collaboration-apis',
+        },
       ],
     },
     {
