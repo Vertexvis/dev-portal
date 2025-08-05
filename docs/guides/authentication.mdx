@@ -126,8 +126,8 @@ for a Vertex Platform token.
 - **Token scope:** User-level access to resources.
 
 To enable token exchange, your deployment must be configured with the
-`OIDC_USERINFO_ENDPOINT` environment variable pointing to your [IdP’s
-userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
+`OidcUserinfoEndpoint` Cloudformation parameter pointing to your [IdP’s userinfo
+endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
 
 <Tabs
   defaultValue="req"
@@ -164,16 +164,50 @@ curl --location --request POST 'https://platform.vertexvis.com/token/exchange' \
 </TabItem>
 </Tabs>
 
+When a token exchange request is performed:
+
+1. The Vertex Platform calls your configured `OidcUserinfoEndpoint` using the
+   provided `subject_token`.
+1. It extracts the user's identifier from the `sub` field of the response.
+1. That identifier must match a User in the Vertex Platform with a corresponding
+   `idpId`.
+
+:::important
+The `idpId` of the Vertex User must exactly match the user ID returned by your
+identity provider. This is how the Platform links external users to internal
+user records.
+:::
+
+For example, if your IdP returns:
+
+```bash
+{
+  "sub": "00u123example",
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com"
+}
+```
+
+Then the user in the Vertex Platform must be created with:
+
+```bash
+{
+  "idpId": "00u123example",
+  "name": "Jane Doe",
+  "email": "jane.doe@example.com"
+}
+```
+
 #### Supported Token Types
 
-| Token Type         | Token Type Identifier                            | Supported |
-| ------------------ | ------------------------------------------------ | --------- |
-| JWT                | `urn:ietf:params:oauth:token-type:jwt`           | No        |
-| Access Token       | `urn:ietf:params:oauth:token-type:access_token`  | Yes       |
-| Refresh Token      | `urn:ietf:params:oauth:token-type:refresh_token` | No        |
-| ID Token           | `urn:ietf:params:oauth:token-type:id_token`      | No        |
-| SAML 1.1 Assertion | `urn:ietf:params:oauth:token-type:saml1`         | No        |
-| SAML 2.0 Assertion | `urn:ietf:params:oauth:token-type:saml2`         | No        |
+| Token Type         | Token Type Identifier                            | Support |
+| ------------------ | ------------------------------------------------ | ------- |
+| JWT                | `urn:ietf:params:oauth:token-type:jwt`           | ❌      |
+| Access Token       | `urn:ietf:params:oauth:token-type:access_token`  | ✅      |
+| Refresh Token      | `urn:ietf:params:oauth:token-type:refresh_token` | ❌      |
+| ID Token           | `urn:ietf:params:oauth:token-type:id_token`      | ❌      |
+| SAML 1.1 Assertion | `urn:ietf:params:oauth:token-type:saml1`         | ❌      |
+| SAML 2.0 Assertion | `urn:ietf:params:oauth:token-type:saml2`         | ❌      |
 
 ### OAuth2 Best Practices
 
