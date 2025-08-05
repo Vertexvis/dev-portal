@@ -15,39 +15,42 @@ import TabItem from '@theme/TabItem';
 <SignUpNote />
 :::
 
-Gain secure access to the Vertex APIs by exchanging OAuth 2.0 credentials for an access token.
+The Vertex Platform uses OAuth 2.0 for authenticating and authorizing access to
+its APIs. This guide explains how authentication works, the different OAuth2
+grant types supported, and best practices for securely integrating your
+application.
 
-The flow is as follows:
+## OAuth2 Overview
 
-- Your application makes a secure HTTP call, providing its credentials. You receive an access token in response.
-- When making subsequent Vertex API calls, your application includes the access token.
+Authentication in the Vertex Platform is based on the OAuth 2.0 framework. Every
+application that needs to access the Platform APIs must first register as an
+**Application**.
 
-<Mermaid
-  chart={`
-  sequenceDiagram
-  participant CF as Client App Frontend
-  participant C as Client App
-  participant V as Vertex API clients
-  participant API as Vertex API
-    CF->>+C: Authenticate
-    C->>+API: Request token with credentials
-    API-->>-C: Token response
-    C-->>-CF: Token
-    CF->>+V: API client call with token
-    V-->>-CF: API client response
-    C->>+API: API request with token
-    API-->>-C: API response
-`}
-/>
+### Applications
 
-## Creating access tokens
+An **Application** represents a client integrating with the Vertex Platform. It
+includes:
 
-To create an access token, `POST` to the [createToken](https://docs.vertex3d.com/#f8c5dc19-0f68-442e-8d28-aa03be2c48fb) API with your credentials. The token API uses HTTP basic access authentication. The request contains the `Authorization: Basic [YOUR_CREDENTIALS]` header, where `YOUR_CREDENTIALS` is the Base64 encoding of your Vertex client ID and secret joined by a colon. The following command performs this encoding and creates an access token.
+- A **Client ID**: A public identifier for your application
+- A **Client Secret**: A private credential used to authenticate your
+  application
+- An associated **Account**: The Platform account that owns the application
 
-:::note
+Applications can request access tokens by using one of several OAuth2 grant
+types, depending on the use case and deployment model.
 
-<ProtectSecretNote />
-:::
+## Supported Grant Types
+
+The Platform supports a handful of grant types that support different
+authentication scenarios.
+
+### Client Credentials
+
+Use this flow when your application needs to authenticate as itself, without
+acting on behalf of a user.
+
+- **Use case**: Server-to-server API calls.
+- **Token scope**: Access to resources owned by the application's account.
 
 <Tabs
   defaultValue="req"
@@ -84,20 +87,126 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-## Using access tokens
+### Authorization Code
 
-Access tokens are valid for one hour. Include them as a bearer token in the `Authorization` header for subsequent API calls.
+Use this flow when your application needs to authenticate a user and obtain
+permission to act on their behalf.
+
+- **Use case:** Web applications with user login flows.
+- **Token scope:** User-level access to resources.
+
+This flow requires a redirect URI and an interactive login experience. After
+authorization, the server issues an authorization code, which can be exchanged
+for an access token.
+
+:::note
+If your application already authenticates users via an
+OIDC-compliant identity provider (such as Okta, Azure AD, or Auth0), consider
+using the Token Exchange flow instead. This allows you to reuse your existing
+user session and avoid a second login prompt.
+:::
+
+### Refresh Token
+
+Use this flow to obtain a new access token after the previous one has expired,
+without prompting the user to log in again.
+
+- **Use case:** Long-lived user sessions.
+- **Precondition:** The original token was obtained using the authorization code
+  flow.
+
+### Token Exchange ([RFC8693](https://datatracker.ietf.org/doc/html/rfc8693))
+
+Use this flow to exchange a token issued by an external identity provider (IdP)
+for a Vertex Platform token.
+
+- **Use case:** Customers using their own IdP (e.g., Okta, Azure AD) to
+  authenticate users and integrate with Vertex user-level APIs (e.g. Vertex
+  Collaboration APIs).
+- **Token scope:** User-level access to resources.
+
+To enable token exchange, your deployment must be configured with the
+`OIDC_USERINFO_ENDPOINT` environment variable pointing to your [IdP’s
+userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
+
+<Tabs
+  defaultValue="req"
+  values={[
+    { label: 'Request', value: 'req', },
+    { label: 'Response', value: 'res', },
+  ]
+}>
+<TabItem value="req">
 
 ```shell
-curl --location --request GET \
-  --url "https://platform.vertexvis.com/files" \
-  // highlight-next-line
-  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]"
+curl --location --request POST 'https://platform.vertexvis.com/token/exchange' \
+  --header "Authorization: Basic $(echo -n "[YOUR_CLIENT_ID]:[YOUR_CLIENT_SECRET]" | base64)"
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+  --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:access_token' \
+  --data-urlencode 'subject_token=<EXTERNAL_IDP_TOKEN>'
 ```
 
-## Viewer component
+</TabItem>
+<TabItem value="res">
 
-The Viewer component authenticates using stream keys. These keys grant access to specific scenes, so you'll need one first. If you don't have one, create one by following the [Import data](./import-data.mdx) and [Render static scenes](./render-static-scenes.mdx) guides. Then, to create a stream key, `POST` to the [createSceneStreamKey](https://docs.vertex3d.com/#dd9c119e-5808-4bc5-8aeb-afc1ca34362d) API.
+```json
+{
+  // highlight-next-line
+  "access_token": "[YOUR_ACCESS_TOKEN]",
+  "account_id": "[YOUR_ACCOUNT_ID]",
+  "expires_in": 3600,
+  "scopes": [],
+  "token_type": "bearer"
+}
+```
+
+</TabItem>
+</Tabs>
+
+#### Supported Token Types
+
+| Token Type         | Token Type Identifier                            | Supported |
+| ------------------ | ------------------------------------------------ | --------- |
+| JWT                | `urn:ietf:params:oauth:token-type:jwt`           | No        |
+| Access Token       | `urn:ietf:params:oauth:token-type:access_token`  | Yes       |
+| Refresh Token      | `urn:ietf:params:oauth:token-type:refresh_token` | No        |
+| ID Token           | `urn:ietf:params:oauth:token-type:id_token`      | No        |
+| SAML 1.1 Assertion | `urn:ietf:params:oauth:token-type:saml1`         | No        |
+| SAML 2.0 Assertion | `urn:ietf:params:oauth:token-type:saml2`         | No        |
+
+### OAuth2 Best Practices
+
+Here are some key security and implementation best practices to follow when
+integrating with the Vertex Platform:
+
+- **Never expose a client secret in frontend applications.** Client secrets should only be used in secure, backend environments.
+- **Use the appropriate grant type for your application model.**
+  - Use client credentials for backend automation.
+  - Use authorization code for user-authenticated flows.
+  - Use token exchange if users authenticate via an external IdP.
+- **Secure redirect URIs.** Register only trusted and validated redirect URIs
+  for authorization code flows.
+- **Scope tokens minimally.** Request only the permissions your application
+  needs.
+- **Implement token expiration handling.** Handle 401 Unauthorized responses by
+  refreshing tokens or re-initiating the flow.
+- **Store refresh tokens securely.** Treat them like credentials; store only in
+  secure, server-side environments.
+
+## Stream Keys
+
+In addition to OAuth2 access tokens, the Vertex Platform supports Stream Keys
+for authenticating access to view Scenes in the Viewer component.
+
+Stream Keys are scoped to individual Scenes and are intended to be used
+client-side (e.g., in the browser) for securely loading visual content without
+requiring a user login or OAuth2 flow.
+
+### Creating a Stream Key
+
+To create a Stream Key, make a POST request to the following endpoint using an
+OAuth2 access token:
 
 <Tabs
   defaultValue="req"
@@ -152,7 +261,9 @@ curl --location --request POST \
 </TabItem>
 </Tabs>
 
-Now, pass the stream key to the `viewer.load` method in the Viewer component.
+### Using the Stream Key
+
+Pass the returned key to the Viewer component’s load method:
 
 ```javascript
 async function main() {
@@ -161,3 +272,9 @@ async function main() {
   await viewer.load('urn:vertex:stream-key:[YOUR_STREAM_KEY]');
 }
 ```
+
+### Notes
+
+- The expiry field defines how long the stream key is valid (in seconds).
+- Stream Keys are short-lived and intended for temporary access.
+- You must use an OAuth2 access token to create a stream key.

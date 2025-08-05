@@ -12,7 +12,7 @@ and replies.
 :::note
 This guide assumes that you have already configured authentication for
 your deployment. Some APIs require a user access token obtained via [token
-exchange](../guides/authentication.md).
+exchange](../guides/authentication#token-exchange-rfc8693).
 :::
 
 ## Core Concepts
@@ -48,10 +48,15 @@ to continue discussions, provide updates, or give feedback.
 - Only users in the user groups associated with a context can interact with its
   threads and replies.
 - Threads and replies **require a user access token** obtained through an
-  RFC8693-compliant [token exchange process](../guides/authentication.md).
+  RFC8693-compliant [token exchange process](../guides/authentication#token-exchange-rfc8693).
 - Collaboration contexts are managed using **application-level access tokens**.
 
 ## API Usage
+
+:::note
+If calling these APIs from a browser, your deployment will need the
+`CorsOrigin` CloudFormation parameter for your deployment.
+:::
 
 ### Collaboration Contexts
 
@@ -77,10 +82,3 @@ to continue discussions, provide updates, or give feedback.
 | Post a reply           | `POST /replies`                      | User token |
 | List replies in thread | `GET /replies?filter[threadId]={id}` | User token |
 | Get reply by ID        | `GET /replies/{id}`                  | User token |
-
-## Authentication Summary
-
-- Use an application token to manage collaboration contexts.
-- Use a user token (via token exchange) to post or read threads and replies.
-- For more details, including how to set up identity provider integration and
-  perform a token exchange, see the Authentication Guide.
