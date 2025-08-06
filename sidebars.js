@@ -64,6 +64,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/collaboration-apis',
         },
+        {
+          type: 'doc',
+          id: 'guides/user-management',
+        },
       ],
     },
     {

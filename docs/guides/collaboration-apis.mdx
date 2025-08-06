@@ -12,7 +12,7 @@ and replies.
 :::note
 This guide assumes that you have already configured authentication for
 your deployment. Some APIs require a user access token obtained via [token
-exchange](../guides/authentication#token-exchange-rfc8693).
+exchange](./authentication#token-exchange-rfc8693).
 :::
 
 ## Core Concepts
@@ -48,7 +48,7 @@ to continue discussions, provide updates, or give feedback.
 - Only users in the user groups associated with a context can interact with its
   threads and replies.
 - Threads and replies **require a user access token** obtained through an
-  RFC8693-compliant [token exchange process](../guides/authentication#token-exchange-rfc8693).
+  RFC8693-compliant [token exchange process](./authentication#token-exchange-rfc8693).
 - Collaboration contexts are managed using **application-level access tokens**.
 
 ## API Usage
@@ -102,7 +102,7 @@ participate in a discussion:
 
 ### Get an Application Access Token
 
-Use the [Client Credentials Flow](../guides/authentication#client-credentials) to get a token for creating and managing
+Use the [Client Credentials Flow](./authentication#client-credentials) to get a token for creating and managing
 collaboration contexts and user groups.
 
 ```bash
