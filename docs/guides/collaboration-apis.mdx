@@ -1,0 +1,249 @@
+---
+id: collaboration-apis
+title: Collaboration APIs
+description: Use Vertex Platform's collaboration APIs to communicate with team members.
+---
+
+This guide explains the core concepts and API usage for enabling collaboration
+within your application using the Vertex Collaboration APIs. These APIs allow
+your users to participate in structured discussions through contexts, threads,
+and replies.
+
+:::note
+This guide assumes that you have already configured authentication for
+your deployment. Some APIs require a user access token obtained via [token
+exchange](./authentication#token-exchange-rfc8693).
+:::
+
+## Core Concepts
+
+### Collaboration Context
+
+A **Collaboration Context** is a container for discussions related to a specific
+resource — such as a 3D model, a project, or a design session. Each context
+defines who can participate via one or more associated **User Groups**.
+
+### Thread
+
+A **Thread** represents a focused discussion within a collaboration context.
+Each thread has two important properties that help categorize and manage
+discussions:
+
+- **Type:** A thread can be either an `issue` or a `comment`. An `issue` thread
+  is typically used to flag problems, bugs, or actionable items that may require
+  resolution. A `comment` thread is intended for general discussion, feedback,
+  or non-blocking remarks.
+
+- **Status:** Threads have a status that indicates their current state. An
+  `open` thread signifies an active discussion or unresolved issue, while a
+  `resolved` thread indicates that the topic has been addressed or closed.
+
+### Reply
+
+A **Reply** is an individual message within a thread. Users can reply to threads
+to continue discussions, provide updates, or give feedback.
+
+## Access Control
+
+- Only users in the user groups associated with a context can interact with its
+  threads and replies.
+- Threads and replies **require a user access token** obtained through an
+  RFC8693-compliant [token exchange process](./authentication#token-exchange-rfc8693).
+- Collaboration contexts are managed using **application-level access tokens**.
+
+## API Usage
+
+:::note
+If calling these APIs from a browser, your deployment will need the
+`CorsOrigin` CloudFormation parameter for your deployment.
+:::
+
+See our [API reference](https://docs.vertex3d.com) for more details and examples
+of the Collaboration APIs.
+
+### Collaboration Contexts
+
+| Operation                          | Endpoint                                        | Auth      |
+| ---------------------------------- | ----------------------------------------------- | --------- |
+| Create a context                   | `POST /collaboration-contexts`                  | App token |
+| Associate user groups to a context | `POST /collaboration-contexts/{id}/user-groups` | App token |
+| List all contexts                  | `GET /collaboration-contexts`                   | App token |
+| Get a context by ID                | `GET /collaboration-contexts/{id}`              | App token |
+
+### Threads
+
+| Operation               | Endpoint                                           | Auth       |
+| ----------------------- | -------------------------------------------------- | ---------- |
+| Create a thread         | `POST /threads`                                    | User token |
+| List threads by context | `GET /threads?filter[collaborationContextId]={id}` | User token |
+| Get thread by ID        | `GET /threads/{id}`                                | User token |
+
+### Replies
+
+| Operation              | Endpoint                             | Auth       |
+| ---------------------- | ------------------------------------ | ---------- |
+| Post a reply           | `POST /replies`                      | User token |
+| List replies in thread | `GET /replies?filter[threadId]={id}` | User token |
+| Get reply by ID        | `GET /replies/{id}`                  | User token |
+
+## Example: End-to-End Flow
+
+This example demonstrates how to use the Collaboration APIs to enable a user to
+participate in a discussion:
+
+1. Get an application access token (for managing contexts)
+1. Create a User Group
+1. Create a User and associate to User Group
+1. Create a collaboration context
+1. Associate a user group with the context
+1. Perform a token exchange for a user access token
+1. Create a thread
+1. Post a reply
+
+### Get an Application Access Token
+
+Use the [Client Credentials Flow](./authentication#client-credentials) to get a token for creating and managing
+collaboration contexts and user groups.
+
+```bash
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/oauth2/token" \
+  --header "Authorization: Basic $(echo -n "[YOUR_CLIENT_ID]:[YOUR_CLIENT_SECRET]" | base64)" \
+  --header "Content-Type: application/x-www-form-urlencoded" \
+  --data-urlencode "grant_type=client_credentials"
+```
+
+### Create a User Group
+
+User groups define which users can participate in a collaboration context.
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/user-groups' \
+  --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "user-group",
+      "attributes": {
+        "name": "Design Reviewers"
+      }
+    }
+  }'
+```
+
+### Create a User and Associate to User Group
+
+Users must be created before they can participate in collaboration. When using
+token exchange, the user's `idpId` should match the user ID from your external
+identity provider.
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/users' \
+  --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "user",
+      "attributes": {
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com",
+        "idpId": "00u123example"  // Must match the user ID from your IdP
+      }
+    }
+  }'
+```
+
+You can then assign the user to a user group:
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/user-groups/YOUR_USER_GROUP_ID/users' \
+  --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": [
+      { "type": "user", "id": "YOUR_USER_ID" }
+    ]
+  }'
+```
+
+### Create a Collaboration Context
+
+Create a collaboration context and save the returned context ID.
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/collaboration-contexts' \
+  --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "collaboration-context",
+      "attributes": {}
+    }
+  }'
+```
+
+### Associate a User Group with the Context
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/collaboration-contexts/YOUR_CONTEXT_ID/user-groups' \
+  --header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": [
+      { "type": "user-group", "id": "YOUR_USER_GROUP_ID" }
+    ]
+  }'
+```
+
+### Perform a Token Exchange for a User Access Token
+
+Exchange an access token from your external identity provider (IdP) for a Vertex
+access token.
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/token/exchange' \
+  --header 'Authorization: Basic BASE64_ENCODED_CLIENT_ID_AND_SECRET' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
+  --data-urlencode 'subject_token=EXTERNAL_IDP_ACCESS_TOKEN' \
+  --data-urlencode 'subject_token_type=urn:ietf:params:oauth:token-type:access_token'
+```
+
+This returns an opaque `access_token` that represents the authenticated user.
+Use this `USER_ACCESS_TOKEN` for all thread and reply operations.
+
+### Create a Thread
+
+Create a thread save the returned thread ID.
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/collaboration-contexts/YOUR_CONTEXT_ID/threads' \
+  --header 'Authorization: Bearer USER_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "thread",
+      "attributes": {
+        "body": "Gap found in left flange",
+        "type": "issue",
+        "status": "open"
+      }
+    }
+  }'
+```
+
+### Post a Reply
+
+```bash
+curl --request POST 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID/replies' \
+  --header 'Authorization: Bearer USER_ACCESS_TOKEN' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "reply",
+      "attributes": {
+        "body": "We will update the CAD file to fix this issue."
+      }
+    }
+  }'
+```

@@ -1,0 +1,89 @@
+---
+id: user-management
+title: User management
+description: Use the User Management APIs to manage users and groups within the Vertex Platform.
+---
+
+The Vertex Platform supports managing **Users** and **User Groups**, which are
+key components for controlling access and participation in collaboration
+workflows.
+
+This guide explains:
+
+- What users and user groups represent
+- How external identity providers relate to users in the system
+- The APIs available to create and manage them
+
+## Core Concepts
+
+### Users
+
+A **User** represents an individual who can participate in collaboration. Each
+user must be uniquely identified and tied to an external identity provider (IdP)
+when integrating with external authentication systems.
+
+- To associate a user with an external IdP, you must set the `idpId` field.
+- The `idpId` **must match** the user identifier returned by your IdP during
+  token exchange (e.g., the `sub` field from the `/userinfo` response).
+- Some endpoints (such as `/threads` and `/replies`) require a user token.
+
+### User Groups
+
+A **User Group** is a collection of users.
+
+- Groups can have one or more users.
+- Groups can be given an external identifier using the `suppliedId` field.
+- A user can belong to multiple groups.
+
+## Relationship to Identity Providers
+
+When integrating with an external identity provider, such as Okta, Azure AD, or
+Auth0:
+
+- Users authenticate through your IdP.
+- Your application exchanges their IdP token using the [Token Exchange flow
+  (RFC8693)](./authentication#token-exchange-rfc8693) to obtain a Vertex
+  Platform user token.
+- The Platform uses the `OidcUserinfoEndpoint` Cloudformation param to retrieve
+  user claims (such as `sub`) and matches the `sub` to the `idpId` field on a
+  user in the Vertex Platform.
+
+If the `idpId` does not match an existing user, token exchange will fail.
+
+To support this:
+
+- Ensure users are provisioned in the Vertex Platform **before** performing
+  token exchange.
+- Always use the same identifier as returned by the IdP (case-sensitive).
+
+## API Overview
+
+See our [API reference](https://docs.vertex3d.com) for more details and examples
+of the User Management APIs.
+
+### User
+
+| Operation        | Endpoint                      | Auth      |
+| ---------------- | ----------------------------- | --------- |
+| Create a user    | `POST /users`                 | App token |
+| List users       | `GET /users`                  | App token |
+| Get a user       | `GET /users/{id}`             | App token |
+| List user groups | `GET /users/{id}/user-groups` | App token |
+
+### User Groups
+
+| Operation         | Endpoint                        | Auth      |
+| ----------------- | ------------------------------- | --------- |
+| Create a group    | `POST /user-groups`             | App token |
+| Get a group       | `GET /user-groups/{id}`         | App token |
+| Add user to group | `POST /users-groups/{id}/users` | App token |
+
+---
+
+## Best Practices
+
+- Provision users at the time of account or workspace creation, before
+  collaboration begins.
+- Use consistent and stable `idpId` values (e.g., UUIDs from the IdP).
+- Use groups to manage access at a logical level (e.g., "Reviewers",
+  "Engineers", "External Vendors").
