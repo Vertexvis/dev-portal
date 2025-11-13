@@ -68,6 +68,10 @@ module.exports = {
           type: 'doc',
           id: 'guides/user-management',
         },
+        {
+          type: 'doc',
+          id: 'guides/annotations-api',
+        },
       ],
     },
     {
