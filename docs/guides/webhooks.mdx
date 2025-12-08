@@ -295,14 +295,15 @@ Occurs when a Part Revision is updated using the `PATCH /part-revisions/:id` end
 
 ## Retry schedule
 
-| Retry number | Interval relative to last retry | Time relative to original attempt |
-| ------------ | ------------------------------- | --------------------------------- |
-| 1            | 5 mins                          | 5 mins                            |
-| 2            | 10 mins                         | 15 mins                           |
-| 3            | 45 mins                         | 1 hr                              |
-| 4            | 2 hrs                           | 3 hrs                             |
-| 5            | 3 hrs                           | 6 hrs                             |
-| 6            | 6 hrs                           | 12 hrs                            |
-| 7            | 12 hrs                          | 24 hrs                            |
-| 8            | 12 hrs                          | 36 hrs                            |
-| 9            | 12 hrs                          | 48 hrs                            |
+| Retry number | Interval relative to last retry | Approx Time relative to original attempt |
+| ------------ | ------------------------------- | ---------------------------------------  |
+| 1            | 1 mins                          | 1 mins                                   |
+| 2            | 5 mins                          | 10 mins                                  |
+| 3            | 15 mins                         | 30 mins                                  |
+| 4            | 30 hrs                          | 1 hr                                     |
+| 5            | 1 hrs                           | 2 hrs                                    |
+| 6            | 2 hrs                           | 4 hrs                                    |
+| 7            | 2 hrs                           | 6 hrs                                    |
+| 8            | 2 hrs                           | 8 hrs                                    |
+| 9            | 2 hrs                           | 10 hrs                                   |
+| 10           | 2 hrs                           | 12 hrs                                   |
