@@ -236,8 +236,9 @@ Use this `USER_ACCESS_TOKEN` for all thread and reply operations.
 ### Create a Thread
 
 Create a thread save the returned thread ID.
-
-__Please note that this endpoint accepts an optional reference payload to associate reference data to scenes or other Vertex concepts__
+:::note
+this endpoint accepts an optional reference payload to associate reference data to scenes or other Vertex concepts.
+:::
 
 ```bash
 curl --request POST 'https://platform.vertexvis.com/collaboration-contexts/YOUR_CONTEXT_ID/threads' \
@@ -284,8 +285,8 @@ These endpoints demonstrate how to update and filter your threads and replies.
 
 ### Update a Thread
 
-Updates an existing thread to modify the body, title, status or other fields. You can update isDrafted=false when you are ready for your thread to be visible in a list request. Any fields you do not want to change can be omitted.
-Editing the title or body will result in a new field `edited_at` to be populated on the thread, that will indicate the contents of the thread have been modified. Status and drafting state will not impact the `edited_at` field.
+Updates an existing thread to modify the body, title, status or other fields. You can update the drafting state when you are ready for your thread to be visible in a list request. Any fields you do not want to change can be omitted.
+Editing the title or body will result in a new field `editedAt` to be populated on the thread, that will indicate the contents of the thread have been modified. Status and drafting state will not impact the `editedAt` field.
 
 ```bash
 curl --request PATCH 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
@@ -328,7 +329,7 @@ curl --request DELETE 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
 
 ### Update a Reply
 
-Editing the body of a reply will result in a new field `edited_at` to be populated on the reply, this field indicates that the reply has been modified from its original state. Drafting state will not impact the `edited_at` field.
+Editing the body of a reply will result in a new field `editedAt` to be populated on the reply, this field indicates that the reply has been modified from its original state. Drafting state will not impact the `editedAt` field.
 
 ```bash
 curl --request PATCH 'https://platform.vertexvis.com/replies/YOUR_REPLY_ID' \
@@ -357,8 +358,9 @@ curl --request DELETE 'https://platform.vertexvis.com/replies/YOUR_REPLY_ID' \
 
 
 ## Thread and Reply Attachments
- __When building applications that leverage attachments, it is recommended to set your thread as drafted so that you can handle the asynchronous upload of your file data prior to your thread being visible to other users__
-
+:::note
+ When building applications that leverage attachments, it is recommended to set your thread as drafted so that you can handle the asynchronous upload of your file data prior to your thread being visible to other users.
+:::
 
 1. [Create an Attachment](#create-an-attachment)
 1. [List Attachments](#list-attachments)
@@ -403,7 +405,7 @@ curl --request GET 'https://platform.vertexvis.com/attachments?filter[relationsh
 
 ### Create Upload Url For Attachment
 
-Creates an upload url for an attachment. This requires the precondition that the attachment type is of type `file`.
+Creates an upload url for an attachment. This requires that the attachment is of `type`.
 The authoring user of the attachment is the only user allowed to create an upload url.
 
 ```bash
@@ -422,7 +424,7 @@ curl --request POST 'https://platform.vertexvis.com/attachments/{attachmentId}/u
 
 ### Create Download Url For Attachment
 
-Creates a download url for an attachment. This requires the precondition that the attachment type is of type `file`.
+Creates a download url for an attachment. This requires that the attachment is of `type`.
 Anyone who has access to the Collaboration Context will have the ability to create a download url.
 
 ```bash
