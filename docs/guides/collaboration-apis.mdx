@@ -365,6 +365,7 @@ curl --request DELETE 'https://platform.vertexvis.com/replies/YOUR_REPLY_ID' \
 1. [Create an Attachment](#create-an-attachment)
 1. [List Attachments](#list-attachments)
 1. [Create Upload Url For Attachment](#create-upload-url-for-attachment)
+1. [Upload file with url](#upload-file-with-url)
 1. [Create Download Url For Attachment](#create-download-url-for-attachment)
 
 
@@ -421,6 +422,16 @@ curl --request POST 'https://platform.vertexvis.com/attachments/{attachmentId}/u
     }
 }'
 ```
+
+### Upload file with url
+
+Upload the file with the returned upload url by performing a PUT request with the file you want to upload.
+
+```bash
+curl --location --request PUT '{UPLOAD_URL}' \
+  --data-binary '@/path/to/file'
+```
+
 
 ### Create Download Url For Attachment
 
