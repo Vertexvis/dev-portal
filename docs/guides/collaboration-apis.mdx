@@ -222,7 +222,7 @@ Exchange an access token from your external identity provider (IdP) for a Vertex
 access token.
 
 ```bash
-curl --request POST 'https://platform.vertexvis.com/token/exchange' \
+curl --request POST 'https://platform.vertexvis.com/oauth2/token' \
   --header 'Authorization: Basic BASE64_ENCODED_CLIENT_ID_AND_SECRET' \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:token-exchange' \
