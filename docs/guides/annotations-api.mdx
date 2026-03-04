@@ -1,0 +1,155 @@
+---
+title: Annotations
+description: Learn how to persist, manage, and visualize annotations in your Vertex scenes using the Platform APIs and Web SDK.
+---
+
+# Annotations
+
+Annotations let you overlay contextual information on your 3D scenes—such as measurements, markups, and callouts—so that your users can collaborate and document their work.
+
+This guide explains how to create, store, and retrieve annotations in your application using the Vertex Platform APIs and Web SDK.
+
+---
+
+## Overview
+
+The Vertex Platform supports **persistent annotations**, meaning you can save annotation data to the platform and rehydrate it later when loading a scene or scene view.
+
+This persistence makes it easier to build **collaborative, stateful visualization experiences** without having to manage your own annotation storage or synchronization logic.
+
+Annotations are organized into **annotation sets**, which can be attached to scenes and activated on one or more scene views. Each annotation describes how it should be rendered (for example, a callout, markup, or measurement) using a simple JSON schema.
+
+---
+
+## How It Works
+
+### Data Model
+
+Annotations are stored using the following structure:
+
+| Table                            | Description                                                                              |
+| -------------------------------- | ---------------------------------------------------------------------------------------- |
+| **scene_annotation_set**         | A group of annotations associated with a scene.                                          |
+| **scene_annotation**             | An individual annotation within a set. Stores JSON describing how to render it.          |
+| **scene_annotation_association** | Links annotations to specific scene items (e.g., to show a leader line or bounding box). |
+| **scene_view_annotation_set**    | Tracks which annotation sets are currently active in a given scene view.                 |
+
+Annotation data is stored as JSON, allowing you to use either Vertex-provided annotation types (such as callouts or measurements) or define your own.
+
+#### Example
+
+```json
+{
+  "type": "com.vertexvis.annotations.measurement",
+  "pointA": [1.0, 2.0, 3.0],
+  "pointB": [4.0, 5.0, 6.0]
+}
+```
+
+---
+
+## Managing Annotations via the API
+
+### Scene Annotation Sets
+
+Use these endpoints to create and manage annotation sets for a scene:
+
+| Method   | Endpoint                      | Description                                     |
+| -------- | ----------------------------- | ----------------------------------------------- |
+| `POST`   | `/scenes/:id/annotation-sets` | Create a new annotation set for a scene.        |
+| `GET`    | `/scene-annotation-sets`      | List all annotation sets (filter by `sceneId`). |
+| `GET`    | `/scene-annotation-sets/:id`  | Retrieve a single annotation set.               |
+| `PATCH`  | `/scene-annotation-sets/:id`  | Update a set’s properties.                      |
+| `DELETE` | `/scene-annotation-sets/:id`  | Delete a set.                                   |
+
+### Scene Annotations
+
+Manage annotations within a set:
+
+| Method   | Endpoint                     | Description                                     |
+| -------- | ---------------------------- | ----------------------------------------------- |
+| `POST`   | `/scene-annotation-sets/:id` | Create an annotation in the set.                |
+| `GET`    | `/scene-annotations`         | List annotations (filter by `annotationSetId`). |
+| `GET`    | `/scene-annotations/:id`     | Retrieve a single annotation.                   |
+| `PATCH`  | `/scene-annotations/:id`     | Update annotation data.                         |
+| `DELETE` | `/scene-annotations/:id`     | Delete an annotation.                           |
+
+### Scene View Annotation Sets
+
+Control which annotation sets are visible in a scene view:
+
+| Method   | Endpoint                           | Description                                   |
+| -------- | ---------------------------------- | --------------------------------------------- |
+| `POST`   | `/scene-views/:id/annotation-sets` | Add an annotation set to a scene view.        |
+| `GET`    | `/scene-view-annotation-sets`      | List active annotation sets for a scene view. |
+| `DELETE` | `/scene-view-annotation-sets/:id`  | Remove an annotation set from a scene view.   |
+
+You can also manage annotations via **gRPC Web APIs**, which power real-time updates in the Vertex Web SDK.
+
+---
+
+## Real-Time Updates with Subscriptions
+
+When annotations are created, updated, or deleted, those changes are automatically streamed to connected clients using the **Scene View subscription mechanism** (see [PLAT0019]).
+The platform sends events such as:
+
+- `AnnotationSetAdded`
+- `AnnotationSetDeleted`
+- `AnnotationChanged`
+
+These events keep all viewers synchronized—ideal for collaborative editing or real-time feedback scenarios.
+
+---
+
+## Using Annotations in the Web SDK
+
+The Web SDK handles the client-side logic for annotations: subscribing to scene view events, maintaining state, and emitting events when annotations change.
+
+Applications can listen to these events and render the corresponding annotation components.
+
+### Example: Vanilla JavaScript
+
+```html
+<vertex-viewer id="viewer"></vertex-viewer>
+<script>
+  const viewer = document.getElementById('viewer');
+
+  viewer.addEventListener('annotationStateChanged', (event) => {
+    const { annotations } = event.detail;
+    viewer.innerHTML = '';
+    annotations.forEach((annotation) => {
+      if (annotation.type === 'com.vertexvis.annotations.callout') {
+        const el = document.createElement('vertex-annotation-callout');
+        el.data = annotation;
+        viewer.appendChild(el);
+      }
+    });
+  });
+</script>
+```
+
+### Example: React
+
+```jsx
+function MyViewer() {
+  const [annotations, setAnnotations] = React.useState([]);
+
+  return (
+    <vertex-viewer
+      onAnnotationStateChanged={(e) => setAnnotations(e.detail.annotations)}
+    >
+      {annotations.map((annotation) => {
+        switch (annotation.type) {
+          case 'com.vertexvis.annotations.callout':
+            return (
+              <vertex-annotation-callout
+                key={annotation.id}
+                data={annotation}
+              />
+            );
+        }
+      })}
+    </vertex-viewer>
+  );
+}
+```

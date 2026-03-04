@@ -9,9 +9,9 @@ This project requires `yarn` and `nvm`.
 ### Local Development
 
 ```shell
-$ nvm use
-$ yarn install
-$ yarn start
+nvm use
+yarn install
+yarn start
 ```
 
 These commands activate the appropriate version of `node.js`, install/update package dependencies, start a local development server, and open up a browser window pointing at the local dev server. Most changes are reflected live without having to restart the server.
@@ -19,7 +19,7 @@ These commands activate the appropriate version of `node.js`, install/update pac
 ### Build
 
 ```shell
-$ yarn build
+yarn build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
@@ -29,7 +29,7 @@ This command generates static content into the `build` directory and can be serv
 _NOTE:_ Production deployment will happen automatically upon any main merge. The instructions below can be used to do so manually.
 
 ```shell
-$ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
+GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
