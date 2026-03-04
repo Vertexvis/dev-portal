@@ -49,6 +49,57 @@ to continue discussions, provide updates, or give feedback.
 An **Attachment** is an additional linked relationship to a reply or a thread. Users can attach
 files and other kinds of data to be provided as additional context for a thread or reply.
 
+### Body Document
+A **Body Document** is a field contained within a reply or a thread. The body document is modeled as an Abstract Syntax Tree (AST) that enables
+clients to specify various forms of textual representations for **threads** and **replies**. Vertex allows you to specify mentions within your thread or reply, 
+and then your client can display the AST however the client decides to display and style the data therein. 
+
+#### Example - Body Document With Text Only
+```json
+    "document": {
+        "type": "text-document-v1",
+        "root": {
+          "type": "root-node",
+          "content": [
+              {
+                "type": "paragraph-node",
+                "content":[
+                    {
+                      "type": "text-node",
+                      "text": "Text Only Document"
+                    }
+                ]
+              }
+          ]
+        }
+    }
+```
+
+#### Example - Body Document With Mention
+```json
+    "document": {
+        "type": "text-document-v1",
+        "root": {
+          "type": "root-node",
+          "content": [
+              {
+                "type": "paragraph-node",
+                "content":[
+                    {
+                      "type": "text-node",
+                      "text": "Text Only Document"
+                    }
+                ]
+                "content": [
+                  { "type": "text-node", "text": "Hey " },
+                  { "type": "mention-node", "userId": "{USER_UUID}" },
+                  { "type": "text-node", "text": ", could you please review this?" }
+                ]
+              }
+          ]
+        }
+    }
+```
 
 ## Access Control
 
@@ -248,7 +299,26 @@ curl --request POST 'https://platform.vertexvis.com/collaboration-contexts/YOUR_
     "data": {
       "type": "thread",
       "attributes": {
-        "body": "Gap found in left flange",
+        "withBodyDocument": {
+            "type": "with-body-document",
+            "document": {
+               "type": "text-document-v1",
+               "root": {
+                  "type": "root-node",
+                  "content": [
+                     {
+                        "type": "paragraph-node",
+                        "content":[
+                           {
+                              "type": "text-node",
+                              "text": "Gap found in left flange"
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         },
         "type": "issue",
         "status": "open"
       }
@@ -266,7 +336,26 @@ curl --request POST 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID/repli
     "data": {
       "type": "reply",
       "attributes": {
-        "body": "We will update the CAD file to fix this issue."
+        "withBodyDocument": {
+            "type": "with-body-document",
+            "document": {
+               "type": "text-document-v1",
+               "root": {
+                  "type": "root-node",
+                  "content": [
+                     {
+                        "type": "paragraph-node",
+                        "content": [
+                           {
+                              "type": "text-node",
+                              "text": "We will update the CAD file to fix this issue."
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         }
       }
     }
   }'
@@ -286,7 +375,7 @@ These endpoints demonstrate how to update and filter your threads and replies.
 ### Update a Thread
 
 Updates an existing thread to modify the body, title, status or other fields. You can update the drafting state when you are ready for your thread to be visible in a list request. Any fields you do not want to change can be omitted.
-Editing the title or body will result in a new field `editedAt` to be populated on the thread, that will indicate the contents of the thread have been modified. Status and drafting state will not impact the `editedAt` field.
+Editing the title or body document will result in a new field `editedAt` to be populated on the thread, that will indicate the contents of the thread have been modified. Status and drafting state will not impact the `editedAt` field, nor will modifying the other fields while the thread is in a "drafting" state.
 
 ```bash
 curl --request PATCH 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
@@ -295,7 +384,26 @@ curl --request PATCH 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
   --data '{
     "data": {
       "attributes": {
-        "body": "Updated Body",
+        "withBodyDocument": {
+            "type": "with-body-document",
+            "document":{
+               "type": "text-document-v1",
+               "root": {
+                  "type": "root-node",
+                  "content": [
+                     {
+                        "type": "paragraph-node",
+                        "content": [
+                           {
+                              "type": "text-node",
+                              "text": "Updated Body"
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         },
         "isDrafting": false,
         "status": "resolved",
         "title": "Updated Title"
@@ -329,7 +437,7 @@ curl --request DELETE 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
 
 ### Update a Reply
 
-Editing the body of a reply will result in a new field `editedAt` to be populated on the reply, this field indicates that the reply has been modified from its original state. Drafting state will not impact the `editedAt` field.
+Editing the body document of a reply will result in a new field `editedAt` to be populated on the reply, this field indicates that the reply has been modified from its original state. Drafting state will not impact the `editedAt` field.
 
 ```bash
 curl --request PATCH 'https://platform.vertexvis.com/replies/YOUR_REPLY_ID' \
@@ -338,7 +446,26 @@ curl --request PATCH 'https://platform.vertexvis.com/replies/YOUR_REPLY_ID' \
   --data '{
     "data": {
       "attributes": {
-        "body": "Updated reply body",
+        "withBodyDocument": {
+            "type": "with-body-document",
+            "document": {
+               "type": "text-document-v1",
+               "root":{
+                  "type": "root-node",
+                  "content": [
+                     {
+                        "type": "paragraph-node",
+                        "content": [
+                           {
+                              "type": "text-node",
+                              "text": "Updated reply body"
+                           }
+                        ]
+                     }
+                  ]
+               }
+            }
+         },
         "isDrafting": false
       },
       "type": "reply"
