@@ -126,7 +126,7 @@ of the Collaboration APIs.
 
 | Operation               | Endpoint                                           | Auth       |
 | ----------------------- | -------------------------------------------------- | ---------- |
-| Create a thread         | `POST /threads`                                    | User token |
+| Create a thread         | `POST /collaboration-contexts/{id}/threads`        | User token |
 | List threads by context | `GET /threads?filter[collaborationContextId]={id}` | User token |
 | Get thread by ID        | `GET /threads/{id}`                                | User token |
 | Update a thread         | `PATCH /threads/{id}`                              | User token |
@@ -136,7 +136,7 @@ of the Collaboration APIs.
 
 | Operation              | Endpoint                             | Auth       |
 | ---------------------- | ------------------------------------ | ---------- |
-| Create a reply         | `POST /replies`                      | User token |
+| Create a reply         | `POST /threads/{}/replies`           | User token |
 | List replies in thread | `GET /replies?filter[threadId]={id}` | User token |
 | Get reply by ID        | `GET /replies/{id}`                  | User token |
 | Update a reply         | `PATCH /replies/{id}`                | User token |

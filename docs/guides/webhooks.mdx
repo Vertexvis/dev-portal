@@ -293,6 +293,86 @@ Occurs when a Part Revision is updated using the `PATCH /part-revisions/:id` end
   - `part` will be included if the Part Revision references a Part.
   - `defaultPartRendition` will be included if the Part Revision has a default Part Rendition.
 
+#### `thread.created`
+
+Occurs when a Thread is created using the `POST /collaboration-contexts/:id/threads` endpoint.
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Thread.
+    - This resource will include the `body_document`, `title`, `status`, `is_drafting` for this thread.
+  - `collaborationContextId` will be included with the Thread.
+  - `bodyText` will also be included, which is a textual representation of the document of the thread. 
+  - `mentions` will be included as an array of users mentioned within the document of the thread. 
+
+#### `thread.updated`
+
+Occurs when a Thread is updated using the `PATCH /threads/:id` endpoint.
+
+- `data.attributes.changed` for this event can contain the following properties:
+  - `with_body` if the document of the thread changed.
+  - `title` if the title of the thread changed.
+  - `status` if the status of the thread changed.
+  - `is_drafting` if the drafting state of the thread changed.
+
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Thread.
+    - This resource will include the `body_document`, `title`, `status`, `is_drafting` for this thread.
+  - `collaborationContextId` will be included with the Thread.
+  - `bodyText` will also be included, which is a textual representation of the document of the thread. 
+  - `mentions` will be included as an array of users mentioned within the document of the thread. 
+
+#### `thread.deleted`
+
+Occurs when a Thread is deleted using the `DELETE /threads/:id` endpoint.
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Thread.
+    - This resource will include the `body_document`, `title`, `status`, `is_drafting` for this thread.
+  - `collaborationContextId` will be included with the Thread.
+
+
+#### `reply.created`
+
+Occurs when a Reply is created using the `POST /threads/:id/replies` endpoint.
+
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Reply.
+    - This resource will include the `body_document` and `is_drafting` for this reply.
+  - `collaborationContextId` will be included with the Reply.
+  - `threadId` will be included with the Reply.
+  - `bodyText` will also be included, which is a textual representation of document of the reply. 
+  - `mentions` will be included as an array of users mentioned within the document of the reply. 
+
+#### `reply.updated`
+
+Occurs when a Reply is updated using the `PATCH /replies/:id` endpoint.
+
+- `data.attributes.changed` for this event can contain the following properties:
+  - `with_body` if the document of the reply changed.
+  - `is_drafting` if the drafting state of the reply changed.
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Reply.
+    - This resource will include the `body_document` and `is_drafting` for this reply.
+  - `collaborationContextId` will be included with the Reply.
+  - `threadId` will be included with the Reply.
+  - `bodyText` will also be included, which is a textual representation of document of the reply. 
+  - `mentions` will be included as an array of users mentioned within the document of the reply. 
+
+#### `reply.deleted`
+
+Occurs when a Reply is deleted using the `DELETE /replies/:id` endpoint.
+
+
+- `included` for this event can contain the following resources:
+  - `self` will always be included and references the Reply.
+    - This resource will include the `body_document` and `is_drafting` for this reply.
+  - `collaborationContextId` will be included with the Reply.
+  - `threadId` will be included with the Reply.
+
+
 ## Retry schedule
 
 | Retry number | Interval relative to last retry | Approx Time relative to original attempt |
