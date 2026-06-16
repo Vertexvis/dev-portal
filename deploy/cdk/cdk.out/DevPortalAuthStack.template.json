@@ -1,0 +1,1781 @@
+{
+ "Description": "CloudFront + Cognito auth layer for developer.vertex3d.com",
+ "Resources": {
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_email",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "LambdaConfig": {
+     "PostConfirmation": {
+      "Fn::GetAtt": [
+       "PostConfirmationFnE0D8EF4F",
+       "Arn"
+      ]
+     },
+     "PreSignUp": {
+      "Fn::GetAtt": [
+       "PreSignUpFn7227C88E",
+       "Arn"
+      ]
+     },
+     "PreTokenGeneration": {
+      "Fn::GetAtt": [
+       "PreTokenFnC674ADAC",
+       "Arn"
+      ]
+     }
+    },
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 12,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": true,
+      "RequireUppercase": true,
+      "TemporaryPasswordValidityDays": 7
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": true,
+      "Name": "email",
+      "Required": true
+     },
+     {
+      "Mutable": true,
+      "Name": "given_name",
+      "Required": false
+     },
+     {
+      "Mutable": true,
+      "Name": "family_name",
+      "Required": false
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "status"
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "dev-portal-users",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPool/Resource"
+   }
+  },
+  "UserPoolPreSignUpCognito3AFF8F1F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PreSignUpFn7227C88E",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPool/PreSignUpCognito"
+   }
+  },
+  "UserPoolPostConfirmationCognito0E6001F8": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PostConfirmationFnE0D8EF4F",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPool/PostConfirmationCognito"
+   }
+  },
+  "UserPoolPreTokenGenerationCognito84D0CADA": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PreTokenFnC674ADAC",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPool/PreTokenGenerationCognito"
+   }
+  },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AccessTokenValidity": 60,
+    "AllowedOAuthFlows": [
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "email",
+     "openid",
+     "profile"
+    ],
+    "CallbackURLs": [
+     "https://developer-preview.vertex3d.com/callback",
+     "https://developer.vertex3d.com/callback"
+    ],
+    "ClientName": "dev-portal-client",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "IdTokenValidity": 60,
+    "LogoutURLs": [
+     "https://developer-preview.vertex3d.com",
+     "https://developer.vertex3d.com"
+    ],
+    "PreventUserExistenceErrors": "ENABLED",
+    "RefreshTokenValidity": 43200,
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "TokenValidityUnits": {
+     "AccessToken": "minutes",
+     "IdToken": "minutes",
+     "RefreshToken": "minutes"
+    },
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPoolClient/Resource"
+   }
+  },
+  "UserPoolDomain5479B217": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "CustomDomainConfig": {
+     "CertificateArn": "arn:aws:acm:us-east-1:396783039869:certificate/6a6280da-071b-45dd-8786-3b211049ffb1"
+    },
+    "Domain": "dev-portal-auth.vertex3d.com",
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPoolDomain/Resource"
+   }
+  },
+  "UserPoolDomainCloudFrontDomainName0B254952": {
+   "Type": "Custom::UserPoolCloudFrontDomainName",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CognitoIdentityServiceProvider\",\"action\":\"describeUserPoolDomain\",\"parameters\":{\"Domain\":\"",
+       {
+        "Ref": "UserPoolDomain5479B217"
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"",
+       {
+        "Ref": "UserPoolDomain5479B217"
+       },
+       "\"}}"
+      ]
+     ]
+    },
+    "Update": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"service\":\"CognitoIdentityServiceProvider\",\"action\":\"describeUserPoolDomain\",\"parameters\":{\"Domain\":\"",
+       {
+        "Ref": "UserPoolDomain5479B217"
+       },
+       "\"},\"physicalResourceId\":{\"id\":\"",
+       {
+        "Ref": "UserPoolDomain5479B217"
+       },
+       "\"}}"
+      ]
+     ]
+    },
+    "InstallLatestAwsSdk": false
+   },
+   "DependsOn": [
+    "UserPoolDomainCloudFrontDomainNameCustomResourcePolicyF374B62C"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPoolDomain/CloudFrontDomainName/Resource/Default"
+   }
+  },
+  "UserPoolDomainCloudFrontDomainNameCustomResourcePolicyF374B62C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "cognito-idp:DescribeUserPoolDomain",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "UserPoolDomainCloudFrontDomainNameCustomResourcePolicyF374B62C",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/UserPoolDomain/CloudFrontDomainName/CustomResourcePolicy/Resource"
+   }
+  },
+  "SsmUserPoolId515A138C": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "/dev-portal/cognito/user-pool-id",
+    "Type": "String",
+    "Value": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SsmUserPoolId/Resource"
+   }
+  },
+  "SsmClientId337546DA": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "/dev-portal/cognito/client-id",
+    "Type": "String",
+    "Value": {
+     "Ref": "UserPoolClient2F5918F7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SsmClientId/Resource"
+   }
+  },
+  "SsmCognitoDomain43615430": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "/dev-portal/cognito/domain",
+    "Type": "String",
+    "Value": "https://dev-portal-auth.vertex3d.com"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SsmCognitoDomain/Resource"
+   }
+  },
+  "SsmActiveDomain6697EC3F": {
+   "Type": "AWS::SSM::Parameter",
+   "Properties": {
+    "Name": "/dev-portal/active-domain",
+    "Type": "String",
+    "Value": "developer-preview.vertex3d.com"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SsmActiveDomain/Resource"
+   }
+  },
+  "AllowedDomainsParam3121C8F9": {
+   "Type": "Custom::AWS",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+      "Arn"
+     ]
+    },
+    "Create": "{\"service\":\"SSM\",\"action\":\"putParameter\",\"parameters\":{\"Name\":\"/dev-portal/cognito/allowed-domains\",\"Value\":\"vertex3d.com,vertexvis.com\",\"Type\":\"StringList\",\"Description\":\"Email domains eligible for self-enrollment. Managed via /add-domain Slack command — do NOT edit here.\",\"Overwrite\":false},\"ignoreErrorCodesMatching\":\"ParameterAlreadyExists\",\"physicalResourceId\":{\"id\":\"/dev-portal/cognito/allowed-domains\"}}",
+    "Delete": "{\"service\":\"SSM\",\"action\":\"deleteParameter\",\"parameters\":{\"Name\":\"/dev-portal/cognito/allowed-domains\"},\"ignoreErrorCodesMatching\":\"ParameterNotFound\"}",
+    "InstallLatestAwsSdk": true
+   },
+   "DependsOn": [
+    "AllowedDomainsParamCustomResourcePolicy78B0F843"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AllowedDomainsParam/Resource/Default"
+   }
+  },
+  "AllowedDomainsParamCustomResourcePolicy78B0F843": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ssm:DeleteParameter",
+        "ssm:PutParameter"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/cognito/allowed-domains"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AllowedDomainsParamCustomResourcePolicy78B0F843",
+    "Roles": [
+     {
+      "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AllowedDomainsParam/CustomResourcePolicy/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource"
+   }
+  },
+  "AWS679f53fac002430cb0da5b7982bd22872D164C4C": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "8b1c21efe0e24332f92ed71e98107d8a27ee1544c62b7b191805e0913fcfdf0f.zip"
+    },
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs24.x",
+    "Timeout": 120
+   },
+   "DependsOn": [
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AWS679f53fac002430cb0da5b7982bd2287/Resource",
+    "aws:asset:path": "asset.8b1c21efe0e24332f92ed71e98107d8a27ee1544c62b7b191805e0913fcfdf0f",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "SlackSecretEA96F13F": {
+   "Type": "AWS::SecretsManager::Secret",
+   "Properties": {
+    "Description": "Slack app credentials for dev portal access management. Populate after creating the Slack app.",
+    "Name": "dev-portal/slack",
+    "SecretString": "{\"signingSecret\":\"REPLACE_ME\",\"botToken\":\"REPLACE_ME\",\"adminChannelId\":\"REPLACE_ME\"}"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackSecret/Resource"
+   }
+  },
+  "PreSignUpFnServiceRoleC270C061": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PreSignUpFn/ServiceRole/Resource"
+   }
+  },
+  "PreSignUpFnServiceRoleDefaultPolicy21B404FA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ssm:GetParameter",
+       "Effect": "Allow",
+       "Resource": "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/cognito/allowed-domains"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PreSignUpFnServiceRoleDefaultPolicy21B404FA",
+    "Roles": [
+     {
+      "Ref": "PreSignUpFnServiceRoleC270C061"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PreSignUpFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "PreSignUpFn7227C88E": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "d1a5098506a6886f4849b1f412dbc55089bb97c3817dba0213bd20a077a390d1.zip"
+    },
+    "Description": "Cognito pre-signup: domain allowlist check",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "PreSignUpFnServiceRoleC270C061",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "PreSignUpFnServiceRoleDefaultPolicy21B404FA",
+    "PreSignUpFnServiceRoleC270C061"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PreSignUpFn/Resource",
+    "aws:asset:path": "asset.d1a5098506a6886f4849b1f412dbc55089bb97c3817dba0213bd20a077a390d1",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "PostConfirmationFnServiceRole5E4DC5AE": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PostConfirmationFn/ServiceRole/Resource"
+   }
+  },
+  "PostConfirmationFnServiceRoleDefaultPolicy7B6816CA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ssm:GetParameter",
+       "Effect": "Allow",
+       "Resource": "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/cognito/allowed-domains"
+      },
+      {
+       "Action": "cognito-idp:AdminUpdateUserAttributes",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:aws:cognito-idp:us-east-1:",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":userpool/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "SlackSecretEA96F13F"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PostConfirmationFnServiceRoleDefaultPolicy7B6816CA",
+    "Roles": [
+     {
+      "Ref": "PostConfirmationFnServiceRole5E4DC5AE"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PostConfirmationFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "PostConfirmationFnE0D8EF4F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "65c48fb208237676e2a32c9ac1018838834414438e692d4a978ac5a64b152b58.zip"
+    },
+    "Description": "Cognito post-confirmation: set status + notify Slack for pending users",
+    "Environment": {
+     "Variables": {
+      "SLACK_SECRET_ARN": {
+       "Ref": "SlackSecretEA96F13F"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "PostConfirmationFnServiceRole5E4DC5AE",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "PostConfirmationFnServiceRoleDefaultPolicy7B6816CA",
+    "PostConfirmationFnServiceRole5E4DC5AE"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PostConfirmationFn/Resource",
+    "aws:asset:path": "asset.65c48fb208237676e2a32c9ac1018838834414438e692d4a978ac5a64b152b58",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "PreTokenFnServiceRole9EDCF235": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PreTokenFn/ServiceRole/Resource"
+   }
+  },
+  "PreTokenFnC674ADAC": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "caeeecf2cc8937620bf0b7d6d3540df4200ee62b05f7db7083bab2cca451254c.zip"
+    },
+    "Description": "Cognito pre-token: block sign-in for pending/unapproved users",
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "PreTokenFnServiceRole9EDCF235",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "PreTokenFnServiceRole9EDCF235"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/PreTokenFn/Resource",
+    "aws:asset:path": "asset.caeeecf2cc8937620bf0b7d6d3540df4200ee62b05f7db7083bab2cca451254c",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "SlackAddDomainFnServiceRole78BFB224": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackAddDomainFn/ServiceRole/Resource"
+   }
+  },
+  "SlackAddDomainFnServiceRoleDefaultPolicyD71C9E6E": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ssm:GetParameter",
+        "ssm:PutParameter"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/cognito/allowed-domains"
+      },
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "SlackSecretEA96F13F"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SlackAddDomainFnServiceRoleDefaultPolicyD71C9E6E",
+    "Roles": [
+     {
+      "Ref": "SlackAddDomainFnServiceRole78BFB224"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackAddDomainFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "SlackAddDomainFnCA736244": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "0ec8825cb91892f4c8ee0201e4a3528571f58b711107f89042294a64ced4608b.zip"
+    },
+    "Description": "Slack /add-domain: appends a domain to the Cognito allowlist in SSM",
+    "Environment": {
+     "Variables": {
+      "SLACK_SECRET_ARN": {
+       "Ref": "SlackSecretEA96F13F"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "SlackAddDomainFnServiceRole78BFB224",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "SlackAddDomainFnServiceRoleDefaultPolicyD71C9E6E",
+    "SlackAddDomainFnServiceRole78BFB224"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackAddDomainFn/Resource",
+    "aws:asset:path": "asset.0ec8825cb91892f4c8ee0201e4a3528571f58b711107f89042294a64ced4608b",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "SlackInteractFnServiceRole6B4DE0F9": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackInteractFn/ServiceRole/Resource"
+   }
+  },
+  "SlackInteractFnServiceRoleDefaultPolicyFA067351": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "cognito-idp:AdminDisableUser",
+        "cognito-idp:AdminUpdateUserAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:aws:cognito-idp:us-east-1:",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          ":userpool/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Ref": "SlackSecretEA96F13F"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SlackInteractFnServiceRoleDefaultPolicyFA067351",
+    "Roles": [
+     {
+      "Ref": "SlackInteractFnServiceRole6B4DE0F9"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackInteractFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "SlackInteractFn74033654": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "afeae1b25e7ff32cd244a206f25f94ae2bf882a66bba34b9a9101f887196184e.zip"
+    },
+    "Description": "Slack interact: handles Approve/Deny button clicks for access requests",
+    "Environment": {
+     "Variables": {
+      "SLACK_SECRET_ARN": {
+       "Ref": "SlackSecretEA96F13F"
+      }
+     }
+    },
+    "Handler": "index.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "SlackInteractFnServiceRole6B4DE0F9",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "SlackInteractFnServiceRoleDefaultPolicyFA067351",
+    "SlackInteractFnServiceRole6B4DE0F9"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackInteractFn/Resource",
+    "aws:asset:path": "asset.afeae1b25e7ff32cd244a206f25f94ae2bf882a66bba34b9a9101f887196184e",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "SlackApi455BD61F": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Description": "Slack integration for dev portal access management",
+    "Name": "dev-portal-slack"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Resource"
+   }
+  },
+  "SlackApiCloudWatchRoleFE90C252": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/CloudWatchRole/Resource"
+   }
+  },
+  "SlackApiAccount0B2995EC": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "SlackApiCloudWatchRoleFE90C252",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "SlackApi455BD61F"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Account"
+   }
+  },
+  "SlackApiDeployment87FBB3011f6f83ed7e31e2c7e0a3cd0bf76d7fce": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Slack integration for dev portal access management",
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    }
+   },
+   "DependsOn": [
+    "SlackApiadddomainPOSTB9BAF507",
+    "SlackApiadddomain048E4E2E",
+    "SlackApiinteractPOST4DCBF068",
+    "SlackApiinteract6F5AAE0F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Deployment/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "SlackApiDeploymentStageprod6A8E211D": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "SlackApiDeployment87FBB3011f6f83ed7e31e2c7e0a3cd0bf76d7fce"
+    },
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    },
+    "StageName": "prod"
+   },
+   "DependsOn": [
+    "SlackApiAccount0B2995EC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/DeploymentStage.prod/Resource"
+   }
+  },
+  "SlackApiadddomain048E4E2E": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "SlackApi455BD61F",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "add-domain",
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/add-domain/Resource"
+   }
+  },
+  "SlackApiadddomainPOSTApiPermissionDevPortalAuthStackSlackApiA4FC8FAAPOSTadddomain5FA18FE9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SlackAddDomainFnCA736244",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:396783039869:",
+       {
+        "Ref": "SlackApi455BD61F"
+       },
+       "/",
+       {
+        "Ref": "SlackApiDeploymentStageprod6A8E211D"
+       },
+       "/POST/add-domain"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/add-domain/POST/ApiPermission.DevPortalAuthStackSlackApiA4FC8FAA.POST..add-domain"
+   }
+  },
+  "SlackApiadddomainPOSTApiPermissionTestDevPortalAuthStackSlackApiA4FC8FAAPOSTadddomain9BD0ABBC": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SlackAddDomainFnCA736244",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:396783039869:",
+       {
+        "Ref": "SlackApi455BD61F"
+       },
+       "/test-invoke-stage/POST/add-domain"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/add-domain/POST/ApiPermission.Test.DevPortalAuthStackSlackApiA4FC8FAA.POST..add-domain"
+   }
+  },
+  "SlackApiadddomainPOSTB9BAF507": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "SlackAddDomainFnCA736244",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SlackApiadddomain048E4E2E"
+    },
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/add-domain/POST/Resource"
+   }
+  },
+  "SlackApiinteract6F5AAE0F": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "SlackApi455BD61F",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "interact",
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/interact/Resource"
+   }
+  },
+  "SlackApiinteractPOSTApiPermissionDevPortalAuthStackSlackApiA4FC8FAAPOSTinteract6806212B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SlackInteractFn74033654",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:396783039869:",
+       {
+        "Ref": "SlackApi455BD61F"
+       },
+       "/",
+       {
+        "Ref": "SlackApiDeploymentStageprod6A8E211D"
+       },
+       "/POST/interact"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/interact/POST/ApiPermission.DevPortalAuthStackSlackApiA4FC8FAA.POST..interact"
+   }
+  },
+  "SlackApiinteractPOSTApiPermissionTestDevPortalAuthStackSlackApiA4FC8FAAPOSTinteractE34BE750": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "SlackInteractFn74033654",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:396783039869:",
+       {
+        "Ref": "SlackApi455BD61F"
+       },
+       "/test-invoke-stage/POST/interact"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/interact/POST/ApiPermission.Test.DevPortalAuthStackSlackApiA4FC8FAA.POST..interact"
+   }
+  },
+  "SlackApiinteractPOST4DCBF068": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "SlackInteractFn74033654",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "SlackApiinteract6F5AAE0F"
+    },
+    "RestApiId": {
+     "Ref": "SlackApi455BD61F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/SlackApi/Default/interact/POST/Resource"
+   }
+  },
+  "HostedUiCustomization": {
+   "Type": "AWS::Cognito::UserPoolUICustomizationAttachment",
+   "Properties": {
+    "CSS": "\n.background-customizable { background-color: #ffffff; }\n.banner-customizable { padding: 20px 0; background-color: #1c1c1c; }\n.label-customizable { font-weight: 400; color: #252525; }\n.textDescription-customizable { padding: 8px 0; font-size: 14px; color: #616161; }\n.inputField-customizable { border: 1px solid #e0e0e0; border-radius: 4px; height: 42px; font-size: 15px; padding: 0 12px; width: 100%; }\n.inputField-customizable:focus { border-color: #00ade4; outline: none; }\n.submitButton-customizable { height: 42px; width: 100%; border-radius: 4px; border: none; font-size: 14px; font-weight: 500; color: #fff; background-color: #00ade4; margin: 16px 0 8px; cursor: pointer; }\n.submitButton-customizable:hover { background-color: #0097c7; }\n.errorMessage-customizable { padding: 8px; font-size: 13px; border-radius: 4px; background-color: #fde8e8; border: 1px solid #e53e3e; color: #c53030; }\n.idpButton-customizable { height: 42px; width: 100%; border-radius: 4px; text-align: center; line-height: 42px; color: #fff; background-color: #1c1c1c; text-decoration: none; }\n.idpButton-customizable:hover { background-color: #252525; }\n.legalText-customizable { color: #9e9e9e; font-size: 12px; }\n",
+    "ClientId": {
+     "Ref": "UserPoolClient2F5918F7"
+    },
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "DependsOn": [
+    "UserPoolDomainCloudFrontDomainNameCustomResourcePolicyF374B62C",
+    "UserPoolDomainCloudFrontDomainName0B254952",
+    "UserPoolDomain5479B217"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/HostedUiCustomization"
+   }
+  },
+  "AuthEdgeFnServiceRoleB3B69B0E": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": [
+         "edgelambda.amazonaws.com",
+         "lambda.amazonaws.com"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AuthEdgeFn/ServiceRole/Resource"
+   }
+  },
+  "AuthEdgeFnServiceRoleDefaultPolicyE79BD8D5": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "ssm:GetParameter",
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/active-domain",
+        "arn:aws:ssm:us-east-1:396783039869:parameter/dev-portal/cognito/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AuthEdgeFnServiceRoleDefaultPolicyE79BD8D5",
+    "Roles": [
+     {
+      "Ref": "AuthEdgeFnServiceRoleB3B69B0E"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AuthEdgeFn/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "AuthEdgeFn68719C85": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "ced5321b1ccbbcba4608e9b0062649324b472409db73752f7799bce747efd871.zip"
+    },
+    "Description": "Cognito auth gate for developer.vertex3d.com",
+    "Handler": "index.handler",
+    "MemorySize": 128,
+    "Role": {
+     "Fn::GetAtt": [
+      "AuthEdgeFnServiceRoleB3B69B0E",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "AuthEdgeFnServiceRoleDefaultPolicyE79BD8D5",
+    "AuthEdgeFnServiceRoleB3B69B0E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AuthEdgeFn/Resource",
+    "aws:asset:path": "asset.ced5321b1ccbbcba4608e9b0062649324b472409db73752f7799bce747efd871",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "AuthEdgeFnCurrentVersionEB66384Eb594394942063d9c6a350d4b64d78467": {
+   "Type": "AWS::Lambda::Version",
+   "Properties": {
+    "FunctionName": {
+     "Ref": "AuthEdgeFn68719C85"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AuthEdgeFn/CurrentVersion/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "HostOverrideFnServiceRole7C9AEE6A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": [
+         "edgelambda.amazonaws.com",
+         "lambda.amazonaws.com"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/HostOverrideFn/ServiceRole/Resource"
+   }
+  },
+  "HostOverrideFn545CD812": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-396783039869-us-east-1",
+     "S3Key": "7e5614ef8c8d5c760c48467faee33f613585ba3279d40e8ccd7eb50c2eaf87df.zip"
+    },
+    "Description": "Sets Host: developer.vertex3d.com for GitHub Pages origin",
+    "Handler": "index.handler",
+    "MemorySize": 128,
+    "Role": {
+     "Fn::GetAtt": [
+      "HostOverrideFnServiceRole7C9AEE6A",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs18.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "HostOverrideFnServiceRole7C9AEE6A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/HostOverrideFn/Resource",
+    "aws:asset:path": "asset.7e5614ef8c8d5c760c48467faee33f613585ba3279d40e8ccd7eb50c2eaf87df",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "HostOverrideFnCurrentVersion349AC6E53d3f7ed4022ec4a953bb7963d369de7c": {
+   "Type": "AWS::Lambda::Version",
+   "Properties": {
+    "FunctionName": {
+     "Ref": "HostOverrideFn545CD812"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/HostOverrideFn/CurrentVersion/Resource",
+    "aws:cdk:do-not-refactor": true
+   }
+  },
+  "Distribution830FAC52": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "Aliases": [
+      "developer-preview.vertex3d.com"
+     ],
+     "Comment": "Auth-gated CDN for developer-preview.vertex3d.com",
+     "DefaultCacheBehavior": {
+      "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
+      "Compress": true,
+      "LambdaFunctionAssociations": [
+       {
+        "EventType": "viewer-request",
+        "LambdaFunctionARN": {
+         "Ref": "AuthEdgeFnCurrentVersionEB66384Eb594394942063d9c6a350d4b64d78467"
+        }
+       },
+       {
+        "EventType": "origin-request",
+        "LambdaFunctionARN": {
+         "Ref": "HostOverrideFnCurrentVersion349AC6E53d3f7ed4022ec4a953bb7963d369de7c"
+        }
+       }
+      ],
+      "OriginRequestPolicyId": "b689b0a8-53d0-40ab-baf2-68738e2966ac",
+      "TargetOriginId": "DevPortalAuthStackDistributionOrigin1DD86C018",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2and3",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "CustomOriginConfig": {
+        "OriginProtocolPolicy": "https-only",
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": "vertexvis.github.io",
+       "Id": "DevPortalAuthStackDistributionOrigin1DD86C018"
+      }
+     ],
+     "ViewerCertificate": {
+      "AcmCertificateArn": "arn:aws:acm:us-east-1:396783039869:certificate/6a6280da-071b-45dd-8786-3b211049ffb1",
+      "MinimumProtocolVersion": "TLSv1.2_2021",
+      "SslSupportMethod": "sni-only"
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/Distribution/Resource"
+   }
+  },
+  "ARecordE7B57761": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "Distribution830FAC52",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z0381719NYLW8OZOIKMN",
+    "Name": "developer-preview.vertex3d.com.",
+    "Type": "A"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/ARecord/Resource"
+   }
+  },
+  "AaaaRecord61D2056E": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "Distribution830FAC52",
+       "DomainName"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z0381719NYLW8OZOIKMN",
+    "Name": "developer-preview.vertex3d.com.",
+    "Type": "AAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AaaaRecord/Resource"
+   }
+  },
+  "AuthDomainARecordB8532CF6": {
+   "Type": "AWS::Route53::RecordSet",
+   "Properties": {
+    "AliasTarget": {
+     "DNSName": {
+      "Fn::GetAtt": [
+       "UserPoolDomainCloudFrontDomainName0B254952",
+       "DomainDescription.CloudFrontDistribution"
+      ]
+     },
+     "HostedZoneId": {
+      "Fn::FindInMap": [
+       "AWSCloudFrontPartitionHostedZoneIdMap",
+       {
+        "Ref": "AWS::Partition"
+       },
+       "zoneId"
+      ]
+     }
+    },
+    "HostedZoneId": "Z0381719NYLW8OZOIKMN",
+    "Name": "dev-portal-auth.vertex3d.com.",
+    "Type": "A"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/AuthDomainARecord/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/2VRwW7bMAz9lt4VbUuRw45uggI7FAsSdNeAkVlXjSUaorQgM/zvoyw7NbaT3iOpR/Jxrdeb7/rrA1x5ZerLqrVn3R8jmIs6IFMKBpXkTr2hxttIun9lDHuiVm3f/B3PYNta9HGZmiIz3ZED65cF/0def2wTR3L2D0RLvooyzrsTlUG14M416F6q9xicZZYCdbS+aTGSf07e5C/qDqTwjn9h4Ck2wUFZcLrfU2vNLccndKAWM83voJhd9iRIlz0EcBgxjMUzkZLHEzBjZF3lR7h+SuaC8QkYFaMJknPgocEgWiPPEgUNCjrbQMQr3HQvvseqs2P/T1gZQ0mM3GHX0s1NLi+YHK0Zhy5gvt44wP2URbPgF4zvVOdQQYMyLaX6LZCPut9Zlo3PaXZxyQcVKEXcPOq+OqChUBfhjI6yWAUAhQ0iOt7yFKa24tCVy30/p/qHLoYc7cwbifk58TPFLo2rv0DXSXBQnmrUH/zl93qj1/rbwwdbuwrilXWoD+X9C58SLB/nAgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "DevPortalAuthStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "SlackApiEndpointDB539A8A": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "SlackApi455BD61F"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "SlackApiDeploymentStageprod6A8E211D"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "UserPoolId": {
+   "Description": "Cognito User Pool ID",
+   "Value": {
+    "Ref": "UserPool6BA7E5F2"
+   }
+  },
+  "UserPoolClientId": {
+   "Description": "Cognito App Client ID",
+   "Value": {
+    "Ref": "UserPoolClient2F5918F7"
+   }
+  },
+  "SlackApiUrl": {
+   "Description": "Base URL for Slack app configuration (append /add-domain and /interact)",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "SlackApi455BD61F"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "SlackApiDeploymentStageprod6A8E211D"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "CloudFrontDistributionId": {
+   "Description": "CloudFront distribution ID",
+   "Value": {
+    "Ref": "Distribution830FAC52"
+   }
+  }
+ },
+ "Mappings": {
+  "AWSCloudFrontPartitionHostedZoneIdMap": {
+   "aws": {
+    "zoneId": "Z2FDTNDATAQYW2"
+   },
+   "aws-cn": {
+    "zoneId": "Z3RFFRIM2A3IF5"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

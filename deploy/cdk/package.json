@@ -1,0 +1,22 @@
+{
+  "name": "dev-portal-cdk",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^18.0.0",
+    "aws-cdk": "2.1127.0",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.0"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.259.0",
+    "constructs": "^10.0.0",
+    "esbuild": "0.28.1"
+  }
+}

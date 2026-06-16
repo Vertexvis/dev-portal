@@ -1,0 +1,1021 @@
+{
+  "/DevPortalAuthStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AllowedDomainsParam": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "installLatestAwsSdk was not specified, and defaults to true. You probably do not want this. Set the global context flag '@aws-cdk/customresources:installLatestAwsSdkDefault' to false to switch this behavior off project-wide, or set the property explicitly to true if you know you need to call APIs that are not in Lambda's built-in SDK version. [ack: @aws-cdk/custom-resources:installLatestAwsSdkNotSpecified]",
+      "trace": [
+        "Annotations.addMessage (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/aws-cdk-lib/core/lib/annotations.js:1:3441)",
+        "Annotations.addWarningV2 (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2129)",
+        "new AwsCustomResource2 (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/aws-cdk-lib/custom-resources/lib/aws-custom-resource/aws-custom-resource.js:1:9863)",
+        "new AwsCustomResource2 (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/aws-cdk-lib/core/lib/prop-injectable.js:1:855)",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:206:5)",
+        "Object.<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "Module._compile (node:internal/modules/cjs/loader:1760:14)",
+        "Module.m._compile (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/index.ts:1618:23)",
+        "Module._extensions..js (node:internal/modules/cjs/loader:1892:10)",
+        "Object.require.extensions.<computed> [as .ts] (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/index.ts:1621:12)",
+        "Module.load (node:internal/modules/cjs/loader:1480:32)",
+        "Module._load (node:internal/modules/cjs/loader:1299:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "phase4 (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/bin.ts:649:14)",
+        "bootstrap (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/bin.ts:95:10)",
+        "main (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/bin.ts:55:10)",
+        "Object.<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/node_modules/ts-node/src/bin.ts:800:3)",
+        "Module._compile (node:internal/modules/cjs/loader:1760:14)",
+        "Object.Module._extensions..js (node:internal/modules/cjs/loader:1892:10)",
+        "Module.load (node:internal/modules/cjs/loader:1480:32)",
+        "Module._load (node:internal/modules/cjs/loader:1299:12)",
+        "TracingChannel.traceSync (node:diagnostics_channel:328:14)",
+        "wrapModuleLoad (node:internal/modules/cjs/loader:245:24)",
+        "Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)",
+        "node:internal/main/run_main_module:33:47"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AWS679f53fac002430cb0da5b7982bd2287": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 0
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 0
+    }
+  ],
+  "/DevPortalAuthStack/HostedUiCustomization": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostedUiCustomization"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:424:35)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:522:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:549:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:553:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:557:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/CloudFrontDistributionId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CloudFrontDistributionId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:561:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:117:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPool/PreSignUpCognito": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolPreSignUpCognito3AFF8F1F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:338:14)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPool/PostConfirmationCognito": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolPostConfirmationCognito0E6001F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:339:14)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPool/PreTokenGenerationCognito": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolPreTokenGenerationCognito84D0CADA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:340:14)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClient2F5918F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolClient2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:145:28)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolDomain5479B217"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolDomain2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:169:28)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SsmUserPoolId/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmUserPoolId515A138C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new StringParameter2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:180:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SsmClientId/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmClientId337546DA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new StringParameter2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:184:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SsmCognitoDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmCognitoDomain43615430"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new StringParameter2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:188:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SsmActiveDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmActiveDomain6697EC3F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new StringParameter2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:195:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AWS679f53fac002430cb0da5b7982bd2287/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWS679f53fac002430cb0da5b7982bd22872D164C4C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AwsCustomResource2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:206:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackSecret/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackSecretEA96F13F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Secret2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:245:25)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PreSignUpFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PreSignUpFn7227C88E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:278:25)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PostConfirmationFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PostConfirmationFnE0D8EF4F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:298:32)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PreTokenFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PreTokenFnC674ADAC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:331:24)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackAddDomainFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackAddDomainFnCA736244"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:349:30)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackInteractFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackInteractFn74033654"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:373:29)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApi455BD61F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiAccount0B2995EC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiEndpointDB539A8A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AuthEdgeFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthEdgeFn68719C85"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:451:20)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/HostOverrideFn/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostOverrideFn545CD812"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:473:28)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Distribution830FAC52"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:486:26)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/ARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ARecordE7B57761"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:522:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AaaaRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AaaaRecord61D2056E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AaaaRecord2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:529:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AuthDomainARecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthDomainARecordB8532CF6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:538:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AllowedDomainsParam/Resource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AllowedDomainsParam3121C8F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AwsCustomResource2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:206:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AllowedDomainsParam/CustomResourcePolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AllowedDomainsParamCustomResourcePolicy78B0F843"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new AwsCustomResource2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:206:5)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AWS679f53fac002430cb0da5b7982bd2287/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PreSignUpFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PreSignUpFnServiceRoleC270C061"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:278:25)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PostConfirmationFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PostConfirmationFnServiceRole5E4DC5AE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:298:32)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PreTokenFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PreTokenFnServiceRole9EDCF235"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:331:24)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackAddDomainFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackAddDomainFnServiceRole78BFB224"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:349:30)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackInteractFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackInteractFnServiceRole6B4DE0F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:373:29)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiCloudWatchRoleFE90C252"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiDeployment87FBB3011f6f83ed7e31e2c7e0a3cd0bf76d7fce"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/DeploymentStage.prod/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiDeploymentStageprod6A8E211D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:405:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AuthEdgeFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthEdgeFnServiceRoleB3B69B0E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:451:20)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AuthEdgeFn/CurrentVersion/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthEdgeFnCurrentVersionEB66384Eb594394942063d9c6a350d4b64d78467"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.get currentVersion in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:503:37)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/HostOverrideFn/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostOverrideFnServiceRole7C9AEE6A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:473:28)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/HostOverrideFn/CurrentVersion/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HostOverrideFnCurrentVersion349AC6E53d3f7ed4022ec4a953bb7963d369de7c"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.get currentVersion in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:507:45)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolDomain/CloudFrontDomainName/Resource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolDomainCloudFrontDomainName0B254952"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/UserPoolDomain/CloudFrontDomainName/CustomResourcePolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolDomainCloudFrontDomainNameCustomResourcePolicyF374B62C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PreSignUpFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PreSignUpFnServiceRoleDefaultPolicy21B404FA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:283:17)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/PostConfirmationFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PostConfirmationFnServiceRoleDefaultPolicy7B6816CA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:308:24)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackAddDomainFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackAddDomainFnServiceRoleDefaultPolicyD71C9E6E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:358:22)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackInteractFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackInteractFnServiceRoleDefaultPolicyFA067351"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:386:21)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/add-domain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiadddomain048E4E2E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:412:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/interact/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiinteract6F5AAE0F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:416:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/AuthEdgeFn/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthEdgeFnServiceRoleDefaultPolicyE79BD8D5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addToRolePolicy in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:460:12)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/add-domain/POST/ApiPermission.DevPortalAuthStackSlackApiA4FC8FAA.POST..add-domain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiadddomainPOSTApiPermissionDevPortalAuthStackSlackApiA4FC8FAAPOSTadddomain5FA18FE9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:413:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/add-domain/POST/ApiPermission.Test.DevPortalAuthStackSlackApiA4FC8FAA.POST..add-domain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiadddomainPOSTApiPermissionTestDevPortalAuthStackSlackApiA4FC8FAAPOSTadddomain9BD0ABBC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:413:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/add-domain/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiadddomainPOSTB9BAF507"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:413:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/interact/POST/ApiPermission.DevPortalAuthStackSlackApiA4FC8FAA.POST..interact": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiinteractPOSTApiPermissionDevPortalAuthStackSlackApiA4FC8FAAPOSTinteract6806212B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:417:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/interact/POST/ApiPermission.Test.DevPortalAuthStackSlackApiA4FC8FAA.POST..interact": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiinteractPOSTApiPermissionTestDevPortalAuthStackSlackApiA4FC8FAAPOSTinteractE34BE750"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:417:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/DevPortalAuthStack/SlackApi/Default/interact/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SlackApiinteractPOST4DCBF068"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new DevPortalAuthStack (/Users/bencollen/code/dev-portal/deploy/cdk/lib/dev-portal-auth-stack.ts:417:8)",
+        "<anonymous> (/Users/bencollen/code/dev-portal/deploy/cdk/bin/app.ts:7:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ]
+}
