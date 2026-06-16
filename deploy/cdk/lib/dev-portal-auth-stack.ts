@@ -457,12 +457,14 @@ export class DevPortalAuthStack extends cdk.Stack {
       memorySize: 128,
     });
     addEdgeTrust(authFn);
+    // Only user-pool-id and client-id are needed for JWT validation.
+    // The custom login page handles the OAuth flow — no PKCE or Cognito domain needed.
     authFn.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ['ssm:GetParameter'],
         resources: [
-          `arn:aws:ssm:${REGION}:${this.account}:parameter/dev-portal/cognito/*`,
-          `arn:aws:ssm:${REGION}:${this.account}:parameter/dev-portal/active-domain`,
+          `arn:aws:ssm:${REGION}:${this.account}:parameter/dev-portal/cognito/user-pool-id`,
+          `arn:aws:ssm:${REGION}:${this.account}:parameter/dev-portal/cognito/client-id`,
         ],
       })
     );

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In – Vertex Developer Portal</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(ellipse at 58% 50%, #0ab8af 0%, #0b5a72 42%, #091e2c 100%);
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 44px 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    .logo {
+      display: block;
+      width: 210px;
+      height: auto;
+      margin: 0 auto 36px;
+    }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0f1c2a;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6b7a8d;
+      text-align: center;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #253040;
+      margin-bottom: 5px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      display: block;
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #d0dae4;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #0f1c2a;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      font-family: inherit;
+    }
+    input:focus {
+      border-color: #00bfb9;
+      box-shadow: 0 0 0 3px rgba(0, 191, 185, 0.14);
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 11px 16px;
+      background: #00bfb9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 14px;
+      transition: background 0.15s, opacity 0.15s;
+      font-family: inherit;
+    }
+    .btn-primary:hover:not(:disabled) { background: #00a8a3; }
+    .btn-primary:disabled { opacity: 0.52; cursor: not-allowed; }
+
+    .msg {
+      font-size: 13px;
+      margin-bottom: 14px;
+      line-height: 1.5;
+      min-height: 20px;
+    }
+    .msg.error { color: #c0392b; }
+    .msg.success { color: #1a7a4a; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e8ecf0;
+      margin: 18px 0;
+    }
+
+    .link-row {
+      text-align: center;
+      font-size: 13px;
+      color: #6b7a8d;
+      margin-bottom: 8px;
+    }
+    .link-row:last-child { margin-bottom: 0; }
+
+    .link-btn {
+      color: #00a3a0;
+      text-decoration: none;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 13px;
+      font-family: inherit;
+      padding: 0;
+    }
+    .link-btn:hover { text-decoration: underline; }
+
+    .pending-icon { font-size: 44px; text-align: center; margin-bottom: 14px; }
+    .pending-body {
+      font-size: 14px;
+      color: #4a5568;
+      text-align: center;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="/img/vertex-devportal.svg" alt="Vertex Developer Portal" class="logo" />
+
+    <!-- ── Sign In ─────────────────────────────── -->
+    <div id="view-signin" class="view active">
+      <h2>Sign in</h2>
+      <p class="subtitle">Sign in to Vertex Developer Portal</p>
+      <div id="signin-msg" class="msg"></div>
+      <div class="field">
+        <label for="signin-email">Email</label>
+        <input type="email" id="signin-email" placeholder="you@company.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="signin-password">Password</label>
+        <input type="password" id="signin-password" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+      <button class="btn-primary" id="signin-btn">Sign in</button>
+      <div class="link-row">
+        <button class="link-btn" onclick="show('forgot')">Forgot password?</button>
+      </div>
+      <hr class="divider" />
+      <div class="link-row">
+        Don't have an account?&nbsp;<button class="link-btn" onclick="show('create')">Create account</button>
+      </div>
+    </div>
+
+    <!-- ── Create Account ─────────────────────── -->
+    <div id="view-create" class="view">
+      <h2>Create account</h2>
+      <p class="subtitle">Join Vertex Developer Portal</p>
+      <div id="create-msg" class="msg"></div>
+      <div class="field">
+        <label for="create-email">Email</label>
+        <input type="email" id="create-email" placeholder="you@company.com" autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="create-password">Password</label>
+        <input type="password" id="create-password" placeholder="Minimum 8 characters" autocomplete="new-password" />
+      </div>
+      <div class="field">
+        <label for="create-confirm">Confirm password</label>
+        <input type="password" id="create-confirm" placeholder="Re-enter password" autocomplete="new-password" />
+      </div>
+      <button class="btn-primary" id="create-btn">Create account</button>
+      <div class="link-row">
+        Already have an account?&nbsp;<button class="link-btn" onclick="show('signin')">Sign in</button>
+      </div>
+    </div>
+
+    <!-- ── Verify Email ────────────────────────── -->
+    <div id="view-verify" class="view">
+      <h2>Verify your email</h2>
+      <p class="subtitle" id="verify-subtitle">Enter the 6-digit code we sent to your email.</p>
+      <div id="verify-msg" class="msg"></div>
+      <div class="field">
+        <label for="verify-code">Verification code</label>
+        <input type="text" id="verify-code" placeholder="123456" autocomplete="one-time-code" maxlength="10" inputmode="numeric" />
+      </div>
+      <button class="btn-primary" id="verify-btn">Verify email</button>
+      <div class="link-row">
+        <button class="link-btn" id="resend-btn">Resend code</button>
+      </div>
+      <div class="link-row">
+        <button class="link-btn" onclick="show('signin')">Back to sign in</button>
+      </div>
+    </div>
+
+    <!-- ── Pending Approval ────────────────────── -->
+    <div id="view-pending" class="view">
+      <div class="pending-icon">⏳</div>
+      <h2>Pending approval</h2>
+      <p class="pending-body">
+        Your email has been verified. A Vertex team member will review your
+        request and activate your account shortly.<br /><br />
+        You'll receive an email once your account is approved.
+      </p>
+      <div class="link-row">
+        <button class="link-btn" onclick="show('signin')">Back to sign in</button>
+      </div>
+    </div>
+
+    <!-- ── Forgot Password ─────────────────────── -->
+    <div id="view-forgot" class="view">
+      <h2>Reset password</h2>
+      <p class="subtitle">We'll email you a code to reset your password.</p>
+      <div id="forgot-msg" class="msg"></div>
+      <div class="field">
+        <label for="forgot-email">Email</label>
+        <input type="email" id="forgot-email" placeholder="you@company.com" autocomplete="email" />
+      </div>
+      <button class="btn-primary" id="forgot-btn">Send reset code</button>
+      <div class="link-row">
+        <button class="link-btn" onclick="show('signin')">Back to sign in</button>
+      </div>
+    </div>
+
+    <!-- ── Reset Password ─────────────────────── -->
+    <div id="view-reset" class="view">
+      <h2>Set new password</h2>
+      <p class="subtitle" id="reset-subtitle">Enter the code we sent to your email and choose a new password.</p>
+      <div id="reset-msg" class="msg"></div>
+      <div class="field">
+        <label for="reset-code">Reset code</label>
+        <input type="text" id="reset-code" placeholder="123456" maxlength="10" inputmode="numeric" />
+      </div>
+      <div class="field">
+        <label for="reset-password">New password</label>
+        <input type="password" id="reset-password" placeholder="Minimum 8 characters" autocomplete="new-password" />
+      </div>
+      <button class="btn-primary" id="reset-btn">Set new password</button>
+      <div class="link-row">
+        <button class="link-btn" onclick="show('signin')">Back to sign in</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/amazon-cognito-identity-js@6/dist/amazon-cognito-identity.min.js"></script>
+  <script>
+    const POOL_ID    = 'us-east-1_l13v1gebp';
+    const CLIENT_ID  = '4n54u9nuil02vtig5986bkjdte';
+    const COOKIE     = 'DevPortalSession';
+
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool({
+      UserPoolId: POOL_ID,
+      ClientId:   CLIENT_ID,
+    });
+
+    // Decode the ?r= redirect param written by the auth Lambda
+    function decodeRedirect() {
+      try {
+        const s = new URLSearchParams(location.search).get('r');
+        if (!s) return '/';
+        const b64 = s.replace(/-/g, '+').replace(/_/g, '/');
+        const pad = (4 - b64.length % 4) % 4;
+        return atob(b64 + '='.repeat(pad)) || '/';
+      } catch {
+        return '/';
+      }
+    }
+    const redirectTo = decodeRedirect();
+
+    // ── Helpers ──────────────────────────────────
+    function show(name) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + name).classList.add('active');
+    }
+
+    function setMsg(id, text, type) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = text || '';
+      el.className = 'msg' + (text ? (' ' + (type || 'error')) : '');
+    }
+
+    // Store button labels before any loading state changes them
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+      btn.dataset.label = btn.textContent;
+    });
+
+    function setBusy(btnId, busy) {
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+      btn.disabled = busy;
+      btn.textContent = busy ? 'Please wait…' : btn.dataset.label;
+    }
+
+    // Email shared between sign-up → verify and forgot → reset flows
+    let pendingEmail = '';
+
+    // ── Sign In ───────────────────────────────────
+    function doSignIn() {
+      const email    = document.getElementById('signin-email').value.trim();
+      const password = document.getElementById('signin-password').value;
+      setMsg('signin-msg', '');
+      if (!email || !password) { setMsg('signin-msg', 'Email and password are required.'); return; }
+      setBusy('signin-btn', true);
+
+      const details = new AmazonCognitoIdentity.AuthenticationDetails({ Username: email, Password: password });
+      const user    = new AmazonCognitoIdentity.CognitoUser({ Username: email, Pool: userPool });
+
+      user.authenticateUser(details, {
+        onSuccess(result) {
+          const token = result.getIdToken().getJwtToken();
+          document.cookie = COOKIE + '=' + token + '; Path=/; SameSite=Lax; Secure';
+          location.replace(redirectTo);
+        },
+        onFailure(err) {
+          setBusy('signin-btn', false);
+          if (err.code === 'UserNotConfirmedException') {
+            pendingEmail = email;
+            document.getElementById('verify-subtitle').textContent =
+              'Enter the 6-digit code we sent to ' + email + '.';
+            setMsg('verify-msg', '');
+            show('verify');
+          } else if (
+            err.code === 'NotAuthorizedException' &&
+            (err.message || '').toLowerCase().includes('disabled')
+          ) {
+            show('pending');
+          } else {
+            setMsg('signin-msg', err.message || 'Sign in failed. Please try again.');
+          }
+        },
+      });
+    }
+
+    document.getElementById('signin-btn').addEventListener('click', doSignIn);
+    document.getElementById('signin-password').addEventListener('keydown', e => { if (e.key === 'Enter') doSignIn(); });
+
+    // ── Create Account ────────────────────────────
+    function doCreate() {
+      const email    = document.getElementById('create-email').value.trim();
+      const password = document.getElementById('create-password').value;
+      const confirm  = document.getElementById('create-confirm').value;
+      setMsg('create-msg', '');
+      if (!email || !password || !confirm) { setMsg('create-msg', 'All fields are required.'); return; }
+      if (password !== confirm)            { setMsg('create-msg', 'Passwords do not match.'); return; }
+      if (password.length < 8)             { setMsg('create-msg', 'Password must be at least 8 characters.'); return; }
+      setBusy('create-btn', true);
+
+      userPool.signUp(email, password, [], null, (err) => {
+        setBusy('create-btn', false);
+        if (err) { setMsg('create-msg', err.message || 'Account creation failed. Please try again.'); return; }
+        pendingEmail = email;
+        document.getElementById('verify-subtitle').textContent =
+          'Enter the 6-digit code we sent to ' + email + '.';
+        setMsg('verify-msg', '');
+        show('verify');
+      });
+    }
+
+    document.getElementById('create-btn').addEventListener('click', doCreate);
+    document.getElementById('create-confirm').addEventListener('keydown', e => { if (e.key === 'Enter') doCreate(); });
+
+    // ── Verify Email ──────────────────────────────
+    function doVerify() {
+      const code = document.getElementById('verify-code').value.trim();
+      setMsg('verify-msg', '');
+      if (!code) { setMsg('verify-msg', 'Please enter the verification code.'); return; }
+      if (!pendingEmail) { show('signin'); return; }
+      setBusy('verify-btn', true);
+
+      const user = new AmazonCognitoIdentity.CognitoUser({ Username: pendingEmail, Pool: userPool });
+      user.confirmRegistration(code, true, (err) => {
+        setBusy('verify-btn', false);
+        if (err) {
+          setMsg('verify-msg', err.message || 'Verification failed. Please check the code and try again.');
+          return;
+        }
+        // Post-confirmation Lambda may disable the account pending Slack approval.
+        // Show sign-in with a success note; if they're disabled they'll land on pending-approval.
+        document.getElementById('signin-email').value = pendingEmail;
+        setMsg('signin-msg', 'Email verified! You can now sign in.', 'success');
+        show('signin');
+      });
+    }
+
+    document.getElementById('verify-btn').addEventListener('click', doVerify);
+    document.getElementById('verify-code').addEventListener('keydown', e => { if (e.key === 'Enter') doVerify(); });
+
+    document.getElementById('resend-btn').addEventListener('click', () => {
+      if (!pendingEmail) { show('signin'); return; }
+      setMsg('verify-msg', '');
+      const user = new AmazonCognitoIdentity.CognitoUser({ Username: pendingEmail, Pool: userPool });
+      user.resendConfirmationCode((err) => {
+        if (err) {
+          setMsg('verify-msg', err.message || 'Could not resend code. Please try again.');
+        } else {
+          setMsg('verify-msg', 'Code resent — check your inbox.', 'success');
+        }
+      });
+    });
+
+    // ── Forgot Password ───────────────────────────
+    function doForgot() {
+      const email = document.getElementById('forgot-email').value.trim();
+      setMsg('forgot-msg', '');
+      if (!email) { setMsg('forgot-msg', 'Please enter your email address.'); return; }
+      setBusy('forgot-btn', true);
+
+      const user = new AmazonCognitoIdentity.CognitoUser({ Username: email, Pool: userPool });
+      user.forgotPassword({
+        onSuccess() {
+          setBusy('forgot-btn', false);
+          pendingEmail = email;
+          document.getElementById('reset-subtitle').textContent =
+            'Enter the code sent to ' + email + ' and choose a new password.';
+          setMsg('reset-msg', '');
+          show('reset');
+        },
+        onFailure(err) {
+          setBusy('forgot-btn', false);
+          setMsg('forgot-msg', err.message || 'Could not send reset code. Please try again.');
+        },
+      });
+    }
+
+    document.getElementById('forgot-btn').addEventListener('click', doForgot);
+    document.getElementById('forgot-email').addEventListener('keydown', e => { if (e.key === 'Enter') doForgot(); });
+
+    // ── Reset Password ────────────────────────────
+    function doReset() {
+      const code     = document.getElementById('reset-code').value.trim();
+      const password = document.getElementById('reset-password').value;
+      setMsg('reset-msg', '');
+      if (!code || !password)  { setMsg('reset-msg', 'All fields are required.'); return; }
+      if (password.length < 8) { setMsg('reset-msg', 'Password must be at least 8 characters.'); return; }
+      if (!pendingEmail) { show('signin'); return; }
+      setBusy('reset-btn', true);
+
+      const user = new AmazonCognitoIdentity.CognitoUser({ Username: pendingEmail, Pool: userPool });
+      user.confirmPassword(code, password, {
+        onSuccess() {
+          setBusy('reset-btn', false);
+          document.getElementById('signin-email').value = pendingEmail;
+          setMsg('signin-msg', 'Password updated — please sign in.', 'success');
+          show('signin');
+        },
+        onFailure(err) {
+          setBusy('reset-btn', false);
+          setMsg('reset-msg', err.message || 'Password reset failed. Please try again.');
+        },
+      });
+    }
+
+    document.getElementById('reset-btn').addEventListener('click', doReset);
+    document.getElementById('reset-password').addEventListener('keydown', e => { if (e.key === 'Enter') doReset(); });
+  </script>
+</body>
+</html>
