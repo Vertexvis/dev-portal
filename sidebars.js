@@ -38,6 +38,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'guides/property-key-policies',
+        },
+        {
+          type: 'doc',
           id: 'guides/import-data-with-api',
         },
         {
