@@ -10,6 +10,15 @@ This guide creates an allowlist policy, adds the property keys that a client may
 and creates a stream key that applies the policy. All requests use an OAuth2 access
 token and the JSON:API media type.
 
+## Understand the policy scope
+
+When a Viewer session is started with a stream key that has a property key policy, the
+policy filters the property metadata available throughout the Viewer. This includes
+available tree columns, property values in the scene tree, search results, metadata
+returned for hit requests, and properties for a scene item on a hit result. The policy
+does not change Platform API REST responses such as
+`GET /scenes/{sceneId}/scene-items/{itemId}`.
+
 ## Choose a policy mode
 
 Each policy has one of these modes:
@@ -70,7 +79,10 @@ hide.
 
 Add one or more existing property key names with
 `POST /property-key-policies/{id}/keys`. The request is an upsert: adding a key that
-is already in the policy does not duplicate it.
+is already in the policy does not duplicate it. Each name must contain 1–1024
+characters. Names are case-sensitive: `part-number` and `Part-Number` are different
+keys. The API does not restrict symbols, so use the exact name from your metadata,
+including any punctuation or spaces.
 
 ```shell
 curl --location --request POST \
@@ -124,5 +136,6 @@ The returned stream key includes `propertyKeyPolicyId` in its attributes. Use it
 - A property key policy filters metadata keys; it does not grant scene access. Stream
   keys remain scoped to their individual scene and are still created with an OAuth2
   access token.
-- Use the exact property key names used by your metadata. You can inspect policy
-  keys with `GET /property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys`.
+- Use the exact property key names used by your metadata, including capitalization,
+  punctuation, and spaces. You can inspect policy keys with
+  `GET /property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys`.
