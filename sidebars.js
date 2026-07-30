@@ -39,7 +39,6 @@ module.exports = {
         {
           type: 'doc',
           id: 'guides/property-key-policies',
-          label: 'Property key policies',
         },
         {
           type: 'doc',
