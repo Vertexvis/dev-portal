@@ -69,12 +69,12 @@ hide.
 ## Add property keys to the policy
 
 Add one or more existing property key names with
-`POST /property-key-policies/{id}/entries`. The request is an upsert: adding a key that
+`POST /property-key-policies/{id}/keys`. The request is an upsert: adding a key that
 is already in the policy does not duplicate it.
 
 ```shell
 curl --location --request POST \
-  --url "https://platform.vertexvis.com/property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/entries" \
+  --url "https://platform.vertexvis.com/property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys" \
   --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
   --header "Content-Type: application/vnd.api+json" \
   --data '{
@@ -125,4 +125,4 @@ The returned stream key includes `propertyKeyPolicyId` in its attributes. Use it
   keys remain scoped to their individual scene and are still created with an OAuth2
   access token.
 - Use the exact property key names used by your metadata. You can inspect policy
-  entries with `GET /property-key-policy-entries?filter[propertyKeyPolicy.id]=[YOUR_PROPERTY_KEY_POLICY_ID]`.
+  keys with `GET /property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys`.
