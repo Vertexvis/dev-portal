@@ -1,24 +1,36 @@
 name: deploy
 
-on: { push: { branches: [main] } }
+on: { push: { branches: [github_pages] } }
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: "Checkout changes"
+        uses: actions/checkout@v7
+      - name: Set Node Version
+        id: nvm
+        run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
+      - name: "Download build artifacts"
+        uses: actions/download-artifact@v8
         with:
-          node-version: 18.x
-      - uses: webfactory/ssh-agent@v0.5.0
+          name: build-artifact
+          path: packages
+      - name: "Install"
+        run: "yarn install"
+      - name: "Generate docs"
+        run: "yarn generate:docs"
+      - name: "Upload docs as pages artifact"
+        uses: actions/upload-pages-artifact@v5
         with:
-          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
-      - name: Release to GitHub Pages
-        env:
-          USE_SSH: true
-          GIT_USER: git
-        run: |
-          git config --global user.email "actions@gihub.com"
-          git config --global user.name "gh-actions"
-          yarn install --frozen-lockfile
-          yarn deploy
+          path: docs
+      - name: "Deploy docs to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v5
