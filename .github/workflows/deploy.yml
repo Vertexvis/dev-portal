@@ -18,15 +18,10 @@ jobs:
       - name: Set Node Version
         id: nvm
         run: echo "NVMRC=$(cat .nvmrc)" >> $GITHUB_OUTPUT
-      - name: "Download build artifacts"
-        uses: actions/download-artifact@v8
-        with:
-          name: build-artifact
-          path: packages
       - name: "Install"
         run: "yarn install"
-      - name: "Generate docs"
-        run: "yarn generate:docs"
+      - name: "Build"
+        run: "yarn build"
       - name: "Upload docs as pages artifact"
         uses: actions/upload-pages-artifact@v5
         with:
