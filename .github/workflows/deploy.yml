@@ -25,7 +25,7 @@ jobs:
       - name: "Upload docs as pages artifact"
         uses: actions/upload-pages-artifact@v5
         with:
-          path: docs
+          path: build
       - name: "Deploy docs to GitHub Pages"
         id: deployment
         uses: actions/deploy-pages@v5
