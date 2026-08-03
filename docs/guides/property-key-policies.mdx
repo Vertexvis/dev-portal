@@ -1,0 +1,141 @@
+---
+title: Property key policies
+---
+
+Property key policies control which metadata property keys are visible to clients that
+use a stream key. Use them when a client may view a scene but must not receive every
+metadata property attached to its items.
+
+This guide creates an allowlist policy, adds the property keys that a client may use,
+and creates a stream key that applies the policy. All requests use an OAuth2 access
+token and the JSON:API media type.
+
+## Understand the policy scope
+
+When a Viewer session is started with a stream key that has a property key policy, the
+policy filters the property metadata available throughout the Viewer. This includes
+available tree columns, property values in the scene tree, search results, metadata
+returned for hit requests, and properties for a scene item on a hit result. The policy
+does not change Platform API REST responses such as
+`GET /scenes/{sceneId}/scene-items/{itemId}`.
+
+## Choose a policy mode
+
+Each policy has one of these modes:
+
+- `allowlist` exposes only the property keys added to the policy. This is the default
+  when `mode` is omitted.
+- `denylist` exposes every property key except those added to the policy.
+
+An allowlist with no entries exposes no property keys, so add its entries before using
+the policy on a stream key.
+
+## Create a property key policy
+
+Create an allowlist policy with a stable `suppliedId` that your application can use to
+find the policy later. Save the policy ID from `data.id`; you will use it when adding
+keys and creating the stream key.
+
+```shell
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/property-key-policies" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+    "data": {
+      "type": "property-key-policy",
+      "attributes": {
+        "suppliedId": "viewer-safe-metadata",
+        "name": "Viewer-safe metadata",
+        "mode": "allowlist"
+      }
+    }
+  }'
+```
+
+The response returns `201 Created`. For example, the value of `data.id` in the
+following response is the property key policy ID:
+
+```json
+{
+  "data": {
+    "type": "property-key-policy",
+    "id": "[YOUR_PROPERTY_KEY_POLICY_ID]",
+    "attributes": {
+      "suppliedId": "viewer-safe-metadata",
+      "name": "Viewer-safe metadata",
+      "mode": "allowlist",
+      "createdAt": "2026-07-29T18:01:02Z"
+    }
+  }
+}
+```
+
+`suppliedId` and `name` are optional. If you omit `mode`, the policy is an
+`allowlist`; use `"denylist"` instead when the entries should identify the keys to
+hide.
+
+## Add property keys to the policy
+
+Add one or more existing property key names with
+`POST /property-key-policies/{id}/keys`. The request is an upsert: adding a key that
+is already in the policy does not duplicate it. Each name must contain 1–1024
+characters. Names are case-sensitive: `part-number` and `Part-Number` are different
+keys. The API does not restrict symbols, so use the exact name from your metadata,
+including any punctuation or spaces.
+
+```shell
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+    "data": [
+      { "name": "part-number" },
+      { "name": "material" }
+    ]
+  }'
+```
+
+The endpoint returns `204 No Content` on success. For an allowlist, the example makes
+only `part-number` and `material` visible to a stream key using this policy. For a
+denylist, it hides those two keys instead.
+
+## Create a stream key that applies the policy
+
+Set `propertyKeyPolicyId` while creating the scene stream key. The policy is applied to
+the JWTs generated from that stream key, so clients that load the key receive metadata
+filtered by the selected policy.
+
+```shell
+curl --location --request POST \
+  --url "https://platform.vertexvis.com/scenes/[YOUR_SCENE_ID]/stream-keys" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+    "data": {
+      "type": "stream-key",
+      "attributes": {
+        "expiry": 600,
+        "propertyKeyPolicyId": "[YOUR_PROPERTY_KEY_POLICY_ID]"
+      }
+    }
+  }'
+```
+
+The returned stream key includes `propertyKeyPolicyId` in its attributes. Use its
+`key` value with the Viewer component as described in the
+[stream key guide](./authentication.mdx#stream-keys).
+
+## Important behavior
+
+- A policy is scoped to the account that created it. Use a policy ID from the same
+  account as the OAuth token that creates the stream key.
+- The policy is selected when the stream key is created. To use a different policy,
+  create another stream key with that policy's ID.
+- A property key policy filters metadata keys; it does not grant scene access. Stream
+  keys remain scoped to their individual scene and are still created with an OAuth2
+  access token.
+- Use the exact property key names used by your metadata, including capitalization,
+  punctuation, and spaces. You can inspect policy keys with
+  `GET /property-key-policies/[YOUR_PROPERTY_KEY_POLICY_ID]/keys`.
