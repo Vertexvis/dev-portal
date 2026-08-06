@@ -23,8 +23,7 @@ export async function onViewerConfigured() {
 }
 
 export async function configureViewer(viewer) {
-  const config = await fetchConfig();
-  const token = { clientId: config.clientId, token: config.token };
+  const token = { clientId: process.env.VERTEX_CLIENT_ID, token: process.env.VERTEX_TOKEN };
 
   if (viewer != null) {
     setCredentials(viewer, token);
@@ -34,14 +33,6 @@ export async function configureViewer(viewer) {
     );
   }
   return config;
-}
-
-async function fetchConfig() {
-  const resp = await fetch(
-    'https://rest-api.prod.vertexvis.io/rest/api/demo_config'
-  );
-  const cfg = await resp.json();
-  return { clientId: cfg.clientId, token: cfg.accessToken, fileId: cfg.fileId };
 }
 
 function setCredentials(viewer, { clientId, token }) {

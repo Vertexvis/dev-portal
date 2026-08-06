@@ -3,10 +3,10 @@ import { onViewerConfigured, configureViewer } from '../helpers.js';
 onViewerConfigured().then(main);
 
 async function main(viewer) {
-  const demoConfig = await configureViewer(viewer);
+  await configureViewer(viewer);
   const sceneBuilder = await viewer.newScene();
   const newScene = await sceneBuilder
-    .from(`urn:vertexvis:eedc:file:${demoConfig.fileId}`)
+    .from(`urn:vertexvis:eedc:file:${process.env.VERTEX_FILE_ID}`)
     // Hide everything in the scene except for matching part
     .showOnly((s) => s.withMetadata('PartID', '15975'))
     // Add another item to the scene
