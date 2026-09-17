@@ -125,9 +125,35 @@ for a Vertex Platform token.
   Collaboration APIs).
 - **Token scope:** User-level access to resources.
 
-To enable token exchange, your deployment must be configured with the
-`OidcUserinfoEndpoint` Cloudformation parameter pointing to your [IdP’s userinfo
-endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo).
+#### Configure the userinfo endpoint
+
+Token exchange validates the external token by calling the [OpenID Connect
+userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo)
+configured for the application account. A root administrator can set the
+account's `oidc_userinfo_endpoint` when creating the account or update it with
+the `PATCH /accounts/{id}` API:
+
+```shell
+curl --request PATCH \
+  --url "https://platform.vertexvis.com/accounts/[ACCOUNT_ID]" \
+  --header "Authorization: Bearer [ROOT_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+    "data": {
+      "type": "account",
+      "attributes": {
+        "oidc_userinfo_endpoint": "https://idp.example.com/oauth2/userinfo"
+      }
+    }
+  }'
+```
+
+The value must be an absolute HTTPS URL without embedded credentials or a
+fragment. HTTP endpoints are accepted only in local development and platdev
+environments. The account setting takes precedence over the deployment's
+`OidcUserinfoEndpoint` CloudFormation parameter. If the account does not have an
+endpoint, token exchange uses that deployment fallback. Omitting the field from
+an account update preserves the existing account setting.
 
 <Tabs
   defaultValue="req"
