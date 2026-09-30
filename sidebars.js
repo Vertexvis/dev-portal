@@ -70,6 +70,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'guides/token-exchange-oidc-configuration',
+        },
+        {
+          type: 'doc',
           id: 'guides/user-management',
         },
       ],
