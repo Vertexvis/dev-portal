@@ -1,0 +1,244 @@
+---
+id: token-exchange-oidc-configuration
+title: Token exchange OIDC configuration
+description: Configure the OIDC userinfo endpoint that the Vertex Platform uses to validate token exchange requests for an account.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+During a [token exchange](./authentication#token-exchange-rfc8693), the Vertex
+Platform sends the external identity provider (IdP) token to an [OIDC userinfo
+endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo). The
+endpoint validates the token and returns the user's `sub`, which the Platform
+matches to a user's `idpId`.
+
+Each account can set its own userinfo endpoint with the `oidc_userinfo_endpoint`
+account attribute. This guide explains how to configure it, how the Platform
+chooses the endpoint for an exchange, and how to trust an IdP that uses a
+private certificate authority (CA).
+
+:::note
+This guide is for platform administrators. Only an authorized root administrator
+can set `oidc_userinfo_endpoint`.
+:::
+
+## How the endpoint is selected
+
+The Platform looks up the account that owns the application making the exchange
+request and uses the first configured value:
+
+1. The account's `oidc_userinfo_endpoint`.
+1. The deployment fallback, set with the `OIDC_USERINFO_ENDPOINT` environment
+   variable. For deployments installed with CloudFormation, this is the
+   `OIDCUserInfoEndpoint` parameter.
+
+Applications can't choose the endpoint in an exchange request. User lookup and
+token issuance stay scoped to the application's owning account.
+
+When an account has an endpoint, the Platform always uses it. If the endpoint is
+wrong, for example the wrong host, the exchange fails; it doesn't fall back to
+the deployment endpoint.
+
+## Endpoint requirements
+
+The value of `oidc_userinfo_endpoint` must:
+
+- Be an absolute URL with a host, at most 2048 characters long.
+- Not contain embedded credentials (`https://user:password@…`) or a fragment
+  (`#…`).
+- Use `https://`. Deployments reject `http://` unless the operator has enabled
+  HTTP endpoints with `ALLOW_HTTP_OIDC_ENDPOINTS=true`. Enable this only for
+  local development or the `platdev` environment.
+- Respond directly. The Platform doesn't follow redirects from the userinfo
+  endpoint, so use the final URL.
+
+Empty or malformed values are rejected with `400 Bad Request`. A well-formed URL
+that points at the wrong IdP is accepted, so confirm it before saving. Most IdPs
+publish the URL as `userinfo_endpoint` in their discovery document:
+
+```shell
+curl --silent 'https://[YOUR_IDP_HOST]/.well-known/openid-configuration' \
+  | jq --raw-output .userinfo_endpoint
+```
+
+## Get a root administrator token
+
+Requests that set `oidc_userinfo_endpoint` must use an access token for an
+application in the active root account, with the `accounts.write` or
+`accounts.*` scope. Requests from any other account that include the attribute
+return `403 Forbidden`.
+
+```shell
+curl --request POST 'https://platform.vertexvis.com/oauth2/token' \
+  --header "Authorization: Basic $(echo -n '[ROOT_CLIENT_ID]:[ROOT_CLIENT_SECRET]' | base64)" \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=client_credentials'
+```
+
+Use the returned `access_token` as `[ROOT_ACCESS_TOKEN]` in the requests below.
+
+## Configure an account
+
+### Create an account with an endpoint
+
+Include `oidc_userinfo_endpoint` in the account attributes. If you omit it, the
+account uses the deployment fallback.
+
+<Tabs
+  defaultValue="req"
+  values={[
+    { label: 'Request', value: 'req', },
+    { label: 'Response', value: 'res', },
+  ]
+}>
+<TabItem value="req">
+
+```shell
+curl --request POST 'https://platform.vertexvis.com/accounts' \
+  --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "account",
+      "attributes": {
+        "name": "Example account",
+        "oidc_userinfo_endpoint": "https://idp.example.com/oauth2/userinfo"
+      }
+    }
+  }'
+```
+
+</TabItem>
+<TabItem value="res">
+
+```json
+{
+  "data": {
+    "type": "account",
+    "id": "[YOUR_ACCOUNT_ID]",
+    "attributes": {
+      "name": "Example account",
+      "status": "active",
+      "created": "2026-09-30T18:00:00Z",
+      // highlight-next-line
+      "oidc_userinfo_endpoint": "https://idp.example.com/oauth2/userinfo"
+    }
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Update an account's endpoint
+
+Send only the attributes you want to change:
+
+- **Set or change the endpoint:** send the new URL.
+- **Keep the current endpoint:** omit `oidc_userinfo_endpoint`.
+- **Clear the endpoint and use the deployment fallback:** send `null`.
+
+```shell
+curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+  --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "account",
+      "attributes": {
+        "oidc_userinfo_endpoint": "https://idp.example.com/oauth2/userinfo"
+      }
+    }
+  }'
+```
+
+To clear the endpoint:
+
+```shell
+curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+  --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
+  --header 'Content-Type: application/vnd.api+json' \
+  --data '{
+    "data": {
+      "type": "account",
+      "attributes": {
+        "oidc_userinfo_endpoint": null
+      }
+    }
+  }'
+```
+
+### Check the configured endpoint
+
+`GET /accounts/{id}` returns the value in
+`data.attributes.oidc_userinfo_endpoint`. The attribute is absent or `null` when
+the account uses the deployment fallback.
+
+```shell
+curl --request GET 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+  --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
+  | jq .data.attributes.oidc_userinfo_endpoint
+```
+
+### Use the Admin Dashboard
+
+Root administrators can also set the endpoint in the Vertex Admin Dashboard:
+
+- **New account:** the create form, including first-run setup, has an optional
+  **OIDC userinfo endpoint** field. Leave it empty to use the deployment
+  fallback.
+- **Existing account:** the account's detail page shows the configured endpoint
+  or **Not configured**. Edit the account, then enter a URL or empty the field
+  to clear it, and save.
+
+The dashboard displays the API's error if the URL is rejected.
+
+## Link users before exchanging tokens
+
+Configuring the endpoint doesn't create users. An exchange succeeds only when
+the account that owns the application has a user whose `idpId` exactly matches
+the `sub` returned by the userinfo endpoint. Create these users with `POST /users` before users exchange tokens. See [User management](./user-management)
+for details.
+
+## Troubleshoot token exchange
+
+A successful exchange returns `200 OK` with a user access token that expires
+after about one hour (`expires_in` is `3600` or slightly less).
+
+| Response                    | Cause                                                                                                                                                            |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `400` `invalid_request`     | No user in the account has an `idpId` that matches the IdP's `sub`.                                                                                              |
+| `400` `invalid_request`     | Neither the account nor the deployment has a valid userinfo endpoint. Set `oidc_userinfo_endpoint` on the account or `OIDC_USERINFO_ENDPOINT` on the deployment. |
+| `401` `invalid_credentials` | The userinfo endpoint rejected the subject token with `401` or `403`, or the client credentials are wrong.                                                       |
+| `500` `server_error`        | The Platform couldn't reach the userinfo endpoint or got another error from it, such as a redirect or a TLS failure against an untrusted CA.                     |
+
+The missing-configuration case is a failed precondition in the Platform. The
+token endpoint reports it as `invalid_request`, the same as an unlinked user, so
+check the account's endpoint and your users' `idpId` values when you see this
+error. The failure affects only exchanges that need the missing configuration;
+it doesn't stop the Platform from starting or block other accounts.
+
+## Trust a private certificate authority
+
+If your IdP's userinfo endpoint uses a certificate from a private CA, the
+Platform must trust that CA. Store the CA certificates in S3 and set these
+environment variables on the account management service:
+
+| Variable              | Description                                                                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `OIDC_CERT_S3_BUCKET` | The S3 bucket that holds the CA certificates. For deployments installed with CloudFormation, this is the `ConfigBucket` parameter. |
+| `OIDC_CERT_S3_PREFIX` | The key prefix to load certificates from. Defaults to `certificates/`.                                                             |
+
+The service loads certificates when it starts:
+
+- It reads every object under the prefix whose key ends in `.pem`, and adds every
+  certificate in those files to the default JVM trust roots.
+- If the bucket or prefix can't be listed, or a certificate can't be downloaded
+  or parsed, the service doesn't start.
+- If the prefix has no `.pem` files, the service uses the default JVM trust
+  roots.
+
+The service must be able to read the bucket (`s3:ListBucket` and
+`s3:GetObject`). Certificate changes take effect only after the account
+management service restarts.
