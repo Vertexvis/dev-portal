@@ -47,9 +47,6 @@ The value of `oidc_userinfo_endpoint` must:
 - Be an absolute URL with a host, at most 2048 characters long.
 - Not contain embedded credentials (`https://user:password@…`) or a fragment
   (`#…`).
-- Use `https://`. Deployments reject `http://` unless the operator has enabled
-  HTTP endpoints with `ALLOW_HTTP_OIDC_ENDPOINTS=true`. Enable this only for
-  local development or the `platdev` environment.
 - Respond directly. The Platform doesn't follow redirects from the userinfo
   endpoint, so use the final URL.
 
@@ -69,8 +66,12 @@ application in the active root account, with the `accounts.write` or
 `accounts.*` scope. Requests from any other account that include the attribute
 return `403 Forbidden`.
 
+The examples in this guide use `platform.[DNS_SUFFIX]`, where `[DNS_SUFFIX]` is
+your deployment's DNS suffix. For example, if your DNS suffix is
+`dev.example.com`, the Platform API is at `https://platform.dev.example.com`.
+
 ```shell
-curl --request POST 'https://platform.vertexvis.com/oauth2/token' \
+curl --request POST 'https://platform.[DNS_SUFFIX]/oauth2/token' \
   --header "Authorization: Basic $(echo -n '[ROOT_CLIENT_ID]:[ROOT_CLIENT_SECRET]' | base64)" \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --data-urlencode 'grant_type=client_credentials'
@@ -95,7 +96,7 @@ account uses the deployment fallback.
 <TabItem value="req">
 
 ```shell
-curl --request POST 'https://platform.vertexvis.com/accounts' \
+curl --request POST 'https://platform.[DNS_SUFFIX]/accounts' \
   --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
   --header 'Content-Type: application/vnd.api+json' \
   --data '{
@@ -140,7 +141,7 @@ Send only the attributes you want to change:
 - **Clear the endpoint and use the deployment fallback:** send `null`.
 
 ```shell
-curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+curl --request PATCH 'https://platform.[DNS_SUFFIX]/accounts/[YOUR_ACCOUNT_ID]' \
   --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
   --header 'Content-Type: application/vnd.api+json' \
   --data '{
@@ -156,7 +157,7 @@ curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]'
 To clear the endpoint:
 
 ```shell
-curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+curl --request PATCH 'https://platform.[DNS_SUFFIX]/accounts/[YOUR_ACCOUNT_ID]' \
   --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
   --header 'Content-Type: application/vnd.api+json' \
   --data '{
@@ -176,7 +177,7 @@ curl --request PATCH 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]'
 the account uses the deployment fallback.
 
 ```shell
-curl --request GET 'https://platform.vertexvis.com/accounts/[YOUR_ACCOUNT_ID]' \
+curl --request GET 'https://platform.[DNS_SUFFIX]/accounts/[YOUR_ACCOUNT_ID]' \
   --header 'Authorization: Bearer [ROOT_ACCESS_TOKEN]' \
   | jq .data.attributes.oidc_userinfo_endpoint
 ```
