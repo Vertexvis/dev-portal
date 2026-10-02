@@ -1,0 +1,52 @@
+---
+id: api-conventions
+title: API Conventions
+description: Conventions the Vertex Platform API follows, including how sparse fieldsets select the fields returned in a response.
+---
+
+The Vertex Platform API follows the [JSON:API](https://jsonapi.org/format/1.1/)
+specification. Requests and responses use the `application/vnd.api+json` media type,
+and each resource is returned as a JSON:API resource object with an `id`, a `type`,
+and its `attributes`.
+
+## Sparse fieldsets
+
+A sparse fieldset limits a response to the fields you ask for. Add a
+`fields[<type>]` query parameter, where `<type>` is the resource type, such as
+`scene`, `scene-item`, or `part-revision`. The behavior follows the JSON:API
+[sparse fieldsets](https://jsonapi.org/format/1.1/#fetching-sparse-fieldsets)
+rules:
+
+- `fields[<type>]` takes a comma-separated list of field names, for example
+  `fields[scene]=name,created`.
+- Spaces around commas are ignored, so `fields[scene]=name, created` returns the
+  same fields as `fields[scene]=name,created`.
+- An empty value returns no fields. For example, `fields[scene]=` returns each scene
+  with its `id` and `type` but no attributes.
+- Field names are case-sensitive and must match exactly. `name` selects the `name`
+  field; `Name` and `NAME` do not.
+- Names that don't match a field, including names that differ only in case, are
+  ignored. They are not returned and do not cause an error.
+- Some fields are returned only when you request them explicitly. For example,
+  `metadata` can be large, so it is omitted unless you include it in
+  `fields[<type>]`. The API Reference lists these fields for each `fields[<type>]`
+  parameter.
+
+When a request omits `fields[<type>]`, the response includes the resource's default
+fields.
+
+The following request returns only the `name` and `metadata` fields of a scene:
+
+```shell
+curl --location --globoff --request GET \
+  --url "https://platform.vertexvis.com/scenes/[YOUR_SCENE_ID]?fields[scene]=name,metadata" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]"
+```
+
+:::note
+
+`fields[thread]` is an exception. It only opts into the `replyCount` field, which
+is returned when `replyCount` is in the list. It does not restrict the other thread
+fields, which are always returned.
+
+:::
