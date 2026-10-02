@@ -85,6 +85,10 @@ module.exports = {
       items: [
         {
           type: 'doc',
+          id: 'guides/api-conventions',
+        },
+        {
+          type: 'doc',
           id: 'guides/install-sdk',
         },
         {
