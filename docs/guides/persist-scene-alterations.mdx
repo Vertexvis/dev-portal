@@ -24,6 +24,10 @@ scene item, `PATCH` the [updateSceneItem](https://docs.vertex3d.com) API. Unlike
 alteration, this writes directly to the scene item and is visible to every scene view opened
 against the scene afterward.
 
+The examples in this guide use `platform.[DNS_SUFFIX]`, where `[DNS_SUFFIX]` is your
+deployment's DNS suffix. For example, if your DNS suffix is `dev.example.com`, the Platform API
+is at `https://platform.dev.example.com`.
+
 <Tabs
   defaultValue="req"
   values={[
@@ -36,7 +40,7 @@ against the scene afterward.
 ```shell
 curl --location --request PATCH \
   // highlight-next-line
-  --url "https://platform.vertexvis.com/scene-items/[YOUR_SCENE_ITEM_ID]" \
+  --url "https://platform.[DNS_SUFFIX]/scene-items/[YOUR_SCENE_ITEM_ID]" \
   --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
   --header "Content-Type: application/vnd.api+json" \
   --data '{
@@ -100,7 +104,7 @@ a single call, rather than looping individual `createSceneItem` or `deleteSceneI
 
 ```shell
 curl --location --request POST \
-  --url "https://platform.vertexvis.com/batches" \
+  --url "https://platform.[DNS_SUFFIX]/batches" \
   --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
   --header "Content-Type: application/vnd.api+json" \
   --data '{
