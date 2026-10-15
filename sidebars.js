@@ -54,6 +54,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'guides/persist-scene-alterations',
+        },
+        {
+          type: 'doc',
           id: 'guides/webhook-events',
         },
         {

@@ -1,0 +1,179 @@
+---
+id: persist-scene-alterations
+title: Persist scene alterations
+description: Promote temporary view alterations to the base scene, and understand the request shapes available for bulk and single-item structural writes.
+toc_min_heading_level: 2
+toc_max_heading_level: 4
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The [Customize your scene](./customize-your-scene.mdx) guide covers scene alterations: temporary
+visibility, material, transform, and phantom changes applied to a scene view. Those changes are
+not saved to the base scene, so they disappear once the scene view ends and are never seen by
+other users of the same scene.
+
+This guide covers how to make a change permanent on the base [scene](./render-static-scenes.mdx),
+and the request shapes available depending on whether you're changing one scene item or many.
+
+## Persisting a single scene item
+
+To persist a visibility, material, transform, phantom, name, metadata, or parent change for one
+scene item, `PATCH` the [updateSceneItem](https://docs.vertex3d.com) API. Unlike a scene
+alteration, this writes directly to the scene item and is visible to every scene view opened
+against the scene afterward.
+
+The examples in this guide use `platform.[DNS_SUFFIX]`, where `[DNS_SUFFIX]` is your
+deployment's DNS suffix. For example, if your DNS suffix is `dev.example.com`, the Platform API
+is at `https://platform.dev.example.com`.
+
+<Tabs
+  defaultValue="req"
+  values={[
+    { label: 'Request', value: 'req', },
+    { label: 'Response', value: 'res', },
+  ]
+}>
+<TabItem value="req">
+
+```shell
+curl --location --request PATCH \
+  // highlight-next-line
+  --url "https://platform.[DNS_SUFFIX]/scene-items/[YOUR_SCENE_ITEM_ID]" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+  "data": {
+    "attributes": {
+      // highlight-next-line
+      "visible": false
+    },
+    "type": "scene-item"
+  }
+}'
+```
+
+</TabItem>
+<TabItem value="res">
+
+```json
+{
+  "data": {
+    "attributes": {
+      // highlight-next-line
+      "visible": false,
+      "transform": {
+        "r0": { "x": 1.0, "y": 0.0, "z": 0.0, "w": 0.0 },
+        "r1": { "x": 0.0, "y": 1.0, "z": 0.0, "w": 0.0 },
+        "r2": { "x": 0.0, "y": 0.0, "z": 1.0, "w": 0.0 },
+        "r3": { "x": 0.0, "y": 0.0, "z": 0.0, "w": 1.0 }
+      }
+    },
+    "id": "[YOUR_SCENE_ITEM_ID]",
+    "type": "scene-item"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+:::note
+There is currently no bulk endpoint for updating `visible`, `materialOverride`, `transform`, or
+`phantom` across many existing scene items in a single call. If you need to persist the same
+attribute change to a large number of scene items, you must issue one `updateSceneItem` request
+per item. Bound the concurrency of these requests (for example, a fixed-size worker pool) rather
+than firing every request at once.
+:::
+
+## Adding or removing many scene items at once
+
+Creating or deleting scene items at scale is different from updating their attributes. Use the
+[createBatch](https://docs.vertex3d.com) API to add or remove up to 500 scene items on a scene in
+a single call, rather than looping individual `createSceneItem` or `deleteSceneItem` requests.
+
+<Tabs
+  defaultValue="req"
+  values={[
+    { label: 'Request', value: 'req', },
+    { label: 'Response', value: 'res', },
+  ]
+}>
+<TabItem value="req">
+
+```shell
+curl --location --request POST \
+  --url "https://platform.[DNS_SUFFIX]/batches" \
+  --header "Authorization: Bearer [YOUR_ACCESS_TOKEN]" \
+  --header "Content-Type: application/vnd.api+json" \
+  --data '{
+  "vertexvis/batch:operations": [
+    {
+      "op": "remove",
+      "ref": { "id": "[YOUR_SCENE_ID]", "type": "scene" },
+      "data": { "id": "[SCENE_ITEM_ID_1]", "type": "scene-item" }
+    },
+    {
+      "op": "remove",
+      "ref": { "id": "[YOUR_SCENE_ID]", "type": "scene" },
+      "data": { "id": "[SCENE_ITEM_ID_2]", "type": "scene-item" }
+    }
+  ]
+}'
+```
+
+</TabItem>
+<TabItem value="res">
+
+```json
+{
+  "data": {
+    "attributes": { "status": "running" },
+    // highlight-next-line
+    "id": "[YOUR_QUEUED_BATCH_ID]",
+    "type": "queued-batch"
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+`createBatch` is asynchronous, like `createSceneItem`. Poll `getQueuedBatch` with the returned ID
+until it redirects to the completed `batch`, then inspect `vertexvis/batch:results`: each entry
+corresponds position-for-position to a request operation, and is either the created/removed
+resource or an error for that specific operation. A single `createBatch` call does not guarantee
+all-or-nothing success — check each result before assuming an operation succeeded, and keep track
+of which operations in the batch have not yet been confirmed if your process is interrupted
+between submitting the batch and resolving its result.
+
+A single `vertexvis/batch:operations` array accepts at most 500 entries. If you need to add or
+remove more than 500 scene items, split the work into multiple sequential `createBatch` calls.
+
+## Deleting a scene item with children
+
+Deleting a scene item that has children (for example, an assembly) does not have a documented
+cascade contract today. Before relying on delete behavior for a hierarchy in production:
+
+- Verify, on a disposable test scene, whether deleting a parent scene item also removes its
+  children or leaves them orphaned in your account.
+- If the behavior isn't what your application needs, explicitly enumerate the subtree with
+  `GET /scenes/{id}/scene-items?filter[parent]={id}` and include each descendant's ID in your own
+  `remove` batch, rather than assuming the parent delete cascades.
+
+## Request budgets
+
+Vertex does not publish fixed numeric rate limits for the Platform API. The only officially
+documented array-size ceilings today are:
+
+| Request | Field | Maximum |
+| --- | --- | --- |
+| `createBatch` | `vertexvis/batch:operations` | 500 |
+| `createSceneAlteration` | `alterations` | 1,024 |
+| Each alteration's `operations` | `operations` | 1,024 |
+| Each alteration's item query | `query-by-collection.values` | 1,024 |
+
+Treat these as hard ceilings, not throughput targets. Build your own conservative, configurable
+budget for request rate and concurrency underneath these ceilings, and confirm it with Vertex
+support before running a large one-time migration or import.
