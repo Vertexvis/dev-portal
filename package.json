@@ -55,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "@docusaurus/core/**/trim": "0.0.2",
+    "@docusaurus/core/**/http-cache-semantics": "4.1.1",
+    "async": "2.6.4",
+    "@docusaurus/preset-classic/**/ua-parser-js": "0.7.33"
   }
 }
