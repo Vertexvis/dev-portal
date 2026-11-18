@@ -55,5 +55,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "resolutions": {
+    "async": "^2.6.4",
+    "http-cache-semantics": "^4.1.1",
+    "trim": "^0.0.2",
+    "ua-parser-js": "^0.7.33"
   }
 }
