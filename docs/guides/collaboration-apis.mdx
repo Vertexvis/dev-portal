@@ -413,7 +413,7 @@ curl --request PATCH 'https://platform.vertexvis.com/threads/YOUR_THREAD_ID' \
   Our APIs support listing threads for a collaboration context. Filtering by the thread status is an optional query parameter to allow filtering by the thread status. 
   These endpoints enable you to filter only open or only resolved thread within your collaboration context.
 ```bash
-curl --request GET 'https://platform.vertexvis.comthreads?filter[collaborationContextId]=YOUR_CONTEXT_ID&filter[threadStatus]=resolved' \
+curl --request GET 'https://platform.vertexvis.com/threads?filter[collaborationContextId]=YOUR_CONTEXT_ID&filter[threadStatus]=resolved' \
   --header 'Authorization: Bearer USER_ACCESS_TOKEN' \
   --header 'Content-Type: application/vnd.api+json'
   ```

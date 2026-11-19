@@ -24,6 +24,8 @@ module.exports = {
           {
             from: ['/docs/guides', '/docs/guides/getting-started'],
             to: '/docs/guides/render-your-first-scene',
+          },
+          {
             from: ['/docs/support'],
             to: '/support',
           },
