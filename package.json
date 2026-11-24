@@ -45,20 +45,23 @@
     ]
   },
   "resolutions": {
-    "**/gray-matter/js-yaml": "3.15.1",
-    "**/js-yaml": "4.3.1",
-    "**/@swagger-api/apidom-reference/**/minimatch": "10.2.4",
-    "**/minimatch": "3.1.5",
-    "**/wait-on/axios": "0.34.0",
-    "**/selfsigned/node-forge": "1.4.3",
+    "**/gray-matter/js-yaml": "^3.15.1",
+    "**/js-yaml": "^4.3.1",
+    "**/@swagger-api/apidom-reference/**/minimatch": "^10.2.4",
+    "**/minimatch": "^3.1.5",
     "@babel/core": "7.29.6",
-    "cookie": "0.7.2",
-    "dompurify": "3.4.17",
-    "json5": "2.2.3",
-    "node-fetch": "2.6.7",
-    "prismjs": "1.30.0",
-    "tmp": "0.2.6",
-    "trim": "0.0.2"
+    "async": "^2.6.4",
+    "axios": "0.34.0",
+    "cookie": "^0.7.2",
+    "dompurify": "^3.4.17",
+    "http-cache-semantics": "^4.1.1",
+    "json5": "^2.2.3",
+    "node-fetch": "^2.6.7",
+    "node-forge": "^1.4.3",
+    "prismjs": "^1.30.0",
+    "tmp": "^0.2.6",
+    "trim": "^0.0.2",
+    "ua-parser-js": "^0.7.33"
   },
   "browserslist": {
     "production": [
